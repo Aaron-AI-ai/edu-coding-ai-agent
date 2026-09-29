@@ -1,0 +1,23 @@
+:root {
+  --page: #f4f3f1;
+  --ink: #141311;
+  --dim: #5d5b57;
+  --rule: #d6d3ce;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 32px;
+  background: var(--page);
+  color: var(--ink);
+  font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Malgun Gothic", sans-serif;
+  font-weight: 300;
+}
+
+header { border-bottom: 1px solid var(--rule); padding-bottom: 16px; }
+h1 { margin: 0; font-size: 28px; font-weight: 500; }
+#status { margin: 8px 0 0; font-size: 14px; color: var(--dim); }
+
+main { margin-top: 24px; height: 420px; }
