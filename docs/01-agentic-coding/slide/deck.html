@@ -1,0 +1,937 @@
+<meta charset="utf-8">
+<title>대화 상대에서 동료로</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@200;300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+  /* ── Tokens: edu-fico 덱의 모노크롬 에디토리얼 시스템 ── */
+  :root {
+    --page: #F4F3F1;
+    --panel: #EAE8E4;
+    --rule: #D6D3CE;
+    --ink: #141311;
+    --dim: #5D5B57;
+    --faint: #96938D;
+    --invert-bg: #111110;
+    --invert-fg: #F4F3F1;
+    --invert-dim: #A9A6A0;
+    --invert-rule: #3A3835;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --page: #171614;
+      --panel: #201F1C;
+      --rule: #33312D;
+      --ink: #F1EFEB;
+      --dim: #A5A29C;
+      --faint: #7A7772;
+      --invert-bg: #0B0B0A;
+      --invert-fg: #F1EFEB;
+      --invert-dim: #9C9992;
+      --invert-rule: #34322E;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --page: #171614;
+    --panel: #201F1C;
+    --rule: #33312D;
+    --ink: #F1EFEB;
+    --dim: #A5A29C;
+    --faint: #7A7772;
+    --invert-bg: #0B0B0A;
+    --invert-fg: #F1EFEB;
+    --invert-dim: #9C9992;
+    --invert-rule: #34322E;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--page);
+    color: var(--ink);
+    font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont,
+      "Apple SD Gothic Neo", "Pretendard", sans-serif;
+    font-weight: 300;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  #stage { position: absolute; inset: 0; overflow: hidden; }
+  #board { width: 1600px; height: 900px; position: absolute; left: 50%; top: 50%; transform-origin: center; background: var(--page); }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    padding: 76px 100px;
+    display: none;
+    flex-direction: column;
+    background: var(--page);
+  }
+  .slide.on { display: flex; }
+
+  .eyebrow { font-size: 19px; letter-spacing: 7px; font-weight: 500; color: var(--faint); }
+  h1 { margin: 18px 0 0; font-size: 65px; line-height: 1.24; font-weight: 300; letter-spacing: -0.6px; text-wrap: balance; }
+  .sub { margin-top: 14px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 17px; letter-spacing: 2px; color: var(--faint); }
+  .hr { margin-top: 24px; height: 1px; background: var(--rule); }
+  .body { margin-top: 34px; flex: 1; min-height: 0; display: flex; flex-direction: column; }
+  b, strong { font-weight: 500; }
+  code { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: .9em; background: var(--panel); padding: .1em .35em; border-radius: 2px; }
+
+  /* ── 판별 기준 ── */
+  .crit { display: flex; align-items: baseline; gap: 22px; }
+  .crit .lab { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13px; letter-spacing: 2px; color: var(--faint); flex-shrink: 0; padding-top: 6px; }
+  .crit .q { font-size: 36px; font-weight: 300; letter-spacing: -0.5px; border-bottom: 2px solid var(--ink); padding-bottom: 6px; }
+
+  /* ── 스펙트럼 ── */
+  .spectrum { margin-top: 42px; display: flex; gap: 16px; }
+  .step {
+    flex: 1;
+    border: 1.5px solid var(--rule);
+    border-radius: 3px;
+    padding: 20px 22px 22px;
+    display: flex;
+    flex-direction: column;
+    background: var(--page);
+  }
+  .step.lead { border: 2px solid var(--ink); background: var(--ink); color: var(--page); }
+  .step .n { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13px; letter-spacing: 2px; color: var(--faint); }
+  .step.lead .n { color: var(--invert-dim); }
+  .step .name { margin-top: 12px; font-size: 30px; font-weight: 400; letter-spacing: -0.4px; }
+  .step .who { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--rule); font-size: 17px; line-height: 1.5; color: var(--dim); }
+  .step.lead .who { border-top-color: var(--invert-rule); color: #C9C6C0; }
+  .step .who b { color: var(--ink); font-weight: 500; }
+  .step.lead .who b { color: var(--page); }
+  .step .human { margin-top: 14px; font-size: 16px; color: var(--faint); }
+  .step.lead .human { color: var(--invert-dim); }
+  .step .human span { display: block; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 11px; letter-spacing: 1.5px; margin-bottom: 5px; }
+
+  /* ── 축 ── */
+  .axis { margin-top: 26px; display: flex; align-items: center; gap: 18px; }
+  .axis .cap { font-size: 18px; color: var(--dim); flex-shrink: 0; }
+  .axis .cap b { color: var(--ink); font-weight: 500; }
+  .axis .line { flex: 1; height: 1px; background: linear-gradient(to right, var(--rule), var(--ink)); position: relative; }
+  .axis .line::after { content: ""; position: absolute; right: -1px; top: -3.5px; border-left: 8px solid var(--ink); border-top: 4px solid transparent; border-bottom: 4px solid transparent; }
+
+  /* ── 하단 ── */
+  .foot { margin-top: auto; padding-top: 30px; display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; }
+  .shift { font-size: 22px; line-height: 1.55; color: var(--dim); max-width: 60ch; }
+  .shift b { color: var(--ink); font-weight: 500; }
+  .shift .head { display: block; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 2px; color: var(--faint); margin-bottom: 10px; }
+  .stage-pair { display: flex; align-items: center; gap: 16px; flex-shrink: 0; font-size: 17px; color: var(--faint); }
+  .stage-pair .box { border: 1px solid var(--rule); border-radius: 2px; padding: 9px 14px; }
+  .stage-pair .box.now { border-color: var(--ink); color: var(--ink); }
+  .stage-pair .arw { color: var(--rule); }
+
+  /* ── 사이클 장표 ── */
+  .cycle-note { margin-top: 20px; display: flex; align-items: baseline; gap: 16px; font-size: 19px; color: var(--dim); }
+  .cycle-note .ref { margin-left: auto; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12.5px; letter-spacing: 0.3px; color: var(--faint); text-align: right; line-height: 1.6; }
+  .cycle-note .lab { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 2px; color: var(--faint); flex-shrink: 0; }
+  .cycle-note b { color: var(--ink); font-weight: 500; }
+  .close { margin-top: auto; padding-top: 26px; font-size: 23px; line-height: 1.6; color: var(--dim); }
+  .close b { color: var(--ink); font-weight: 500; }
+
+  /* ── 패러다임 3단 ── */
+  .para { display: flex; align-items: stretch; gap: 0; }
+  .pbox {
+    flex: 1;
+    border: 1.5px solid var(--rule);
+    border-radius: 3px;
+    padding: 26px 28px 28px;
+    display: flex;
+    flex-direction: column;
+    background: var(--page);
+  }
+  .pbox.lead { border: 2px solid var(--ink); }
+  .parrow { flex-shrink: 0; width: 64px; display: flex; align-items: center; justify-content: center; color: var(--dim); font-size: 26px; }
+
+  .phead { display: flex; align-items: center; gap: 12px; }
+  .pnum {
+    width: 30px; height: 30px; border-radius: 50%;
+    border: 1.5px solid var(--ink); color: var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 14px; font-weight: 500;
+    flex-shrink: 0;
+  }
+  .pbox.lead .pnum { background: var(--ink); color: var(--page); }
+  .ptitle { font-size: 26px; font-weight: 400; letter-spacing: -0.3px; }
+
+  .pq {
+    margin-top: 22px; padding: 13px 16px;
+    background: var(--panel); border-radius: 3px;
+    font-size: 19px; color: var(--ink); line-height: 1.4;
+  }
+  .pbox.lead .pq { background: var(--ink); color: var(--page); }
+
+  .plist { margin: 24px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 13px; }
+  .plist li { position: relative; padding-left: 20px; font-size: 19px; line-height: 1.45; color: var(--dim); }
+  .plist li::before { content: ""; position: absolute; left: 0; top: .62em; width: 8px; height: 1px; background: var(--rule); }
+  .pbox.lead .plist li { color: var(--ink); }
+  .pbox.lead .plist li::before { background: var(--ink); }
+
+  .pkind { margin-top: auto; padding-top: 22px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 1.5px; color: var(--faint); }
+
+  .banner {
+    margin-top: 30px; border: 1.5px solid var(--ink); border-radius: 3px;
+    padding: 20px 28px; display: flex; align-items: baseline; gap: 16px;
+    font-size: 24px; color: var(--ink); font-weight: 300;
+  }
+  .banner .k { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 2px; color: var(--faint); flex-shrink: 0; }
+  .banner b { font-weight: 500; }
+  .banner .sep { color: var(--faint); margin: 0 6px; }
+  .why { margin-top: 18px; display: flex; align-items: baseline; gap: 16px; font-size: 20px; color: var(--dim); line-height: 1.5; }
+  .why .k { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 2px; color: var(--faint); flex-shrink: 0; }
+  .why b { color: var(--ink); font-weight: 500; }
+  .why .weak { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 15px; color: var(--faint); letter-spacing: 0.3px; }
+  .fnote { margin-top: 12px; text-align: right; font-size: 14px; color: var(--faint); }
+
+  /* ── 하네스 동심원 ── */
+  .harness { display: flex; gap: 56px; flex: 1; min-height: 0; align-items: center; }
+  .rings { flex-shrink: 0; width: 640px; }
+  .rings img { width: 100%; height: auto; display: block; border: 1px solid var(--rule); border-radius: 3px; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .rings img { filter: invert(1) hue-rotate(180deg) brightness(.92); }
+  }
+  :root[data-theme="dark"] .rings img { filter: invert(1) hue-rotate(180deg) brightness(.92); }
+  .hcol { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .hdef { font-size: 34px; font-weight: 300; line-height: 1.35; letter-spacing: -0.5px; }
+  .hdef b { font-weight: 500; }
+  .hsub { margin-top: 14px; font-size: 18px; color: var(--dim); line-height: 1.55; }
+
+  .layers { margin-top: 30px; display: flex; flex-direction: column; gap: 0; }
+  .layer { display: flex; gap: 20px; padding: 16px 0; border-top: 1px solid var(--rule); }
+  .layer:last-child { border-bottom: 1px solid var(--rule); }
+  .layer .ln { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 1.6px; color: var(--faint); width: 132px; flex-shrink: 0; padding-top: 4px; }
+  .layer .li { font-size: 18px; color: var(--ink); line-height: 1.5; }
+  .layer .li span { color: var(--faint); }
+
+  .flow { margin-top: 26px; display: flex; flex-direction: column; gap: 9px; font-size: 16px; color: var(--dim); }
+  .flow div { display: flex; gap: 12px; }
+  .flow .a { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; color: var(--faint); flex-shrink: 0; width: 26px; }
+
+  .hclose { margin-top: auto; padding-top: 24px; display: flex; align-items: baseline; justify-content: space-between; gap: 30px; }
+  .hclose .line { font-size: 21px; color: var(--ink); }
+  .hclose .line b { font-weight: 500; }
+  .hclose .src { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; color: var(--faint); text-align: right; line-height: 1.7; flex-shrink: 0; }
+
+  /* ── 이미지 전면 장표 ── */
+  .slide.wide { padding: 44px 60px 56px; }
+  .wide-head { display: flex; align-items: baseline; gap: 20px; }
+  .wide-head .eyebrow { font-size: 15px; letter-spacing: 5px; }
+  .wide-head h1 { margin: 0; font-size: 40px; line-height: 1.2; }
+  .wide-head .tail { margin-left: auto; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 1.5px; color: var(--faint); }
+  .canvas { flex: 1; min-height: 0; margin-top: 18px; display: flex; align-items: center; justify-content: center; }
+  .canvas img { max-width: 100%; max-height: 100%; width: auto; height: auto; display: block; border: 1px solid var(--rule); border-radius: 3px; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .canvas img { filter: invert(1) hue-rotate(180deg) brightness(.92); }
+  }
+  :root[data-theme="dark"] .canvas img { filter: invert(1) hue-rotate(180deg) brightness(.92); }
+  .parts { margin-top: 18px; display: flex; gap: 26px; }
+  .part-i { flex: 1; padding-top: 12px; border-top: 1.5px solid var(--ink); }
+  .part-i.soft { border-top-color: var(--rule); }
+  .part-i .t { font-size: 17px; font-weight: 500; color: var(--ink); line-height: 1.25; }
+  .part-i .t span { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 11px; letter-spacing: 1.2px; color: var(--faint); display: block; margin-bottom: 5px; font-weight: 400; }
+  .part-i .d { margin-top: 7px; font-size: 14px; color: var(--dim); line-height: 1.45; }
+  .wide-note { margin-top: 14px; text-align: right; font-size: 12.5px; color: var(--faint); }
+
+  /* ── 실습 레시피 ── */
+  .recipe { display: flex; gap: 48px; flex: 1; min-height: 0; }
+
+  .term { flex: 1.12; background: #111110; border: 1px solid #2A2825; border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; }
+  .term-bar { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-bottom: 1px solid #2A2825; background: #1A1917; }
+  .term-bar .dot { width: 9px; height: 9px; border-radius: 50%; background: #3A3835; }
+  .term-bar .name { margin-left: 10px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13px; color: #6B6862; letter-spacing: .5px; }
+  .term-body { padding: 18px 22px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 14px; line-height: 1.5; color: #A9A6A0; flex: 1; white-space: pre; overflow: auto; }
+  .term-body .c { color: #6B6862; }
+  .term-body .h { color: #FFFFFF; }
+  .term-body .p { color: #E4B363; }
+  .term-body .g { color: #8FBF9F; }
+
+  .steps-col { flex: 1; display: flex; flex-direction: column; }
+  .rstep { display: flex; gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--rule); }
+  .rstep:first-child { border-top: 1px solid var(--rule); }
+  .rstep .n { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13px; color: var(--faint); flex-shrink: 0; padding-top: 3px; width: 20px; }
+  .rstep .t { font-size: 18px; color: var(--ink); font-weight: 500; }
+  .rstep .d { margin-top: 4px; font-size: 15px; color: var(--dim); line-height: 1.45; }
+  .rstep.key .t { position: relative; }
+  .rstep.key { background: linear-gradient(to right, var(--panel), transparent); margin-left: -12px; padding-left: 12px; }
+
+  .watch { margin-top: auto; padding-top: 22px; }
+  .watch .h { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 2px; color: var(--faint); }
+  .watch ul { margin: 12px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .watch li { position: relative; padding-left: 20px; font-size: 16px; color: var(--dim); line-height: 1.45; }
+  .watch li::before { content: ""; position: absolute; left: 0; top: .62em; width: 9px; height: 1px; background: var(--ink); }
+  .watch li b { color: var(--ink); font-weight: 500; }
+
+  /* ── 명령어 표 ── */
+  .two-tbl { display: flex; gap: 52px; flex: 1; min-height: 0; }
+  .tcol { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+  .tcol-h { display: flex; align-items: baseline; gap: 12px; padding-bottom: 11px; border-bottom: 1.5px solid var(--ink); }
+  .tcol-h .n { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 2px; color: var(--faint); }
+  .tcol-h .t { font-size: 21px; font-weight: 500; letter-spacing: -0.2px; }
+  .ctbl { width: 100%; border-collapse: collapse; }
+  .ctbl td { padding: 11px 0; border-bottom: 1px solid var(--rule); vertical-align: top; font-size: 16px; line-height: 1.45; color: var(--dim); }
+  .ctbl td.k { width: 186px; padding-right: 16px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 15px; color: var(--ink); white-space: nowrap; }
+  .ctbl tr.hi td { color: var(--ink); }
+  .ctbl tr.hi td.k { font-weight: 500; }
+  .ctbl td .sub { display: block; font-size: 13.5px; color: var(--faint); margin-top: 3px; }
+  .ctbl tr:last-child td { border-bottom: 0; }
+  .tnote { margin-top: auto; padding-top: 20px; font-size: 17px; color: var(--dim); }
+  .tnote b { color: var(--ink); font-weight: 500; }
+
+  .modes { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+  .mode { display: flex; gap: 14px; align-items: baseline; padding: 11px 14px; border: 1px solid var(--rule); border-radius: 3px; }
+  .mode.now { border-color: var(--ink); border-width: 1.5px; }
+  .mode .mn { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13px; color: var(--faint); width: 96px; flex-shrink: 0; }
+  .mode .md { font-size: 16px; color: var(--dim); }
+  .mode .md b { color: var(--ink); font-weight: 500; }
+
+  /* ── 모션 ── */
+  @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+  .slide.on .rv { animation: rise .55s cubic-bezier(.16,1,.3,1) both var(--d, 0s); }
+  .slide.on .fd { animation: fade .5s ease both var(--d, 0s); }
+  .rv, .fd { opacity: 0; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .slide.on .rv, .slide.on .fd { animation: none; opacity: 1; }
+  }
+
+  /* ── Footer chrome ── */
+  #chrome {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    display: flex; align-items: center; gap: 18px;
+    padding: 14px 26px; font-size: 13px; color: var(--faint);
+    letter-spacing: 1px; pointer-events: none;
+  }
+  #progress { flex: 1; height: 1px; background: var(--rule); position: relative; }
+  #progress i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--ink); transition: width .28s ease; }
+  #count { font-variant-numeric: tabular-nums; }
+  #hint { opacity: .65; }
+
+  .nav { position: fixed; top: 0; bottom: 0; width: 16%; cursor: pointer; background: transparent; border: 0; padding: 0; }
+  .nav:focus-visible { outline: 2px solid var(--ink); outline-offset: -4px; }
+  #prev { left: 0; }
+  #next { right: 0; }
+</style>
+
+<div id="stage"><div id="board">
+
+<!-- 01 ───────────────────────────────────────────── -->
+<section class="slide on">
+  <div class="eyebrow fd">CHAT &rarr; COWORKER</div>
+  <h1 class="rv" style="--d:.08s">대화 상대에서 동료로</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="crit rv" style="--d:.3s">
+      <span class="lab">발전 방향</span>
+      <span class="q">제어 흐름이 사람에서 모델로 넘어간다</span>
+    </div>
+
+    <div class="spectrum">
+      <div class="step rv" style="--d:.42s">
+        <span class="n">01</span>
+        <div class="name">자동완성</div>
+        <div class="who"><b>사람</b><br>커서 위치가 곧 지시</div>
+        <div class="human"><span>사람의 일</span>계속 타이핑</div>
+      </div>
+
+      <div class="step rv" style="--d:.5s">
+        <span class="n">02</span>
+        <div class="name">대화</div>
+        <div class="who"><b>사람</b><br>매 턴마다 지시</div>
+        <div class="human"><span>사람의 일</span>붙여넣고 옮기기</div>
+      </div>
+
+      <div class="step rv" style="--d:.58s">
+        <span class="n">03</span>
+        <div class="name">워크플로</div>
+        <div class="who"><b>사람</b><br>경로를 미리 고정</div>
+        <div class="human"><span>사람의 일</span>파이프라인 설계</div>
+      </div>
+
+      <div class="step lead rv" style="--d:.66s">
+        <span class="n">04</span>
+        <div class="name">에이전트</div>
+        <div class="who"><b>모델</b><br>경로를 정하고 스스로 검증</div>
+        <div class="human"><span>사람의 일</span>기준을 주고 결과를 검증</div>
+      </div>
+    </div>
+
+    <div class="axis fd" style="--d:.82s">
+      <span class="cap">사람이 하는 일은 <b>실행</b>에서</span>
+      <span class="line"></span>
+      <span class="cap"><b>설계와 판단</b>으로 옮겨간다</span>
+    </div>
+
+    <div class="foot">
+      <div class="shift rv" style="--d:.92s">
+        <span class="head">WHAT CHANGED</span>
+        채팅창에 붙여넣어 <b>가능성을 시험하던 단계</b>를 지나,<br>
+        이제는 실제 업무를 <b>맡기고 함께 수행하는 단계</b>로 넘어왔다.
+      </div>
+      <div class="stage-pair fd" style="--d:1.05s">
+        <span class="box">PoC · 시험</span>
+        <span class="arw">→</span>
+        <span class="box now">업무 · 협업</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">에이전틱 코딩 WORKFLOW</div>
+  <h1 class="rv" style="--d:.08s">한 번의 요청, 다섯 개의 단계</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <figure class="fd" style="--d:.3s;margin:0">
+      <svg viewBox="0 0 1400 400" role="img" aria-label="에이전틱 코딩 워크플로 — Explore, Plan, Implement, Commit">
+        <defs>
+          <marker id="ah" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 z" fill="var(--dim)"></path>
+          </marker>
+          <marker id="ahk" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 z" fill="var(--ink)"></path>
+          </marker>
+        </defs>
+
+        <!-- 사람 개입 지점 -->
+        <g font-family="Noto Sans KR, sans-serif" font-size="14" fill="var(--faint)">
+          <circle cx="8" cy="48" r="4" fill="var(--dim)"></circle>
+          <line x1="8" y1="53" x2="8" y2="58" stroke="var(--rule)"></line>
+          <text x="22" y="40">시작 전 · 완료 기준을 준다</text>
+
+          <circle cx="841" cy="48" r="6" fill="var(--ink)"></circle>
+          <line x1="841" y1="54" x2="841" y2="58" stroke="var(--ink)"></line>
+          <text x="841" y="19" text-anchor="middle" fill="var(--ink)" font-size="15" font-weight="500">계획 승인</text>
+          <text x="841" y="38" text-anchor="middle">개입 효과가 가장 큰 지점</text>
+
+          <circle cx="1124" cy="48" r="4" fill="var(--dim)"></circle>
+          <line x1="1124" y1="53" x2="1124" y2="58" stroke="var(--rule)"></line>
+          <text x="1124" y="40" text-anchor="middle">커밋 전 · 최종 확인</text>
+        </g>
+
+        <!-- 다섯 단계 -->
+        <g>
+          <rect x="0"    y="58" width="268" height="150" rx="3" fill="var(--page)" stroke="var(--rule)" stroke-width="1.5"></rect>
+          <rect x="283"  y="58" width="268" height="150" rx="3" fill="var(--page)" stroke="var(--rule)" stroke-width="1.5"></rect>
+          <rect x="566"  y="58" width="268" height="150" rx="3" fill="var(--page)" stroke="var(--rule)" stroke-width="1.5"></rect>
+          <rect x="849"  y="58" width="268" height="150" rx="3" fill="var(--panel)" stroke="var(--rule)" stroke-width="1.5"></rect>
+          <rect x="1132" y="58" width="268" height="150" rx="3" fill="var(--page)" stroke="var(--rule)" stroke-width="1.5"></rect>
+        </g>
+
+        <g font-family="JetBrains Mono, monospace" font-size="12" fill="var(--faint)" letter-spacing="1.2">
+          <text x="20" y="84">01 · EXPLORE</text>
+          <text x="303" y="84">02 · EXPLORE</text>
+          <text x="586" y="84">03 · PLAN</text>
+          <text x="869" y="84">04 · IMPLEMENT</text>
+          <text x="1152" y="84">05 · COMMIT</text>
+        </g>
+
+        <g font-family="Noto Sans KR, sans-serif" font-size="22" fill="var(--ink)">
+          <text x="20" y="116">문제 인식</text>
+          <text x="303" y="116">코드 탐색</text>
+          <text x="586" y="116">계획</text>
+          <text x="869" y="116">구현 · 검증</text>
+          <text x="1152" y="116">커밋</text>
+        </g>
+
+        <g font-family="Noto Sans KR, sans-serif" font-size="14" fill="var(--dim)">
+          <text x="20" y="144">요구를 읽고</text>
+          <text x="20" y="163">모호한 곳을 되묻는다</text>
+
+          <text x="303" y="144">관련 파일·함수를</text>
+          <text x="303" y="163">찾아낸다</text>
+
+          <text x="586" y="144">바꿀 파일과 순서를</text>
+          <text x="586" y="163">목록으로 만든다</text>
+
+          <text x="869" y="144">파일을 수정하고</text>
+          <text x="869" y="163">테스트를 돌린다</text>
+
+          <text x="1152" y="144">diff를 정리하고</text>
+          <text x="1152" y="163">메시지를 쓴다</text>
+        </g>
+
+        <g font-family="JetBrains Mono, monospace" font-size="12" fill="var(--faint)">
+          <text x="20" y="194">—</text>
+          <text x="303" y="194">grep · LSP · read</text>
+          <text x="586" y="194">—</text>
+          <text x="869" y="194">edit · bash · test</text>
+          <text x="1152" y="194">git</text>
+        </g>
+
+        <!-- 전진 화살표 -->
+        <g stroke="var(--dim)" stroke-width="1.2" marker-end="url(#ah)">
+          <line x1="270" y1="133" x2="279" y2="133"></line>
+          <line x1="553" y1="133" x2="562" y2="133"></line>
+          <line x1="836" y1="133" x2="845" y2="133"></line>
+          <line x1="1119" y1="133" x2="1128" y2="133"></line>
+        </g>
+
+        <!-- 구현·검증 안에서 도는 루프 -->
+        <path d="M1040 208 L1040 250 L926 250 L926 212" fill="none" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#ahk)"></path>
+        <text x="983" y="274" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="14" fill="var(--ink)">테스트가 깨지면 스스로 고친다</text>
+
+        <!-- 계획으로 되돌아가는 흐름 -->
+        <path d="M1100 208 L1100 322 L700 322 L700 212" fill="none" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ahk)"></path>
+        <text x="880" y="315" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="14" fill="var(--ink)">접근이 틀렸으면 계획을 다시 짠다</text>
+
+        <!-- 사람 없는 구간 -->
+        <path d="M849 354 L849 364 L1117 364 L1117 354" fill="none" stroke="var(--rule)" stroke-width="1.5"></path>
+        <text x="983" y="386" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="14" fill="var(--faint)">이 구간에는 사람이 없다</text>
+      </svg>
+    </figure>
+
+    <div class="cycle-note fd" style="--d:.9s">
+      <span class="lab">CORE</span>
+      <span>되돌아가는 화살표가 있으면 <b>에이전트</b>, 없으면 <b>자동완성</b>이다.</span>
+      <span class="ref">
+        Anthropic 공식 문서 참고<br>
+        Explore-Plan-Implement-Commit Workflow
+      </span>
+    </div>
+
+    <div class="close rv" style="--d:1s">
+      에이전트는 이 단계를 스스로 돈다.<br>
+      우리가 설계하는 것은 단계가 아니라, <b>멈추는 조건과 되돌아가는 규칙</b>이다.
+    </div>
+  </div>
+</section>
+
+<!-- 03 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">PARADIGM SHIFT</div>
+  <h1 class="rv" style="--d:.08s">AI 에이전트 개발 패러다임 변화</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="para">
+      <div class="pbox rv" style="--d:.3s">
+        <div class="phead">
+          <span class="pnum">1</span>
+          <span class="ptitle">Prompt Engineering</span>
+        </div>
+        <div class="pq">모델에게 무엇을 말할까?</div>
+        <ul class="plist">
+          <li>지시문 작성</li>
+          <li>예시 넣기</li>
+          <li>출력 형식 통제</li>
+        </ul>
+        <div class="pkind">한 번의 요청</div>
+      </div>
+
+      <div class="parrow fd" style="--d:.46s">&rarr;</div>
+
+      <div class="pbox rv" style="--d:.42s">
+        <div class="phead">
+          <span class="pnum">2</span>
+          <span class="ptitle">Context Engineering</span>
+        </div>
+        <div class="pq">어떤 정보를 언제 얼마나 줄까?</div>
+        <ul class="plist">
+          <li>문맥 선택</li>
+          <li>검색 결과</li>
+          <li>메모리</li>
+          <li>토큰 예산</li>
+        </ul>
+        <div class="pkind">하나의 세션</div>
+      </div>
+
+      <div class="parrow fd" style="--d:.58s">&rarr;</div>
+
+      <div class="pbox lead rv" style="--d:.54s">
+        <div class="phead">
+          <span class="pnum">3</span>
+          <span class="ptitle">Harness Engineering</span>
+        </div>
+        <div class="pq">에이전트를 어떤 환경에서 굴릴까?</div>
+        <ul class="plist">
+          <li>도구 · MCP</li>
+          <li>Agent Skills</li>
+          <li>메모리 계층</li>
+          <li>검증 루프</li>
+          <li>재사용 SOP</li>
+        </ul>
+        <div class="pkind">저장소 전체 · 팀 공유</div>
+      </div>
+    </div>
+
+    <div class="banner fd" style="--d:.8s">
+      <span class="k">FOCUS</span>
+      <span>경쟁력의 초점이 <b>프롬프트 작성</b><span class="sep">&rarr;</span><b>문맥 설계</b><span class="sep">&rarr;</span><b>실행 시스템 설계</b>로 이동</span>
+    </div>
+    <div class="why fd" style="--d:.9s">
+      <span class="k">WHY</span>
+      <span>세 단계 모두 <b>LLM의 약점을 줄이기 위한 발전</b>이다<br>
+        <span class="weak">환각 · 맥락 망각 · 낡은 지식 · 검증 없는 완료 선언</span></span>
+    </div>
+    <div class="fnote fd" style="--d:1s">※ Harness Engineering은 분석적 표현으로, 아직 정착된 용어는 아니다</div>
+  </div>
+</section>
+
+<!-- 04 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">HARNESS</div>
+  <h1 class="rv" style="--d:.08s">하네스란 무엇인가</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="harness">
+
+      <figure class="rings fd" style="--d:.3s;margin:0">
+        <img src="assets/harness-layers.png" alt="모델을 중심으로 Runtime · Capabilities · Safety &amp; Scale 계층이 둘러싼 하네스 구조">
+      </figure>
+
+      <div class="hcol">
+        <div class="hdef rv" style="--d:.4s">하네스는 <b>LLM 이외의 모든 것</b>이다</div>
+        <div class="hsub fd" style="--d:.5s">하나의 wrapper가 아니라 <b style="color:var(--ink)">multi-layered</b> 구조다.<br>모델은 추론만 하고, 나머지는 전부 이 layer들에서 일어난다.</div>
+
+        <div class="layers">
+          <div class="layer rv" style="--d:.58s">
+            <span class="ln">RUNTIME</span>
+            <span class="li">오케스트레이션 루프 <span>·</span> 출력 파싱 <span>·</span> 프롬프트 구성 <span>·</span> 에러 처리</span>
+          </div>
+          <div class="layer rv" style="--d:.66s">
+            <span class="ln">CAPABILITIES</span>
+            <span class="li">도구 <span>·</span> 메모리 <span>·</span> 상태 관리 <span>·</span> 컨텍스트 관리</span>
+          </div>
+          <div class="layer rv" style="--d:.74s">
+            <span class="ln">SAFETY &amp; SCALE</span>
+            <span class="li">가드레일 <span>·</span> 검증 루프 <span>·</span> 도구 범위 제한 <span>·</span> 서브에이전트 조율</span>
+          </div>
+        </div>
+
+        <div class="flow fd" style="--d:.86s">
+          <div><span class="a">&rarr;</span><span>사용자 요청은 가장 바깥에서 들어온다</span></div>
+          <div><span class="a">&larr;</span><span>도구 호출은 가장 바깥으로 나간다</span></div>
+          <div><span class="a">&#8635;</span><span>그 사이에서 루프는 계속 돈다</span></div>
+        </div>
+
+        <div class="hclose">
+          <div class="line">모델은 <b>고르는 것</b>, 하네스는 <b>만드는 것</b>.</div>
+          <div class="src">
+            Agent = Model + Harness<br>
+            도식 출처: 원저자 표기 필요
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 05 ───────────────────────────────────────────── -->
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">CODING HARNESS</span>
+    <h1 class="rv" style="--d:.08s">Claude Code</h1>
+    <span class="tail fd" style="--d:.2s">PERCEPTION &rarr; ACTION &rarr; OBSERVATION</span>
+  </div>
+
+  <div class="canvas fd" style="--d:.28s">
+    <img src="assets/claude-code-architecture.png" alt="Claude Code 아키텍처 — 입력·지식·실행·관측·멀티에이전트 계층과 중앙의 Master Agent Loop">
+  </div>
+
+  <div class="parts fd" style="--d:.7s">
+    <div class="part-i">
+      <div class="t"><span>CORE</span>Master Agent Loop</div>
+      <div class="d">인지 → 행동 → 관찰을 반복한다. 나머지 전부가 이 루프를 돕는 장치다.</div>
+    </div>
+    <div class="part-i">
+      <div class="t"><span>GATE</span>Permission Gate</div>
+      <div class="d">모든 실행이 거쳐가는 관문. 차단 · 허용 · 승인 요청으로 갈린다.</div>
+    </div>
+    <div class="part-i soft">
+      <div class="t"><span>FEED</span>Knowledge Layer</div>
+      <div class="d">스킬 · 메모리 · 컨텍스트 압축. 루프에 무엇을 쥐어줄지 정한다.</div>
+    </div>
+    <div class="part-i soft">
+      <div class="t"><span>ACT</span>Execution Layer</div>
+      <div class="d">도구 디스패치. bash · read · write · grep이 실제 변경을 만든다.</div>
+    </div>
+    <div class="part-i soft">
+      <div class="t"><span>WATCH</span>Observability · Multi-Agent</div>
+      <div class="d">훅이 지켜보고, 서브에이전트가 격리된 컨텍스트에서 일을 나눠 받는다.</div>
+    </div>
+  </div>
+
+  <div class="wide-note fd" style="--d:.86s">※ 커뮤니티 분석 도식 · 일부 파일명과 수치는 공식 문서와 다를 수 있음</div>
+</section>
+
+<!-- 06 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">SECRET RECIPE 01</div>
+  <h1 class="rv" style="--d:.08s">설치하고, 물어보고, 확인한다</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="recipe">
+
+      <div class="term rv" style="--d:.3s">
+        <div class="term-bar">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="name">Windows PowerShell</span>
+        </div>
+        <div class="term-body">
+<span class="c"># 1 · 설치 — PowerShell 에서</span>
+<span class="h">irm https://claude.ai/install.ps1 | iex</span>
+<span class="h">claude --version</span>      <span class="c">새 창을 열고 확인</span>
+
+<span class="c"># 2 · 로그인 — 브라우저가 열린다</span>
+<span class="h">claude</span>                <span class="c">Team 계정 선택 → 승인</span>
+<span class="g">/status</span>               <span class="c">로그인 상태 확인</span>
+<span class="c">  다시 로그인하려면 /login</span>
+
+<span class="c"># 3 · 실습 프로젝트에서 실행</span>
+<span class="h">cd edu-stock-chart</span>   <span class="c">교육 레포 안의 실습 프로젝트</span>
+<span class="h">claude</span>
+
+<span class="c"># 4 · 하네스 둘러보기</span>
+<span class="g">/model sonnet</span>   <span class="g">/permissions</span>   <span class="g">/context</span>
+
+<span class="c"># 5 · 첫 프롬프트</span>
+<span class="p">&gt; 이 프로젝트를 분석해서 구조와 실행 방법을</span>
+<span class="p">  docs/analysis.md 로 정리해줘</span>
+
+<span class="c"># 6 · 다시 확인</span>
+<span class="g">/context</span>              <span class="c">얼마나 찼나</span>
+        </div>
+      </div>
+
+      <div class="steps-col">
+        <div class="rstep rv" style="--d:.42s">
+          <span class="n">01</span>
+          <span>
+            <div class="t">설치 · 로그인</div>
+            <div class="d">설치 후 <b style="color:var(--ink)">새 창</b>을 열어야 PATH가 잡힌다. 첫 <code>claude</code> 실행에서 브라우저로 <b style="color:var(--ink)">Team 계정 로그인</b></div>
+          </span>
+        </div>
+        <div class="rstep rv" style="--d:.48s">
+          <span class="n">02</span>
+          <span>
+            <div class="t">프로젝트 안에서 연다</div>
+            <div class="d">열린 디렉토리가 곧 작업 범위. 경로에 <b style="color:var(--ink)">공백·한글이 없는 곳</b>이 안전하다</div>
+          </span>
+        </div>
+        <div class="rstep rv" style="--d:.54s">
+          <span class="n">03</span>
+          <span>
+            <div class="t">하네스를 눈으로 본다</div>
+            <div class="d">실습은 <b style="color:var(--ink)">Sonnet</b>으로 통일. 세 명령 모두 모델을 호출하지 않아 토큰을 쓰지 않는다</div>
+          </span>
+        </div>
+        <div class="rstep key rv" style="--d:.6s">
+          <span class="n">04</span>
+          <span>
+            <div class="t">한 문장으로 한 바퀴</div>
+            <div class="d">탐색 → 정리 → <b style="color:var(--ink)">파일 쓰기 권한 요청</b> → 결과물</div>
+          </span>
+        </div>
+        <div class="rstep rv" style="--d:.66s">
+          <span class="n">05</span>
+          <span>
+            <div class="t">전후를 비교한다</div>
+            <div class="d">대화와 읽은 파일이 컨텍스트의 대부분을 차지한다</div>
+          </span>
+        </div>
+
+        <div class="watch fd" style="--d:.8s">
+          <div class="h">관찰 포인트</div>
+          <ul>
+            <li>어떤 파일을 <b>어떤 순서로</b> 여는가 — 아무도 지시하지 않았다</li>
+            <li>md 파일을 쓰기 직전에 <b>멈춰서 묻는가</b> — Permission Gate</li>
+            <li><code>/context</code>가 전후로 <b>얼마나 달라졌는가</b></li>
+          </ul>
+          <div style="margin-top:16px;font-size:14px;color:var(--faint);line-height:1.6">
+            ※ <b style="color:var(--dim)">Git for Windows</b> 설치 권장 — 있으면 Bash 도구, 없으면 PowerShell 도구로 동작<br>
+            ※ 대안 설치 <code>winget install Anthropic.ClaudeCode</code> · CMD는 <code>install.cmd</code> 방식
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 07 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">SLASH COMMANDS · 1</div>
+  <h1 class="rv" style="--d:.08s">매일 쓰는 명령</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="two-tbl">
+      <div class="tcol rv" style="--d:.32s">
+        <div class="tcol-h"><span class="n">1순위</span><span class="t">컨텍스트를 관리한다</span></div>
+        <table class="ctbl">
+          <tbody>
+            <tr class="hi"><td class="k">/context</td><td>지금 무엇이 얼마나 들어있는지 본다</td></tr>
+            <tr class="hi"><td class="k">/clear</td><td>대화를 비우고 새로 시작한다 <span class='sub'>주제가 바뀌면 무조건</span></td></tr>
+            <tr><td class="k">/compact</td><td>요약해 공간을 확보한다 <span class='sub'>/compact API 변경 중심으로</span></td></tr>
+            <tr class="hi"><td class="k">/model</td><td>모델을 바꾼다 <span class='sub'>작업 난이도에 맞춰</span></td></tr>
+            <tr><td class="k">/usage · /cost</td><td>사용량과 비용을 본다</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tcol rv" style="--d:.42s">
+        <div class="tcol-h"><span class="n">2순위</span><span class="t">세션을 다룬다</span></div>
+        <table class="ctbl">
+          <tbody>
+            <tr class="hi"><td class="k">/diff</td><td>AI가 무엇을 고쳤는지 본다</td></tr>
+            <tr class="hi"><td class="k">/rewind</td><td>체크포인트로 코드·대화를 되돌린다</td></tr>
+            <tr><td class="k">/resume</td><td>이전 대화를 이어간다</td></tr>
+            <tr><td class="k">/branch</td><td>현재 지점에서 대화를 분기한다</td></tr>
+            <tr><td class="k">/btw</td><td>기록에 남기지 않고 물어본다 <span class='sub'>컨텍스트를 늘리지 않는다</span></td></tr>
+            <tr><td class="k">/status</td><td>계정 · 모델 · 프로젝트 상태</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tnote fd" style="--d:.8s">
+      주제가 바뀌면 <b>/clear</b>. 이 하나만 습관이 되어도 절반은 된다.
+    </div>
+  </div>
+</section>
+
+<!-- 08 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">SLASH COMMANDS · 2</div>
+  <h1 class="rv" style="--d:.08s">하네스를 만드는 명령</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="two-tbl">
+      <div class="tcol rv" style="--d:.32s">
+        <div class="tcol-h"><span class="n">3순위</span><span class="t">구성 요소를 만든다</span></div>
+        <table class="ctbl">
+          <tbody>
+            <tr class="hi"><td class="k">/init</td><td>프로젝트를 읽고 CLAUDE.md를 만든다 <span class='sub'>RECIPE 02</span></td></tr>
+            <tr><td class="k">/memory</td><td>메모리 파일을 직접 편집한다 <span class='sub'>RECIPE 02</span></td></tr>
+            <tr class="hi"><td class="k">/permissions</td><td>허용 · 차단 규칙을 정한다 <span class='sub'>RECIPE 02</span></td></tr>
+            <tr class="hi"><td class="k">/hooks</td><td>훅을 확인하고 등록한다 <span class='sub'>RECIPE 03</span></td></tr>
+            <tr class="hi"><td class="k">/agents</td><td>서브에이전트를 만들고 관리한다 <span class='sub'>RECIPE 05</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tcol rv" style="--d:.42s">
+        <div class="tcol-h"><span class="n">4순위</span><span class="t">도구를 붙이고 품질을 본다</span></div>
+        <table class="ctbl">
+          <tbody>
+            <tr class="hi"><td class="k">/mcp</td><td>외부 도구 서버를 연결한다 <span class='sub'>RECIPE 04</span></td></tr>
+            <tr><td class="k">/plugin</td><td>플러그인을 설치하고 배포한다 <span class='sub'>RECIPE 04</span></td></tr>
+            <tr class="hi"><td class="k">/code-review</td><td>코드를 검토한다 <span class='sub'>low ~ max · --fix 로 바로 수정</span></td></tr>
+            <tr><td class="k">/security-review</td><td>보안 취약점을 검토한다</td></tr>
+            <tr><td class="k">/verify</td><td>실제로 앱을 띄워 동작을 확인한다</td></tr>
+            <tr><td class="k">/doctor</td><td>설정을 진단하고 고친다</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tnote fd" style="--d:.8s">
+      오른쪽의 <b>RECIPE 번호</b>가 앞으로의 실습 순서다. 하나씩 만들어 내 하네스가 된다.
+    </div>
+  </div>
+</section>
+
+<!-- 09 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">KEYBOARD</div>
+  <h1 class="rv" style="--d:.08s">손이 먼저 기억해야 할 키</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="two-tbl">
+      <div class="tcol rv" style="--d:.32s">
+        <div class="tcol-h"><span class="n">필수</span><span class="t">이 셋만은 외운다</span></div>
+        <table class="ctbl">
+          <tbody>
+            <tr class="hi"><td class="k">Shift + Tab</td><td>권한 모드를 순환한다 <span class='sub'>Plan 모드 진입이 여기</span></td></tr>
+            <tr class="hi"><td class="k">Esc</td><td>즉시 중단한다 <span class='sub'>컨텍스트는 유지된다</span></td></tr>
+            <tr class="hi"><td class="k">Esc  Esc</td><td>되감기 메뉴 <span class='sub'>= /rewind</span></td></tr>
+            <tr><td class="k">Ctrl + T</td><td>작업 체크리스트 토글</td></tr>
+            <tr><td class="k">Ctrl + O</td><td>전체 기록 보기</td></tr>
+            <tr><td class="k">Ctrl + B</td><td>실행 중 작업을 백그라운드로</td></tr>
+            <tr><td class="k">Ctrl + R</td><td>명령 기록 검색</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tcol rv" style="--d:.42s">
+        <div class="tcol-h"><span class="n">SHIFT+TAB</span><span class="t">권한 모드 네 가지</span></div>
+        <div class="modes">
+          <div class="mode"><span class="mn">AUTO</span><span class="md">분류기가 위험한 것만 막는다 <b>· 기본값</b></span></div>
+          <div class="mode"><span class="mn">MANUAL</span><span class="md">편집과 명령마다 <b>사람이 승인</b></span></div>
+          <div class="mode"><span class="mn">ACCEPT EDITS</span><span class="md">파일 편집은 자동, 그 외는 확인</span></div>
+          <div class="mode now"><span class="mn">PLAN</span><span class="md">소스를 건드리지 않고 <b>계획만 세운다</b></span></div>
+        </div>
+        <div class="tnote" style="margin-top:20px;padding-top:18px;border-top:1px solid var(--rule)">
+          사람이 개입하는 두 지점이 <b>이 두 키</b>에 있다 — Plan으로 들어가고, Esc로 멈춘다.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div></div>
+
+<button id="prev" class="nav" aria-label="이전 슬라이드"></button>
+<button id="next" class="nav" aria-label="다음 슬라이드"></button>
+
+<div id="chrome">
+  <span id="count">01 / 09</span>
+  <span id="progress"><i style="width:11%"></i></span>
+  <span id="hint">← → 이동 · F 전체화면</span>
+</div>
+
+<script>
+  (function () {
+    var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+    var board = document.getElementById("board");
+    var bar = document.querySelector("#progress i");
+    var count = document.getElementById("count");
+    var i = 0;
+
+    function pad(n) { return (n < 10 ? "0" : "") + n; }
+
+    function show(n) {
+      i = Math.max(0, Math.min(slides.length - 1, n));
+      slides.forEach(function (s, k) { s.classList.toggle("on", k === i); });
+      bar.style.width = ((i + 1) / slides.length * 100) + "%";
+      count.textContent = pad(i + 1) + " / " + pad(slides.length);
+      if (location.hash !== "#" + (i + 1)) history.replaceState(null, "", "#" + (i + 1));
+    }
+
+    function fit() {
+      var s = Math.min(window.innerWidth / 1600, (window.innerHeight - 44) / 900);
+      board.style.transform = "translate(-50%, -50%) scale(" + s + ")";
+    }
+
+    document.getElementById("next").addEventListener("click", function () { show(i + 1); });
+    document.getElementById("prev").addEventListener("click", function () { show(i - 1); });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " ") { e.preventDefault(); show(i + 1); }
+      else if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); show(i - 1); }
+      else if (e.key === "Home") { show(0); }
+      else if (e.key === "End") { show(slides.length - 1); }
+      else if (e.key === "f" || e.key === "F") {
+        if (document.fullscreenElement) document.exitFullscreen();
+        else if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+      }
+    });
+
+    window.addEventListener("resize", fit);
+    fit();
+
+    var start = parseInt((location.hash || "#1").slice(1), 10);
+    show(isNaN(start) ? 0 : start - 1);
+  })();
+</script>

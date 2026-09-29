@@ -1,0 +1,207 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "AI-native SDLC 흐름",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "define",
+      "label": "정의 · 사람이 의도를 확정"
+    },
+    {
+      "id": "build",
+      "label": "구현 · 배포 · Claude가 만들고 게이트가 막는다"
+    },
+    {
+      "id": "loop",
+      "label": "운영 루프 · 감지에서 다시 기획으로",
+      "variant": "exception"
+    }
+  ],
+  "phases": [
+    {
+      "id": "p_define",
+      "label": "1 Plan · 2 Design",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "p_build",
+      "label": "3 Build · 4 Test",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "p_ship",
+      "label": "5 Deploy · 6 Maintain",
+      "fromCol": 4,
+      "toCol": 5,
+      "variant": "dashed"
+    }
+  ],
+  "mainPath": [
+    "intent",
+    "spec",
+    "plan",
+    "verify",
+    "review",
+    "deploy",
+    "monitor"
+  ],
+  "nodes": [
+    {
+      "id": "intent",
+      "lane": "define",
+      "col": 0,
+      "type": "frontend",
+      "label": "intent.md",
+      "sublabel": "아이디어 캡처",
+      "tag": "PO 승인"
+    },
+    {
+      "id": "spec",
+      "lane": "define",
+      "col": 1,
+      "type": "frontend",
+      "label": "spec.md",
+      "sublabel": "요구사항+설계",
+      "tag": "PO · 테크리드"
+    },
+    {
+      "id": "plan",
+      "lane": "build",
+      "col": 2,
+      "type": "backend",
+      "label": "plan.md",
+      "sublabel": "plan mode",
+      "tag": "엔지니어 승인"
+    },
+    {
+      "id": "verify",
+      "lane": "build",
+      "col": 3,
+      "type": "backend",
+      "label": "diff + 테스트",
+      "sublabel": "자체 검증",
+      "tag": "CI evals"
+    },
+    {
+      "id": "review",
+      "lane": "build",
+      "col": 4,
+      "type": "security",
+      "label": "PR 리뷰",
+      "sublabel": "AI 리뷰 + 소유자",
+      "tag": "branch 보호"
+    },
+    {
+      "id": "deploy",
+      "lane": "build",
+      "col": 5,
+      "type": "cloud",
+      "label": "배포",
+      "sublabel": "티어별 자율성",
+      "tag": "hook 게이트"
+    },
+    {
+      "id": "monitor",
+      "lane": "loop",
+      "col": 5,
+      "type": "messagebus",
+      "label": "모니터링",
+      "sublabel": "결정적 감지",
+      "tag": "3σ 이탈"
+    },
+    {
+      "id": "triage",
+      "lane": "loop",
+      "col": 3,
+      "type": "external",
+      "label": "트리아지",
+      "sublabel": "headless Claude",
+      "tag": "on-call"
+    }
+  ],
+  "edges": [
+    {
+      "from": "intent",
+      "to": "spec",
+      "label": "승인"
+    },
+    {
+      "from": "spec",
+      "to": "plan",
+      "label": "승인",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "top"
+    },
+    {
+      "from": "plan",
+      "to": "verify",
+      "label": "구현"
+    },
+    {
+      "from": "verify",
+      "to": "review",
+      "label": "증거 첨부",
+      "variant": "emphasis"
+    },
+    {
+      "from": "review",
+      "to": "deploy",
+      "label": "merge"
+    },
+    {
+      "from": "deploy",
+      "to": "monitor",
+      "variant": "security"
+    },
+    {
+      "from": "monitor",
+      "to": "triage",
+      "label": "이상 감지",
+      "role": "error",
+      "variant": "security"
+    },
+    {
+      "from": "triage",
+      "to": "intent",
+      "label": "새 intent.md",
+      "role": "return",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "커밋되는 산출물 체인",
+      "items": [
+        "intent.md → spec.md → plan.md → diff+테스트",
+        "→ PR 리뷰 결과 → 배포 → 인시던트 기록",
+        "모두 git에 남아 그대로 감사 추적이 된다"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "3단 통제 레이어",
+      "items": [
+        "Skills: 정책을 권고로 적용 (advisory)",
+        "Hooks: 차단·확인을 항상 강제 (deterministic)",
+        "Gate: 사람 승인 · branch 보호 · 릴리스 매니저"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "사람은 루프 위에서 판단",
+      "items": [
+        "기획·설계는 PO/아키텍트, plan은 엔지니어",
+        "PR은 코드 소유자, 운영은 서비스 소유자",
+        "인시던트는 영구 eval이 되어 재발을 막는다"
+      ]
+    }
+  ]
+}
