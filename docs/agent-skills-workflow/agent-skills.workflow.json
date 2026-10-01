@@ -1,0 +1,283 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "agent-skills 개발 라이프사이클 (AI SDLC)",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "human",
+      "label": "사용자 (Human Gate)"
+    },
+    {
+      "id": "main",
+      "label": "라이프사이클 커맨드"
+    },
+    {
+      "id": "support",
+      "label": "자동 활성 스킬 · 페르소나 · 수정 루프"
+    }
+  ],
+  "phases": [
+    {
+      "id": "ph_define",
+      "label": "DEFINE",
+      "fromCol": 0,
+      "toCol": 0
+    },
+    {
+      "id": "ph_plan",
+      "label": "PLAN",
+      "fromCol": 1,
+      "toCol": 1
+    },
+    {
+      "id": "ph_build",
+      "label": "BUILD",
+      "fromCol": 2,
+      "toCol": 2,
+      "variant": "emphasis"
+    },
+    {
+      "id": "ph_verify",
+      "label": "VERIFY",
+      "fromCol": 3,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "ph_review",
+      "label": "REVIEW",
+      "fromCol": 4,
+      "toCol": 4
+    },
+    {
+      "id": "ph_ship",
+      "label": "SHIP",
+      "fromCol": 5,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "interview",
+    "spec",
+    "approve",
+    "plan",
+    "build",
+    "test",
+    "review",
+    "ship",
+    "golive"
+  ],
+  "nodes": [
+    {
+      "id": "interview",
+      "lane": "support",
+      "col": 0,
+      "type": "frontend",
+      "label": "interview-me",
+      "sublabel": "idea-refine",
+      "width": 104
+    },
+    {
+      "id": "spec",
+      "lane": "main",
+      "col": 0,
+      "type": "frontend",
+      "label": "/spec",
+      "sublabel": "PRD · 경계 정의"
+    },
+    {
+      "id": "approve",
+      "lane": "human",
+      "col": 0,
+      "type": "security",
+      "label": "Spec 승인",
+      "sublabel": "가정 확인",
+      "tag": "human gate"
+    },
+    {
+      "id": "plan",
+      "lane": "main",
+      "col": 1,
+      "type": "frontend",
+      "label": "/plan",
+      "sublabel": "작은 task · 수용기준"
+    },
+    {
+      "id": "build",
+      "lane": "main",
+      "col": 2,
+      "type": "backend",
+      "label": "/build",
+      "sublabel": "수직 slice · commit",
+      "tag": "incremental"
+    },
+    {
+      "id": "context",
+      "lane": "support",
+      "col": 2,
+      "type": "cloud",
+      "label": "보조 스킬",
+      "sublabel": "UI·API·문서근거",
+      "width": 116
+    },
+    {
+      "id": "test",
+      "lane": "main",
+      "col": 3,
+      "type": "backend",
+      "label": "/test",
+      "sublabel": "RED → GREEN",
+      "tag": "TDD"
+    },
+    {
+      "id": "debug",
+      "lane": "support",
+      "col": 3,
+      "type": "backend",
+      "label": "debugging",
+      "sublabel": "재현·국소화·가드",
+      "width": 104
+    },
+    {
+      "id": "review",
+      "lane": "main",
+      "col": 4,
+      "type": "security",
+      "label": "/review",
+      "sublabel": "5축 리뷰"
+    },
+    {
+      "id": "ship",
+      "lane": "main",
+      "col": 5,
+      "type": "cloud",
+      "label": "/ship",
+      "sublabel": "출시 체크리스트"
+    },
+    {
+      "id": "personas",
+      "lane": "support",
+      "col": 5,
+      "type": "messagebus",
+      "label": "전문가 페르소나",
+      "sublabel": "code·test·security",
+      "width": 116
+    },
+    {
+      "id": "golive",
+      "lane": "human",
+      "col": 5,
+      "type": "security",
+      "label": "Go / No-Go",
+      "sublabel": "단계적 롤아웃",
+      "tag": "human gate"
+    }
+  ],
+  "edges": [
+    {
+      "from": "interview",
+      "to": "spec",
+      "label": "요구사항"
+    },
+    {
+      "from": "spec",
+      "to": "approve"
+    },
+    {
+      "from": "approve",
+      "to": "plan",
+      "variant": "emphasis"
+    },
+    {
+      "from": "plan",
+      "to": "build",
+      "label": "tasks",
+      "variant": "emphasis"
+    },
+    {
+      "from": "build",
+      "to": "context",
+      "role": "async",
+      "variant": "dashed"
+    },
+    {
+      "from": "build",
+      "to": "test"
+    },
+    {
+      "from": "test",
+      "to": "debug",
+      "label": "실패",
+      "role": "error",
+      "variant": "security"
+    },
+    {
+      "from": "debug",
+      "to": "build",
+      "label": "수정",
+      "role": "return",
+      "variant": "dashed"
+    },
+    {
+      "from": "test",
+      "to": "review",
+      "label": "통과",
+      "variant": "emphasis"
+    },
+    {
+      "from": "review",
+      "to": "build",
+      "label": "변경 요청",
+      "role": "return",
+      "variant": "dashed"
+    },
+    {
+      "from": "review",
+      "to": "ship",
+      "label": "승인"
+    },
+    {
+      "from": "ship",
+      "to": "personas",
+      "label": "병렬 점검",
+      "role": "async",
+      "variant": "dashed"
+    },
+    {
+      "from": "ship",
+      "to": "golive"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "DEFINE → PLAN",
+      "items": [
+        "코드 전에 /spec으로 PRD 작성, 가정은 명시",
+        "사람이 승인한 spec만 /plan으로 분해",
+        "task마다 수용 기준 · 의존 순서 포함"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "BUILD → VERIFY → REVIEW",
+      "items": [
+        "한 번에 한 slice: 구현 → 테스트 → commit",
+        "실패 시 debugging 5단계 후 재빌드",
+        "/review 5축: 정확성·가독성·구조·보안·성능"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "SHIP",
+      "items": [
+        "/ship이 페르소나에 병렬 점검 분배",
+        "결과 종합 후 사람이 Go / No-Go 결정",
+        "/build auto: 계획 1회 승인 후 자동 실행"
+      ]
+    }
+  ]
+}

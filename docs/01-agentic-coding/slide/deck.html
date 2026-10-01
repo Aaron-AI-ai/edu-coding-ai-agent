@@ -244,7 +244,7 @@
   .term-bar { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-bottom: 1px solid #2A2825; background: #1A1917; }
   .term-bar .dot { width: 9px; height: 9px; border-radius: 50%; background: #3A3835; }
   .term-bar .name { margin-left: 10px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13px; color: #6B6862; letter-spacing: .5px; }
-  .term-body { padding: 18px 22px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 14px; line-height: 1.5; color: #A9A6A0; flex: 1; white-space: pre; overflow: auto; }
+  .term-body { padding: 10px 22px 4px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 14px; line-height: 1.5; color: #A9A6A0; flex: 1; white-space: pre; overflow: auto; }
   .term-body .c { color: #6B6862; }
   .term-body .h { color: #FFFFFF; }
   .term-body .p { color: #E4B363; }
@@ -277,6 +277,7 @@
   .ctbl td.k { width: 186px; padding-right: 16px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 15px; color: var(--ink); white-space: nowrap; }
   .ctbl tr.hi td { color: var(--ink); }
   .ctbl tr.hi td.k { font-weight: 500; }
+  .ctbl td.k.long { white-space: normal; word-break: normal; overflow-wrap: normal; font-size: 13.5px; line-height: 1.35; }
   .ctbl td .sub { display: block; font-size: 13.5px; color: var(--faint); margin-top: 3px; }
   .ctbl tr:last-child td { border-bottom: 0; }
   .tnote { margin-top: auto; padding-top: 20px; font-size: 17px; color: var(--dim); }
@@ -288,6 +289,202 @@
   .mode .mn { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13px; color: var(--faint); width: 96px; flex-shrink: 0; }
   .mode .md { font-size: 16px; color: var(--dim); }
   .mode .md b { color: var(--ink); font-weight: 500; }
+
+  /* ── 플러그인 목록 ── */
+  .plug3 { display: flex; gap: 30px; flex: 1; min-height: 0; }
+  .pcol { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .prow { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 4px 0; border-bottom: 1px solid var(--rule); }
+  .prow:last-child { border-bottom: 0; }
+  .pn { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 15px; color: var(--ink); font-weight: 500; }
+  .pd { margin-top: 2px; font-size: 14.5px; color: var(--dim); line-height: 1.4; }
+  .pd .w { color: var(--faint); }
+  .pl { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 11px; letter-spacing: 2px; color: var(--ink); flex-shrink: 0; padding-top: 5px; white-space: nowrap; }
+  .pl.none { color: var(--faint); letter-spacing: 1px; }
+  .mk { font-family: "JetBrains Mono", "Noto Sans KR", monospace; font-size: 11px; letter-spacing: 1px; padding: 2px 9px; border-radius: 999px; flex-shrink: 0; align-self: flex-start; margin-top: 3px; white-space: nowrap; }
+  .mk.do { background: var(--ink); color: var(--page); }
+  .mk.rec { border: 1px solid var(--ink); color: var(--ink); }
+  .legend { display: flex; align-items: center; gap: 8px; font-family: "Noto Sans KR", sans-serif; font-size: 13px; color: var(--dim); letter-spacing: 0; }
+  .legend span { margin: 0; }
+  .legend .mk { margin-top: 0; align-self: center; }
+  .legend .lt { margin-right: 14px; }
+  .prow > div { min-width: 0; }
+  .skip { margin-top: auto; padding: 14px 16px; border: 1px dashed var(--rule); border-radius: 3px; }
+  .skip .h { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 11px; letter-spacing: 2px; color: var(--faint); }
+  .skip ul { margin: 8px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .skip li { font-size: 13.5px; color: var(--dim); line-height: 1.4; }
+  .skip li b { color: var(--ink); font-weight: 500; }
+  .legend { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; color: var(--faint); letter-spacing: .5px; }
+  .legend span { margin-right: 14px; }
+  .legend em { font-style: normal; color: var(--ink); letter-spacing: 2px; }
+
+  /* ── 설치 실습 표 ── */
+  .itbl { width: 100%; border-collapse: collapse; }
+  .itbl th { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 2px; font-weight: 500; color: var(--faint); text-align: left; padding: 0 0 11px; border-bottom: 1.5px solid var(--ink); }
+  .itbl td { padding: 6px 0; border-bottom: 1px solid var(--rule); vertical-align: top; font-size: 17px; color: var(--dim); line-height: 1.45; }
+  .itbl td.n { width: 52px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13px; color: var(--faint); padding-top: 12px; }
+  .itbl td.p { width: 210px; font-size: 20px; color: var(--ink); font-weight: 500; }
+  .itbl td.p i { display: block; font-style: normal; font-size: 14px; font-weight: 300; color: var(--faint); margin-top: 3px; }
+  .itbl td.c { width: 600px; padding-right: 26px; }
+  .itbl code.cmd { display: block; background: #111110; color: #E8E6E1; border-radius: 3px; padding: 7px 14px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13.5px; line-height: 1.5; white-space: nowrap; }
+  .itbl code.cmd .d { color: #6B6862; }
+  .copy { cursor: pointer; }
+  .copy:hover { outline: 1px dashed #6B6862; outline-offset: 3px; }
+  .copy.copied::after { content: "  ✓ 복사됨"; color: #7FD99A; font-size: .85em; }
+  /* 13 · skill packs */
+  .packs { display: flex; gap: 30px; }
+  .pack { flex: 1; display: flex; gap: 20px; align-items: center; border: 1px solid var(--rule); padding: 16px 20px; }
+  .pack .im { flex: none; height: 96px; background: #fff; border: 1px solid var(--rule); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .pack .im img { height: 100%; display: block; }
+  .pack .nm { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 22px; font-weight: 500; color: var(--ink); display: flex; align-items: center; gap: 10px; }
+  .pack .stars { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 15px; font-weight: 400; color: var(--dim); letter-spacing: 0; }
+  .pack .src { font-size: 14px; color: var(--faint); margin-top: 2px; }
+  .pack .ft { font-size: 20px; color: var(--ink); margin-top: 8px; font-weight: 500; }
+  .pack .ft2 { font-size: 15px; color: var(--dim); margin-top: 2px; }
+  .stbl { margin-top: 20px; }
+  .fn { margin-top: 14px; font-size: 13px; color: var(--faint); text-align: right; }
+  .stbl td { padding: 6px 0; }
+  .stbl td.n { padding-top: 10px; }
+  .stbl td.p { width: 190px; font-size: 19px; }
+  .stbl td.p .lp { font-size: 15px; color: var(--faint); margin-left: 4px; }
+  .stbl th.h2 { color: var(--ink); }
+  .stbl .it { line-height: 1.35; margin: 1px 0; }
+  .stbl .ds { font-size: 14px; color: var(--faint); margin-left: 8px; }
+  /* 14 · implementation plugins */
+  .trio { display: flex; gap: 26px; flex: 1; min-height: 0; }
+  .tc { flex: 1; min-width: 0; border: 1px solid var(--rule); padding: 20px 24px; display: flex; flex-direction: column; }
+  .tc .top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+  .tc .nm { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 27px; font-weight: 500; color: var(--ink); display: flex; align-items: center; gap: 10px; }
+  .tc .st { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 14px; color: var(--dim); }
+  .tc .lb { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 11.5px; letter-spacing: 3px; color: var(--faint); margin-top: 16px; }
+  .tc .wk { font-size: 19px; color: var(--ink); font-weight: 500; line-height: 1.4; margin-top: 4px; }
+  .tc .sl { font-size: 17px; color: var(--dim); line-height: 1.5; margin-top: 4px; }
+  .tc ul { list-style: none; margin: 4px 0 0; padding: 0; }
+  .tc li { font-size: 16px; color: var(--dim); line-height: 1.5; padding: 5px 0; border-top: 1px solid var(--rule); }
+  .tc li:first-child { border-top: 0; }
+  .tc li b { color: var(--ink); font-weight: 500; }
+  .tc .ev { margin-top: auto; padding-top: 12px; border-top: 1.5px solid var(--ink); font-size: 14px; color: var(--dim); line-height: 1.5; }
+  .tc .ev b { color: var(--ink); font-weight: 500; }
+  /* 15 · hands-on */
+  .pre { display: flex; align-items: center; gap: 12px; font-size: 16px; color: var(--dim); margin-bottom: 16px; }
+  .pre .k { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 3px; color: var(--faint); }
+  .tc code.cmd { display: block; background: #111110; color: #E8E6E1; border-radius: 3px; padding: 8px 12px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13px; line-height: 1.5; white-space: pre-wrap; word-break: break-all; }
+  .tc code.cmd + code.cmd { margin-top: 5px; }
+  .pre code.cmd { display: inline-block; background: #111110; color: #E8E6E1; border-radius: 3px; padding: 4px 12px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 14px; }
+  .tc .sp { margin-top: 12px; font-size: 16px; color: var(--ink); font-weight: 500; }
+  .tc .sp span { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; color: var(--faint); margin-right: 8px; font-weight: 400; }
+  .tc .sd { font-size: 15px; color: var(--dim); line-height: 1.45; margin: 4px 0 6px; }
+  .tc .goal { font-size: 17px; color: var(--dim); margin-top: 6px; line-height: 1.4; }
+  /* 16 · deliverables */
+  .tc .vis { flex: none; height: 150px; background: #fff; border: 1px solid var(--rule); display: flex; align-items: center; justify-content: center; gap: 6px; padding: 6px; margin-top: 12px; overflow: hidden; }
+  .tc .vis img { max-height: 100%; min-width: 0; object-fit: contain; }
+  .tc .vis.two img { max-width: calc(50% - 3px); }
+  .tc .vis.one img { max-width: 100%; }
+  .tc .chips { display: flex; flex-wrap: wrap; gap: 6px; align-content: center; justify-content: center; }
+  .tc .chips span { font-size: 14px; color: #141311; border: 1px solid #141311; border-radius: 999px; padding: 3px 11px; }
+  .tc .chips span.g { background: #141311; color: #fff; }
+  .tc .def { font-size: 17px; color: var(--ink); font-weight: 500; line-height: 1.4; margin-top: 12px; }
+  .tc .lb2 { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 11.5px; letter-spacing: 3px; color: var(--faint); margin-top: 8px; }
+  .tc ul.t li { font-size: 14.5px; padding: 3px 0; line-height: 1.42; }
+  .tc .ex { margin-top: auto; padding-top: 10px; }
+  .tc .ex code.cmd { font-size: 12px; padding: 7px 10px; }
+  /* 15 · quality checks */
+  .qc { flex: 1; min-width: 0; border: 1px solid var(--rule); padding: 20px 28px; display: flex; flex-direction: column; }
+  .qc .top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+  .qc .nm { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 28px; font-weight: 500; color: var(--ink); display: flex; align-items: center; gap: 12px; }
+  .qc .st { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 14px; color: var(--dim); }
+  .qc .def { font-size: 19px; color: var(--ink); font-weight: 500; line-height: 1.4; margin-top: 12px; }
+  .qc .lb { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 11.5px; letter-spacing: 3px; color: var(--faint); margin-top: 14px; }
+  .qc ul { list-style: none; margin: 4px 0 0; padding: 0; }
+  .qc li { font-size: 16px; color: var(--dim); line-height: 1.45; padding: 5px 0; border-top: 1px solid var(--rule); }
+  .qc li:first-child { border-top: 0; }
+  .qc li b { color: var(--ink); font-weight: 500; }
+  .qc li code { font-size: 13.5px; white-space: nowrap; }
+  .qc code.cmd { display: block; background: #111110; color: #E8E6E1; border-radius: 3px; padding: 8px 12px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13px; line-height: 1.5; white-space: pre-wrap; }
+  .qc code.cmd + code.cmd { margin-top: 5px; }
+  .qc .ex { margin-top: auto; padding-top: 10px; }
+  .qc .warn { margin-top: 10px; padding-top: 10px; border-top: 1.5px solid var(--ink); font-size: 14.5px; color: var(--dim); line-height: 1.5; }
+  .qc .warn b { color: var(--ink); font-weight: 500; }
+  /* 18 · CLAUDE.md overview */
+  .cm-top { display: flex; gap: 40px; }
+  .cm-role { flex: 0 0 430px; }
+  .cm-loc { flex: 1; min-width: 0; }
+  .cm-lb { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 3px; color: var(--faint); padding-bottom: 8px; border-bottom: 1.5px solid var(--ink); }
+  .cm-role ul { list-style: none; margin: 0; padding: 0; }
+  .cm-role li { font-size: 20px; color: var(--dim); line-height: 1.5; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+  .cm-role li b { color: var(--ink); font-weight: 500; }
+  .cml { width: 100%; border-collapse: collapse; }
+  .cml td { padding: 10px 0; border-bottom: 1px solid var(--rule); font-size: 17px; color: var(--dim); line-height: 1.4; vertical-align: top; }
+  .cml td.n { width: 32px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; color: var(--faint); padding-top: 14px; }
+  .cml td.w { width: 290px; color: var(--ink); font-weight: 500; }
+  .cml td.w code { font-size: 15px; font-weight: 400; }
+  .cm-rule { margin-top: 12px; font-size: 16px; color: var(--dim); line-height: 1.5; }
+  .cm-rule b { color: var(--ink); font-weight: 500; }
+  .cm-in { margin-top: 30px; }
+  .cm-in .row { display: flex; gap: 14px; margin-top: 10px; }
+  .cm-in .it { flex: 1; min-width: 0; border: 1px solid var(--rule); padding: 16px 16px 18px; }
+  .cm-in .it .t { font-size: 21px; color: var(--ink); font-weight: 500; }
+  .cm-in .it .e { font-size: 15.5px; color: var(--dim); line-height: 1.5; margin-top: 6px; }
+  /* 19 · writing a good CLAUDE.md */
+  .gw { display: flex; gap: 34px; flex: 1; min-height: 0; }
+  .gw-l { flex: 0 0 560px; display: flex; flex-direction: column; }
+  .gw-r { flex: 1; min-width: 0; }
+  .gw .lb { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 3px; color: var(--faint); padding-bottom: 8px; border-bottom: 1.5px solid var(--ink); }
+  .gw pre.ex { margin: 10px 0 0; background: #111110; color: #E8E6E1; border-radius: 3px; padding: 10px 16px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; line-height: 1.34; white-space: pre; overflow: hidden; flex: 1; }
+  .gw pre.ex .h { color: #FFFFFF; }
+  .gw pre.ex .t { color: #E4B363; }
+  .gw pre.ex .c { color: #6B6862; }
+  .gw pre.ex .cat { font-family: "Noto Sans KR", sans-serif; font-size: 11.5px; background: #E4B363; color: #111110; padding: 1px 9px; border-radius: 999px; margin-left: 8px; }
+  .tip { margin-top: 10px; border-top: 1px solid var(--rule); padding-top: 9px; display: flex; align-items: flex-start; gap: 22px; }
+  .tip .k { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13px; letter-spacing: 3px; color: var(--ink); font-weight: 500; white-space: nowrap; width: 110px; padding-top: 2px; }
+  .tip .m { font-size: 15.5px; color: var(--dim); line-height: 1.5; flex: 1; }
+  .tip .m b { color: var(--ink); font-weight: 500; }
+  .tip .m code { font-size: 13.5px; white-space: nowrap; }
+  .tip .m .sm { font-size: 13.5px; color: var(--faint); }
+  .gw-r ol { list-style: none; margin: 0; padding: 0; counter-reset: g; }
+  .gw-r li { counter-increment: g; display: flex; gap: 14px; padding: 9px 0; border-bottom: 1px solid var(--rule); }
+  .gw-r li::before { content: "0" counter(g); font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; color: var(--faint); padding-top: 6px; }
+  .gw-r li .t { font-size: 19px; color: var(--ink); font-weight: 500; }
+  .gw-r li .d { font-size: 15px; color: var(--dim); line-height: 1.45; margin-top: 2px; }
+  .warn2 { margin-top: 12px; border-top: 1.5px solid var(--ink); padding-top: 10px; display: flex; flex-direction: column; gap: 8px; }
+  .warn2 .r1, .warn2 .r2 { display: flex; align-items: center; gap: 22px; }
+  .warn2 .k { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13px; letter-spacing: 3px; color: var(--ink); font-weight: 500; white-space: nowrap; width: 110px; }
+  .warn2 .m { font-size: 17px; color: var(--dim); line-height: 1.45; flex: 1; }
+  .warn2 .m b { color: var(--ink); font-weight: 500; }
+  .warn2 .r2 { padding-left: 132px; }
+  .warn2 .m2 { font-size: 15px; color: var(--dim); white-space: nowrap; line-height: 1.3; margin-right: 4px; }
+  .warn2 .sz { display: flex; gap: 10px; }
+  .warn2 .sz div { border: 1px solid var(--ink); padding: 4px 14px; font-size: 14px; color: var(--dim); white-space: nowrap; }
+  .warn2 .sz div b { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 16px; color: var(--ink); font-weight: 500; margin-left: 6px; }
+  /* 20 · CLAUDE.md practice */
+  .pt td { padding: 8px 0; }
+  .pt td.n { padding-top: 13px; }
+  .pt td.p { width: 230px; font-size: 19px; }
+  .pt td.p i { font-size: 13.5px; }
+  .pt td.c { width: 640px; padding-right: 24px; }
+  .pt code.cmd { white-space: pre-wrap; font-size: 13px; line-height: 1.5; padding: 8px 12px; }
+  .pt code.cmd + code.cmd { margin-top: 4px; }
+  .pt td.k { font-size: 15.5px; color: var(--dim); line-height: 1.45; }
+  .pt td.k b { color: var(--ink); font-weight: 500; }
+  .pt-note { margin-top: 12px; display: flex; gap: 36px; font-size: 15px; color: var(--dim); line-height: 1.5; }
+  .pt-note b { color: var(--ink); font-weight: 500; }
+  /* 18 · project structure */
+  .ps { display: flex; gap: 30px; flex: 1; min-height: 0; }
+  .ps-im { flex: none; width: 262px; background: #fff; border: 1px solid var(--rule); display: flex; align-items: flex-start; justify-content: center; overflow: hidden; cursor: zoom-in; position: relative; }
+  .ps-im img { width: 100%; height: auto; display: block; }
+  .ps-im .zm { position: absolute; right: 8px; bottom: 8px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 11px; background: #141311; color: #fff; padding: 3px 8px; border-radius: 999px; }
+  .ps-r { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .ps-g { display: grid; grid-template-columns: 1fr 1fr; column-gap: 30px; }
+  .ps-g .it { padding: 13px 0; border-bottom: 1px solid var(--rule); }
+  .ps-g .it .n { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 17px; font-weight: 500; color: var(--ink); }
+  .ps-g .it .d { font-size: 16.5px; color: var(--dim); line-height: 1.45; margin-top: 2px; }
+  .ps-g .it .d b { color: var(--ink); font-weight: 500; }
+  .ps-note { margin-top: auto; padding-top: 10px; border-top: 1.5px solid var(--ink); font-size: 15px; color: var(--dim); line-height: 1.5; }
+  .ps-note b { color: var(--ink); font-weight: 500; }
+  .itbl tr.demo td.p { color: var(--dim); }
+  .itbl tr:last-child td { border-bottom: 0; }
+  .inote { margin-top: auto; padding-top: 18px; display: flex; gap: 40px; font-size: 16px; color: var(--dim); line-height: 1.55; }
+  .inote b { color: var(--ink); font-weight: 500; }
+  .inote .k { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 2px; color: var(--faint); display: block; margin-bottom: 4px; }
 
   /* ── 모션 ── */
   @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
@@ -762,7 +959,7 @@
 
 <!-- 07 ───────────────────────────────────────────── -->
 <section class="slide">
-  <div class="eyebrow fd">SLASH COMMANDS · 1</div>
+  <div class="eyebrow fd">CLAUDE CODE 기본 제공 기능 · SLASH COMMANDS 1</div>
   <h1 class="rv" style="--d:.08s">매일 쓰는 명령</h1>
   <div class="hr fd" style="--d:.22s"></div>
 
@@ -803,7 +1000,7 @@
 
 <!-- 08 ───────────────────────────────────────────── -->
 <section class="slide">
-  <div class="eyebrow fd">SLASH COMMANDS · 2</div>
+  <div class="eyebrow fd">CLAUDE CODE 기본 제공 기능 · SLASH COMMANDS 2</div>
   <h1 class="rv" style="--d:.08s">하네스를 만드는 명령</h1>
   <div class="hr fd" style="--d:.22s"></div>
 
@@ -817,7 +1014,7 @@
             <tr><td class="k">/memory</td><td>메모리 파일을 직접 편집한다 <span class='sub'>RECIPE 02</span></td></tr>
             <tr class="hi"><td class="k">/permissions</td><td>허용 · 차단 규칙을 정한다 <span class='sub'>RECIPE 02</span></td></tr>
             <tr class="hi"><td class="k">/hooks</td><td>훅을 확인하고 등록한다 <span class='sub'>RECIPE 03</span></td></tr>
-            <tr class="hi"><td class="k">/agents</td><td>서브에이전트를 만들고 관리한다 <span class='sub'>RECIPE 05</span></td></tr>
+            <tr class="hi"><td class="k long">/skill-creator:<wbr>skill-creator</td><td>나만의 스킬을 만든다 <span class='sub'>공식 플러그인 · 설치 필요</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -857,9 +1054,6 @@
             <tr class="hi"><td class="k">Shift + Tab</td><td>권한 모드를 순환한다 <span class='sub'>Plan 모드 진입이 여기</span></td></tr>
             <tr class="hi"><td class="k">Esc</td><td>즉시 중단한다 <span class='sub'>컨텍스트는 유지된다</span></td></tr>
             <tr class="hi"><td class="k">Esc  Esc</td><td>되감기 메뉴 <span class='sub'>= /rewind</span></td></tr>
-            <tr><td class="k">Ctrl + T</td><td>작업 체크리스트 토글</td></tr>
-            <tr><td class="k">Ctrl + O</td><td>전체 기록 보기</td></tr>
-            <tr><td class="k">Ctrl + B</td><td>실행 중 작업을 백그라운드로</td></tr>
             <tr><td class="k">Ctrl + R</td><td>명령 기록 검색</td></tr>
           </tbody>
         </table>
@@ -880,14 +1074,506 @@
   </div>
 </section>
 
+<!-- 10 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">EXTEND · 외부 플러그인</div>
+  <h1 class="rv" style="--d:.08s">개발에 유용한 플러그인</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="plug3">
+      <div class="pcol rv" style="--d:.3s">
+        <div class="tcol-h"><span class="n">A</span><span class="t">계획 · 품질 프로세스</span></div>
+          <div class="prow"><div><div class="pn">superpowers</div><div class="pd">계획 → TDD → 디버깅 프로세스</div></div><span class="mk rec">권장</span></div>
+          <div class="prow"><div><div class="pn">feature-dev</div><div class="pd">탐색 → 설계 → 구현 워크플로</div></div></div>
+          <div class="prow"><div><div class="pn">code-simplifier</div><div class="pd">코드를 읽기 좋게 정리</div></div></div>
+          <div class="prow"><div><div class="pn">commit-commands</div><div class="pd">커밋 · 푸시 · PR 자동화</div></div></div>
+          <div class="prow"><div><div class="pn">hookify</div><div class="pd">막고 싶은 동작을 훅으로</div></div></div>
+          <div class="prow"><div><div class="pn">claude-md-management</div><div class="pd">CLAUDE.md 유지 · 개선</div></div></div>
+          <div class="prow"><div><div class="pn">aidlc</div><div class="pd">AI 주도 개발 라이프사이클 (AI-DLC)<br><span class="w">AWS 오픈소스 · 공식 마켓 아님</span></div></div><span class="mk rec">권장</span></div>
+          <div class="prow"><div><div class="pn">agent-skills</div><div class="pd">스펙 → 계획 → 구현 → 테스트 → 리뷰<br><span class="w">Addy Osmani · 공식 마켓 아님</span></div></div><span class="mk rec">권장</span></div>
+
+      </div>
+      <div class="pcol rv" style="--d:.38s">
+        <div class="tcol-h"><span class="n">B</span><span class="t">코드 품질 · 안전</span></div>
+          <div class="prow"><div><div class="pn">jdtls-lsp</div><div class="pd">Java 오류 진단 · 심볼 탐색 <span class="w">· 바이너리 별도 설치</span></div></div></div>
+          <div class="prow"><div><div class="pn">typescript-lsp</div><div class="pd">TS · JS 오류 진단 <span class="w">· npm 설치 필요</span></div></div></div>
+          <div class="prow"><div><div class="pn">security-guidance</div><div class="pd">보안 패턴 경고</div></div></div>
+          <div class="prow"><div><div class="pn">claude-security</div><div class="pd">내 코드 심층 취약점 스캔</div></div></div>
+          <div class="prow"><div><div class="pn">code-modernization</div><div class="pd">레거시 코드 현대화 가이드</div></div></div>
+          <div class="prow"><div><div class="pn">frontend-design</div><div class="pd">화면 디자인 가이드 (UI)</div></div></div>
+          <div class="prow"><div><div class="pn">ponytail</div><div class="pd">가장 단순한 해법을 먼저 고른다<br><span class="w">공식 마켓 아님</span></div></div><span class="mk do">실습</span></div>
+
+      </div>
+      <div class="pcol rv" style="--d:.46s">
+        <div class="tcol-h"><span class="n">C</span><span class="t">외부 연동 · 메모리 (MCP)</span></div>
+          <div class="prow"><div><div class="pn">context7</div><div class="pd">최신 라이브러리 문서 조회</div></div><span class="mk do">실습</span></div>
+          <div class="prow"><div><div class="pn">playwright</div><div class="pd">브라우저로 화면 검증</div></div><span class="mk do">실습</span></div>
+          <div class="prow"><div><div class="pn">github</div><div class="pd">공식 GitHub 연동</div></div></div>
+          <div class="prow"><div><div class="pn">atlassian</div><div class="pd">Jira · Confluence 연동</div></div><span class="pl none">소개만</span></div>
+          <div class="prow"><div><div class="pn">claude-mem</div><div class="pd">세션 기록을 저장해 다음 세션에 주입<br><span class="w">오픈소스 · 공식 마켓 아님</span></div></div><span class="mk do">실습</span></div>
+
+      </div>
+      <div class="pcol rv" style="--d:.54s">
+        <div class="tcol-h"><span class="n">D</span><span class="t">문서화 · 시각화</span></div>
+          <div class="prow"><div><div class="pn">eli5</div><div class="pd">코드 · 오류를 눈높이에 맞춰 설명<br><span class="w">공식 마켓 아님</span></div></div><span class="mk do">실습</span></div>
+          <div class="prow"><div><div class="pn">archify</div><div class="pd">아키텍처 · 시퀀스 도식을 HTML로<br><span class="w">공식 마켓 아님</span></div></div><span class="mk do">실습</span></div>
+          <div class="prow"><div><div class="pn">remotion</div><div class="pd">React로 영상 만들기<br><span class="w">공식 마켓 아님</span></div></div><span class="mk do">실습</span></div>
+          <div class="prow"><div><div class="pn">graphify</div><div class="pd">코드 · 문서를 지식 그래프로 · HTML 시각화<br><span class="w">오픈소스 · 공식 마켓 아님</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="foot fd" style="--d:.85s">
+      <div class="takeaway">설치는 <b>공식 마켓</b>에서. 플러그인은 훅과 MCP를 실행할 수 있으니 <b>서드파티는 검토 후에</b>.</div>
+      <div class="legend"><span class="mk do">실습</span><span class="lt">설치 실습 대상</span><span class="mk rec">권장</span><span class="lt">권장</span></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 11 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">PLUGINS · 설치 방법</div>
+  <h1 class="rv" style="--d:.08s">찾고, 설치하고, 확인한다</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="recipe">
+
+      <div class="term rv" style="--d:.3s">
+        <div class="term-bar">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="name">claude</span>
+        </div>
+        <div class="term-body"><span class="c"># 1 · 찾기</span>
+<span class="g">/plugin</span>                          <span class="c">Discover 탭에서 검색</span>
+
+<span class="c"># 2 · 설치</span>
+<span class="h">/plugin install context7@claude-plugins-official</span>
+
+<span class="c"># 3 · 활성화 · 확인</span>
+<span class="g">/reload-plugins</span>                  <span class="c">"Active now"면 생략</span>
+<span class="g">/</span>                                <span class="c">/mcp 에서 context7 이 보이면 성공</span>
+<span class="h">claude plugin list</span>               <span class="c">셸에서 목록 · 상태</span>
+
+<span class="c"># 4 · 공식이 아닌 마켓에서 (remotion · ponytail · claude-mem)</span>
+<span class="h">/plugin marketplace add remotion-dev/claude-code-plugin</span>
+<span class="h">/plugin install remotion@remotion</span>
+<span class="h">/plugin marketplace add DietrichGebert/ponytail</span>
+<span class="h">/plugin install ponytail@ponytail</span>
+<span class="h">/plugin marketplace add thedotmack/claude-mem</span>
+<span class="h">/plugin install claude-mem</span>
+
+<span class="c"># 5 · 스킬만 있는 저장소 (플러그인 아님)</span>
+<span class="h">npx skills add tt-a1i/archify -g</span>
+<span class="h">git clone https://github.com/DreambigOu/ELI5.git</span>
+<span class="h">cp -r ELI5/skills/eli5 ~/.claude/skills/eli5</span>
+        </div>
+      </div>
+
+      <div class="steps-col">
+        <div class="rstep rv" style="--d:.42s">
+          <span class="n">01</span>
+          <span>
+            <div class="t">설치 전에 상세창을 읽는다</div>
+            <div class="d"><b style="color:var(--ink)">Will install</b> — 명령 · 에이전트 · 스킬 · <b style="color:var(--ink)">훅</b> · <b style="color:var(--ink)">MCP</b> · LSP</div>
+          </span>
+        </div>
+        <div class="rstep rv" style="--d:.5s">
+          <span class="n">02</span>
+          <span>
+            <div class="t">범위 세 가지 중 하나</div>
+            <div class="d">나만 · 이 저장소 팀 전체 · <b style="color:var(--ink)">나만, 이 저장소에서만</b></div>
+          </span>
+        </div>
+        <div class="rstep rv" style="--d:.58s">
+          <span class="n">03</span>
+          <span>
+            <div class="t">공식 마켓은 처음부터 있다</div>
+            <div class="d">첫 실행 때 자동 등록. 없으면<br><code style="font-size:12px;white-space:nowrap">/plugin marketplace add anthropics/claude-plugins-official</code></div>
+          </span>
+        </div>
+        <div class="rstep rv" style="--d:.66s">
+          <span class="n">04</span>
+          <span>
+            <div class="t">켜고 끄고 지운다</div>
+            <div class="d"><code>/plugin</code> → Installed 탭 · <code>claude plugin disable</code> · <code>uninstall</code></div>
+          </span>
+        </div>
+
+        <div class="watch fd" style="--d:.8s">
+          <div class="h">주의</div>
+          <ul>
+            <li>플러그인은 <b>훅과 MCP 서버</b>를 실행할 수 있다 — 상세창을 읽고 설치한다</li>
+            <li>공식 마켓 밖은 <b>Anthropic이 검토하지 않는다</b></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 12 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">SECRET RECIPE 04</div>
+  <h1 class="rv" style="--d:.08s">플러그인 일곱 개를 설치한다</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <table class="itbl">
+      <thead><tr class="fd" style="--d:.28s"><th></th><th>플러그인</th><th>설치 · 클릭하면 복사</th><th>확인</th></tr></thead>
+      <tbody>
+            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">context7<i>최신 문서 조회 (MCP)</i></td><td class="c"><code class="cmd">/plugin install context7@claude-plugins-official</code></td><td>"Spring Boot 3.4 문서를 조회해줘" → <b style='color:var(--ink)'>도구 호출</b>이 뜨는지</td></tr>
+            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">playwright<i>브라우저로 화면 검증 (MCP)</i></td><td class="c"><code class="cmd">/plugin install playwright@claude-plugins-official</code></td><td>"localhost:5173 을 열어줘" → <b style='color:var(--ink)'>브라우저 도구 호출</b>이 뜨는지</td></tr>
+            <tr class="rv" style="--d:0.57s"><td class="n">03</td><td class="p">ponytail<i>가장 단순한 해법을 먼저 고른다</i></td><td class="c"><code class="cmd">/plugin marketplace add DietrichGebert/ponytail<br>/plugin install ponytail@ponytail</code></td><td>새 세션에서 <b style='color:var(--ink)'>답변이 짧아지고 단순해지는지</b></td></tr>
+            <tr class="rv" style="--d:0.64s"><td class="n">04</td><td class="p">remotion<i>React로 영상 만들기</i></td><td class="c"><code class="cmd">/plugin marketplace add remotion-dev/claude-code-plugin<br>/plugin install remotion@remotion</code></td><td><code>/</code> 를 눌러 <b style='color:var(--ink)'>remotion</b> 항목이 보이는지</td></tr>
+            <tr class="rv" style="--d:0.71s"><td class="n">05</td><td class="p">archify<i>아키텍처 · 시퀀스 도식</i></td><td class="c"><code class="cmd">npx skills add tt-a1i/archify -g</code></td><td><code>/</code> 를 눌러 <b style='color:var(--ink)'>archify</b> 스킬이 보이는지</td></tr>
+            <tr class="rv" style="--d:0.78s"><td class="n">06</td><td class="p">eli5<i>코드 · 오류를 눈높이에 맞춰 설명</i></td><td class="c"><code class="cmd"><span class="d">$ </span>git clone https://github.com/DreambigOu/ELI5.git<br><span class="d">$ </span>cp -r ELI5/skills/eli5 ~/.claude/skills/eli5</code></td><td>"이 오류를 초등학생에게 설명해줘" → <b style='color:var(--ink)'>eli5</b> 스킬이 쓰이는지</td></tr>
+            <tr class="rv" style="--d:0.85s"><td class="n">07</td><td class="p">claude-mem<i>세션 기억 저장 · 주입</i></td><td class="c"><code class="cmd">/plugin marketplace add thedotmack/claude-mem<br>/plugin install claude-mem</code></td><td>Claude Code <b style='color:var(--ink)'>재시작</b> 후 <code>/mcp</code> 에 claude-mem 이 보이는지</td></tr>
+      </tbody>
+    </table>
+
+    <div class="inote fd" style="--d:.9s">
+      <div><span class="k">범위</span>세 번째 <b>"이 저장소에서만"</b> 을 고른다 — 실습이 끝나면 개인 환경에 남지 않는다</div>
+      <div><span class="k">정리</span><code>claude plugin uninstall &lt;이름&gt;@claude-plugins-official --scope local</code></div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">SKILL PACKS · 설명 + 2일차 강사 시연</div>
+  <h1 class="rv" style="--d:.08s">개발 사이클을 이끄는 두 가지 스킬 모음</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="packs rv" style="--d:.3s">
+      <div class="pack">
+        <div class="im"><img src="assets/superpowers-icon.png" alt="superpowers"></div>
+        <div>
+          <div class="nm">superpowers <span class="stars">★ 293,282</span></div>
+          <div class="src">Jesse Vincent · MIT · github.com/obra/superpowers</div>
+          <div class="ft">자동으로 발동하는 개발 방법론</div>
+          <div class="ft2">코드 전에 질문하고, 계획 · TDD · 리뷰를 스킬이 강제한다</div>
+        </div>
+      </div>
+      <div class="pack">
+        <div class="im"><img src="assets/agent-skills-banner.jpg" alt="agent-skills"></div>
+        <div>
+          <div class="nm">agent-skills <span class="stars">★ 100,054</span></div>
+          <div class="src">Addy Osmani · MIT · github.com/addyosmani/agent-skills</div>
+          <div class="ft">명령으로 운전하는 개발 라이프사이클</div>
+          <div class="ft2">/spec → /plan → /build → /test → /review → /ship</div>
+        </div>
+      </div>
+    </div>
+
+    <table class="itbl stbl">
+      <thead><tr class="fd" style="--d:.4s"><th></th><th>단계 · ↻ 태스크마다 반복</th><th class="h2">superpowers · 자동으로 발동</th><th class="h2">agent-skills · 명령으로 실행</th></tr></thead>
+      <tbody>
+            <tr class="rv" style="--d:0.50s"><td class="n">01</td><td class="p">요구사항·스펙</td><td><div class="it"><code>brainstorming</code><span class="ds">질문으로 설계를 다듬고 조각별로 승인</span></div></td><td><div class="it"><code>interview-me</code><span class="ds">한 번에 한 질문으로 요구사항 정리</span></div><div class="it"><code>/spec</code><span class="ds">코드 전에 구조화된 스펙</span></div></td></tr>
+            <tr class="rv" style="--d:0.57s"><td class="n">02</td><td class="p">계획</td><td><div class="it"><code>writing-plans</code><span class="ds">2~5분짜리 태스크 · 파일 경로 · 검증 단계</span></div><div class="it"><code>using-git-worktrees</code><span class="ds">격리된 브랜치에서 작업</span></div></td><td><div class="it"><code>/plan</code><span class="ds">작고 원자적인 태스크</span></div><div class="it"><code>/constraints</code><span class="ds">품질 기준을 CONSTRAINTS.md에</span></div></td></tr>
+            <tr class="rv" style="--d:0.64s"><td class="n">03</td><td class="p">구현<span class="lp">↻</span></td><td><div class="it"><code>subagent-driven-development</code><span class="ds">태스크마다 서브에이전트가 구현 · 검토</span></div></td><td><div class="it"><code>/build</code><span class="ds">한 조각씩 구현 · 테스트 · 커밋</span></div></td></tr>
+            <tr class="rv" style="--d:0.71s"><td class="n">04</td><td class="p">실행·검증<span class="lp">↻</span></td><td><div class="it"><code>test-driven-development</code><span class="ds">RED → GREEN → REFACTOR 강제</span></div><div class="it"><code>systematic-debugging</code><span class="ds">4단계 원인 추적</span></div></td><td><div class="it"><code>/test</code><span class="ds">TDD · 버그는 재현 테스트부터</span></div></td></tr>
+            <tr class="rv" style="--d:0.78s"><td class="n">05</td><td class="p">리뷰<span class="lp">↻</span></td><td><div class="it"><code>requesting-code-review</code><span class="ds">태스크 사이마다 심각도별 점검</span></div></td><td><div class="it"><code>/review</code><span class="ds">5축 리뷰 (정확성·가독성·구조·보안·성능)</span></div><div class="it"><code>/code-simplify</code><span class="ds">동작은 그대로, 복잡도만 줄임</span></div></td></tr>
+            <tr class="rv" style="--d:0.85s"><td class="n">06</td><td class="p">마무리</td><td><div class="it"><code>finishing-a-development-branch</code><span class="ds">merge · PR · 유지 · 폐기 선택</span></div></td><td><div class="it"><code>/ship</code><span class="ds">병렬 점검 후 go / no-go</span></div></td></tr>
+      </tbody>
+    </table>
+    <div class="fn fd" style="--d:.9s">★ GitHub 스타 수 · 2026-09-30 기준</div>
+  </div>
+</section>
+
+<!-- 14 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">PLUGINS · 실습 대상</div>
+  <h1 class="rv" style="--d:.08s">개발 구현에 활용하는 플러그인</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="trio rv" style="--d:.3s">
+      <div class="tc">
+        <div class="top"><div class="nm">ponytail <span class="mk do">실습</span></div><span class="st">★ 148,682</span></div>
+        <div class="lb">LLM의 약점</div>
+        <div class="wk">요청보다 크게 만든다 — 라이브러리 설치, 래퍼 컴포넌트, 불필요한 추상화로 코드가 장황해진다</div>
+        <div class="lb">해법</div>
+        <div class="sl">"가장 게으른 시니어 개발자"처럼 <b style="color:var(--ink);font-weight:500">안 만들기 → 있는 것 재사용 → 표준·네이티브 기능 → 한 줄</b> 순으로 가장 단순한 해법을 먼저 고른다</div>
+        <div class="lb" style="margin-top:14px">핵심 기능</div>
+        <ul><li><b>사다리</b> 필요한가? → 코드베이스에 있나? → 표준 라이브러리 → 네이티브</li><li><b>강도</b> lite · full · ultra 선택</li><li><b>/ponytail-review · audit</b> 과잉 설계를 찾아 삭제 제안</li></ul>
+        <div class="ev">예) 날짜 선택기 <b>404줄 → 23줄</b> (<code>&lt;input type="date"&gt;</code>)<br>코드 <b>−54%</b> · 토큰 −22% · 비용 −20% · 시간 −27%<br><span style="color:var(--faint)">README 자체 측정 · 기능 12개 · Haiku 4.5</span></div>
+      </div>
+      <div class="tc">
+        <div class="top"><div class="nm">context7 <span class="mk do">실습</span></div><span class="st">★ 62,556</span></div>
+        <div class="lb">LLM의 약점</div>
+        <div class="wk">학습 시점에 멈춘 지식 — 옛 버전 답, 존재하지 않는 API를 지어낸다(환각)</div>
+        <div class="lb">해법</div>
+        <div class="sl">공식 문서와 예제를 <b style="color:var(--ink);font-weight:500">버전별로 실시간 조회</b>해 프롬프트에 넣는다. 모델이 기억이 아니라 최신 문서를 보고 코드를 쓴다</div>
+        <div class="lb" style="margin-top:14px">핵심 기능</div>
+        <ul><li><b>use context7</b> 를 붙이거나 자동 발동 규칙으로 사용</li><li><b>MCP 도구 2개</b> resolve-library-id → query-docs</li><li><b>버전 · ID 지정</b> "Next.js 14" · /vercel/next.js</li></ul>
+        <div class="ev">예) "Spring Boot 3.4 문서를 조회해줘" → 도구 호출이 화면에 뜬다<br><span style="color:var(--faint)">무료 API 키를 발급하면 호출 한도가 올라간다 (권장)</span></div>
+      </div>
+      <div class="tc">
+        <div class="top"><div class="nm">claude-mem <span class="mk do">실습</span></div><span class="st">★ 94,993</span></div>
+        <div class="lb">LLM의 약점</div>
+        <div class="wk">세션이 끝나면 기억이 사라진다 — 매번 프로젝트 코드를 다시 읽어 파악하느라 토큰이 많이 든다</div>
+        <div class="lb">해법</div>
+        <div class="sl">세션 중 한 일을 <b style="color:var(--ink);font-weight:500">자동으로 기록 · 요약해 로컬에 저장</b>하고, 다음 세션 시작 때 필요한 맥락을 자동으로 넣어 준다</div>
+        <div class="lb" style="margin-top:14px">핵심 기능</div>
+        <ul><li><b>자동 캡처</b> 훅이 도구 사용을 기록 → 로컬 SQLite</li><li><b>3단계 검색</b> search(목록) → timeline → get_observations(필요한 것만)</li><li><b>&lt;private&gt;</b> 태그로 저장 제외 · 웹 뷰어</li></ul>
+        <div class="ev">3단계 검색으로 상세 조회를 줄여 토큰 <b>약 10배 절감</b><span style="color:var(--faint)"> (README 주장)</span><br><span style="color:var(--faint)">※ 기록 · 요약 자체에도 소량의 토큰이 든다</span></div>
+      </div>
+    </div>
+    <div class="fn fd" style="--d:.9s">★ GitHub 스타 수 · 2026-09-30 기준</div>
+  </div>
+</section>
+
+<!-- 15 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">SECRET RECIPE 05</div>
+  <h1 class="rv" style="--d:.08s">플러그인 세 개를 써 본다</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="pre fd" style="--d:.28s"><span class="k">먼저</span> 실습 프로젝트 폴더에서 Claude Code 를 연다 <code class="cmd">cd edu-stock-chart</code><code class="cmd">claude</code> <span style="color:var(--faint)">· claude-mem 은 설치 뒤 Claude Code 재시작</span></div>
+    <div class="trio rv" style="--d:.34s">
+      <div class="tc">
+        <div class="top"><div class="nm" style="font-size:24px">ponytail</div><span class="st">강사 시연</span></div>
+        <div class="goal">과잉 설계를 찾아 <b style="color:var(--ink);font-weight:500">지울 목록</b>만 받는다</div>
+        <div class="sp"><span>01</span>전체 점검</div>
+        <code class="cmd">/ponytail-audit</code>
+        <div class="sd">저장소 전체를 훑어 삭제 · 단순화 후보를 순위로 보여 준다 (수정은 하지 않는다)</div>
+        <div class="sp"><span>02</span>하나만 적용</div>
+        <code class="cmd">가장 효과 큰 1개만 적용하고 테스트를 돌려줘</code>
+        <div class="sd">제안을 그대로 다 받지 말고 한 건만 골라 적용한다</div>
+        <div class="ev"><b>볼 것</b> 항목마다 「위치 · 자를 것 · 대체 방법」이 한 줄로 나오는가</div>
+      </div>
+      <div class="tc">
+        <div class="top"><div class="nm" style="font-size:24px">context7</div><span class="st">실습 1</span></div>
+        <div class="goal"><b style="color:var(--ink);font-weight:500">최신 문서</b>를 근거로 Spring Boot 스펙을 묻는다</div>
+        <div class="sp"><span>01</span>질문 끝에 use context7</div>
+        <code class="cmd">Spring Boot 3.4에서 spring.jpa.hibernate.ddl-auto 값과 기본값을 알려줘. use context7</code>
+        <div class="sd">프롬프트에 use context7 을 붙이면 문서 조회를 거친다</div>
+        <div class="sp"><span>02</span>비교 (선택)</div>
+        <code class="cmd">Spring Boot 3.4에서 spring.jpa.hibernate.ddl-auto 값과 기본값을 알려줘</code>
+        <div class="sd">같은 질문을 use context7 없이 물어 답을 비교한다</div>
+        <div class="ev"><b>확인</b> 화면에 <code>resolve-library-id</code> → <code>query-docs</code> 도구 호출이 뜨는가</div>
+      </div>
+      <div class="tc">
+        <div class="top"><div class="nm" style="font-size:24px">claude-mem</div><span class="st">실습 2</span></div>
+        <div class="goal"><b style="color:var(--ink);font-weight:500">프로젝트 전체</b>를 기억에 미리 넣는다</div>
+        <div class="sp"><span>01</span>전체 소스를 읽혀 기억시키기</div>
+        <code class="cmd">/learn-codebase</code>
+        <div class="sd">모든 소스 파일을 읽어 기억에 저장한다 (약 5분 · 토큰 소모 큼). 끝나면 /exit</div>
+        <div class="ev"><b>확인</b> 새 세션에서 프로젝트를 물었을 때 코드를 다시 읽지 않고 답하는가 · <code>/mcp</code> 에 claude-mem 이 보이는가</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 16 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">PLUGINS · 코드 품질 검사</div>
+  <h1 class="rv" style="--d:.08s">코드는 리뷰로, 화면은 브라우저로 검사한다</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="trio rv" style="--d:.3s">
+      <div class="qc">
+        <div class="top"><div class="nm">code-review <span class="mk rec">기본 제공</span></div><span class="st">공식 플러그인도 있음</span></div>
+        <div class="def">변경한 코드를 여러 관점으로 검토해 <b style="font-weight:500">진짜 문제만</b> 골라 준다</div>
+        <div class="lb">두 가지 방식</div>
+        <ul><li><b>기본 명령</b> <code>/code-review</code> 현재 변경분(diff)이나 PR 번호를 검토. 강도 low ~ max 선택, <code>--fix</code> 로 바로 수정</li><li><b>공식 플러그인</b> <code>code-review@claude-plugins-official</code> 병렬 에이전트 4개가 PR을 검토 — CLAUDE.md 준수 2 · 버그 1 · 변경 이력(git blame) 1</li><li><b>오탐 줄이기</b> 이슈마다 신뢰도 0~100 점수, <b>80 미만은 제외</b>하고 GitHub PR에 댓글로 게시</li></ul>
+        <div class="lb">함께 쓰는 명령</div>
+        <ul><li><code>/security-review</code> 보안 점검 &nbsp;·&nbsp; <code>/simplify</code> 재사용 · 단순화 정리</li></ul>
+        <div class="ex"><code class="cmd">/code-review</code></div>
+        <div class="warn"><b>주의</b> PR 리뷰는 GitHub 원격과 <code>gh</code> 가 필요하다. <code>ultra</code> 강도는 클라우드에서 돌고 별도 과금된다</div>
+      </div>
+      <div class="qc">
+        <div class="top"><div class="nm">playwright <span class="mk do">실습</span></div><span class="st">★ 37,713</span></div>
+        <div class="def">브라우저를 직접 열어 <b style="font-weight:500">만든 화면을 눌러 보고</b> 확인한다</div>
+        <div class="lb">어떻게 동작하나</div>
+        <ul><li><b>Playwright MCP</b> (Microsoft) — 페이지의 <b>접근성 트리</b>(구조화된 텍스트)를 읽어 조작. 스크린샷 · 비전 모델이 필요 없다</li><li><b>도구</b> <code>browser_navigate</code> · <code>browser_snapshot</code> · <code>browser_click</code> · <code>browser_fill_form</code> · <code>browser_take_screenshot</code></li><li><b>품질 확인</b> 콘솔 오류(<code>browser_console_messages</code>) · 네트워크 실패(<code>browser_network_requests</code>)까지 본다</li></ul>
+        <div class="lb">이런 때 쓴다</div>
+        <ul><li>구현한 UI가 실제로 열리고 차트가 그려지는지 · 폼 입력 흐름 · 화면 오류 재현</li></ul>
+        <div class="ex"><code class="cmd">localhost:5173 을 열어서 차트가 그려지는지, 콘솔 오류가 없는지 확인해줘</code></div>
+        <div class="warn"><b>주의</b> 도구 정의와 접근성 트리가 <b>토큰을 많이 쓴다</b>. 저장소도 토큰 효율은 CLI + 스킬 방식이 낫다고 안내한다 (Node 18 이상)</div>
+      </div>
+    </div>
+    <div class="fn fd" style="--d:.9s">★ GitHub 스타 수 · 2026-09-30 기준 · microsoft/playwright-mcp</div>
+  </div>
+</section>
+
+<!-- 17 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">PLUGINS · 실습 대상</div>
+  <h1 class="rv" style="--d:.08s">개발 산출물 · 코드 분석 및 질의</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="trio rv" style="--d:.3s">
+      <div class="tc">
+        <div class="top"><div class="nm" style="font-size:25px">eli5 <span class="mk do">실습</span></div><span class="st">★ 1,567</span></div>
+        <div class="vis"><div class="chips"><span class="g">5세</span><span>초등 5학년</span><span>대학생</span><span class="g">매니저</span><span>엔지니어</span><span>디자이너</span><span class="g">부모</span><span>배우자</span></div></div>
+        <div class="def">누구에게 설명하느냐에 맞춰 답을 바꿔 준다</div>
+        <div class="lb2">제공</div>
+        <ul class="t"><li>대상 4종류: 나이 · 학년 · 직무 · 관계</li><li>어휘 · 비유 · 어조 · 깊이 · 관점을 대상에 맞춰 조정</li></ul>
+        <div class="lb2">장점</div>
+        <ul class="t"><li>코드 · 오류 · 개념을 비개발자에게 바로 설명</li><li>스킬 파일 하나라 설치가 가볍다</li></ul>
+        <div class="ex"><code class="cmd">이 오류를 초등학생에게 설명해줘</code></div>
+      </div>
+      <div class="tc">
+        <div class="top"><div class="nm" style="font-size:25px">archify <span class="mk do">실습</span></div><span class="st">★ 74,917</span></div>
+        <div class="vis two"><img src="assets/archify-sequence.png" alt="archify sequence"><img src="assets/archify-dataflow.png" alt="archify data flow"></div>
+        <div class="def">코드를 읽고 다이어그램을 HTML 한 파일로 만든다</div>
+        <div class="lb2">제공</div>
+        <ul class="t"><li>아키텍처 · 워크플로 · 시퀀스 · 데이터 플로우 · 라이프사이클 5종</li><li>다크/라이트 · 경로 추적 · PNG · SVG · 영상 내보내기</li></ul>
+        <div class="lb2">장점</div>
+        <ul class="t"><li>저장소를 읽어 소스 근거의 다이어그램</li><li>채팅으로 계속 수정 (“Redis 추가”)</li><li>HTML 파일이라 설치 없이 공유</li></ul>
+        <div class="ex"><code class="cmd">edu-stock-chart의 주식 조회 흐름을 archify로 시퀀스 다이어그램으로 그려줘</code></div>
+      </div>
+      <div class="tc">
+        <div class="top"><div class="nm" style="font-size:25px">remotion <span class="mk do">실습</span></div><span class="st">★ 61,240</span></div>
+        <div class="vis one"><img src="assets/remotion-logo.gif" alt="remotion"></div>
+        <div class="def">React 코드로 영상을 만든다 — 코드가 원본</div>
+        <div class="lb2">제공</div>
+        <ul class="t"><li>스킬 remotion-create · studio(미리보기) · render(내보내기)</li><li>웹앱에 넣는 Player · 대량 렌더링</li></ul>
+        <div class="lb2">활용</div>
+        <ul class="t"><li>발표 · 소개 · 데이터 연동 영상</li><li>에이전트에게 말로 시키고 코드로 다듬기</li><li>수정 · 재사용 · 버전 관리가 쉽다</li></ul>
+        <div class="ex"><code class="cmd">remotion으로 edu-stock-chart를 소개하는 15초 영상을 만들어줘</code></div>
+      </div>
+    </div>
+    <div class="fn fd" style="--d:.9s">★ GitHub 스타 수 · 2026-09-30 기준 · remotion 은 본 저장소(remotion-dev/remotion) 기준</div>
+  </div>
+</section>
+
+<!-- 18 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">PROJECT STRUCTURE</div>
+  <h1 class="rv" style="--d:.08s">Claude Code 프로젝트 구조</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="ps rv" style="--d:.3s">
+      <div class="ps-im"><img data-zoom src="assets/claude-code-project-structure.png" alt="Claude Code Project Structure"><span class="zm">클릭하면 확대</span></div>
+      <div class="ps-r">
+        <div class="ps-g"><div class="it"><div class="n">CLAUDE.md</div><div class="d">프로젝트 메모리. 세션마다 <b>항상 읽힌다</b> (다음 장)</div></div><div class="it"><div class="n">.claude/settings.json</div><div class="d">팀 공유 설정. <b>permissions · hooks · env</b></div></div><div class="it"><div class="n">.claude/settings.local.json</div><div class="d">내 로컬 설정. git에 올리지 않는다</div></div><div class="it"><div class="n">.claude/commands/</div><div class="d">슬래시 명령. md 파일 하나가 명령 하나 (<code>/review</code>)</div></div><div class="it"><div class="n">skills/&lt;이름&gt;/SKILL.md</div><div class="d">작업이 맞으면 <b>자동 활성화</b>되는 스킬. scripts · references · assets 포함</div></div><div class="it"><div class="n">agents/</div><div class="d">서브에이전트 정의 (code-reviewer 등). 역할을 나눠 병렬로 일한다</div></div><div class="it"><div class="n">.mcp.json</div><div class="d">외부 도구(MCP 서버) 연결: GitHub · DB · Playwright</div></div><div class="it"><div class="n">plugins/</div><div class="d">스킬 · 명령 · 에이전트 · 훅 · MCP를 묶어 <b>배포하는 단위</b></div></div><div class="it"><div class="n">Hooks</div><div class="d">특정 시점에 스크립트 실행. 실행 전 차단 · 수정 후 자동 lint</div></div><div class="it"><div class="n">components/ · services/ · tests/ · docs/ …</div><div class="d">일반 앱 코드와 문서. 그림의 예시 프로젝트 구조</div></div></div>
+        <div class="ps-note"><b>그림은 서드파티 인포그래픽</b> (Brij Kishore Pandey). 공식 문서와 다른 곳: <code>skills/</code> · <code>agents/</code> 는 <b>.claude/ 아래</b>에 둔다 · 에이전트 파일은 <b>.md</b> · <code>PreCommit</code> 은 공식 훅 이벤트가 아니다</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 19 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">매번 읽히는 프로젝트 배경지식</div>
+  <h1 class="rv" style="--d:.08s">CLAUDE.md</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="cm-top rv" style="--d:.3s">
+      <div class="cm-role">
+        <div class="cm-lb">역할</div>
+        <ul>
+          <li>세션이 시작될 때마다 <b>자동으로 읽혀</b> 컨텍스트에 들어간다</li>
+          <li>그래서 <b>반복해서 주입하는 프롬프트 · 배경지식</b>을 적는다. 대상은 <b>자주 바뀌지 않는 정보</b></li>
+        </ul>
+      </div>
+      <div class="cm-loc">
+        <div class="cm-lb">어디에 두나 · 읽히는 순서</div>
+        <table class="cml"><tbody><tr><td class="n">01</td><td class="w">조직 정책 파일</td><td>그 PC의 모든 사용자 · <b style="font-weight:500">개인이 제외할 수 없다</b></td></tr><tr><td class="n">02</td><td class="w"><code>~/.claude/CLAUDE.md</code></td><td>내 모든 프로젝트 · 나만</td></tr><tr><td class="n">03</td><td class="w"><code>./CLAUDE.md</code></td><td>이 프로젝트 · <b style="font-weight:500">팀과 공유</b> (git)</td></tr><tr><td class="n">04</td><td class="w"><code>./CLAUDE.local.md</code></td><td>이 프로젝트 · 나만 (<code>.gitignore</code>)</td></tr><tr><td class="n">05</td><td class="w">하위 폴더 <code>CLAUDE.md</code></td><td>그 폴더의 파일을 읽을 때만 로드</td></tr></tbody></table>
+        <div class="cm-rule"><b>덮어쓰지 않고 이어 붙인다</b> · 실행 위치에 가까운 파일이 나중에 읽힌다 · 충돌 시 따를 쪽이 보장되지 않으니 <b>모순되게 쓰지 않는다</b></div>
+      </div>
+    </div>
+
+    <div class="cm-in rv" style="--d:.5s">
+      <div class="cm-lb">CLAUDE.md에 넣는 정보</div>
+      <div class="row"><div class="it"><div class="t">기술 스택</div><div class="e">Spring Boot 3.4 · Java 21<br>Gradle · JPA + H2</div></div><div class="it"><div class="t">명령어</div><div class="e">gradlew.bat build<br>gradlew.bat test · bootRun</div></div><div class="it"><div class="t">프로젝트 구성</div><div class="e">패키지 구조<br>컨트롤러 → 서비스 → 리포지토리</div></div><div class="it"><div class="t">Git 규칙</div><div class="e">브랜치 전략<br>커밋 메시지 규칙</div></div><div class="it"><div class="t">프로젝트 설명</div><div class="e">무엇을 위한 프로젝트인가<br>주식 차트 연습용 웹 서비스</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 20 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">CLAUDE.md · 무엇을 넣을까</div>
+  <h1 class="rv" style="--d:.08s">좋은 CLAUDE.md 쓰는 법</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="gw rv" style="--d:.3s">
+      <div class="gw-l">
+        <div class="lb">예시 · 실습 프로젝트의 CLAUDE.md · 태그 = 들어가는 분류</div>
+        <pre class="ex"><span class="h"># edu-stock-chart</span>
+주식 시세를 조회해 차트로 보여 주는 교육용 웹 서비스 <span class="cat">프로젝트 설명</span>
+
+<span class="t">## Tech Stack</span> <span class="cat">기술 스택</span>
+- Spring Boot 3.4, Java 21, Gradle 8.6, JPA + H2, Lombok
+- UI: Vite 6 + Chart.js 4 (edu-stock-chart-ui)
+
+<span class="t">## Commands</span> <span class="cat">명령어</span>
+- `gradlew.bat build` — 빌드 + 테스트
+- `gradlew.bat test` — 단위 테스트
+- `gradlew.bat bootRun` — 실행 (http://localhost:8080)
+
+<span class="t">## Architecture</span> <span class="cat">프로젝트 구성</span>
+- 패키지: `kr.co.koscom.edu.stockchart`
+- 컨트롤러 → 서비스 → 리포지토리 (로직은 서비스에)
+
+<span class="t">## Git</span> <span class="cat">Git 규칙</span>
+- 브랜치: `feature/*` → `main`
+- 커밋 메시지: 한글, `type: 요약`</pre>
+      </div>
+      <div class="gw-r">
+        <div class="lb">핵심 5가지 · HumanLayer</div>
+        <ol><li><div><div class="t">꼭 알려줄 것만</div><div class="d">무엇으로 만들었나(스택 · 구조) · 왜 만드나(목적) · 어떻게 일하나(명령 · 검증)</div></div></li><li><div><div class="t">모든 작업에 해당하는 것만</div><div class="d">일부 작업에만 맞는 지시는 뺀다. 관련 없는 내용이 많을수록 무시되기 쉽다</div></div></li><li><div><div class="t">점진적 공개</div><div class="d">세부 내용은 별도 md로 나누고, CLAUDE.md에는 어디를 보면 되는지만 적는다. 코드 복사 대신 file:line</div></div></li><li><div><div class="t">스타일은 린터에게</div><div class="d">포매터 · 린터(필요하면 hook)에 맡긴다. Claude는 린터가 아니다</div></div></li><li><div><div class="t">자동 생성은 초안으로만</div><div class="d">/init 결과를 그대로 쓰지 말고 한 줄씩 검토한다. 모든 단계에 영향을 주는 파일이다</div></div></li></ol>
+      </div>
+    </div>
+
+    <div class="warn2 fd" style="--d:.8s">
+      <div class="r1"><span class="k">주의 사항</span><span class="m">내용이 많다고 <b>무조건 좋은 것이 아니다</b>. 지시가 늘수록 뒤쪽만이 아니라 <b>전부 고르게 덜 지켜진다</b></span></div>
+      <div class="r2"><span class="m2">모델 크기별 권장 지시 수</span><div class="sz"><div>대형 <b>150 ~ 200</b></div><div>중형 <b>80 ~ 120</b></div><div>소형 <b>40 ~ 60</b></div></div></div>
+    </div>
+    <div class="tip fd" style="--d:.85s">
+      <span class="k">꿀팁</span>
+      <span class="m">CLAUDE.md는 <b>항상 컨텍스트에 들어가 토큰을 쓴다</b>. 정말 필요한 것만 쓰고, <b>상황별 내용은 별도 md 파일</b>로 빼서 CLAUDE.md에는 <b>경로와 언제 읽는지</b>만 적는다.
+        <code>DB 스키마를 바꿀 때 → docs/db-schema.md</code> <span class="sm">(@import 는 시작 시 함께 로드되어 절약되지 않는다)</span></span>
+    </div>
+    <div class="fn fd" style="--d:.9s">참고: HumanLayer, Writing a good CLAUDE.md (2025-11) · 대형 수치는 글 기준, 중형 · 소형 수치는 대략적 추정 · 계층 · Git 규칙은 예시</div>
+  </div>
+</section>
+
+<!-- 21 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">SECRET RECIPE 06</div>
+  <h1 class="rv" style="--d:.08s">CLAUDE.md를 만들어 본다</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <table class="itbl pt">
+      <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
+      <tbody>
+            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">준비<i>프로젝트 폴더에서 Claude Code 실행</i></td><td class="c"><code class="cmd">cd edu-stock-chart</code><code class="cmd">claude</code></td><td class="k">프롬프트 입력창이 열린다</td></tr>
+            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">초안 만들기<i><code>/init</code> 이 코드를 분석해 CLAUDE.md 를 만든다</i></td><td class="c"><code class="cmd">/init</code></td><td class="k"><b>edu-stock-chart/CLAUDE.md</b> 가 생긴다. 파일이 이미 있으면 덮어쓰지 않고 개선안을 제안한다</td></tr>
+            <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">정리하기<i>초안에서 필요한 것만 남긴다</i></td><td class="c"><code class="cmd">CLAUDE.md를 정리해줘. 기술 스택, 빌드 · 테스트 · 실행 명령, 패키지 구성과 계층 규칙, Git 규칙, 프로젝트 설명만 남기고 코드를 읽으면 알 수 있는 내용과 파일별 설명은 지워줘. 100줄 이하로.</code></td><td class="k"><b>한 줄씩 읽는다.</b> 빼도 실수하지 않을 줄은 지운다</td></tr>
+            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">규칙 추가<i>우리 팀 규칙을 한두 줄 넣는다</i></td><td class="c"><code class="cmd">CLAUDE.md의 Git 섹션에 규칙을 추가해줘. 브랜치는 feature/* 에서 작업해 main 으로 PR 머지하고, 커밋 메시지는 한글로 "type: 요약" 형식으로 쓴다.</code></td><td class="k">Git 섹션에 두 줄이 늘었는가 (규칙은 예시이니 팀 기준으로 바꾼다)</td></tr>
+            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">로드 확인<i>CLAUDE.md 가 읽히는지 본다</i></td><td class="c"><code class="cmd">/context</code></td><td class="k">목록의 <b>Memory files</b> 아래에 CLAUDE.md 가 보이는가</td></tr>
+            <tr class="rv" style="--d:0.71s"><td class="n">06</td><td class="p">새 세션 검증<i>기억 없이 시작해도 아는지 묻는다</i></td><td class="c"><code class="cmd">/exit</code><code class="cmd">claude</code><code class="cmd">이 프로젝트 테스트는 어떻게 실행해?</code></td><td class="k">코드를 다시 읽지 않고 <b>CLAUDE.md 의 명령</b>으로 답하는가</td></tr>
+      </tbody>
+    </table>
+    <div class="pt-note fd" style="--d:.9s">
+      <div><b>초안은 그대로 쓰지 않는다.</b> CLAUDE.md는 매 세션 들어가므로 정리 단계가 핵심이다</div>
+      <div>입력이 여러 줄이면 <b>위에서부터 차례로</b> 입력한다</div>
+    </div>
+  </div>
+</section>
+
 </div></div>
 
 <button id="prev" class="nav" aria-label="이전 슬라이드"></button>
 <button id="next" class="nav" aria-label="다음 슬라이드"></button>
 
 <div id="chrome">
-  <span id="count">01 / 09</span>
-  <span id="progress"><i style="width:11%"></i></span>
+  <span id="count">01 / 21</span>
+  <span id="progress"><i style="width:4.8%"></i></span>
   <span id="hint">← → 이동 · F 전체화면</span>
 </div>
 
@@ -914,6 +1600,30 @@
       board.style.transform = "translate(-50%, -50%) scale(" + s + ")";
     }
 
+
+    Array.prototype.forEach.call(document.querySelectorAll(".term-body .h, code.cmd"), function (el) {
+      el.classList.add("copy");
+      el.title = "클릭해서 복사";
+      el.addEventListener("click", function () {
+        var t = el.innerText.replace(/^\$ /gm, "").trim();
+        var done = function () { el.classList.add("copied"); setTimeout(function () { el.classList.remove("copied"); }, 1200); };
+        if (navigator.clipboard) navigator.clipboard.writeText(t).then(done, done);
+        else { var a = document.createElement("textarea"); a.value = t; document.body.appendChild(a); a.select(); document.execCommand("copy"); a.remove(); done(); }
+      });
+    });
+
+    var zov = document.createElement("div");
+    zov.style.cssText = "position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.88);z-index:9999;overflow:auto;display:none;text-align:center;padding:16px;cursor:zoom-out";
+    var zim = document.createElement("img");
+    zim.style.cssText = "width:min(980px,96vw);height:auto;background:#fff;display:inline-block";
+    zov.appendChild(zim); document.body.appendChild(zov);
+    Array.prototype.forEach.call(document.querySelectorAll("img[data-zoom]"), function (el) {
+      el.addEventListener("click", function () { zim.src = el.src; zov.style.display = "block"; zov.scrollTop = 0; });
+    });
+    zov.addEventListener("click", function () { zov.style.display = "none"; });
+    document.addEventListener("keydown", function (e) {
+      if (zov.style.display === "block") { if (e.key === "Escape") zov.style.display = "none"; e.stopImmediatePropagation(); e.preventDefault(); }
+    }, true);
     document.getElementById("next").addEventListener("click", function () { show(i + 1); });
     document.getElementById("prev").addEventListener("click", function () { show(i - 1); });
 

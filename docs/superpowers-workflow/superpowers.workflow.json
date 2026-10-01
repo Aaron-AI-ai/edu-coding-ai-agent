@@ -1,0 +1,295 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Superpowers 개발 워크플로우",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "human",
+      "label": "사용자 (Human Gate)"
+    },
+    {
+      "id": "work",
+      "label": "요구사항 · 계획 · 실행"
+    },
+    {
+      "id": "review",
+      "label": "검증 · 리뷰"
+    },
+    {
+      "id": "side",
+      "label": "병렬 작업 · 수정 루프",
+      "variant": "exception"
+    }
+  ],
+  "phases": [
+    {
+      "id": "ph_req",
+      "label": "요구사항",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "ph_plan",
+      "label": "계획",
+      "fromCol": 2,
+      "toCol": 2
+    },
+    {
+      "id": "ph_exec",
+      "label": "실행 + 검증",
+      "fromCol": 3,
+      "toCol": 4,
+      "variant": "emphasis"
+    },
+    {
+      "id": "ph_done",
+      "label": "완료",
+      "fromCol": 5,
+      "toCol": 5
+    }
+  ],
+  "groups": [
+    {
+      "id": "g_review",
+      "label": "2단계 리뷰 (task마다)",
+      "lane": "review",
+      "fromCol": 3,
+      "toCol": 4,
+      "variant": "emphasis"
+    }
+  ],
+  "mainPath": [
+    "brainstorm",
+    "approve",
+    "worktree",
+    "plans",
+    "implement",
+    "spec_review",
+    "quality_review",
+    "verify",
+    "finish",
+    "choose"
+  ],
+  "nodes": [
+    {
+      "id": "brainstorm",
+      "lane": "work",
+      "col": 0,
+      "type": "frontend",
+      "label": "brainstorming",
+      "sublabel": "질문 · 설계 문서"
+    },
+    {
+      "id": "approve",
+      "lane": "human",
+      "col": 1,
+      "type": "security",
+      "label": "설계 승인",
+      "sublabel": "섹션별 확인",
+      "tag": "human gate"
+    },
+    {
+      "id": "worktree",
+      "lane": "work",
+      "col": 1,
+      "type": "cloud",
+      "label": "git-worktrees",
+      "sublabel": "격리 브랜치",
+      "width": 104
+    },
+    {
+      "id": "plans",
+      "lane": "work",
+      "col": 2,
+      "type": "frontend",
+      "label": "writing-plans",
+      "sublabel": "2~5분 task 분해",
+      "width": 104
+    },
+    {
+      "id": "implement",
+      "lane": "work",
+      "col": 3,
+      "type": "backend",
+      "label": "subagent 실행",
+      "sublabel": "task당 새 agent",
+      "tag": "TDD: RED→GREEN",
+      "width": 104
+    },
+    {
+      "id": "spec_review",
+      "lane": "review",
+      "col": 3,
+      "type": "security",
+      "label": "Spec 리뷰",
+      "sublabel": "계획 준수 여부"
+    },
+    {
+      "id": "quality_review",
+      "lane": "review",
+      "col": 4,
+      "type": "security",
+      "label": "품질 리뷰",
+      "sublabel": "심각도별 이슈",
+      "width": 92
+    },
+    {
+      "id": "verify",
+      "lane": "review",
+      "col": 5,
+      "type": "security",
+      "label": "verification",
+      "sublabel": "증거 후 완료",
+      "tag": "before-completion"
+    },
+    {
+      "id": "finish",
+      "lane": "work",
+      "col": 5,
+      "type": "cloud",
+      "label": "finish-branch",
+      "sublabel": "테스트 · 정리",
+      "width": 104
+    },
+    {
+      "id": "choose",
+      "lane": "human",
+      "col": 5,
+      "type": "security",
+      "label": "통합 방식 선택",
+      "sublabel": "merge/PR/keep",
+      "width": 104
+    },
+    {
+      "id": "dispatch",
+      "lane": "side",
+      "col": 2,
+      "type": "messagebus",
+      "label": "parallel-agents",
+      "sublabel": "독립 문제 동시 처리",
+      "width": 116
+    },
+    {
+      "id": "fixer",
+      "lane": "side",
+      "col": 4,
+      "type": "backend",
+      "label": "수정 / 디버깅",
+      "sublabel": "systematic-debugging"
+    }
+  ],
+  "edges": [
+    {
+      "from": "brainstorm",
+      "to": "approve",
+      "label": "설계안",
+      "fromSide": "top",
+      "toSide": "left"
+    },
+    {
+      "from": "approve",
+      "to": "worktree",
+      "variant": "emphasis"
+    },
+    {
+      "from": "worktree",
+      "to": "plans"
+    },
+    {
+      "from": "plans",
+      "to": "implement",
+      "label": "tasks",
+      "variant": "emphasis"
+    },
+    {
+      "from": "implement",
+      "to": "spec_review"
+    },
+    {
+      "from": "spec_review",
+      "to": "quality_review",
+      "label": "통과"
+    },
+    {
+      "from": "quality_review",
+      "to": "implement",
+      "label": "다음 task",
+      "variant": "dashed",
+      "role": "return"
+    },
+    {
+      "from": "quality_review",
+      "to": "verify",
+      "label": "완료",
+      "variant": "emphasis"
+    },
+    {
+      "from": "verify",
+      "to": "finish"
+    },
+    {
+      "from": "finish",
+      "to": "choose"
+    },
+    {
+      "from": "plans",
+      "to": "dispatch",
+      "label": "독립",
+      "role": "async",
+      "variant": "dashed"
+    },
+    {
+      "from": "dispatch",
+      "to": "verify",
+      "label": "통합",
+      "role": "async",
+      "variant": "dashed"
+    },
+    {
+      "from": "spec_review",
+      "to": "fixer",
+      "label": "이슈",
+      "role": "error",
+      "variant": "security"
+    },
+    {
+      "from": "fixer",
+      "to": "spec_review",
+      "label": "재리뷰",
+      "role": "return",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "요구사항 → 계획",
+      "items": [
+        "코드 전에 brainstorming으로 설계를 확정",
+        "사람이 승인한 설계만 계획으로 넘어감",
+        "계획은 파일 경로·코드·검증 단계까지 명시"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "실행 → 검증",
+      "items": [
+        "task마다 새 subagent + TDD",
+        "Spec 리뷰 → Code Quality 리뷰 2단계",
+        "완료 선언 전 실제 실행 증거 확인"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "병렬 · 수정",
+      "items": [
+        "서로 독립인 문제는 병렬 subagent로 분배",
+        "리뷰 이슈는 수정 후 반드시 재리뷰",
+        "worktree로 작업 공간을 격리"
+      ]
+    }
+  ]
+}
