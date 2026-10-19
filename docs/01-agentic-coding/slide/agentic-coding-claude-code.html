@@ -1359,13 +1359,14 @@
       <div class="tc">
         <div class="top"><div class="nm" style="font-size:24px">context7</div><span class="st">실습 1</span></div>
         <div class="goal"><b style="color:var(--ink);font-weight:500">최신 문서</b>를 근거로 Spring Boot 스펙을 묻는다</div>
+        <div class="sp"><span>00</span>처음 한 번 로그인</div>
+        <code class="cmd">/mcp</code>
+        <div class="sd">context7 선택 → Authenticate → 브라우저에서 로그인 · 승인</div>
         <div class="sp"><span>01</span>질문 끝에 use context7</div>
         <code class="cmd">Spring Boot 3.4에서 spring.jpa.hibernate.ddl-auto 값과 기본값을 알려줘. use context7</code>
-        <div class="sd">프롬프트에 use context7 을 붙이면 문서 조회를 거친다</div>
-        <div class="sp"><span>02</span>비교 (선택)</div>
+        <div class="sp"><span>02</span>비교 (선택) <span style="margin-left:6px">use context7 없이 같은 질문</span></div>
         <code class="cmd">Spring Boot 3.4에서 spring.jpa.hibernate.ddl-auto 값과 기본값을 알려줘</code>
-        <div class="sd">같은 질문을 use context7 없이 물어 답을 비교한다</div>
-        <div class="ev"><b>확인</b> 화면에 <code>resolve-library-id</code> → <code>query-docs</code> 도구 호출이 뜨는가</div>
+        <div class="ev"><b>확인</b> <code>resolve-library-id</code> → <code>query-docs</code> 호출이 뜨는가</div>
       </div>
       <div class="tc">
         <div class="top"><div class="nm" style="font-size:24px">claude-mem</div><span class="st">실습 2</span></div>
