@@ -244,7 +244,7 @@
   .term-bar { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-bottom: 1px solid #2A2825; background: #1A1917; }
   .term-bar .dot { width: 9px; height: 9px; border-radius: 50%; background: #3A3835; }
   .term-bar .name { margin-left: 10px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13px; color: #6B6862; letter-spacing: .5px; }
-  .term-body { padding: 10px 22px 4px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 14px; line-height: 1.5; color: #A9A6A0; flex: 1; white-space: pre; overflow: auto; }
+  .term-body { padding: 10px 22px 4px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 14px; line-height: 1.43; color: #A9A6A0; flex: 1; white-space: pre; overflow: auto; }
   .term-body .c { color: #6B6862; }
   .term-body .h { color: #FFFFFF; }
   .term-body .p { color: #E4B363; }
@@ -480,6 +480,11 @@
   .ps-g .it .d b { color: var(--ink); font-weight: 500; }
   .ps-note { margin-top: auto; padding-top: 10px; border-top: 1.5px solid var(--ink); font-size: 15px; color: var(--dim); line-height: 1.5; }
   .ps-note b { color: var(--ink); font-weight: 500; }
+  .inst { display: flex; gap: 26px; margin-top: 12px; }
+  .inst .ic { flex: 1; min-width: 0; }
+  .inst .k { display: block; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 11.5px; letter-spacing: 3px; color: var(--faint); margin-bottom: 5px; }
+  .inst code.cmd { display: block; background: #111110; color: #E8E6E1; border-radius: 3px; padding: 6px 12px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12.5px; line-height: 1.45; white-space: pre-wrap; word-break: break-all; }
+  .inst code.cmd + code.cmd { margin-top: 4px; }
   .itbl tr.demo td.p { color: var(--dim); }
   .itbl tr:last-child td { border-bottom: 0; }
   .inote { margin-top: auto; padding-top: 18px; display: flex; gap: 40px; font-size: 16px; color: var(--dim); line-height: 1.55; }
@@ -1014,7 +1019,7 @@
             <tr><td class="k">/memory</td><td>메모리 파일을 직접 편집한다 <span class='sub'>RECIPE 02</span></td></tr>
             <tr class="hi"><td class="k">/permissions</td><td>허용 · 차단 규칙을 정한다 <span class='sub'>RECIPE 02</span></td></tr>
             <tr class="hi"><td class="k">/hooks</td><td>훅을 확인하고 등록한다 <span class='sub'>RECIPE 03</span></td></tr>
-            <tr class="hi"><td class="k long">/skill-creator:<wbr>skill-creator</td><td>나만의 스킬을 만든다 <span class='sub'>공식 플러그인 · 설치 필요</span></td></tr>
+            <tr class="hi"><td class="k long">/skill-creator:<wbr>skill-creator</td><td>나만의 스킬을 만든다 <span class='sub'>공식 플러그인 · 설치 필요 · 이름은 <b>플러그인:스킬</b> 형식</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -1118,8 +1123,8 @@
         <div class="tcol-h"><span class="n">D</span><span class="t">문서화 · 시각화</span></div>
           <div class="prow"><div><div class="pn">eli5</div><div class="pd">코드 · 오류를 눈높이에 맞춰 설명<br><span class="w">공식 마켓 아님</span></div></div><span class="mk do">실습</span></div>
           <div class="prow"><div><div class="pn">archify</div><div class="pd">아키텍처 · 시퀀스 도식을 HTML로<br><span class="w">공식 마켓 아님</span></div></div><span class="mk do">실습</span></div>
-          <div class="prow"><div><div class="pn">remotion</div><div class="pd">React로 영상 만들기<br><span class="w">공식 마켓 아님</span></div></div><span class="mk do">실습</span></div>
-          <div class="prow"><div><div class="pn">graphify</div><div class="pd">코드 · 문서를 지식 그래프로 · HTML 시각화<br><span class="w">오픈소스 · 공식 마켓 아님</span></div></div></div>
+          <div class="prow"><div><div class="pn">remotion</div><div class="pd">React로 영상 만들기<br><span class="w">공식 마켓 아님</span></div></div><span class="mk rec">권장</span></div>
+          <div class="prow"><div><div class="pn">graphify</div><div class="pd">코드 · 문서를 지식 그래프로 · HTML 시각화<br><span class="w">오픈소스 · 공식 마켓 아님</span></div></div><span class="mk rec">권장</span></div>
       </div>
     </div>
 
@@ -1167,7 +1172,8 @@
 <span class="c"># 5 · 스킬만 있는 저장소 (플러그인 아님)</span>
 <span class="h">npx skills add tt-a1i/archify -g</span>
 <span class="h">git clone https://github.com/DreambigOu/ELI5.git</span>
-<span class="h">cp -r ELI5/skills/eli5 ~/.claude/skills/eli5</span>
+<span class="h">New-Item -ItemType Directory -Force "$HOME\.claude\skills" | Out-Null</span>
+<span class="h">Copy-Item -Recurse ELI5\skills\eli5 "$HOME\.claude\skills\eli5"</span>
         </div>
       </div>
 
@@ -1229,7 +1235,7 @@
             <tr class="rv" style="--d:0.57s"><td class="n">03</td><td class="p">ponytail<i>가장 단순한 해법을 먼저 고른다</i></td><td class="c"><code class="cmd">/plugin marketplace add DietrichGebert/ponytail<br>/plugin install ponytail@ponytail</code></td><td>새 세션에서 <b style='color:var(--ink)'>답변이 짧아지고 단순해지는지</b></td></tr>
             <tr class="rv" style="--d:0.64s"><td class="n">04</td><td class="p">remotion<i>React로 영상 만들기</i></td><td class="c"><code class="cmd">/plugin marketplace add remotion-dev/claude-code-plugin<br>/plugin install remotion@remotion</code></td><td><code>/</code> 를 눌러 <b style='color:var(--ink)'>remotion</b> 항목이 보이는지</td></tr>
             <tr class="rv" style="--d:0.71s"><td class="n">05</td><td class="p">archify<i>아키텍처 · 시퀀스 도식</i></td><td class="c"><code class="cmd">npx skills add tt-a1i/archify -g</code></td><td><code>/</code> 를 눌러 <b style='color:var(--ink)'>archify</b> 스킬이 보이는지</td></tr>
-            <tr class="rv" style="--d:0.78s"><td class="n">06</td><td class="p">eli5<i>코드 · 오류를 눈높이에 맞춰 설명</i></td><td class="c"><code class="cmd"><span class="d">$ </span>git clone https://github.com/DreambigOu/ELI5.git<br><span class="d">$ </span>cp -r ELI5/skills/eli5 ~/.claude/skills/eli5</code></td><td>"이 오류를 초등학생에게 설명해줘" → <b style='color:var(--ink)'>eli5</b> 스킬이 쓰이는지</td></tr>
+            <tr class="rv" style="--d:0.78s"><td class="n">06</td><td class="p">eli5<i>코드 · 오류를 눈높이에 맞춰 설명</i></td><td class="c"><code class="cmd"><span class="d">PS&gt; </span>git clone https://github.com/DreambigOu/ELI5.git<br><span class="d">PS&gt; </span>New-Item -ItemType Directory -Force "$HOME\.claude\skills" | Out-Null<br><span class="d">PS&gt; </span>Copy-Item -Recurse ELI5\skills\eli5 "$HOME\.claude\skills\eli5"</code></td><td>"이 오류를 초등학생에게 설명해줘" → <b style='color:var(--ink)'>eli5</b> 스킬이 쓰이는지</td></tr>
             <tr class="rv" style="--d:0.85s"><td class="n">07</td><td class="p">claude-mem<i>세션 기억 저장 · 주입</i></td><td class="c"><code class="cmd">/plugin marketplace add thedotmack/claude-mem<br>/plugin install claude-mem</code></td><td>Claude Code <b style='color:var(--ink)'>재시작</b> 후 <code>/mcp</code> 에 claude-mem 이 보이는지</td></tr>
       </tbody>
     </table>
@@ -1366,6 +1372,11 @@
         <div class="sd">모든 소스 파일을 읽어 기억에 저장한다 (약 5분 · 토큰 소모 큼). 끝나면 /exit</div>
         <div class="ev"><b>확인</b> 새 세션에서 프로젝트를 물었을 때 코드를 다시 읽지 않고 답하는가 · <code>/mcp</code> 에 claude-mem 이 보이는가</div>
       </div>
+    </div>
+    <div class="inst fd" style="--d:.8s">
+      <div class="ic"><span class="k">설치 · ponytail</span><code class="cmd">/plugin marketplace add DietrichGebert/ponytail</code><code class="cmd">/plugin install ponytail@ponytail</code></div>
+      <div class="ic"><span class="k">설치 · context7</span><code class="cmd">/plugin install context7@claude-plugins-official</code></div>
+      <div class="ic"><span class="k">설치 · claude-mem</span><code class="cmd">/plugin marketplace add thedotmack/claude-mem</code><code class="cmd">/plugin install claude-mem</code></div>
     </div>
   </div>
 </section>
@@ -1605,7 +1616,7 @@
       el.classList.add("copy");
       el.title = "클릭해서 복사";
       el.addEventListener("click", function () {
-        var t = el.innerText.replace(/^\$ /gm, "").trim();
+        var t = el.innerText.replace(/^(\$|PS>) /gm, "").trim();
         var done = function () { el.classList.add("copied"); setTimeout(function () { el.classList.remove("copied"); }, 1200); };
         if (navigator.clipboard) navigator.clipboard.writeText(t).then(done, done);
         else { var a = document.createElement("textarea"); a.value = t; document.body.appendChild(a); a.select(); document.execCommand("copy"); a.remove(); done(); }
