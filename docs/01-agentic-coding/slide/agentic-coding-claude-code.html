@@ -1386,6 +1386,60 @@
 
 <!-- 16 ───────────────────────────────────────────── -->
 <section class="slide">
+  <div class="eyebrow fd">SECRET RECIPE 05 · context7 결과</div>
+  <h1 class="rv" style="--d:.08s">context7 을 켜면 답이 바뀐다</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="pre fd" style="--d:.28s"><span class="k">조건</span> 같은 질문 · 같은 모델 <b style="color:var(--ink);font-weight:500">Claude Sonnet 4.6</b> (지식 기준 2025.08 · Spring Boot 4 는 2025.11 출시) · context7 만 껐다 켰다</div>
+    <div class="pre fd" style="--d:.32s;margin-top:-6px"><span class="k">질문</span> <code class="cmd">Spring Boot 4에서 REST API 버전 관리(v1, v2)를 헤더 방식으로 설정하는 방법과 application.yml 예제를 알려줘</code></div>
+    <div class="trio rv" style="--d:.38s">
+      <div class="tc">
+        <div class="top"><div class="nm" style="font-size:24px">context7 없음</div><span class="mk rec">웹 검색으로 대체</span></div>
+        <div class="goal">context7 미연결 → WebSearch 1회 → <b style="color:var(--ink);font-weight:500">블로그 4개</b>를 근거로 답함</div>
+        <div class="sp"><span>yml</span>답으로 나온 설정</div>
+        <code class="cmd">spring:
+  mvc:
+    apiversion:
+      enabled: true
+      header: X-API-Version
+      default-version: "1"
+      supported-versions: ["1", "2"]</code>
+        <ul class="t" style="margin-top:8px">
+          <li><b>enabled</b> 없는 속성</li>
+          <li><b>header</b> → 실제는 use.header</li>
+          <li><b>default-version · supported-versions</b> → 실제는 default · supported</li>
+        </ul>
+        <div class="ev"><b>결과</b> 오류 없이 무시된다 → 버전 관리가 켜지지 않는다 · Java 설정 · 컨트롤러 코드는 맞음</div>
+      </div>
+      <div class="tc">
+        <div class="top"><div class="nm" style="font-size:24px">use context7</div><span class="mk do">공식 문서 조회</span></div>
+        <div class="goal">context7 3회 호출 → <b style="color:var(--ink);font-weight:500">Spring Boot 4.0.0 공식 소스</b>를 근거로 답함</div>
+        <div class="sp"><span>yml</span>답으로 나온 설정</div>
+        <code class="cmd">spring:
+  mvc:
+    apiversion:
+      use:
+        header: X-API-Version
+      default: "1.0"
+      supported: ["1.0", "2.0"]
+      detect-supported: true</code>
+        <ul class="t" style="margin-top:8px">
+          <li><b>use.header · default · supported</b> 공식 속성 이름과 일치</li>
+          <li><b>detect-supported</b> 컨트롤러의 version 값을 자동 수집</li>
+        </ul>
+        <div class="ev"><b>결과</b> 공식 문서와 일치 · 근거가 블로그 → 공식 소스로 바뀜</div>
+      </div>
+    </div>
+    <div class="inote fd" style="--d:.7s">
+      <div><span class="k">정리</span>모르는 최신 내용은 AI 가 <b>웹 검색으로 메우지만, 설정 키처럼 정확해야 하는 값은 틀릴 수 있다.</b> context7 은 <b>버전별 공식 문서</b>로 답한다.</div>
+      <div><span class="k">참고</span>Opus · Sonnet 5.5 (지식 기준 2026.06) 는 context7 없이도 맞힌다 · 차이는 <b style="white-space:nowrap">학습 시점 이후</b> 내용에서 난다</div>
+    </div>
+  </div>
+</section>
+
+<!-- 17 ───────────────────────────────────────────── -->
+<section class="slide">
   <div class="eyebrow fd">PLUGINS · 코드 품질 검사</div>
   <h1 class="rv" style="--d:.08s">코드는 리뷰로, 화면은 브라우저로 검사한다</h1>
   <div class="hr fd" style="--d:.22s"></div>
@@ -1417,7 +1471,7 @@
   </div>
 </section>
 
-<!-- 17 ───────────────────────────────────────────── -->
+<!-- 18 ───────────────────────────────────────────── -->
 <section class="slide">
   <div class="eyebrow fd">PLUGINS · 실습 대상</div>
   <h1 class="rv" style="--d:.08s">개발 산출물 · 코드 분석 및 질의</h1>
@@ -1460,7 +1514,7 @@
   </div>
 </section>
 
-<!-- 18 ───────────────────────────────────────────── -->
+<!-- 19 ───────────────────────────────────────────── -->
 <section class="slide">
   <div class="eyebrow fd">PROJECT STRUCTURE</div>
   <h1 class="rv" style="--d:.08s">Claude Code 프로젝트 구조</h1>
@@ -1477,7 +1531,7 @@
   </div>
 </section>
 
-<!-- 19 ───────────────────────────────────────────── -->
+<!-- 20 ───────────────────────────────────────────── -->
 <section class="slide">
   <div class="eyebrow fd">매번 읽히는 프로젝트 배경지식</div>
   <h1 class="rv" style="--d:.08s">CLAUDE.md</h1>
@@ -1506,7 +1560,7 @@
   </div>
 </section>
 
-<!-- 20 ───────────────────────────────────────────── -->
+<!-- 21 ───────────────────────────────────────────── -->
 <section class="slide">
   <div class="eyebrow fd">CLAUDE.md · 무엇을 넣을까</div>
   <h1 class="rv" style="--d:.08s">좋은 CLAUDE.md 쓰는 법</h1>
@@ -1555,7 +1609,7 @@
   </div>
 </section>
 
-<!-- 21 ───────────────────────────────────────────── -->
+<!-- 22 ───────────────────────────────────────────── -->
 <section class="slide">
   <div class="eyebrow fd">SECRET RECIPE 06</div>
   <h1 class="rv" style="--d:.08s">CLAUDE.md를 만들어 본다</h1>
