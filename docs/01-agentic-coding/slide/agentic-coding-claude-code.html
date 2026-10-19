@@ -1340,7 +1340,7 @@
   <div class="hr fd" style="--d:.22s"></div>
 
   <div class="body">
-    <div class="pre fd" style="--d:.28s"><span class="k">먼저</span> 실습 프로젝트 폴더에서 Claude Code 를 연다 <code class="cmd">cd edu-stock-chart</code><code class="cmd">claude</code> <span style="color:var(--faint)">· claude-mem 은 설치 뒤 Claude Code 재시작</span></div>
+    <div class="pre fd" style="--d:.28s"><span class="k">먼저</span> 실습 프로젝트 폴더에서 Claude Code 를 연다 <code class="cmd">cd edu-stock-chart</code><code class="cmd">claude</code><code class="cmd">/model claude-sonnet-4-6</code> <span style="color:var(--faint)">· 모델을 Sonnet 4.6 으로 (context7 비교용) · claude-mem 은 설치 뒤 재시작</span></div>
     <div class="trio rv" style="--d:.34s">
       <div class="tc">
         <div class="top"><div class="nm" style="font-size:24px">ponytail</div><span class="st">강사 시연</span></div>
@@ -1360,12 +1360,11 @@
         <div class="top"><div class="nm" style="font-size:24px">context7</div><span class="st">실습 1</span></div>
         <div class="goal"><b style="color:var(--ink);font-weight:500">최신 문서</b>를 근거로 Spring Boot 스펙을 묻는다</div>
         <div class="sp"><span>01</span>질문 끝에 use context7</div>
-        <code class="cmd">Spring Boot 3.4에서 spring.jpa.hibernate.ddl-auto 값과 기본값을 알려줘. use context7</code>
-        <div class="sd">프롬프트에 use context7 을 붙이면 문서 조회를 거친다</div>
+        <code class="cmd">Spring Boot 4에서 REST API 버전 관리(v1, v2)를 헤더 방식으로 설정하는 방법과 application.yml 예제를 알려줘. use context7</code>
         <div class="sp"><span>02</span>비교 (선택)</div>
-        <code class="cmd">Spring Boot 3.4에서 spring.jpa.hibernate.ddl-auto 값과 기본값을 알려줘</code>
+        <code class="cmd">Spring Boot 4에서 REST API 버전 관리(v1, v2)를 헤더 방식으로 설정하는 방법과 application.yml 예제를 알려줘</code>
         <div class="sd">같은 질문을 use context7 없이 물어 답을 비교한다</div>
-        <div class="ev"><b>확인</b> 화면에 <code>resolve-library-id</code> → <code>query-docs</code> 도구 호출이 뜨는가</div>
+        <div class="ev"><b>확인</b> <code>resolve-library-id</code> → <code>query-docs</code> 호출이 뜨는가 · yml 속성 이름이 바뀌는가 (다음 장)</div>
       </div>
       <div class="tc">
         <div class="top"><div class="nm" style="font-size:24px">claude-mem</div><span class="st">실습 2</span></div>
