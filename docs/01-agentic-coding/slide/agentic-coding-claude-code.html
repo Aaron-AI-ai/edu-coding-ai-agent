@@ -556,6 +556,36 @@
   .sk-pr ul { list-style: none; margin: 0; padding: 0; }
   .sk-pr li { font-size: 17px; line-height: 1.5; color: var(--dim); padding: 3px 0; }
   .sk-pr li b { color: var(--ink); font-weight: 600; }
+
+  /* ── Skill 구조 · 컨텍스트 반영 장표 ── */
+  .sc { display: grid; grid-template-columns: 43fr 57fr; gap: 36px; flex: 1; min-height: 0; margin-top: 22px; word-break: keep-all; }
+  .sc-l { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .sc-lb { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 3px; color: var(--faint); }
+  .sc-code { margin: 0; background: var(--invert-bg); color: var(--invert-fg); border-radius: 8px; padding: 14px 18px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 14.5px; line-height: 1.6; white-space: pre; overflow: hidden; }
+  .sc-code .c { color: var(--invert-dim); }
+  .sc-code .n { display: inline-block; min-width: 20px; height: 20px; line-height: 20px; border-radius: 50%; background: var(--invert-fg); color: var(--invert-bg); font-size: 12px; text-align: center; font-weight: 700; margin-right: 6px; }
+  .sc-code .hl { border-left: 3px solid var(--invert-fg); padding-left: 8px; margin-left: -11px; display: block; }
+  .sc-loc { font-size: 15px; color: var(--dim); line-height: 1.5; }
+  .sc-loc b { color: var(--ink); font-weight: 500; }
+  .sc-r { display: flex; flex-direction: column; min-width: 0; }
+  .sc-win { flex: 1; border: 1.5px solid var(--ink); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+  .sc-win > .sc-row:not(.sys) { flex: 1; }
+  .sc-win > .h { font-size: 13px; letter-spacing: 3px; color: var(--faint); font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; padding: 10px 18px 0; }
+  .sc-row { display: grid; grid-template-columns: 34px 1fr 210px; gap: 12px; align-items: center; padding: 9px 18px; }
+  .sc-row.sys { background: var(--panel); }
+  .sc-row.sys + .sc-row:not(.sys) { border-top: 1.5px solid var(--ink); }
+  .sc-no { width: 30px; height: 30px; border-radius: 50%; background: var(--ink); color: var(--page); font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .sc-no.o { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+  .sc-b { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13.5px; line-height: 1.5; color: var(--ink); background: var(--page); border: 1px solid var(--rule); border-radius: 6px; padding: 7px 12px; }
+  .sc-b.dash { border: 1.5px dashed var(--faint); }
+  .sc-b.res { background: var(--panel); color: var(--dim); }
+  .sc-b + .sc-b { margin-top: 5px; }
+  .sc-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .sc-chips span { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13px; padding: 4px 10px; border: 1px solid var(--ink); border-radius: 6px; background: var(--page); color: var(--ink); }
+  .sc-cap { font-size: 14px; line-height: 1.45; color: var(--dim); }
+  .sc-cap b { display: block; color: var(--ink); font-weight: 600; font-size: 15px; }
+  .sc-note { margin-top: 14px; padding: 14px 18px; border-radius: 10px; background: var(--invert-bg); color: var(--invert-fg); font-size: 17px; line-height: 1.5; }
+  .sc-note b { font-weight: 600; }
 </style>
 
 <div id="stage"><div id="board">
@@ -1728,6 +1758,83 @@
           </ul>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- 24 ───────────────────────────────────────────── -->
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">SKILLS · 구조</span>
+    <h1 class="rv" style="--d:.08s">Skill 의 파일 구성과, 컨텍스트에 들어오는 순서</h1>
+  </div>
+
+  <div class="sc">
+    <div class="sc-l rv" style="--d:.2s">
+      <div class="sc-lb">디렉토리 · 폴더 하나 = 스킬 하나</div>
+<pre class="sc-code">.claude/skills/
+└── api-scaffold/
+    ├── SKILL.md             <span class="c">← 필수 · 이름 · 설명 · 절차</span>
+    ├── references/
+    │   └── layer-rules.md   <span class="c">← 참고 문서 (선택)</span>
+    ├── scripts/
+    │   └── check.sh         <span class="c">← 실행 스크립트 (선택)</span>
+    └── assets/
+        └── Test.java.tmpl   <span class="c">← 템플릿 (선택)</span></pre>
+      <div class="sc-loc"><b>위치</b> 프로젝트 <b>.claude/skills/</b> (git 으로 팀 공유) · 개인 <b>~/.claude/skills/</b> · 플러그인 안 <b>skills/</b></div>
+      <div class="sc-lb" style="margin-top:6px">SKILL.md · 부분마다 읽히는 시점이 다르다</div>
+<pre class="sc-code"><span class="hl"><span class="n">1</span><span class="c">항상 · 세션 시작</span>
+---
+name: api-scaffold
+description: 새 REST API 를 추가할 때 사용.
+  Controller · Service · Test 뼈대를 만든다
+---</span><span class="hl"><span class="n">3</span><span class="c">스킬이 켜질 때</span>
+## 절차
+1. dto/ 에 요청 · 응답 record
+2. service/ 에 로직 (금액은 price-rules)
+3. controller/ 에 엔드포인트 + @Min/@Max
+4. Mockito · @WebMvcTest 테스트 작성
+## 완료 기준
+- ./gradlew test 통과</span><span class="hl"><span class="n">4</span><span class="c">본문이 가리킬 때만</span>
+## 참고
+- 계층 규칙은 references/layer-rules.md</span></pre>
+    </div>
+
+    <div class="sc-r rv" style="--d:.32s">
+      <div class="sc-win">
+        <div class="h sc-row sys" style="display:block;padding-bottom:0">컨텍스트 창</div>
+        <div class="sc-row sys">
+          <div></div>
+          <div class="sc-b">&lt; 에이전트 기본 시스템 프롬프트 · CLAUDE.md &gt;</div>
+          <div class="sc-cap"><b>기본</b>세션마다 항상</div>
+        </div>
+        <div class="sc-row sys">
+          <div class="sc-no">1</div>
+          <div class="sc-chips"><span>api-scaffold</span><span>price-rules</span><span>test-writer</span><span>code-review</span><span>commit-pr</span><span>…</span></div>
+          <div class="sc-cap"><b>세션 시작</b>모든 스킬의 name · description 만 (스킬당 수십 토큰)</div>
+        </div>
+        <div class="sc-row">
+          <div class="sc-no">2</div>
+          <div class="sc-b">사용자: 종가 수익률 조회 API 를 추가해줘</div>
+          <div class="sc-cap"><b>요청</b>description 과 맞는 스킬을 고른다</div>
+        </div>
+        <div class="sc-row">
+          <div class="sc-no">3</div>
+          <div><div class="sc-b">에이전트: api-scaffold 스킬을 쓴다 → SKILL.md 읽기</div><div class="sc-b res">결과: SKILL.md 본문 (절차 · 완료 기준)</div></div>
+          <div class="sc-cap"><b>스킬 켜짐</b>이때 본문 전체가 들어온다</div>
+        </div>
+        <div class="sc-row">
+          <div class="sc-no o">4</div>
+          <div><div class="sc-b dash">Read references/layer-rules.md</div><div class="sc-b res">결과: layer-rules.md 내용</div></div>
+          <div class="sc-cap"><b>참고 따라가기</b>본문이 가리키고 필요할 때만</div>
+        </div>
+        <div class="sc-row">
+          <div class="sc-no o">5</div>
+          <div><div class="sc-b dash">Bash scripts/check.sh</div><div class="sc-b res">결과: OK · 3 files created</div></div>
+          <div class="sc-cap"><b>스크립트 실행</b>코드는 안 들어오고 실행 결과만</div>
+        </div>
+      </div>
+      <div class="sc-note">한 번에 다 넣지 않고 <b>필요한 만큼 단계적으로</b> 불러온다 (점진적 공개) → 스킬이 많아도 컨텍스트가 가볍다.<br>그래서 <b>description 은 짧고 정확하게</b>, 긴 내용은 <b>본문 · references 로</b> 나눈다.</div>
     </div>
   </div>
 </section>
