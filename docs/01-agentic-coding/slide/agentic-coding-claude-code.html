@@ -1636,6 +1636,63 @@
   </div>
 </section>
 
+<!-- 23 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">SKILLS · 개념</div>
+  <h1 class="rv" style="--d:.08s">Skill — 필요할 때만 꺼내 쓰는 작업 설명서</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="pre fd" style="--d:.28s"><span class="k">한 줄</span> CLAUDE.md 는 <b style="color:var(--ink);font-weight:500">매 세션 항상</b> 읽히고, Skill 은 <b style="color:var(--ink);font-weight:500">작업이 맞을 때만</b> 읽힌다 → 규칙이 많아져도 토큰을 아낀다</div>
+    <div class="trio rv" style="--d:.34s">
+      <div class="tc">
+        <div class="top"><div class="nm" style="font-size:24px">무엇인가</div><span class="st">폴더 하나 = 스킬 하나</span></div>
+        <div class="goal">특정 작업의 <b style="color:var(--ink);font-weight:500">규칙 · 절차 · 예시</b>를 담은 폴더</div>
+        <code class="cmd" style="margin-top:10px">.claude/skills/price-rules/
+├── SKILL.md      ← 설명 + 지시
+├── references/   ← 참고 문서 (선택)
+└── scripts/      ← 실행 스크립트 (선택)</code>
+        <code class="cmd">---
+name: price-rules
+description: 금액 · 시세 계산 코드를
+  작성하거나 수정할 때 사용
+---
+- 금액은 BigDecimal, double 금지
+- 반올림은 HALF_UP, 소수 둘째 자리</code>
+        <div class="ev"><b>핵심</b> <code>description</code> 은 항상 보이니 짧게 · 본문은 쓸 때만 읽힌다</div>
+      </div>
+      <div class="tc">
+        <div class="top"><div class="nm" style="font-size:24px">개발에서 쓰는 예</div><span class="st">반복 설명을 줄인다</span></div>
+        <div class="goal">같은 설명을 <b style="color:var(--ink);font-weight:500">반복하게 될 때</b> · 특정 작업에만 필요한 규칙일 때</div>
+        <ul class="t" style="margin-top:8px">
+          <li><b>price-rules</b> 금액 · 시세 계산 규칙 (BigDecimal · 반올림)</li>
+          <li><b>api-scaffold</b> Controller · Service · Test 뼈대 생성</li>
+          <li><b>test-writer</b> JUnit 5 · Mockito 테스트 작성 방식</li>
+          <li><b>code-review</b> 리뷰 체크리스트와 출력 형식</li>
+          <li><b>commit-pr</b> 커밋 메시지 · PR 본문 형식</li>
+          <li><b>db-migration</b> 테이블 변경 절차와 주의사항</li>
+        </ul>
+        <div class="ev"><b>구분</b> 항상 지킬 규칙은 CLAUDE.md · 특정 작업용은 Skill</div>
+      </div>
+      <div class="tc">
+        <div class="top"><div class="nm" style="font-size:24px">사용 방법</div><span class="st">자동 · 직접 · 만들기</span></div>
+        <div class="goal">평소에는 <b style="color:var(--ink);font-weight:500">알아서 켜지고</b>, 필요하면 직접 부른다</div>
+        <div class="sp"><span>01</span>자동 <span style="margin-left:6px">요청이 description 과 맞으면</span></div>
+        <code class="cmd">종가 수익률 계산 서비스를 만들어줘</code>
+        <div class="sp"><span>02</span>직접 <span style="margin-left:6px">/스킬이름</span></div>
+        <code class="cmd">/price-rules</code>
+        <div class="sp"><span>03</span>만들기 <span style="margin-left:6px">또는 SKILL.md 를 직접 작성</span></div>
+        <code class="cmd">/skill-creator:skill-creator</code>
+        <div class="ev"><b>확인</b> 작업 중 화면에 스킬을 불러오는 표시가 뜨는가</div>
+      </div>
+    </div>
+    <div class="inote fd" style="--d:.7s;border-top:1.5px solid var(--ink);margin-top:14px;padding-top:12px">
+      <div><span class="k">원칙 1 · 영역이 겹치지 않게</span>두 스킬의 description 이 같은 상황을 가리키면 <b>엉뚱한 스킬이 켜진다.</b> 담당 범위를 분명히 나눈다 (test-writer 는 테스트만, code-review 는 리뷰만)</div>
+      <div><span class="k">원칙 2 · 스킬 하나에 의도 하나</span>리뷰 + 테스트 + 커밋을 한 스킬에 섞으면 <b>언제 켜야 할지 흐려지고 지시가 부딪힌다.</b> 작게 나누고 필요하면 조합한다</div>
+    </div>
+  </div>
+</section>
+
 </div></div>
 
 <button id="prev" class="nav" aria-label="이전 슬라이드"></button>
