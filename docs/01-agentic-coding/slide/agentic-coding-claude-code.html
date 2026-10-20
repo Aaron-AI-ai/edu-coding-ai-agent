@@ -518,6 +518,44 @@
   .nav:focus-visible { outline: 2px solid var(--ink); outline-offset: -4px; }
   #prev { left: 0; }
   #next { right: 0; }
+  /* ── Skill 개념 장표 (인포그래픽형) ── */
+  .sk { display: grid; grid-template-columns: 5fr 6fr; gap: 40px; flex: 1; min-height: 0; word-break: keep-all; }
+  .sk svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .sk-l { display: flex; flex-direction: column; min-width: 0; }
+  .sk-l h1 { margin: 16px 0 0; font-size: 78px; line-height: 1.14; font-weight: 300; }
+  .sk-l h1 b { font-weight: 600; }
+  .sk-bar { width: 72px; height: 3px; background: var(--ink); margin: 28px 0 24px; }
+  .sk-def { font-size: 25px; line-height: 1.55; color: var(--dim); }
+  .sk-def b { color: var(--ink); font-weight: 500; }
+  .sk-call { display: flex; align-items: center; gap: 22px; margin-top: 30px; padding: 22px 26px; border: 1px solid var(--rule); border-radius: 12px; font-size: 22px; line-height: 1.5; color: var(--dim); }
+  .sk-call b { color: var(--ink); font-weight: 500; }
+  .sk-ic { flex-shrink: 0; width: 72px; height: 72px; border-radius: 50%; background: var(--ink); color: var(--page); padding: 19px; }
+  .sk-ben { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 36px; }
+  .sk-ben > div { text-align: center; padding: 0 8px; font-size: 18px; line-height: 1.4; color: var(--ink); border-left: 1px solid var(--rule); }
+  .sk-ben > div:first-child { border-left: 0; }
+  .sk-ben i { display: block; width: 54px; height: 54px; margin: 0 auto 12px; color: var(--ink); }
+  .sk-ban { margin-top: auto; display: flex; align-items: center; gap: 16px; padding: 22px 26px; border-radius: 12px; background: var(--invert-bg); color: var(--invert-fg); font-size: 20px; line-height: 1.5; }
+  .sk-ban i { flex-shrink: 0; width: 40px; height: 40px; color: var(--invert-fg); }
+  .sk-ban b { font-weight: 600; }
+  .sk-r { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+  .sk-pn { flex: 1; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--rule); border-radius: 14px; padding: 28px 32px; background: var(--panel); }
+  .sk-pn h3 { margin: 0 0 18px; font-size: 25px; font-weight: 600; color: var(--ink); }
+  .sk-pn hr { border: 0; border-top: 1px solid var(--rule); margin: 22px 0; width: 100%; }
+  .sk-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .sk-st { position: relative; }
+  .sk-st .o { width: 80px; height: 80px; border-radius: 50%; border: 1px solid var(--rule); background: var(--page); padding: 22px; color: var(--ink); }
+  .sk-st:not(:last-child)::after { content: ""; position: absolute; top: 40px; left: 92px; right: -8px; border-top: 2px dotted var(--faint); }
+  .sk-st .t { margin-top: 12px; font-size: 19px; font-weight: 600; color: var(--ink); }
+  .sk-st .d, .sk-in .d { margin-top: 5px; font-size: 15.5px; line-height: 1.45; color: var(--dim); }
+  .sk-ins { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; text-align: center; }
+  .sk-in .o { width: 70px; height: 70px; margin: 0 auto; border-radius: 50%; background: var(--page); border: 1px solid var(--rule); padding: 18px; color: var(--ink); }
+  .sk-in .t { margin-top: 10px; font-size: 18px; font-weight: 600; color: var(--ink); }
+  .sk-pr { display: flex; gap: 20px; align-items: flex-start; padding: 20px 26px; border: 1.5px solid var(--ink); border-radius: 14px; }
+  .sk-pr > i { flex-shrink: 0; width: 40px; height: 40px; color: var(--ink); margin-top: 2px; }
+  .sk-pr .h { font-size: 22px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .sk-pr ul { list-style: none; margin: 0; padding: 0; }
+  .sk-pr li { font-size: 17px; line-height: 1.5; color: var(--dim); padding: 3px 0; }
+  .sk-pr li b { color: var(--ink); font-weight: 600; }
 </style>
 
 <div id="stage"><div id="board">
@@ -1637,58 +1675,59 @@
 </section>
 
 <!-- 23 ───────────────────────────────────────────── -->
-<section class="slide">
-  <div class="eyebrow fd">SKILLS · 개념</div>
-  <h1 class="rv" style="--d:.08s">Skill — 필요할 때만 꺼내 쓰는 작업 설명서</h1>
-  <div class="hr fd" style="--d:.22s"></div>
-
-  <div class="body">
-    <div class="pre fd" style="--d:.28s"><span class="k">한 줄</span> CLAUDE.md 는 <b style="color:var(--ink);font-weight:500">매 세션 항상</b> 읽히고, Skill 은 <b style="color:var(--ink);font-weight:500">작업이 맞을 때만</b> 읽힌다 → 규칙이 많아져도 토큰을 아낀다</div>
-    <div class="trio rv" style="--d:.34s">
-      <div class="tc">
-        <div class="top"><div class="nm" style="font-size:24px">무엇인가</div><span class="st">폴더 하나 = 스킬 하나</span></div>
-        <div class="goal">특정 작업의 <b style="color:var(--ink);font-weight:500">규칙 · 절차 · 예시</b>를 담은 폴더</div>
-        <code class="cmd" style="margin-top:10px">.claude/skills/price-rules/
-├── SKILL.md      ← 설명 + 지시
-├── references/   ← 참고 문서 (선택)
-└── scripts/      ← 실행 스크립트 (선택)</code>
-        <code class="cmd">---
-name: price-rules
-description: 금액 · 시세 계산 코드를
-  작성하거나 수정할 때 사용
----
-- 금액은 BigDecimal, double 금지
-- 반올림은 HALF_UP, 소수 둘째 자리</code>
-        <div class="ev"><b>핵심</b> <code>description</code> 은 항상 보이니 짧게 · 본문은 쓸 때만 읽힌다</div>
+<section class="slide wide">
+  <div class="sk">
+    <div class="sk-l">
+      <div class="eyebrow fd">SKILLS · 개념</div>
+      <h1 class="rv" style="--d:.08s"><b>Skill</b> 이란<br>무엇인가?</h1>
+      <div class="sk-bar fd" style="--d:.2s"></div>
+      <div class="sk-def fd" style="--d:.26s">Skill 은 특정 작업을 <b>매번 같은 품질</b>로 끝내도록<br><b>지시 · 맥락 · 자료</b>를 묶어 둔 <b>재사용 가능한 능력</b>이다.</div>
+      <div class="sk-call rv" style="--d:.34s">
+        <i class="sk-ic"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 16h6"/></svg></i>
+        <div>Skill 은 일을 <b>올바르게 하는 방법</b>을 적어 둔<br>플레이북이다 — <b>매번 똑같이.</b></div>
       </div>
-      <div class="tc">
-        <div class="top"><div class="nm" style="font-size:24px">개발에서 쓰는 예</div><span class="st">반복 설명을 줄인다</span></div>
-        <div class="goal">같은 설명을 <b style="color:var(--ink);font-weight:500">반복하게 될 때</b> · 특정 작업에만 필요한 규칙일 때</div>
-        <ul class="t" style="margin-top:8px">
-          <li><b>price-rules</b> 금액 · 시세 계산 규칙 (BigDecimal · 반올림)</li>
-          <li><b>api-scaffold</b> Controller · Service · Test 뼈대 생성</li>
-          <li><b>test-writer</b> JUnit 5 · Mockito 테스트 작성 방식</li>
-          <li><b>code-review</b> 리뷰 체크리스트와 출력 형식</li>
-          <li><b>commit-pr</b> 커밋 메시지 · PR 본문 형식</li>
-          <li><b>db-migration</b> 테이블 변경 절차와 주의사항</li>
-        </ul>
-        <div class="ev"><b>구분</b> 항상 지킬 규칙은 CLAUDE.md · 특정 작업용은 Skill</div>
+      <div class="sk-ben rv" style="--d:.42s">
+        <div><i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></i>일관된 결과</div>
+        <div><i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></i>시간 절약 ·<br>반복 설명 감소</div>
+        <div><i><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></i>모범 사례<br>표준화</div>
+        <div><i><svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M7 17v-3M11 17v-6M15 17v-8M19 17V5"/></svg></i>생산성 ·<br>품질 향상</div>
       </div>
-      <div class="tc">
-        <div class="top"><div class="nm" style="font-size:24px">사용 방법</div><span class="st">자동 · 직접 · 만들기</span></div>
-        <div class="goal">평소에는 <b style="color:var(--ink);font-weight:500">알아서 켜지고</b>, 필요하면 직접 부른다</div>
-        <div class="sp"><span>01</span>자동 <span style="margin-left:6px">요청이 description 과 맞으면</span></div>
-        <code class="cmd">종가 수익률 계산 서비스를 만들어줘</code>
-        <div class="sp"><span>02</span>직접 <span style="margin-left:6px">/스킬이름</span></div>
-        <code class="cmd">/price-rules</code>
-        <div class="sp"><span>03</span>만들기 <span style="margin-left:6px">또는 SKILL.md 를 직접 작성</span></div>
-        <code class="cmd">/skill-creator:skill-creator</code>
-        <div class="ev"><b>확인</b> 작업 중 화면에 스킬을 불러오는 표시가 뜨는가</div>
+      <div class="sk-ban fd" style="--d:.6s">
+        <i><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.8.8 1 1.6 1 2.5h6c0-.9.2-1.7 1-2.5A6 6 0 0 0 12 3z"/></svg></i>
+        <div>전문 지식을 <b>한 번</b> 정리해 두고, <b>언제 어디서나</b> 다시 쓴다.<br>Skill 은 <b>작업이 맞을 때만</b> 읽히니, 많이 만들어도 부담이 적다.</div>
       </div>
     </div>
-    <div class="inote fd" style="--d:.7s;border-top:1.5px solid var(--ink);margin-top:14px;padding-top:12px">
-      <div><span class="k">원칙 1 · 영역이 겹치지 않게</span>두 스킬의 description 이 같은 상황을 가리키면 <b>엉뚱한 스킬이 켜진다.</b> 담당 범위를 분명히 나눈다 (test-writer 는 테스트만, code-review 는 리뷰만)</div>
-      <div><span class="k">원칙 2 · 스킬 하나에 의도 하나</span>리뷰 + 테스트 + 커밋을 한 스킬에 섞으면 <b>언제 켜야 할지 흐려지고 지시가 부딪힌다.</b> 작게 나누고 필요하면 조합한다</div>
+
+    <div class="sk-r">
+      <div class="sk-pn rv" style="--d:.3s">
+        <h3>Skill 은 이렇게 동작한다</h3>
+        <div class="sk-steps">
+          <div class="sk-st"><div class="o"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M12 11v6M9 14h6"/></svg></div><div class="t">1. 만들기</div><div class="d">작업 · 지시 · 예시 · 자료를 SKILL.md 에 정리</div></div>
+          <div class="sk-st"><div class="o"><svg viewBox="0 0 24 24"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg></div><div class="t">2. 켜기</div><div class="d">요청이 description 과 맞으면 자동 · <b>/이름</b> 으로 직접</div></div>
+          <div class="sk-st"><div class="o"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 10l3 2-3 2M12 15h5"/></svg></div><div class="t">3. 실행</div><div class="d">지시대로 작업 · 본문은 <b>이때만</b> 읽힌다</div></div>
+          <div class="sk-st"><div class="o"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg></div><div class="t">4. 결과</div><div class="d">매번 같은 형식 · 같은 품질의 결과</div></div>
+        </div>
+        <hr>
+        <h3>Skill 안에 들어가는 것</h3>
+        <div class="sk-ins">
+          <div class="sk-in"><div class="o"><svg viewBox="0 0 24 24"><path d="M4 5c3-1 6-1 8 1 2-2 5-2 8-1v14c-3-1-6-1-8 1-2-2-5-2-8-1z"/><path d="M12 6v14"/></svg></div><div class="t">지시</div><div class="d">단계별 작업 방법<br>(SKILL.md 본문)</div></div>
+          <div class="sk-in"><div class="o"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M9 11h6M9 14h6M9 17h4"/></svg></div><div class="t">예시</div><div class="d">좋은 입력 · 출력<br>샘플</div></div>
+          <div class="sk-in"><div class="o"><svg viewBox="0 0 24 24"><path d="M3 7h6l2 2h10v10H3z"/></svg></div><div class="t">자료</div><div class="d">references/ 문서<br>scripts/ 스크립트</div></div>
+          <div class="sk-in"><div class="o"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 9l1.5 1.5L12 8M8 15l1.5 1.5L12 14M14 9h2M14 15h2"/></svg></div><div class="t">규칙 · 기준</div><div class="d">지켜야 할 기준<br>예) 금액은 BigDecimal</div></div>
+          <div class="sk-in"><div class="o"><svg viewBox="0 0 24 24"><path d="M9 8l-4 4 4 4M15 8l4 4-4 4"/></svg></div><div class="t">템플릿</div><div class="d">반복 산출물 형식<br>예) Controller ·<br>Test 뼈대</div></div>
+        </div>
+      </div>
+
+      <div class="sk-pr rv" style="--d:.5s">
+        <i><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"/></svg></i>
+        <div>
+          <div class="h">잘 만드는 두 가지 원칙</div>
+          <ul>
+            <li><b>영역이 겹치지 않게</b> — 두 스킬의 description 이 같은 상황을 가리키면 엉뚱한 스킬이 켜진다. 담당 범위를 나눈다 (test-writer 는 테스트만, code-review 는 리뷰만)</li>
+            <li><b>스킬 하나에 의도 하나</b> — 리뷰 + 테스트 + 커밋을 한 스킬에 섞지 않는다. 작게 나누고 필요하면 조합한다</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
