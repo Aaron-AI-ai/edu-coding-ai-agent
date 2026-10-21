@@ -1881,6 +1881,31 @@ description: 새 REST API 를 추가할 때 사용.
   </div>
 </section>
 
+<!-- 26 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">SKILLS · 실습</div>
+  <h1 class="rv" style="--d:.08s">스캐폴딩 Skill 을 만들어 본다</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <table class="itbl pt">
+      <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
+      <tbody>
+            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">준비<i>skill-creator 설치 (처음 한 번)</i></td><td class="c"><code class="cmd">/plugin install skill-creator@claude-plugins-official</code></td><td class="k">설치 후 Claude Code 를 다시 시작한다</td></tr>
+            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">스킬 만들기<i>슬래시 명령으로 skill-creator 를 부른다</i></td><td class="c"><code class="cmd">/skill-creator:skill-creator 이 프로젝트 .claude/skills/ 에 api-scaffold 스킬을 만들어줘. 새 REST API 를 추가할 때 쓴다. 절차: Controller(@Min/@Max 검증) → Service → DTO record → 테스트(Service 는 Mockito, Controller 는 @WebMvcTest). 기존 StockController 패턴을 따르고 템플릿은 assets/ 에 둔다. 완료 기준: ./gradlew test 통과.</code></td><td class="k">질문이 오면 답한다. 스킬 하나에 <b>의도 하나</b> (API 뼈대만)</td></tr>
+            <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">파일 확인<i>폴더 구조와 description 을 본다</i></td><td class="c"><code class="cmd">! ls -R .claude/skills/api-scaffold</code></td><td class="k"><b>SKILL.md</b> 와 <b>assets/</b> 가 있는가 · SKILL.md 의 description 이 <b>언제 쓰는지</b>를 말하는가</td></tr>
+            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">직접 호출<i>스킬로 API 를 만든다</i></td><td class="c"><code class="cmd">/api-scaffold 종목의 최근 종가를 조회하는 API 를 추가해줘. GET /api/stocks/{symbol}/latest</code></td><td class="k"><b>Controller → Service</b> 순서로 만들어지는가 · 테스트까지 생기는가</td></tr>
+            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">검증<i>완료 기준을 직접 확인한다</i></td><td class="c"><code class="cmd">! ./gradlew test</code></td><td class="k">테스트가 모두 통과하는가 · Swagger 에 새 API 가 보이는가</td></tr>
+            <tr class="rv" style="--d:0.71s"><td class="n">06</td><td class="p">자동 호출<i>새 세션에서 슬래시 없이</i></td><td class="c"><code class="cmd">종목별 기간 최고가를 조회하는 API 를 추가해줘</code></td><td class="k">/exit → claude 로 새로 연 뒤, 말하지 않아도 <b>api-scaffold 스킬을 불러오는가</b> (안 켜지면 description 을 고친다)</td></tr>
+      </tbody>
+    </table>
+    <div class="pt-note fd" style="--d:.9s">
+      <div><b>만든 스킬은 git 으로 팀과 공유한다.</b> .claude/skills/ 는 프로젝트에 커밋된다</div>
+      <div>잘 안 켜지면 <b>description</b> 을, 결과가 틀리면 <b>본문 · 템플릿</b>을 고친다</div>
+    </div>
+  </div>
+</section>
+
 </div></div>
 
 <button id="prev" class="nav" aria-label="이전 슬라이드"></button>
