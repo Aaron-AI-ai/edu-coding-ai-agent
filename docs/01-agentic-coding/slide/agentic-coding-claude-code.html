@@ -586,6 +586,23 @@
   .sc-cap b { display: block; color: var(--ink); font-weight: 600; font-size: 15px; }
   .sc-note { margin-top: 14px; padding: 14px 18px; border-radius: 10px; background: var(--invert-bg); color: var(--invert-fg); font-size: 17px; line-height: 1.5; }
   .sc-note b { font-weight: 600; }
+
+  /* ── SW 개발 스킬 카테고리 장표 ── */
+  .cg { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: 16px 22px; flex: 1; min-height: 0; margin-top: 22px; word-break: keep-all; }
+  .cg-c { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 14px 18px; border: 1.5px solid var(--rule); border-radius: 14px; background: var(--page); }
+  .cg-c.on { border-color: var(--ink); }
+  .cg-c .mk { position: absolute; top: 10px; right: 12px; margin: 0; }
+  .cg-c .t { font-size: 25px; font-weight: 600; color: var(--ink); line-height: 1.25; }
+  .cg-c .en { margin-top: 2px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 11px; letter-spacing: 2px; color: var(--faint); }
+  .cg-c .d { margin-top: 10px; font-size: 17.5px; color: var(--dim); line-height: 1.4; }
+  .cg-c .w { margin-top: 7px; font-size: 16px; color: var(--ink); line-height: 1.4; }
+  .cg-c .w b { font-weight: 600; margin-right: 6px; }
+  .cg-c .x { margin-top: 10px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 14px; color: var(--faint); }
+  .cg-ft { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 16px; }
+  .cg-ft > div { padding: 14px 20px; border-radius: 10px; font-size: 16.5px; line-height: 1.5; color: var(--dim); border: 1px solid var(--rule); }
+  .cg-ft > div.dk { background: var(--invert-bg); color: var(--invert-fg); border: 0; }
+  .cg-ft b { font-weight: 600; color: inherit; }
+  .cg-ft > div:not(.dk) b { color: var(--ink); }
 </style>
 
 <div id="stage"><div id="board">
@@ -1836,6 +1853,33 @@ description: 새 REST API 를 추가할 때 사용.
       </div>
       <div class="sc-note">한 번에 다 넣지 않고 <b>필요한 만큼 단계적으로</b> 불러온다 (점진적 공개) → 스킬이 많아도 컨텍스트가 가볍다.<br>그래서 <b>description 은 짧고 정확하게</b>, 긴 내용은 <b>본문 · references 로</b> 나눈다.</div>
     </div>
+  </div>
+</section>
+
+<!-- 25 ───────────────────────────────────────────── -->
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">SKILLS · 카테고리</span>
+    <h1 class="rv" style="--d:.08s">SW 개발 스킬 9가지 — 언제 무엇을 만드나</h1>
+  </div>
+
+  <div class="cg rv" style="--d:.24s">
+    <div class="cg-c"><div class="t">라이브러리 · API 레퍼런스</div><div class="en">LIBRARY &amp; API REFERENCE</div><div class="d">사내 라이브러리 · CLI · SDK 의 올바른 사용법과 함정</div><div class="w"><b>이럴 때</b>AI 가 사내 라이브러리를 자꾸 틀리게 쓸 때</div><div class="x">billing-lib · platform-cli · sdk-gotchas</div></div>
+    <div class="cg-c on"><span class="mk do">이 과정</span><div class="t">제품 검증</div><div class="en">PRODUCT VERIFICATION</div><div class="d">실행 중인 앱을 직접 움직여 동작을 확인</div><div class="w"><b>이럴 때</b>테스트 통과만으로 부족할 때 · 효과가 가장 크다</div><div class="x">signup-driver · checkout · chart-ui-check</div></div>
+    <div class="cg-c"><div class="t">데이터 · 분석</div><div class="en">DATA &amp; ANALYSIS</div><div class="d">데이터 · 모니터링 연결, ID · 필드명 · 쿼리 패턴</div><div class="w"><b>이럴 때</b>지표 · 로그를 반복해서 조회할 때</div><div class="x">funnel-query · grafana · datadog</div></div>
+
+    <div class="cg-c"><div class="t">업무 자동화</div><div class="en">BUSINESS AUTOMATION</div><div class="d">여러 도구를 오가는 일을 명령 하나로</div><div class="w"><b>이럴 때</b>매일 · 매주 같은 보고 · 티켓 작업을 할 때</div><div class="x">standup · tickets · weekly-recap</div></div>
+    <div class="cg-c on"><span class="mk do">이 과정</span><div class="t">스캐폴딩 · 템플릿</div><div class="en">SCAFFOLDING &amp; TEMPLATES</div><div class="d">프레임워크 규칙에 맞는 뼈대 코드 생성</div><div class="w"><b>이럴 때</b>새 API · 마이그레이션을 반복해서 만들 때</div><div class="x">api-scaffold · new-migration · new-app</div></div>
+    <div class="cg-c on"><span class="mk do">이 과정</span><div class="t">코드 품질 · 리뷰</div><div class="en">CODE QUALITY &amp; REVIEW</div><div class="d">팀 코드 기준과 리뷰 방법 (훅 · CI 에서도)</div><div class="w"><b>이럴 때</b>리뷰 · 테스트 기준을 모두 같게 하고 싶을 때</div><div class="x">price-rules · test-writer · code-review</div></div>
+
+    <div class="cg-c"><div class="t">CI/CD · 배포</div><div class="en">CI/CD &amp; DEPLOYMENT</div><div class="d">커밋 · 푸시 · 배포를 안전하게</div><div class="w"><b>이럴 때</b>PR 감시 · 배포 절차가 정해져 있을 때</div><div class="x">babysit-pr · deploy · cherry-pick</div></div>
+    <div class="cg-c"><div class="t">장애 대응 런북</div><div class="en">INCIDENT RUNBOOKS</div><div class="d">증상 → 조사 → 보고서</div><div class="w"><b>이럴 때</b>알림 · 에러 로그에서 원인을 찾을 때</div><div class="x">oncall · log-correlator · queue-debug</div></div>
+    <div class="cg-c"><div class="t">인프라 운영</div><div class="en">INFRASTRUCTURE OPS</div><div class="d">정리 · 유지보수 — 삭제가 많아 안전장치 필수</div><div class="w"><b>이럴 때</b>안 쓰는 리소스 · 의존성 · 비용을 점검할 때</div><div class="x">orphans · deps · cost-investigation</div></div>
+  </div>
+
+  <div class="cg-ft fd" style="--d:.6s">
+    <div class="dk"><b>좋은 스킬은 한 카테고리에 깔끔하게 들어간다.</b> 여러 카테고리에 걸치면 에이전트가 헷갈린다 — 스킬 하나에 의도 하나</div>
+    <div><b>작성 팁</b> description 은 사람이 아니라 <b>모델이 읽고 켤지 정하는 문장</b> · <b>함정(gotcha) 모음</b>이 가장 값지다 · 당연한 내용은 쓰지 않는다 · 작게 시작해 키운다</div>
   </div>
 </section>
 
