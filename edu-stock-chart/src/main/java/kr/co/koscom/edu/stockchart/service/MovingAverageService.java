@@ -4,7 +4,7 @@ import kr.co.koscom.edu.stockchart.domain.StockPrice;
 import kr.co.koscom.edu.stockchart.dto.MovingAverageResponse;
 import kr.co.koscom.edu.stockchart.dto.MovingAverageResponse.Point;
 import kr.co.koscom.edu.stockchart.exception.StockNotFoundException;
-import kr.co.koscom.edu.stockchart.repository.StockPriceRepository;
+import kr.co.koscom.edu.stockchart.mapper.StockPriceMapper;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,7 @@ public class MovingAverageService {
     private static final int MIN_WINDOW = 2;
     private static final int MAX_WINDOW = 20;
 
-    private final StockPriceRepository repository;
+    private final StockPriceMapper mapper;
 
     private final Map<String, MovingAverageResponse> cache = new ConcurrentHashMap<>();
     private final MovingAverageConfig config = MovingAverageConfig.builder()
@@ -97,7 +97,7 @@ public class MovingAverageService {
         RuntimeException lastError = null;
         for (int attempt = 1; attempt <= MAX_RETRY; attempt++) {
             try {
-                return repository.findBySymbolOrderByTradeDateAsc(symbol);
+                return mapper.findBySymbol(symbol);
             } catch (RuntimeException e) {
                 lastError = e;
                 log.warn("시세 조회 실패 ({}/{}): {}", attempt, MAX_RETRY, e.getMessage());

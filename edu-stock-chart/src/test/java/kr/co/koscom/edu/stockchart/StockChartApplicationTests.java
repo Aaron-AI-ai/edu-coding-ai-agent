@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class StockChartApplicationTests {
 
     @Test
-    @DisplayName("스프링 컨텍스트가 정상적으로 뜬다 - JPA · H2 · Swagger 설정 포함")
+    @DisplayName("스프링 컨텍스트가 정상적으로 뜬다 - MyBatis · H2 · Swagger 설정 포함")
     void contextLoads() {
     }
 }

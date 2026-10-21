@@ -3,7 +3,7 @@ package kr.co.koscom.edu.stockchart.service;
 import kr.co.koscom.edu.stockchart.domain.StockPrice;
 import kr.co.koscom.edu.stockchart.dto.MovingAverageResponse;
 import kr.co.koscom.edu.stockchart.exception.StockNotFoundException;
-import kr.co.koscom.edu.stockchart.repository.StockPriceRepository;
+import kr.co.koscom.edu.stockchart.mapper.StockPriceMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 class MovingAverageServiceTest {
 
     @Mock
-    StockPriceRepository repository;
+    StockPriceMapper mapper;
 
     @InjectMocks
     MovingAverageService service;
@@ -35,7 +35,7 @@ class MovingAverageServiceTest {
     @Test
     @DisplayName("3일 이동평균은 3일째부터 한 칸씩 이동하며 계산된다")
     void movingAverageOfThree() {
-        when(repository.findBySymbolOrderByTradeDateAsc("005930"))
+        when(mapper.findBySymbol("005930"))
                 .thenReturn(List.of(price(1, "10"), price(2, "20"), price(3, "30"), price(4, "40")));
 
         MovingAverageResponse result = service.calculate("005930", 3);
@@ -49,7 +49,7 @@ class MovingAverageServiceTest {
     @Test
     @DisplayName("소수점 셋째 자리에서 반올림한다")
     void roundsToTwoDecimals() {
-        when(repository.findBySymbolOrderByTradeDateAsc("005930"))
+        when(mapper.findBySymbol("005930"))
                 .thenReturn(List.of(price(1, "10"), price(2, "10"), price(3, "11")));
 
         MovingAverageResponse result = service.calculate("005930", 3);
@@ -60,7 +60,7 @@ class MovingAverageServiceTest {
     @Test
     @DisplayName("데이터가 window 보다 적으면 빈 목록을 돌려준다")
     void windowLargerThanData() {
-        when(repository.findBySymbolOrderByTradeDateAsc("005930"))
+        when(mapper.findBySymbol("005930"))
                 .thenReturn(List.of(price(1, "10"), price(2, "20")));
 
         assertThat(service.calculate("005930", 5).points()).isEmpty();
@@ -69,7 +69,7 @@ class MovingAverageServiceTest {
     @Test
     @DisplayName("없는 종목이면 StockNotFoundException 이 발생한다")
     void unknownSymbol() {
-        when(repository.findBySymbolOrderByTradeDateAsc("000000")).thenReturn(List.of());
+        when(mapper.findBySymbol("000000")).thenReturn(List.of());
 
         assertThatThrownBy(() -> service.calculate("000000", 5))
                 .isInstanceOf(StockNotFoundException.class);
