@@ -601,6 +601,47 @@
   .cg-ft > div.dk { background: var(--invert-bg); color: var(--invert-fg); border: 0; }
   .cg-ft b { font-weight: 600; color: inherit; }
   .cg-ft > div:not(.dk) b { color: var(--ink); }
+
+  /* ── MCP 개념 장표 ── */
+  .mc { display: grid; grid-template-columns: 56fr 44fr; grid-template-rows: 1fr auto; gap: 22px 34px; flex: 1; min-height: 0; margin-top: 18px; word-break: keep-all; }
+  .mc-l { display: flex; flex-direction: column; min-width: 0; }
+  .mc-im { position: relative; border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; background: #F6F0E8; align-self: start; }
+  .mc-im img { display: block; width: 100%; height: auto; cursor: zoom-in; }
+  .mc-im .zm { position: absolute; right: 10px; bottom: 10px; font-size: 12px; background: var(--ink); color: var(--page); border-radius: 999px; padding: 3px 10px; }
+  .mc-cap { margin-top: 10px; font-size: 14px; color: var(--faint); line-height: 1.5; }
+  .mc-r { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  .mc-def { font-size: 24px; line-height: 1.5; color: var(--dim); }
+  .mc-def b { color: var(--ink); font-weight: 600; }
+  .mc-roles { display: flex; flex-direction: column; border-top: 1.5px solid var(--ink); }
+  .mc-roles > div { display: grid; grid-template-columns: 96px 1fr; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--rule); font-size: 17.5px; line-height: 1.45; color: var(--dim); }
+  .mc-roles b { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 16px; color: var(--ink); font-weight: 600; }
+  .mc-lb { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 3px; color: var(--faint); }
+  .mc-can { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .mc-can > div { border: 1px solid var(--rule); border-radius: 10px; padding: 13px 16px; font-size: 16.5px; line-height: 1.45; color: var(--dim); }
+  .mc-can b { display: block; color: var(--ink); font-weight: 600; font-size: 18px; margin-bottom: 2px; }
+  .mc-ban { grid-column: 1 / -1; padding: 18px 22px; border-radius: 10px; background: var(--invert-bg); color: var(--invert-fg); font-size: 19px; line-height: 1.5; }
+  .mc-ban b { font-weight: 600; }
+
+  /* ── Skill vs MCP 비교 장표 ── */
+  .vs { display: grid; grid-template-columns: 58fr 42fr; gap: 34px; flex: 1; min-height: 0; margin-top: 22px; word-break: keep-all; }
+  .vs-t { width: 100%; border-collapse: collapse; font-size: 17px; line-height: 1.45; }
+  .vs-t th { text-align: left; padding: 10px 14px; border-bottom: 1.5px solid var(--ink); font-size: 22px; font-weight: 600; color: var(--ink); }
+  .vs-t th:first-child { width: 150px; }
+  .vs-t th small { display: block; font-size: 13px; font-weight: 400; color: var(--faint); font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; letter-spacing: 1px; }
+  .vs-t td { padding: 12px 14px; border-bottom: 1px solid var(--rule); color: var(--dim); vertical-align: top; }
+  .vs-t td:first-child { font-size: 14px; color: var(--faint); letter-spacing: 1px; }
+  .vs-t td b { color: var(--ink); font-weight: 600; }
+  .vs-t tr.key td { background: var(--panel); }
+  .vs-r { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .vs-lb { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 3px; color: var(--faint); }
+  .vs-c { flex: 1; display: flex; flex-direction: column; justify-content: center; border: 1.5px solid var(--rule); border-radius: 12px; padding: 16px 22px; }
+  .vs-c .q { font-size: 21px; color: var(--ink); font-weight: 600; line-height: 1.4; }
+  .vs-c .a { margin-top: 8px; font-size: 17px; color: var(--dim); line-height: 1.5; }
+  .vs-c .a b { color: var(--ink); font-weight: 600; }
+  .vs-c .tag { display: inline-block; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13px; padding: 2px 10px; border-radius: 999px; margin-right: 8px; background: var(--ink); color: var(--page); }
+  .vs-c .tag.o { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+  .vs-ban { padding: 16px 20px; border-radius: 10px; background: var(--invert-bg); color: var(--invert-fg); font-size: 17px; line-height: 1.5; }
+  .vs-ban b { font-weight: 600; }
 </style>
 
 <div id="stage"><div id="board">
@@ -1926,6 +1967,70 @@ description: 새 REST API 를 추가할 때 사용.
     <div class="pt-note fd" style="--d:.9s">
       <div><b>비교</b> 스킬 없이 하면 테스트 스타일 · 검증 범위가 매번 다르다 → 스킬로 <b>팀 테스트 규칙</b>을 통일한다</div>
       <div>막히면 <b>실습 1 의 단계</b>를 그대로 따라 한다</div>
+    </div>
+  </div>
+</section>
+
+<!-- 28 ───────────────────────────────────────────── -->
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">MCP · 개념</span>
+    <h1 class="rv" style="--d:.08s">MCP — AI 에이전트를 시스템에 꽂는 표준 연결</h1>
+  </div>
+
+  <div class="mc">
+    <div class="mc-l rv" style="--d:.2s">
+      <div class="mc-im"><img data-zoom src="assets/mcp-architecture.png" alt="MCP 구조 — MCP hosts(Claude 등) 안의 MCP clients 가 허브처럼 여러 MCP server 에 연결되고, 각 서버는 Slack · Gmail · Calendar 같은 원격 서비스와 로컬 파일 같은 로컬 데이터에 닿는다"><span class="zm">클릭하면 확대</span></div>
+      <div class="mc-cap">노트북 = AI 앱(Host) · 허브 = MCP · 케이블 = MCP Server · 끝에 꽂힌 것 = 원격 서비스 · 로컬 데이터</div>
+    </div>
+
+    <div class="mc-r rv" style="--d:.3s">
+      <div class="mc-def"><b>MCP(Model Context Protocol)</b> 는 AI 에이전트가 외부 시스템과 이야기하는 <b>표준 규격</b>이다. USB-C 처럼 한 번 맞춰 두면 <b>어떤 AI 앱에서도 같은 연결</b>을 쓴다.</div>
+
+      <div class="mc-roles">
+        <div><b>Host</b><span>AI 앱 — Claude Code · Claude Desktop · IDE. 사용자가 대화하는 곳</span></div>
+        <div><b>Client</b><span>Host 안에서 서버 하나와 1 : 1 로 연결을 맡는 부분</span></div>
+        <div><b>Server</b><span>기능을 내놓는 쪽 — <b style="font-family:inherit;font-size:inherit;font-weight:500">도구 · 리소스 · 프롬프트</b>. 로컬(파일 · DB) 또는 원격(Slack · Gmail · Calendar)</span></div>
+      </div>
+
+      <div class="mc-lb">연결하면 에이전트가 더 할 수 있는 것</div>
+      <div class="mc-can">
+        <div><b>읽기</b>사내 DB · 문서 · 최신 라이브러리 문서 (context7)</div>
+        <div><b>실행</b>티켓 생성 · 메시지 전송 · 일정 등록</div>
+        <div><b>검증</b>브라우저를 직접 열어 화면 확인 (Playwright)</div>
+        <div><b>재사용</b>서버 하나를 여러 AI 앱 · 팀원이 같이 쓴다</div>
+      </div>
+    </div>
+      <div class="mc-ban fd" style="--d:.6s">Skill 은 <b>아는 것</b>을, MCP 는 <b>할 수 있는 것</b>을 늘린다. 앞에서 쓴 <b>context7 이 바로 MCP Server</b> 였다.</div>
+  </div>
+</section>
+
+<!-- 29 ───────────────────────────────────────────── -->
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">SKILL vs MCP</span>
+    <h1 class="rv" style="--d:.08s">Skill 과 MCP — 언제 무엇을 쓰나</h1>
+  </div>
+
+  <div class="vs">
+    <table class="vs-t rv" style="--d:.22s">
+      <thead><tr><th></th><th>Skill<small>아는 것을 늘린다</small></th><th>MCP<small>할 수 있는 것을 늘린다</small></th></tr></thead>
+      <tbody>
+        <tr class="key"><td>주는 것</td><td><b>지식 · 절차</b> — 규칙, 순서, 템플릿, 예시</td><td><b>도구 · 데이터 연결</b> — 외부 시스템 호출, 조회 · 실행</td></tr>
+        <tr><td>형태</td><td>폴더 + <b>SKILL.md</b> (Markdown)</td><td><b>서버 프로그램</b> — 로컬 프로세스 또는 원격 URL</td></tr>
+        <tr><td>컨텍스트</td><td>평소엔 description 만 · <b>필요할 때 본문</b></td><td>연결된 <b>도구 정의가 늘 자리</b>를 차지 · 많이 켜면 무겁다</td></tr>
+        <tr><td>만드는 사람</td><td>팀 누구나 — Markdown 만 쓰면 된다</td><td>대부분 <b>공식 · 벤더 제공</b>을 설치 · 직접 만들려면 개발 필요</td></tr>
+        <tr><td>설치 · 공유</td><td>.claude/skills/ 를 git 으로 공유</td><td><code>claude mcp add</code> · .mcp.json 으로 공유</td></tr>
+        <tr><td>예시</td><td><span style="white-space:nowrap">api-scaffold</span> · <span style="white-space:nowrap">test-writer</span> · <span style="white-space:nowrap">price-rules</span></td><td>context7 · Playwright · GitHub · DB</td></tr>
+      </tbody>
+    </table>
+
+    <div class="vs-r rv" style="--d:.34s">
+      <div class="vs-lb">이럴 때 이것</div>
+      <div class="vs-c"><div class="q"><span class="tag o">Skill</span>어떻게 해야 하는지 알려 주면 되는 일</div><div class="a">팀 코딩 규칙 · API 뼈대 · 테스트 작성 방식 · 커밋 메시지 형식</div></div>
+      <div class="vs-c"><div class="q"><span class="tag">MCP</span>밖에 있는 걸 가져오거나 실행해야 하는 일</div><div class="a">최신 문서 조회 · DB 조회 · 브라우저로 화면 확인 · 티켓 · 메시지</div></div>
+      <div class="vs-c"><div class="q"><span class="tag">MCP</span><span class="tag o">Skill</span>둘 다 — 연결은 MCP, 쓰는 법은 Skill</div><div class="a">DB MCP + <b>쿼리 규칙 Skill</b> · Playwright MCP + <b>화면 검증 절차 Skill</b></div></div>
+      <div class="vs-ban">먼저 묻는다: <b>외부 시스템에 닿아야 하나?</b> 예 → MCP · 아니오 → <b>반복되는 규칙 · 절차인가?</b> 예 → Skill · 아니오 → 프롬프트나 CLAUDE.md 로 충분</div>
     </div>
   </div>
 </section>
