@@ -2207,7 +2207,7 @@ description: 새 REST API 를 추가할 때 사용.
 
 <!-- 35 ───────────────────────────────────────────── -->
 <section class="slide">
-  <div class="eyebrow fd">HOOKS · 실습</div>
+  <div class="eyebrow fd">HOOKS · 실습 1</div>
   <h1 class="rv" style="--d:.08s">작업이 끝나면 빌드 검사 — 실패하면 스스로 고친다</h1>
   <div class="hr fd" style="--d:.22s"></div>
 
@@ -2226,6 +2226,31 @@ description: 새 REST API 를 추가할 때 사용.
     <div class="pt-note fd" style="--d:.9s">
       <div><b>|| exit 2 가 핵심</b> gradle 은 실패하면 exit 1 → 그냥 알리고 끝난다 · <b>exit 2</b> 여야 막고 에러를 AI 에게 돌려준다</div>
       <div><b>주의</b> 계속 실패하면 멈추지 못한다 → 입력의 <code>stop_hook_active</code> 로 두 번째는 통과 · <code>test</code> 는 매 턴이 느려지니 <code>compileJava</code> 부터</div>
+    </div>
+  </div>
+</section>
+
+<!-- 36 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">HOOKS · 실습 2 · 이제 해 보세요</div>
+  <h1 class="rv" style="--d:.08s">도구 실행 전에 막고, 실행 후에 남긴다</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="pre fd" style="--d:.26s"><span class="k">목표</span> <b style="color:var(--ink);font-weight:500">PreToolUse</b> 로 설정 파일 수정을 막고, <b style="color:var(--ink);font-weight:500">PostToolUse</b> 로 고친 파일을 기록한다 · 둘 다 matcher <code>Edit|Write</code></div>
+    <table class="itbl pt">
+      <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
+      <tbody>
+            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">PreToolUse 추가<i>실행 전 · 막기</i></td><td class="c"><code class="cmd">.claude/settings.json 에 PreToolUse hook 을 추가해줘. matcher 는 Edit|Write, 대상 파일이 application.yml 이면 "설정 파일은 수정 금지" 를 stderr 로 내고 exit 2 로 막아줘.</code></td><td class="k">hook 입력(stdin JSON)의 <code>tool_input.file_path</code> 를 보고 판단하는가</td></tr>
+            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">PostToolUse 추가<i>실행 후 · 기록</i></td><td class="c"><code class="cmd">PostToolUse hook 도 추가해줘. matcher 는 Edit|Write, 수정된 파일 경로를 시간과 함께 .claude/edit-log.txt 에 한 줄씩 남겨줘.</code></td><td class="k"><code>/hooks</code> 에 <b>PreToolUse · PostToolUse</b> 가 모두 보이는가</td></tr>
+            <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">막히는지<i>Pre 확인</i></td><td class="c"><code class="cmd">application.yml 의 server.port 를 9090 으로 바꿔줘</code></td><td class="k"><b>"설정 파일은 수정 금지"</b> 로 막히는가 · <code>! git diff --stat</code> 에 변경이 없는가</td></tr>
+            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">남는지<i>Post 확인</i></td><td class="c"><code class="cmd">MovingAverageService 클래스 위에 한 줄 주석을 추가해줘</code></td><td class="k"><code>! cat .claude/edit-log.txt</code> 에 <b>시간 · 파일 경로</b>가 찍히는가</td></tr>
+            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">되돌리기<i>실습 정리</i></td><td class="c"><code class="cmd">! git restore src</code></td><td class="k">코드가 원래대로 · hook 은 <code>/hooks</code> 에서 확인 후 지우거나 남긴다</td></tr>
+      </tbody>
+    </table>
+    <div class="pt-note fd" style="--d:.9s">
+      <div><b>Pre 는 막을 수 있고 Post 는 못 막는다</b> Post 시점엔 이미 파일이 바뀌었다 → 기록 · 포맷 · 알림 같은 후처리용</div>
+      <div><b>hook 이 안 먹으면</b> <code>/hooks</code> 로 등록 확인 → 그래도 안 되면 <code>/exit</code> 후 <code>claude</code> 재시작</div>
     </div>
   </div>
 </section>
