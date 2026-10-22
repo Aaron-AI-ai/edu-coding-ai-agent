@@ -642,6 +642,28 @@
   .vs-c .tag.o { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
   .vs-ban { padding: 16px 20px; border-radius: 10px; background: var(--invert-bg); color: var(--invert-fg); font-size: 17px; line-height: 1.5; }
   .vs-ban b { font-weight: 600; }
+
+  /* ── Skills VS MCP (어두운 카드형) ── */
+  .slide.vsd { background: var(--invert-bg); color: var(--invert-fg); align-items: center; padding: 56px 100px 60px; }
+  .vsd .eyebrow { color: var(--invert-dim); }
+  .vsd-h { display: flex; align-items: center; gap: 28px; margin-top: 10px; font-size: 76px; font-weight: 700; letter-spacing: -1px; }
+  .vsd-h .x { font-size: 54px; padding: 2px 22px 6px; border-radius: 8px; background: var(--invert-fg); color: var(--invert-bg); }
+  .vsd-g { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%; max-width: 1240px; margin-top: 34px; flex: 1; min-height: 0; }
+  .vsd-c { position: relative; border: 1px solid var(--invert-rule); border-radius: 18px; padding: 38px 40px 34px; background: rgba(255,255,255,.03); display: flex; flex-direction: column; word-break: keep-all; }
+  .vsd-c::before { content: ""; position: absolute; top: -1px; left: 50%; width: 120px; height: 4px; margin-left: -60px; border-radius: 0 0 4px 4px; background: var(--invert-fg); }
+  .vsd-c.m::before { background: var(--invert-dim); }
+  .vsd-c .nm { font-size: 46px; font-weight: 700; }
+  .vsd-c .sub { margin-top: 18px; font-size: 19px; color: var(--invert-dim); }
+  .vsd-c .big { margin-top: 4px; font-size: 40px; font-weight: 700; line-height: 1.25; }
+  .vsd-c .big small { display: block; margin-top: 6px; font-size: 18px; font-weight: 400; color: var(--invert-dim); }
+  .vsd-c .ex { margin-top: auto; border: 1px solid var(--invert-rule); border-left: 3px solid var(--invert-fg); border-radius: 10px; padding: 16px 20px; }
+  .vsd-c.m .ex { border-left-color: var(--invert-dim); }
+  .vsd-c .ex .k { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 3px; color: var(--invert-dim); }
+  .vsd-c .ex .v { margin-top: 8px; font-size: 19px; line-height: 1.5; }
+  .vsd-c .ex .v + .v { margin-top: 4px; }
+  .vsd-f { width: 100%; max-width: 1240px; margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; font-size: 16px; line-height: 1.5; color: var(--invert-dim); word-break: keep-all; }
+  .vsd-f b { color: var(--invert-fg); font-weight: 600; }
+  .vsd-f .q { grid-column: 1 / -1; padding-top: 14px; border-top: 1px solid var(--invert-rule); font-size: 17px; }
 </style>
 
 <div id="stage"><div id="board">
@@ -2006,32 +2028,30 @@ description: 새 REST API 를 추가할 때 사용.
 </section>
 
 <!-- 29 ───────────────────────────────────────────── -->
-<section class="slide wide">
-  <div class="wide-head">
-    <span class="eyebrow fd">SKILL vs MCP</span>
-    <h1 class="rv" style="--d:.08s">Skill 과 MCP — 언제 무엇을 쓰나</h1>
+<section class="slide vsd">
+  <div class="eyebrow fd">SKILL vs MCP · 언제 무엇을 쓰나</div>
+  <div class="vsd-h rv" style="--d:.08s"><span>Skills</span><span class="x">VS</span><span>MCP</span></div>
+
+  <div class="vsd-g">
+    <div class="vsd-c rv" style="--d:.24s">
+      <div class="nm">Skills</div>
+      <div class="sub">에이전트에게 가르친다</div>
+      <div class="big">HOW · 어떻게 할지<small>규칙 · 절차 · 템플릿 — 아는 것을 늘린다</small></div>
+      <div class="ex"><div class="k">EXAMPLE</div><div class="v">우리 팀 규칙대로 만드는 계좌 API<br>(조회도 POST · 생성자 주입)</div><div class="v" style="color:var(--invert-dim);font-size:16px">api-scaffold · test-writer</div></div>
+    </div>
+    <div class="vsd-c m rv" style="--d:.32s">
+      <div class="nm">MCP</div>
+      <div class="sub">에이전트를 연결한다</div>
+      <div class="big">WHAT · 무엇이 필요한지<small>도구 · 데이터 — 할 수 있는 것을 늘린다</small></div>
+      <div class="ex"><div class="k">EXAMPLE</div><div class="v">외부 API 의 실시간 시세 ·<br>사내 DB 의 계좌 잔고 · 최신 문서</div><div class="v" style="color:var(--invert-dim);font-size:16px">context7 · Playwright · DB</div></div>
+    </div>
   </div>
 
-  <div class="vs">
-    <table class="vs-t rv" style="--d:.22s">
-      <thead><tr><th></th><th>Skill<small>아는 것을 늘린다</small></th><th>MCP<small>할 수 있는 것을 늘린다</small></th></tr></thead>
-      <tbody>
-        <tr class="key"><td>주는 것</td><td><b>지식 · 절차</b> — 규칙, 순서, 템플릿, 예시</td><td><b>도구 · 데이터 연결</b> — 외부 시스템 호출, 조회 · 실행</td></tr>
-        <tr><td>형태</td><td>폴더 + <b>SKILL.md</b> (Markdown)</td><td><b>서버 프로그램</b> — 로컬 프로세스 또는 원격 URL</td></tr>
-        <tr><td>컨텍스트</td><td>평소엔 description 만 · <b>필요할 때 본문</b></td><td>연결된 <b>도구 정의가 늘 자리</b>를 차지 · 많이 켜면 무겁다</td></tr>
-        <tr><td>만드는 사람</td><td>팀 누구나 — Markdown 만 쓰면 된다</td><td>대부분 <b>공식 · 벤더 제공</b>을 설치 · 직접 만들려면 개발 필요</td></tr>
-        <tr><td>설치 · 공유</td><td>.claude/skills/ 를 git 으로 공유</td><td><code>claude mcp add</code> · .mcp.json 으로 공유</td></tr>
-        <tr><td>예시</td><td><span style="white-space:nowrap">api-scaffold</span> · <span style="white-space:nowrap">test-writer</span> · <span style="white-space:nowrap">price-rules</span></td><td>context7 · Playwright · GitHub · DB</td></tr>
-      </tbody>
-    </table>
-
-    <div class="vs-r rv" style="--d:.34s">
-      <div class="vs-lb">이럴 때 이것</div>
-      <div class="vs-c"><div class="q"><span class="tag o">Skill</span>어떻게 해야 하는지 알려 주면 되는 일</div><div class="a">팀 코딩 규칙 · API 뼈대 · 테스트 작성 방식 · 커밋 메시지 형식</div></div>
-      <div class="vs-c"><div class="q"><span class="tag">MCP</span>밖에 있는 걸 가져오거나 실행해야 하는 일</div><div class="a">최신 문서 조회 · DB 조회 · 브라우저로 화면 확인 · 티켓 · 메시지</div></div>
-      <div class="vs-c"><div class="q"><span class="tag">MCP</span><span class="tag o">Skill</span>둘 다 — 연결은 MCP, 쓰는 법은 Skill</div><div class="a">DB MCP + <b>쿼리 규칙 Skill</b> · Playwright MCP + <b>화면 검증 절차 Skill</b></div></div>
-      <div class="vs-ban">먼저 묻는다: <b>외부 시스템에 닿아야 하나?</b> 예 → MCP · 아니오 → <b>반복되는 규칙 · 절차인가?</b> 예 → Skill · 아니오 → 프롬프트나 CLAUDE.md 로 충분</div>
-    </div>
+  <div class="vsd-f fd" style="--d:.6s">
+    <div><b>Skill</b> — 어떻게 해야 하는지 알려 주면 되는 일</div>
+    <div><b>MCP</b> — 밖에 있는 걸 가져오거나 실행해야 하는 일</div>
+    <div><b>둘 다</b> — 연결은 MCP, 쓰는 법은 Skill</div>
+    <div class="q">먼저 묻는다 → <b>외부 시스템에 닿아야 하나?</b> 예: MCP · 아니오 → <b>반복되는 규칙 · 절차인가?</b> 예: Skill · 아니오: 프롬프트나 CLAUDE.md 로 충분</div>
   </div>
 </section>
 
