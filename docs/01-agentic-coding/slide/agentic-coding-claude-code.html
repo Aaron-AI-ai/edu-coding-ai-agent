@@ -685,6 +685,20 @@
   .mx-c.own { border-style: dashed; }
   .mx-ft { margin-top: 16px; font-size: 16.5px; color: var(--dim); line-height: 1.5; }
   .mx-ft b { color: var(--ink); font-weight: 600; }
+  .hl { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 1fr; gap: 14px 16px; flex: 1; min-height: 0; margin-top: 18px; word-break: keep-all; }
+  .hl-c { display: flex; flex-direction: column; border: 1.5px solid var(--rule); border-radius: 12px; padding: 12px 18px 4px; background: var(--page); min-height: 0; }
+  .hl-t { display: flex; align-items: baseline; gap: 8px; font-size: 20px; font-weight: 600; color: var(--ink); padding-bottom: 8px; border-bottom: 1.5px solid var(--ink); }
+  .hl-t .no, .hl-t .ct { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; font-weight: 400; color: var(--faint); letter-spacing: 1px; }
+  .hl-t .ct { margin-left: auto; }
+  .hl-r { padding: 4px 0; border-bottom: 1px solid var(--rule); line-height: 1.35; }
+  .hl-r:last-child { border-bottom: 0; }
+  .hl-r b { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 14.5px; font-weight: 500; color: var(--dim); }
+  .hl-r.on b { color: var(--ink); font-weight: 700; }
+  .hl-r.on b::before { content: "★ "; }
+  .hl-r .w { display: block; font-size: 14.5px; color: var(--dim); }
+  .hl-r .bk, .hl-bk { margin-left: 6px; font-size: 11px; letter-spacing: 1px; color: var(--ink); border: 1px solid var(--ink); border-radius: 999px; padding: 0 6px; vertical-align: 1px; }
+  .hl-bk { margin-left: 0; }
+  .mx-ft a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
   .vsd-f .q { grid-column: 1 / -1; padding-top: 14px; border-top: 1px solid var(--invert-rule); font-size: 17px; }
 </style>
 
@@ -2154,6 +2168,27 @@ description: 새 REST API 를 추가할 때 사용.
     </div>
     <div class="mc-ban fd" style="--d:.6s">CLAUDE.md 는 <b>부탁</b>, Hook 은 <b>보장</b>이다. 꼭 실행돼야 하는 것만 hook 으로 — 느린 명령은 매 턴을 느리게 만든다.</div>
   </div>
+</section>
+
+<!-- 34 ───────────────────────────────────────────── -->
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">HOOKS · 시점 전체</span>
+    <h1 class="rv" style="--d:.08s">Claude Code hook 시점 33개 — 언제 실행되나</h1>
+  </div>
+
+  <div class="hl rv" style="--d:.22s">
+    <div class="hl-c"><div class="hl-t"><span class="no">01</span>세션<span class="ct">4</span></div><div class="hl-r on"><b>SessionStart</b><span class="w">세션 시작 · 재개 · /clear · 압축 직후</span></div><div class="hl-r"><b>Setup</b><span class="w">--init · --maintenance 로 시작할 때 (CI 준비 1회)</span></div><div class="hl-r"><b>InstructionsLoaded</b><span class="w">CLAUDE.md · rules 파일을 읽어 들일 때</span></div><div class="hl-r"><b>SessionEnd</b><span class="w">세션이 끝날 때 (exit · /clear · logout)</span></div></div>
+    <div class="hl-c"><div class="hl-t"><span class="no">02</span>프롬프트 · 화면<span class="ct">3</span></div><div class="hl-r on"><b>UserPromptSubmit</b><span class="bk">차단</span><span class="w">프롬프트 제출 직후 · AI 가 처리하기 전</span></div><div class="hl-r"><b>UserPromptExpansion</b><span class="bk">차단</span><span class="w">슬래시 명령이 프롬프트로 펼쳐질 때</span></div><div class="hl-r"><b>MessageDisplay</b><span class="w">AI 답변 텍스트가 화면에 표시될 때</span></div></div>
+    <div class="hl-c"><div class="hl-t"><span class="no">03</span>도구 실행<span class="ct">6</span></div><div class="hl-r on"><b>PreToolUse</b><span class="bk">차단</span><span class="w">도구 실행 직전 · matcher 로 도구 이름 지정</span></div><div class="hl-r"><b>PermissionRequest</b><span class="w">권한 승인 창이 뜰 때 · decision 으로 허용 · 거부</span></div><div class="hl-r"><b>PermissionDenied</b><span class="w">auto 모드가 도구 호출을 거부했을 때</span></div><div class="hl-r on"><b>PostToolUse</b><span class="w">도구 실행이 성공한 직후</span></div><div class="hl-r"><b>PostToolUseFailure</b><span class="w">도구 실행이 실패한 직후</span></div><div class="hl-r"><b>PostToolBatch</b><span class="bk">차단</span><span class="w">병렬 도구 호출 묶음이 끝나고 다음 판단 전</span></div></div>
+    <div class="hl-c"><div class="hl-t"><span class="no">04</span>응답 종료 · 알림<span class="ct">3</span></div><div class="hl-r on"><b>Stop</b><span class="bk">차단</span><span class="w">AI 가 응답을 마쳤을 때 · 막으면 이어서 일한다</span></div><div class="hl-r"><b>StopFailure</b><span class="w">API 오류(rate limit · 과부하)로 턴이 끝났을 때</span></div><div class="hl-r on"><b>Notification</b><span class="w">권한 요청 · 입력 대기 알림을 보낼 때</span></div></div>
+    <div class="hl-c"><div class="hl-t"><span class="no">05</span>서브에이전트 · 작업<span class="ct">5</span></div><div class="hl-r"><b>SubagentStart</b><span class="w">서브에이전트가 생성될 때</span></div><div class="hl-r"><b>SubagentStop</b><span class="bk">차단</span><span class="w">서브에이전트가 일을 마칠 때</span></div><div class="hl-r"><b>TaskCreated</b><span class="bk">차단</span><span class="w">작업 목록에 작업이 만들어질 때</span></div><div class="hl-r"><b>TaskCompleted</b><span class="bk">차단</span><span class="w">작업을 완료로 표시할 때</span></div><div class="hl-r"><b>TeammateIdle</b><span class="bk">차단</span><span class="w">에이전트 팀의 팀원이 쉬려 할 때</span></div></div>
+    <div class="hl-c"><div class="hl-t"><span class="no">06</span>컨텍스트 · 모델<span class="ct">4</span></div><div class="hl-r"><b>PreCompact</b><span class="bk">차단</span><span class="w">컨텍스트 압축 직전 (수동 · 자동)</span></div><div class="hl-r"><b>PostCompact</b><span class="w">컨텍스트 압축이 끝난 뒤</span></div><div class="hl-r"><b>PreModelSwitch</b><span class="bk">차단</span><span class="w">모델 변경을 적용하기 직전</span></div><div class="hl-r"><b>PostModelSwitch</b><span class="w">모델이 바뀐 뒤</span></div></div>
+    <div class="hl-c"><div class="hl-t"><span class="no">07</span>환경 변화<span class="ct">6</span></div><div class="hl-r"><b>ConfigChange</b><span class="bk">차단</span><span class="w">세션 중 설정 파일이 바뀔 때</span></div><div class="hl-r"><b>CwdChanged</b><span class="w">작업 디렉터리가 바뀔 때 (cd)</span></div><div class="hl-r"><b>DirectoryAdded</b><span class="w">/add-dir 로 작업 폴더를 추가할 때</span></div><div class="hl-r"><b>FileChanged</b><span class="w">지켜보는 파일(.env 등)이 바뀔 때</span></div><div class="hl-r"><b>WorktreeCreate</b><span class="bk">차단</span><span class="w">worktree 를 만들 때 · 기본 git 동작 대체</span></div><div class="hl-r"><b>WorktreeRemove</b><span class="bk">차단</span><span class="w">hook 이 만든 worktree 를 지울 때</span></div></div>
+    <div class="hl-c"><div class="hl-t"><span class="no">08</span>MCP<span class="ct">2</span></div><div class="hl-r"><b>Elicitation</b><span class="bk">차단</span><span class="w">MCP 서버가 도구 실행 중 사용자 입력을 요청할 때</span></div><div class="hl-r"><b>ElicitationResult</b><span class="bk">차단</span><span class="w">사용자가 답한 뒤 · 서버로 보내기 전</span></div></div>
+  </div>
+
+  <div class="mx-ft fd" style="--d:.6s"><b>★</b> 앞 장에서 다룬 자주 쓰는 시점 · <span class="hl-bk">차단</span> exit 2 로 막을 수 있다 (Stop 류는 「멈추지 말고 계속」) · 출처 <a href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener">code.claude.com/docs/en/hooks</a> · 2026.10 기준</div>
 </section>
 
 </div></div>
