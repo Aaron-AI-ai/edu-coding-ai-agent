@@ -1496,11 +1496,11 @@
 <!-- 15 ───────────────────────────────────────────── -->
 <section class="slide">
   <div class="eyebrow fd">SECRET RECIPE 05</div>
-  <h1 class="rv" style="--d:.08s">플러그인 세 개를 써 본다</h1>
+  <h1 class="rv" style="--d:.08s">플러그인 두 개를 써 본다</h1>
   <div class="hr fd" style="--d:.22s"></div>
 
   <div class="body">
-    <div class="pre fd" style="--d:.28s"><span class="k">먼저</span> 실습 프로젝트 폴더에서 Claude Code 를 연다 <code class="cmd">cd edu-stock-chart</code><code class="cmd">claude</code><code class="cmd">/model claude-sonnet-4-6</code> <span style="color:var(--faint)">· 모델을 Sonnet 4.6 으로 (context7 비교용) · claude-mem 은 설치 뒤 재시작</span></div>
+    <div class="pre fd" style="--d:.28s"><span class="k">먼저</span> 실습 프로젝트 폴더에서 Claude Code 를 연다 <code class="cmd">cd edu-stock-chart</code><code class="cmd">claude</code> <span style="color:var(--faint)">· claude-mem 은 설치 뒤 재시작</span></div>
     <div class="trio rv" style="--d:.34s">
       <div class="tc">
         <div class="top"><div class="nm" style="font-size:24px">ponytail</div><span class="st">강사 시연</span></div>
@@ -1517,17 +1517,7 @@
         <div class="ev"><b>볼 것</b> 「위치 · 자를 것 · 대체」 한 줄씩 · 끝에 <code>net: -N lines</code></div>
       </div>
       <div class="tc">
-        <div class="top"><div class="nm" style="font-size:24px">context7</div><span class="st">실습 1</span></div>
-        <div class="goal"><b style="color:var(--ink);font-weight:500">최신 문서</b>를 근거로 Spring Boot 스펙을 묻는다</div>
-        <div class="sp"><span>01</span>질문 끝에 use context7</div>
-        <code class="cmd">Spring Boot 4에서 REST API 버전 관리(v1, v2)를 헤더 방식으로 설정하는 방법과 application.yml 예제를 알려줘. use context7</code>
-        <div class="sp"><span>02</span>비교 (선택)</div>
-        <code class="cmd">Spring Boot 4에서 REST API 버전 관리(v1, v2)를 헤더 방식으로 설정하는 방법과 application.yml 예제를 알려줘</code>
-        <div class="sd">같은 질문을 use context7 없이 물어 답을 비교한다</div>
-        <div class="ev"><b>확인</b> <code>resolve-library-id</code> → <code>query-docs</code> 호출이 뜨는가 · yml 속성 이름이 바뀌는가 (다음 장)</div>
-      </div>
-      <div class="tc">
-        <div class="top"><div class="nm" style="font-size:24px">claude-mem</div><span class="st">실습 2</span></div>
+        <div class="top"><div class="nm" style="font-size:24px">claude-mem</div><span class="st">실습</span></div>
         <div class="goal"><b style="color:var(--ink);font-weight:500">프로젝트 전체</b>를 기억에 미리 넣는다</div>
         <div class="sp"><span>01</span>전체 소스를 읽혀 기억시키기</div>
         <code class="cmd">/learn-codebase</code>
@@ -1540,62 +1530,7 @@
     </div>
     <div class="inst fd" style="--d:.8s">
       <div class="ic"><span class="k">설치 · ponytail</span><code class="cmd">/plugin marketplace add DietrichGebert/ponytail</code><code class="cmd">/plugin install ponytail@ponytail</code></div>
-      <div class="ic"><span class="k">설치 · context7</span><code class="cmd">/plugin install context7@claude-plugins-official</code><code class="cmd">/mcp</code><div style="font-size:13px;color:var(--dim);margin-top:5px">처음 한 번 로그인 · context7 선택 → Authenticate → 브라우저에서 승인</div></div>
       <div class="ic"><span class="k">설치 · claude-mem</span><code class="cmd">/plugin marketplace add thedotmack/claude-mem</code><code class="cmd">/plugin install claude-mem</code></div>
-    </div>
-  </div>
-</section>
-
-<!-- 16 ───────────────────────────────────────────── -->
-<section class="slide">
-  <div class="eyebrow fd">SECRET RECIPE 05 · context7 결과</div>
-  <h1 class="rv" style="--d:.08s">context7 을 켜면 답이 바뀐다</h1>
-  <div class="hr fd" style="--d:.22s"></div>
-
-  <div class="body">
-    <div class="pre fd" style="--d:.28s"><span class="k">조건</span> 같은 질문 · 같은 모델 <b style="color:var(--ink);font-weight:500">Claude Sonnet 4.6</b> (지식 기준 2025.08 · Spring Boot 4 는 2025.11 출시) · context7 만 껐다 켰다</div>
-    <div class="pre fd" style="--d:.32s;margin-top:-6px"><span class="k">질문</span> <code class="cmd">Spring Boot 4에서 REST API 버전 관리(v1, v2)를 헤더 방식으로 설정하는 방법과 application.yml 예제를 알려줘</code></div>
-    <div class="trio rv" style="--d:.38s">
-      <div class="tc">
-        <div class="top"><div class="nm" style="font-size:24px">context7 없음</div><span class="mk rec">웹 검색으로 대체</span></div>
-        <div class="goal">context7 미연결 → WebSearch 1회 → <b style="color:var(--ink);font-weight:500">블로그 4개</b>를 근거로 답함</div>
-        <div class="sp"><span>yml</span>답으로 나온 설정</div>
-        <code class="cmd">spring:
-  mvc:
-    apiversion:
-      enabled: true
-      header: X-API-Version
-      default-version: "1"
-      supported-versions: ["1", "2"]</code>
-        <ul class="t" style="margin-top:8px">
-          <li><b>enabled</b> 없는 속성</li>
-          <li><b>header</b> → 실제는 use.header</li>
-          <li><b>default-version · supported-versions</b> → 실제는 default · supported</li>
-        </ul>
-        <div class="ev"><b>결과</b> 오류 없이 무시된다 → 버전 관리가 켜지지 않는다 · Java 설정 · 컨트롤러 코드는 맞음</div>
-      </div>
-      <div class="tc">
-        <div class="top"><div class="nm" style="font-size:24px">use context7</div><span class="mk do">공식 문서 조회</span></div>
-        <div class="goal">context7 3회 호출 → <b style="color:var(--ink);font-weight:500">Spring Boot 4.0.0 공식 소스</b>를 근거로 답함</div>
-        <div class="sp"><span>yml</span>답으로 나온 설정</div>
-        <code class="cmd">spring:
-  mvc:
-    apiversion:
-      use:
-        header: X-API-Version
-      default: "1.0"
-      supported: ["1.0", "2.0"]
-      detect-supported: true</code>
-        <ul class="t" style="margin-top:8px">
-          <li><b>use.header · default · supported</b> 공식 속성 이름과 일치</li>
-          <li><b>detect-supported</b> 컨트롤러의 version 값을 자동 수집</li>
-        </ul>
-        <div class="ev"><b>결과</b> 공식 문서와 일치 · 근거가 블로그 → 공식 소스로 바뀜</div>
-      </div>
-    </div>
-    <div class="inote fd" style="--d:.7s">
-      <div><span class="k">정리</span>모르는 최신 내용은 AI 가 <b>웹 검색으로 메우지만, 설정 키처럼 정확해야 하는 값은 틀릴 수 있다.</b> context7 은 <b>버전별 공식 문서</b>로 답한다.</div>
-      <div><span class="k">참고</span>Opus · Sonnet 5.5 (지식 기준 2026.06) 는 context7 없이도 맞힌다 · 차이는 <b style="white-space:nowrap">학습 시점 이후</b> 내용에서 난다</div>
     </div>
   </div>
 </section>
@@ -2037,7 +1972,7 @@ description: 새 REST API 를 추가할 때 사용.
         <div><b>재사용</b>서버 하나를 여러 AI 앱 · 팀원이 같이 쓴다</div>
       </div>
     </div>
-      <div class="mc-ban fd" style="--d:.6s">Skill 은 <b>아는 것</b>을, MCP 는 <b>할 수 있는 것</b>을 늘린다. 앞에서 쓴 <b>context7 이 바로 MCP Server</b> 였다.</div>
+      <div class="mc-ban fd" style="--d:.6s">Skill 은 <b>아는 것</b>을, MCP 는 <b>할 수 있는 것</b>을 늘린다. <b>context7 도 MCP Server</b> 다 — 뒤에서 직접 연결해 본다.</div>
   </div>
 </section>
 
@@ -2095,6 +2030,86 @@ description: 새 REST API 를 추가할 때 사용.
   </div>
 
   <div class="mx-ft fd" style="--d:.6s"><b>도입 원칙</b> 읽기 전용 · 최소 권한 토큰부터 · 운영 DB · 로그는 연결하지 않는다 · 원격 MCP 는 데이터가 외부로 나간다 · <b>필요한 MCP 만 켠다</b> (도구 정의가 늘 컨텍스트를 차지) · 점선 카드는 공개 오픈소스가 없어 직접 만든다</div>
+</section>
+
+<!-- 31 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">MCP · 실습</div>
+  <h1 class="rv" style="--d:.08s">Context7 MCP 를 연결해 쓴다</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="pre fd" style="--d:.26s"><span class="k">목표</span> 모델이 <b style="color:var(--ink);font-weight:500">학습 이후에 나온 스펙</b>을 MCP 로 공식 문서에서 찾아 답하게 한다 · 실습 폴더 <code class="cmd">cd edu-stock-chart</code><code class="cmd">claude</code></div>
+    <table class="itbl pt">
+      <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
+      <tbody>
+            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">모델 고정<i>비교를 위해</i></td><td class="c"><code class="cmd">/model claude-sonnet-4-6</code></td><td class="k">지식 기준 2025.08 · Spring Boot 4 (2025.11 출시) 를 <b>모르는 모델</b>로 비교한다</td></tr>
+            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">연결 확인<i>이미 있는지 먼저 본다</i></td><td class="c"><code class="cmd">! claude mcp list</code></td><td class="k">context7 이 보이면 04 로 · 플러그인으로 깔았다면 <code>plugin:context7</code> 으로 보인다</td></tr>
+            <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">MCP 등록<i>없을 때만 · 팀과 공유</i></td><td class="c"><code class="cmd">! claude mcp add --transport http --scope project context7 https://mcp.context7.com/mcp</code></td><td class="k"><code>.mcp.json</code> 이 생기는가 · 플러그인 방식은 <code>/plugin install context7@claude-plugins-official</code></td></tr>
+            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">로그인<i>처음 한 번</i></td><td class="c"><code class="cmd">/mcp</code></td><td class="k">context7 선택 → <b>Authenticate</b> → 브라우저 승인 · 도구 <b>resolve-library-id · query-docs</b> 가 보이는가</td></tr>
+            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">질문<i>끝에 use context7</i></td><td class="c"><code class="cmd">Spring Boot 4에서 REST API 버전 관리(v1, v2)를 헤더 방식으로 설정하는 방법과 application.yml 예제를 알려줘. use context7</code></td><td class="k"><b>resolve-library-id → query-docs</b> 호출이 뜨는가 · 공식 문서 출처가 붙는가</td></tr>
+            <tr class="rv" style="--d:0.71s"><td class="n">06</td><td class="p">비교<i>/mcp 에서 끄고 같은 질문</i></td><td class="c"><code class="cmd">Spring Boot 4에서 REST API 버전 관리(v1, v2)를 헤더 방식으로 설정하는 방법과 application.yml 예제를 알려줘</code></td><td class="k">yml 속성 이름이 05 와 같은가 다른가 → <b>다음 장</b>에서 결과 비교</td></tr>
+      </tbody>
+    </table>
+    <div class="pt-note fd" style="--d:.9s">
+      <div><b>필요할 때만 켠다</b> 연결된 MCP 의 도구 정의는 늘 컨텍스트를 차지한다 · 실습 후 안 쓰면 <code>/mcp</code> 에서 끈다</div>
+      <div><b>API 키 방식</b> context7.com/dashboard 에서 발급 → <code>--header "Authorization: Bearer 키"</code></div>
+    </div>
+  </div>
+</section>
+
+<!-- 32 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">MCP · 실습 결과</div>
+  <h1 class="rv" style="--d:.08s">context7 을 켜면 답이 바뀐다</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="pre fd" style="--d:.28s"><span class="k">조건</span> 같은 질문 · 같은 모델 <b style="color:var(--ink);font-weight:500">Claude Sonnet 4.6</b> (지식 기준 2025.08 · Spring Boot 4 는 2025.11 출시) · context7 만 껐다 켰다</div>
+    <div class="pre fd" style="--d:.32s;margin-top:-6px"><span class="k">질문</span> <code class="cmd">Spring Boot 4에서 REST API 버전 관리(v1, v2)를 헤더 방식으로 설정하는 방법과 application.yml 예제를 알려줘</code></div>
+    <div class="trio rv" style="--d:.38s">
+      <div class="tc">
+        <div class="top"><div class="nm" style="font-size:24px">context7 없음</div><span class="mk rec">웹 검색으로 대체</span></div>
+        <div class="goal">context7 미연결 → WebSearch 1회 → <b style="color:var(--ink);font-weight:500">블로그 4개</b>를 근거로 답함</div>
+        <div class="sp"><span>yml</span>답으로 나온 설정</div>
+        <code class="cmd">spring:
+  mvc:
+    apiversion:
+      enabled: true
+      header: X-API-Version
+      default-version: "1"
+      supported-versions: ["1", "2"]</code>
+        <ul class="t" style="margin-top:8px">
+          <li><b>enabled</b> 없는 속성</li>
+          <li><b>header</b> → 실제는 use.header</li>
+          <li><b>default-version · supported-versions</b> → 실제는 default · supported</li>
+        </ul>
+        <div class="ev"><b>결과</b> 오류 없이 무시된다 → 버전 관리가 켜지지 않는다 · Java 설정 · 컨트롤러 코드는 맞음</div>
+      </div>
+      <div class="tc">
+        <div class="top"><div class="nm" style="font-size:24px">use context7</div><span class="mk do">공식 문서 조회</span></div>
+        <div class="goal">context7 3회 호출 → <b style="color:var(--ink);font-weight:500">Spring Boot 4.0.0 공식 소스</b>를 근거로 답함</div>
+        <div class="sp"><span>yml</span>답으로 나온 설정</div>
+        <code class="cmd">spring:
+  mvc:
+    apiversion:
+      use:
+        header: X-API-Version
+      default: "1.0"
+      supported: ["1.0", "2.0"]
+      detect-supported: true</code>
+        <ul class="t" style="margin-top:8px">
+          <li><b>use.header · default · supported</b> 공식 속성 이름과 일치</li>
+          <li><b>detect-supported</b> 컨트롤러의 version 값을 자동 수집</li>
+        </ul>
+        <div class="ev"><b>결과</b> 공식 문서와 일치 · 근거가 블로그 → 공식 소스로 바뀜</div>
+      </div>
+    </div>
+    <div class="inote fd" style="--d:.7s">
+      <div><span class="k">정리</span>모르는 최신 내용은 AI 가 <b>웹 검색으로 메우지만, 설정 키처럼 정확해야 하는 값은 틀릴 수 있다.</b> context7 은 <b>버전별 공식 문서</b>로 답한다.</div>
+      <div><span class="k">참고</span>Opus · Sonnet 5.5 (지식 기준 2026.06) 는 context7 없이도 맞힌다 · 차이는 <b style="white-space:nowrap">학습 시점 이후</b> 내용에서 난다</div>
+    </div>
+  </div>
 </section>
 
 </div></div>
