@@ -628,6 +628,8 @@
   .hk .mc-roles > div { grid-template-columns: 170px 1fr; padding: 9px 0; font-size: 16.5px; }
   .hk .mc-roles b.u { font-family: inherit; font-size: inherit; font-weight: 600; }
   .hk .mc-roles code { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 14px; background: var(--panel); padding: 1px 5px; border-radius: 3px; }
+  .hk .mc-roles b.st { font-family: inherit; font-size: 17px; }
+  .hk-can { grid-template-columns: repeat(3, 1fr); }
   .hk-code { margin: 0; background: #111110; color: #E8E6E1; border-radius: 8px; padding: 12px 16px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 14px; line-height: 1.5; white-space: pre; }
 
   /* ── Skill vs MCP 비교 장표 ── */
@@ -2147,26 +2149,24 @@ description: 새 REST API 를 추가할 때 사용.
     <div class="mc-r rv" style="--d:.3s">
       <div class="mc-def"><b>Hook</b> 은 에이전트가 일하는 흐름의 <b>정해진 시점</b>(세션 시작 · 도구 실행 전후 · 작업 끝)마다 <b>자동으로 실행되는 명령</b>이다. CLAUDE.md 의 지시는 AI 가 잊을 수 있지만, hook 은 <b>매번 반드시</b> 돈다.</div>
 
-      <div class="mc-lb">언제 쓰나 — 빠지면 안 되는 일</div>
+      <div class="mc-lb">개발 흐름의 어느 단계에 붙이나</div>
       <div class="mc-roles">
-        <div><b>Stop</b><span>작업이 끝날 때 <b class="u">린트 · 테스트 실행</b> → 실패하면 exit 2 로 돌려보내 AI 가 이어서 고친다</span></div>
-        <div><b>PostToolUse</b><span>파일을 고친 직후 <b class="u">포맷터 자동 적용</b> · matcher <code>Edit|Write</code></span></div>
-        <div><b>PreToolUse</b><span>도구 실행 전 <b class="u">위험 명령 차단</b> — <code>rm -rf</code> · 운영 DB 접속 · <code>.env</code> 수정 (exit 2 = 막기)</span></div>
-        <div><b>UserPromptSubmit</b><span>프롬프트 제출 시 <b class="u">비밀번호 · 키 포함 여부 검사</b></span></div>
-        <div><b>SessionStart</b><span>세션 시작 시 <b class="u">브랜치 · 최근 커밋을 컨텍스트로 주입</b></span></div>
-        <div><b>Notification</b><span>승인 · 입력을 기다릴 때 <b class="u">데스크톱 알림</b></span></div>
+        <div><b class="st">작업 시작</b><span><b class="u">환경 준비</b> — 브랜치 · 이슈 · 팀 규칙을 미리 알려 준다</span></div>
+        <div><b class="st">요청 입력</b><span><b class="u">입력 점검</b> — 비밀번호 · 키 · 고객 정보가 섞였는지 본다</span></div>
+        <div><b class="st">코드 수정 전</b><span><b class="u">안전장치</b> — 위험 명령 · 운영 설정 · <code>.env</code> 수정을 막는다</span></div>
+        <div><b class="st">코드 수정 후</b><span><b class="u">품질 자동화</b> — 포맷터 · import 정리를 바로 적용한다</span></div>
+        <div><b class="st">작업 마무리</b><span><b class="u">검증 게이트</b> — 린트 · 테스트 · 빌드를 못 넘으면 다시 고치게 한다</span></div>
+        <div><b class="st">대기 중</b><span><b class="u">알림</b> — 승인 · 입력을 기다리면 메신저 · 데스크톱으로 알린다</span></div>
       </div>
 
-      <div class="mc-lb">예시 · .claude/settings.json — 작업이 끝나면 린트</div>
-      <pre class="hk-code">{
-  "hooks": {
-    "Stop": [
-      { "hooks": [{ "type": "command", "command": "./gradlew check -q" }] }
-    ]
-  }
-}</pre>
+      <div class="mc-lb">이런 일이면 hook 으로 만든다</div>
+      <div class="mc-can hk-can">
+        <div><b>매번 빠뜨리는 일</b>린트 · 포맷 · 테스트 실행</div>
+        <div><b>사람이 보기 귀찮은 일</b>비밀 정보 · 금지 파일 검사</div>
+        <div><b>사고 나면 큰 일</b>운영 DB · 삭제 명령 차단</div>
+      </div>
     </div>
-    <div class="mc-ban fd" style="--d:.6s">CLAUDE.md 는 <b>부탁</b>, Hook 은 <b>보장</b>이다. 꼭 실행돼야 하는 것만 hook 으로 — 느린 명령은 매 턴을 느리게 만든다.</div>
+    <div class="mc-ban fd" style="--d:.6s">CLAUDE.md 는 <b>부탁</b>, Hook 은 <b>보장</b>이다. 꼭 실행돼야 하는 것만 hook 으로 — 느린 명령은 매 턴을 느리게 만든다. 시점 전체는 다음 장.</div>
   </div>
 </section>
 
@@ -2188,7 +2188,7 @@ description: 새 REST API 를 추가할 때 사용.
     <div class="hl-c"><div class="hl-t"><span class="no">08</span>MCP<span class="ct">2</span></div><div class="hl-r"><b>Elicitation</b><span class="bk">차단</span><span class="w">MCP 서버가 도구 실행 중 사용자 입력을 요청할 때</span></div><div class="hl-r"><b>ElicitationResult</b><span class="bk">차단</span><span class="w">사용자가 답한 뒤 · 서버로 보내기 전</span></div></div>
   </div>
 
-  <div class="mx-ft fd" style="--d:.6s"><b>★</b> 앞 장에서 다룬 자주 쓰는 시점 · <span class="hl-bk">차단</span> exit 2 로 막을 수 있다 (Stop 류는 「멈추지 말고 계속」) · 출처 <a href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener">code.claude.com/docs/en/hooks</a> · 2026.10 기준</div>
+  <div class="mx-ft fd" style="--d:.6s"><b>★</b> 개발에서 자주 쓰는 시점 · <span class="hl-bk">차단</span> exit 2 로 막을 수 있다 (Stop 류는 「멈추지 말고 계속」) · 출처 <a href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener">code.claude.com/docs/en/hooks</a> · 2026.10 기준</div>
 </section>
 
 </div></div>
