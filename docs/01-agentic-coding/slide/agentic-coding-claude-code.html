@@ -621,6 +621,14 @@
   .mc-can b { display: block; color: var(--ink); font-weight: 600; font-size: 18px; margin-bottom: 2px; }
   .mc-ban { grid-column: 1 / -1; padding: 18px 22px; border-radius: 10px; background: var(--invert-bg); color: var(--invert-fg); font-size: 19px; line-height: 1.5; }
   .mc-ban b { font-weight: 600; }
+  .hk { grid-template-columns: auto 1fr; }
+  .hk-im { position: relative; height: 100%; min-height: 0; border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; background: #F6F0E8; }
+  .hk-im img { display: block; height: 100%; width: auto; cursor: zoom-in; }
+  .hk-im .zm { position: absolute; right: 8px; bottom: 8px; font-size: 12px; background: var(--ink); color: var(--page); border-radius: 999px; padding: 3px 10px; }
+  .hk .mc-roles > div { grid-template-columns: 170px 1fr; padding: 9px 0; font-size: 16.5px; }
+  .hk .mc-roles b.u { font-family: inherit; font-size: inherit; font-weight: 600; }
+  .hk .mc-roles code { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 14px; background: var(--panel); padding: 1px 5px; border-radius: 3px; }
+  .hk-code { margin: 0; background: #111110; color: #E8E6E1; border-radius: 8px; padding: 12px 16px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 14px; line-height: 1.5; white-space: pre; }
 
   /* ── Skill vs MCP 비교 장표 ── */
   .vs { display: grid; grid-template-columns: 58fr 42fr; gap: 34px; flex: 1; min-height: 0; margin-top: 22px; word-break: keep-all; }
@@ -2109,6 +2117,42 @@ description: 새 REST API 를 추가할 때 사용.
       <div><span class="k">정리</span>모르는 최신 내용은 AI 가 <b>웹 검색으로 메우지만, 설정 키처럼 정확해야 하는 값은 틀릴 수 있다.</b> context7 은 <b>버전별 공식 문서</b>로 답한다.</div>
       <div><span class="k">참고</span>Opus · Sonnet 5.5 (지식 기준 2026.06) 는 context7 없이도 맞힌다 · 차이는 <b style="white-space:nowrap">학습 시점 이후</b> 내용에서 난다</div>
     </div>
+  </div>
+</section>
+
+<!-- 33 ───────────────────────────────────────────── -->
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">HOOKS · 개념</span>
+    <h1 class="rv" style="--d:.08s">Hooks — 정해진 순간에 반드시 실행된다</h1>
+  </div>
+
+  <div class="mc hk">
+    <div class="hk-im rv" style="--d:.2s"><img data-zoom src="assets/hooks-lifecycle.png" alt="Claude Code hook 생명주기 — SessionStart → UserPromptSubmit → 에이전트 루프(PreToolUse → PermissionRequest → 도구 실행 → PostToolUse → SubagentStart/Stop → TaskCreated → TaskCompleted) → Stop → PreCompact → PostCompact → SessionEnd, 옆에 Notification · ConfigChange · WorktreeCreate 등 비동기 이벤트"><span class="zm">클릭하면 확대</span></div>
+
+    <div class="mc-r rv" style="--d:.3s">
+      <div class="mc-def"><b>Hook</b> 은 에이전트가 일하는 흐름의 <b>정해진 시점</b>(세션 시작 · 도구 실행 전후 · 작업 끝)마다 <b>자동으로 실행되는 명령</b>이다. CLAUDE.md 의 지시는 AI 가 잊을 수 있지만, hook 은 <b>매번 반드시</b> 돈다.</div>
+
+      <div class="mc-lb">언제 쓰나 — 빠지면 안 되는 일</div>
+      <div class="mc-roles">
+        <div><b>Stop</b><span>작업이 끝날 때 <b class="u">린트 · 테스트 실행</b> → 실패하면 exit 2 로 돌려보내 AI 가 이어서 고친다</span></div>
+        <div><b>PostToolUse</b><span>파일을 고친 직후 <b class="u">포맷터 자동 적용</b> · matcher <code>Edit|Write</code></span></div>
+        <div><b>PreToolUse</b><span>도구 실행 전 <b class="u">위험 명령 차단</b> — <code>rm -rf</code> · 운영 DB 접속 · <code>.env</code> 수정 (exit 2 = 막기)</span></div>
+        <div><b>UserPromptSubmit</b><span>프롬프트 제출 시 <b class="u">비밀번호 · 키 포함 여부 검사</b></span></div>
+        <div><b>SessionStart</b><span>세션 시작 시 <b class="u">브랜치 · 최근 커밋을 컨텍스트로 주입</b></span></div>
+        <div><b>Notification</b><span>승인 · 입력을 기다릴 때 <b class="u">데스크톱 알림</b></span></div>
+      </div>
+
+      <div class="mc-lb">예시 · .claude/settings.json — 작업이 끝나면 린트</div>
+      <pre class="hk-code">{
+  "hooks": {
+    "Stop": [
+      { "hooks": [{ "type": "command", "command": "./gradlew check -q" }] }
+    ]
+  }
+}</pre>
+    </div>
+    <div class="mc-ban fd" style="--d:.6s">CLAUDE.md 는 <b>부탁</b>, Hook 은 <b>보장</b>이다. 꼭 실행돼야 하는 것만 hook 으로 — 느린 명령은 매 턴을 느리게 만든다.</div>
   </div>
 </section>
 
