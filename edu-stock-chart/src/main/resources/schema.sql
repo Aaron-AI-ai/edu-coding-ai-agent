@@ -5,3 +5,11 @@ CREATE TABLE IF NOT EXISTS stock_price (
     trade_date  DATE           NOT NULL,
     close_price DECIMAL(15, 2) NOT NULL
 );
+
+-- 출납 계좌 (스킬 실습 1 · 계좌 잔고 조회 API 용)
+CREATE TABLE IF NOT EXISTS account (
+    account_no VARCHAR(20)    PRIMARY KEY,
+    owner_name VARCHAR(50)    NOT NULL,
+    balance    DECIMAL(15, 2) NOT NULL DEFAULT 0,
+    updated_at TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
