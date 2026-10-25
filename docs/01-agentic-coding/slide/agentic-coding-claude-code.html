@@ -2415,20 +2415,20 @@ description: 새 REST API 를 추가할 때 사용.
   <div class="hr fd" style="--d:.22s"></div>
 
   <div class="body">
-    <div class="pre fd" style="--d:.26s"><span class="k">준비</span> 없을 때만 설치 <code class="cmd">! uv tool install graphifyy</code><code class="cmd">! graphify install</code> <span style="color:var(--faint)">· Python 3.10+ · uv</span></div>
+    <div class="pre fd" style="--d:.26s"><span class="k">준비</span> <code class="cmd">/skills</code> 에 graphify 가 없을 때만 <code class="cmd">! uv tool install graphifyy</code><code class="cmd">! graphify install</code> <span style="color:var(--faint)">· 설치 후 claude 재시작 · Python 3.10+</span></div>
     <table class="itbl pt dense">
-      <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
+      <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>Claude Code 에 입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
       <tbody>
-            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">그래프 만들기<i>코드만 · LLM 0</i></td><td class="c"><code class="cmd">! graphify update src/main</code></td><td class="k">노드 · 엣지 수가 나오는가 · <code>src/main/graphify-out/</code> 에 결과 3개</td></tr>
-            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">그래프 보기<i>브라우저 · 토큰 0</i></td><td class="c"><code class="cmd">! open src/main/graphify-out/graph.html</code></td><td class="k">클래스 · 메서드 연결과 묶음이 보이는가 · Windows 는 <code>start</code></td></tr>
-            <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">핵심 파악<i>리포트</i></td><td class="c"><code class="cmd">! head -30 src/main/graphify-out/GRAPH_REPORT.md</code></td><td class="k"><b>God Nodes</b> (가장 많이 연결된 클래스) · <code>Token cost: 0</code></td></tr>
-            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">호출 경로<i>관계 따라가기</i></td><td class="c"><code class="cmd">! graphify path "StockController" "StockPriceMapper" --graph src/main/graphify-out/graph.json</code></td><td class="k">Controller → calculate → fetchWithRetry → <b>findBySymbol</b> → Mapper</td></tr>
-            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">AI 활용<i>그래프를 근거로</i></td><td class="c"><code class="cmd">src/main/graphify-out/graph.json 을 graphify query · path 로 조회해서, StockPriceMapper.findBySymbol 을 바꾸면 영향받는 클래스를 정리해줘</code></td><td class="k">그래프로 <b>영향 범위</b>를 답하는가 · <code>/context</code> 로 읽은 양 확인</td></tr>
+            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">그래프 만들기<i>코드는 로컬 분석</i></td><td class="c"><code class="cmd">/graphify src/main/java</code></td><td class="k">파일 분류(code 7) · 노드 · 엣지 수 · <code>graphify-out/</code> 에 graph.html · GRAPH_REPORT.md</td></tr>
+            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">그래프 보기<i>브라우저</i></td><td class="c"><code class="cmd">graphify-out/graph.html 을 브라우저로 열고, GRAPH_REPORT.md 의 핵심 클래스를 요약해줘</code></td><td class="k">연결 · 묶음이 보이는가 · <b>가장 많이 연결된 클래스</b>가 무엇인가</td></tr>
+            <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">호출 경로<i>관계 따라가기</i></td><td class="c"><code class="cmd">/graphify path "StockController" "StockPriceMapper"</code></td><td class="k">Controller → calculate → fetchWithRetry → <b>findBySymbol</b> → Mapper</td></tr>
+            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">관계 질의<i>답 길이 상한</i></td><td class="c"><code class="cmd">/graphify query "findBySymbol 을 바꾸면 영향받는 곳" --budget 800</code></td><td class="k">호출하는 메서드 · 클래스가 <b>그래프에서</b> 나오는가</td></tr>
+            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">활용<i>그래프로 계획</i></td><td class="c"><code class="cmd">위 그래프 결과를 근거로, findBySymbol 에 기간(from, to) 조건을 추가할 때 고칠 파일과 순서를 계획해줘</code></td><td class="k">파일을 다 열지 않고 <b>영향 범위</b>를 잡는가 · <code>/context</code> 로 읽은 양 확인</td></tr>
       </tbody>
     </table>
     <div class="pt-note fd" style="--d:.9s">
-      <div><b>토큰</b> 코드는 tree-sitter 로 <b>로컬 분석 → LLM 0</b> · 문서 · PDF 까지 넣는 <code>/graphify</code> 는 모델 토큰을 쓴다</div>
-      <div><b>정리</b> <code>graphify-out</code> 은 git 에 올리지 않는다 · 코드가 바뀌면 다시 <code>update</code></div>
+      <div><b>토큰</b> 코드는 tree-sitter 로 로컬 분석(무료) · 스킬 진행 · 묶음 이름 짓기만 모델 사용 · yml · md 같은 문서를 넣으면 의미 분석에 토큰</div>
+      <div><b>정리</b> <code>graphify-out</code> 은 git 에 올리지 않는다 · 코드가 바뀌면 <code>/graphify src/main/java --update</code></div>
     </div>
   </div>
 </section>
