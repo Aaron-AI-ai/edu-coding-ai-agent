@@ -664,6 +664,13 @@
   .rg-u b { display: block; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 2px; color: var(--faint); font-weight: 400; margin-bottom: 4px; }
   .rg-e { margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--rule); font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 16px; color: var(--dim); }
   .rg .mc-ban { grid-column: auto; }
+  .rg.art .rg-c { gap: 22px; padding: 30px 30px 20px; }
+  .rg.art .rg-t { font-size: 36px; }
+  .rg.art .rg-shape { font-size: 17px; padding: 14px 18px; }
+  .rg.art .rg-d, .rg.art .rg-u { font-size: 22px; }
+  .rg.art .rg-e { font-size: 15px; }
+  .rg-ex { border: 1.5px dashed var(--rule); border-radius: 10px; padding: 14px 16px; font-size: 20px; line-height: 1.5; color: var(--ink); }
+  .rg-ex b { display: block; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 2px; color: var(--faint); font-weight: 400; margin-bottom: 4px; }
   .rg.sdl { gap: 24px; }
   .rg.sdl .rg-cards { flex: none; }
   .rg.sdl .ru { flex: 1; padding: 24px 30px; display: flex; flex-direction: column; justify-content: center; }
@@ -2772,6 +2779,69 @@ description: 새 REST API 를 추가할 때 사용.
     <div class="pt-note fd" style="--d:.9s">
       <div><b>AI-SDLC 대응</b> specs = intent · spec · plans = plan.md · 리뷰 = PR 게이트 · 단계마다 <b>사람이 승인</b>해야 다음으로</div>
       <div><b>토큰</b> 실행은 이 세션에서(executing-plans) · subagent-driven 은 작업마다 서브에이전트라 토큰이 크다</div>
+    </div>
+  </div>
+</section>
+
+<!-- 49a ───────────────────────────────────────────── -->
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">AI AGENT · 산출물</span>
+    <h1 class="rv" style="--d:.08s">에이전트는 코드만이 아니라 그림 · 영상도 만든다</h1>
+  </div>
+
+  <div class="rg art">
+    <div class="rg-cards rv" style="--d:.2s">
+      <div class="rg-c">
+        <div class="rg-t">archify<i>아키텍처 다이어그램</i></div>
+        <div class="rg-shape">→ 단일 HTML (확대 · 테마) · PNG · SVG</div>
+        <div class="rg-d">한 문장이나 <b>저장소를 읽어</b> 구조도 · 시퀀스 등 5가지 다이어그램을 만든다</div>
+        <div class="rg-u"><b>이럴 때</b>설계 리뷰 · 신규 입사자 온보딩 · 발표에서 보여주고 탐색할 때</div>
+        <div class="rg-ex"><b>요청 예</b>「이 저장소의 아키텍처를 archify 로 그려줘」</div>
+        <div class="rg-e">npx skills add tt-a1i/archify -g</div>
+      </div>
+      <div class="rg-c">
+        <div class="rg-t">drawio-skill<i>draw.io 다이어그램</i></div>
+        <div class="rg-shape">→ .drawio · PNG · SVG · PDF</div>
+        <div class="rg-d">설명 · 코드 · <b>SQL 스키마</b>를 사람이 계속 고칠 수 있는 draw.io 파일로 만든다</div>
+        <div class="rg-u"><b>이럴 때</b>설계서 · 위키에 넣고 팀이 직접 편집하며 관리할 때</div>
+        <div class="rg-ex"><b>요청 예</b>「schema.sql 을 ERD 로 그려서 PNG 로 내보내줘」</div>
+        <div class="rg-e">draw.io 데스크톱 + npx skills add Agents365-ai/drawio-skill -g</div>
+      </div>
+      <div class="rg-c">
+        <div class="rg-t">remotion<i>영상</i></div>
+        <div class="rg-shape">→ React 코드 → MP4</div>
+        <div class="rg-d">장면을 <b>코드로</b> 만들고 렌더한다 · 문구만 바꿔 다시 뽑기 쉽다</div>
+        <div class="rg-u"><b>이럴 때</b>기능 소개 · 릴리스 노트 · 교육 영상 · 회사 사용은 라이선스 확인</div>
+        <div class="rg-ex"><b>요청 예</b>「이번 릴리스 기능 3개를 30초 소개 영상으로 만들어줘」</div>
+        <div class="rg-e">claude plugin install remotion@remotion</div>
+      </div>
+    </div>
+    <div class="jx-p fd" style="--d:.5s"><b>공통점</b> 결과가 <b>파일</b>로 남는다 → git 으로 관리하고, 코드가 바뀌면 같은 요청으로 다시 만든다 · 보여주고 탐색은 archify, 계속 고치는 문서는 drawio</div>
+  </div>
+</section>
+
+<!-- 49b ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">AI AGENT · 산출물 실습</div>
+  <h1 class="rv" style="--d:.08s">archify · drawio-skill 로 우리 프로젝트를 그린다</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="pre fd" style="--d:.26s"><span class="k">준비</span> <code class="cmd">/skills</code> 에 없을 때만 <code class="cmd">! npx skills add tt-a1i/archify -g</code><code class="cmd">! npx skills add Agents365-ai/drawio-skill -g</code> <span style="color:var(--faint)">· drawio 는 draw.io 데스크톱 필요 · 설치 후 claude 재시작</span></div>
+    <table class="itbl pt">
+      <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>Claude Code 에 입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
+      <tbody>
+            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">구조도<i>archify</i></td><td class="c"><code class="cmd">archify 로 이 프로젝트의 아키텍처 다이어그램을 만들어줘. Controller → Service → Mapper → H2 흐름 중심으로 컴포넌트 8~12개</code></td><td class="k">HTML 하나가 생기는가 · 브라우저에서 <b>확대 · 테마 전환</b></td></tr>
+            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">시퀀스<i>archify</i></td><td class="c"><code class="cmd">archify 로 GET /api/stocks/{symbol}/moving-average 요청의 시퀀스 다이어그램을 만들어줘</code></td><td class="k">호출 순서가 <b>실제 코드와 같은가</b></td></tr>
+            <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">ERD<i>drawio-skill</i></td><td class="c"><code class="cmd">drawio-skill 로 src/main/resources/schema.sql 의 테이블 구조를 ERD 로 그리고 PNG 로도 내보내줘</code></td><td class="k"><code>.drawio</code> · <code>.png</code> 생성 · stock_price · account 컬럼이 맞는가</td></tr>
+            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">직접 고치기<i>draw.io 앱 · 토큰 0</i></td><td class="c"><span style="color:var(--dim)">draw.io 앱에서 <b style="color:var(--ink)">.drawio 파일 열기</b> → 박스 · 선 이동 · 메모 추가</span></td><td class="k">AI 가 만든 그림을 <b>사람이 바로</b> 이어서 고칠 수 있는가</td></tr>
+            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">문서에 넣기<i>재사용</i></td><td class="c"><code class="cmd">만든 ERD PNG 를 README 에 「데이터 구조」 섹션으로 넣어줘</code></td><td class="k">문서와 그림이 함께 git 에 남는가</td></tr>
+      </tbody>
+    </table>
+    <div class="pt-note fd" style="--d:.9s">
+      <div><b>고르는 기준</b> 보여주고 탐색 → archify (HTML) · 계속 고치고 문서화 → drawio (.drawio)</div>
+      <div><b>토큰</b> 범위를 좁혀 요청한다 — 컴포넌트 8~12개 · 테이블 2개 · 요청 하나</div>
     </div>
   </div>
 </section>
