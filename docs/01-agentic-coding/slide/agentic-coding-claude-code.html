@@ -665,6 +665,23 @@
   .rg-e { margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--rule); font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 16px; color: var(--dim); }
   .rg .mc-ban { grid-column: auto; }
   .rg-w { color: var(--dim); }
+  .plg { grid-template-columns: 60fr 40fr; grid-template-rows: minmax(0, 1fr); }
+  .plg .mc-l { justify-content: center; }
+  .plg .mc-im { align-self: center; }
+  .plg .mc-r { justify-content: center; gap: 22px; }
+  .pl-l { display: flex; flex-direction: column; border-top: 1.5px solid var(--ink); }
+  .pl-l > div { display: flex; flex-direction: column; gap: 6px; padding: 16px 0; border-bottom: 1px solid var(--rule); }
+  .pl-l > div > b { font-size: 26px; font-weight: 600; color: var(--ink); display: flex; align-items: baseline; gap: 12px; }
+  .pl-l > div > b i { font-style: normal; font-size: 16px; font-weight: 500; color: var(--dim); }
+  .pl-l .f { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 14px; color: var(--ink); background: var(--panel); border-radius: 6px; padding: 6px 10px; align-self: flex-start; }
+  .pl-l .d { font-size: 18px; line-height: 1.5; color: var(--dim); }
+  .pl-l .d b { color: var(--ink); font-weight: 600; }
+  .pl-k { display: flex; gap: 22px; font-size: 15px; color: var(--dim); }
+  .pl-k > div { display: flex; align-items: center; gap: 7px; }
+  .pl-k b { color: var(--ink); font-weight: 600; }
+  .pl-k .dot { width: 14px; height: 14px; border-radius: 50%; background: #F2B8A0; border: 1px solid var(--ink); }
+  .pl-k .arw { font-size: 18px; color: var(--ink); }
+  .pl-k .dia { width: 12px; height: 12px; transform: rotate(45deg); background: #F5D76E; border: 1px solid var(--ink); }
   .ev-l > div.on { background: var(--panel); margin: 0 -10px; padding-left: 10px; padding-right: 10px; }
   .ev-cap { font-size: 14.5px; line-height: 1.5; color: var(--faint); }
   .ev-cap b { color: var(--ink); font-weight: 600; }
@@ -2387,6 +2404,81 @@ description: 새 REST API 를 추가할 때 사용.
     <div class="pt-note fd" style="--d:.9s">
       <div><b>토큰 아끼기</b> 넣는 파일 수 = 토큰 · ingest 는 한 번만 · 04 는 앱에서 보니 0 · 06 은 <code>/exit</code> 후 프로젝트에서 새 세션</div>
       <div><b>환경</b> Python 3.11+ · Windows 는 WSL 권장 (02 의 <code>{ , }</code> 묶음도 동작)</div>
+    </div>
+  </div>
+</section>
+
+<!-- 40 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">GRAPH · 실습 · graphify</div>
+  <h1 class="rv" style="--d:.08s">코드를 그래프로 — 관계를 따라 찾는다</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="pre fd" style="--d:.26s"><span class="k">준비</span> 없을 때만 설치 <code class="cmd">! uv tool install graphifyy</code><code class="cmd">! graphify install</code> <span style="color:var(--faint)">· Python 3.10+ · uv</span></div>
+    <table class="itbl pt dense">
+      <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
+      <tbody>
+            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">그래프 만들기<i>코드만 · LLM 0</i></td><td class="c"><code class="cmd">! graphify update src/main</code></td><td class="k">노드 · 엣지 수가 나오는가 · <code>src/main/graphify-out/</code> 에 결과 3개</td></tr>
+            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">그래프 보기<i>브라우저 · 토큰 0</i></td><td class="c"><code class="cmd">! open src/main/graphify-out/graph.html</code></td><td class="k">클래스 · 메서드 연결과 묶음이 보이는가 · Windows 는 <code>start</code></td></tr>
+            <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">핵심 파악<i>리포트</i></td><td class="c"><code class="cmd">! head -30 src/main/graphify-out/GRAPH_REPORT.md</code></td><td class="k"><b>God Nodes</b> (가장 많이 연결된 클래스) · <code>Token cost: 0</code></td></tr>
+            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">호출 경로<i>관계 따라가기</i></td><td class="c"><code class="cmd">! graphify path "StockController" "StockPriceMapper" --graph src/main/graphify-out/graph.json</code></td><td class="k">Controller → calculate → fetchWithRetry → <b>findBySymbol</b> → Mapper</td></tr>
+            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">AI 활용<i>그래프를 근거로</i></td><td class="c"><code class="cmd">src/main/graphify-out/graph.json 을 graphify query · path 로 조회해서, StockPriceMapper.findBySymbol 을 바꾸면 영향받는 클래스를 정리해줘</code></td><td class="k">그래프로 <b>영향 범위</b>를 답하는가 · <code>/context</code> 로 읽은 양 확인</td></tr>
+      </tbody>
+    </table>
+    <div class="pt-note fd" style="--d:.9s">
+      <div><b>토큰</b> 코드는 tree-sitter 로 <b>로컬 분석 → LLM 0</b> · 문서 · PDF 까지 넣는 <code>/graphify</code> 는 모델 토큰을 쓴다</div>
+      <div><b>정리</b> <code>graphify-out</code> 은 git 에 올리지 않는다 · 코드가 바뀌면 다시 <code>update</code></div>
+    </div>
+  </div>
+</section>
+
+<!-- 41 ───────────────────────────────────────────── -->
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">PROMPT · LOOP · GRAPH</span>
+    <h1 class="rv" style="--d:.08s">한 번 묻고, 다시 돌리고, 여럿을 엮는다</h1>
+  </div>
+
+  <div class="mc plg">
+    <div class="mc-l rv" style="--d:.2s">
+      <div class="mc-im"><img data-zoom src="assets/prompts-loops-graphs.png" alt="Prompts, Loops, Graphs — Prompt 는 한 번 요청 한 번 실행, Loop 는 검사를 통과할 때까지 재시도, Graph 는 여러 루프와 에이전트를 한 지도로 엮고 중요한 관문에 사람이 선다"><span class="zm">클릭하면 확대</span></div>
+    </div>
+
+    <div class="mc-r rv" style="--d:.3s">
+      <div class="pl-l">
+        <div><b>Prompt<i>한 번 요청 · 한 번 실행</i></b><span class="f">나 → AI → 결과</span><span class="d">결과의 품질은 <b>질문</b>에 달려 있다 · 틀리면 사람이 다시 묻는다</span></div>
+        <div><b>Loop<i>통과할 때까지 다시</i></b><span class="f">작업 → AI → 검사 ✕ → 다시 … ✓ → 완료</span><span class="d"><b>목표(검사)</b>가 있어 스스로 고친다 · 앞의 Stop hook 빌드 게이트가 작은 루프다</span></div>
+        <div><b>Graph<i>여러 부분의 지도</i></b><span class="f">시작 → 에이전트 A · B · C → 검사 → 사람 승인 → 완료</span><span class="d">여러 루프 · 에이전트를 <b>한 흐름</b>으로 엮고, 중요한 관문에 <b>사람</b>이 선다</span></div>
+      </div>
+      <div class="pl-k">
+        <div><span class="dot"></span><b>노드</b>누가 · 무엇이 일하나</div>
+        <div><span class="arw">→</span><b>엣지</b>다음에 무엇을 하나</div>
+        <div><span class="dia"></span><b>검사</b>품질 관문</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 42 ───────────────────────────────────────────── -->
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">LOOP ENGINEERING</span>
+    <h1 class="rv" style="--d:.08s">사람은 「완료」를 정하고, AI 는 통과할 때까지 돈다</h1>
+  </div>
+
+  <div class="mc plg">
+    <div class="mc-l rv" style="--d:.2s">
+      <div class="mc-im"><img data-zoom src="assets/loop-engineering.png" alt="Loop Engineering — PM 이 목표 · 증거 · 제약 · 맥락으로 완료를 정의하고, AI 에이전트가 Plan → Execute → Verify → Learn 을 반복하며, Stop condition 에서 통과는 배포 · 실패는 다시 · 불가능은 사람에게 넘기고, 반복 횟수와 비용에 상한을 둔다"><span class="zm">클릭하면 확대</span></div>
+    </div>
+
+    <div class="mc-r rv" style="--d:.3s">
+      <div class="pl-l">
+        <div><b>완료의 정의<i>사람이 정한다</i></b><span class="f">목표 · 증거 · 경계 · 배경</span><span class="d"><b>증거</b> 테스트 · 빌드 통과 · <b>경계</b> 건드리면 안 되는 파일 · 명령 · <b>배경</b> CLAUDE.md · Skill · 위키</span></div>
+        <div><b>반복<i>AI 가 돈다</i></b><span class="f">계획 → 실행 → 검증 → 학습 → 계획 …</span><span class="d">결과를 <b>증거로 확인</b>하고, 실패 원인을 다음 계획에 반영한다</span></div>
+        <div><b>멈춤 조건<i>관문</i></b><span class="f">통과 → 완료 · 실패 → 다시 · 불가능 → 사람에게</span><span class="d">설계 · 문장처럼 주관적인 판단은 <b>독립 채점자</b>(다른 모델 · 리뷰어 에이전트)가 본다</span></div>
+        <div><b>브레이크<i>폭주 방지</i></b><span class="f">최대 반복 횟수 + 비용 상한</span><span class="d">멈추지 않는 루프는 토큰을 태운다 · Stop hook 의 <code>stop_hook_active</code> 도 같은 장치</span></div>
+      </div>
     </div>
   </div>
 </section>
