@@ -682,6 +682,13 @@
   .pl-k .dot { width: 14px; height: 14px; border-radius: 50%; background: #F2B8A0; border: 1px solid var(--ink); }
   .pl-k .arw { font-size: 18px; color: var(--ink); }
   .pl-k .dia { width: 12px; height: 12px; transform: rotate(45deg); background: #F5D76E; border: 1px solid var(--ink); }
+  .lp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 12px; word-break: keep-all; }
+  .lp > div { border: 1.5px solid var(--rule); border-radius: 10px; padding: 10px 14px; display: flex; flex-direction: column; gap: 4px; }
+  .lp > div > b { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 18px; color: var(--ink); display: flex; align-items: baseline; gap: 10px; }
+  .lp > div > b i { font-family: "Noto Sans KR", sans-serif; font-style: normal; font-size: 14px; font-weight: 500; color: var(--dim); }
+  .lp > div > span { font-size: 14px; line-height: 1.45; color: var(--dim); }
+  .lp > div > span b { color: var(--ink); font-weight: 600; }
+  .lp em { font-style: normal; font-size: 11.5px; letter-spacing: 1px; color: var(--ink); border: 1px solid var(--ink); border-radius: 999px; padding: 0 7px; margin-right: 6px; }
   .ev-l > div.on { background: var(--panel); margin: 0 -10px; padding-left: 10px; padding-right: 10px; }
   .ev-cap { font-size: 14.5px; line-height: 1.5; color: var(--faint); }
   .ev-cap b { color: var(--ink); font-weight: 600; }
@@ -2479,6 +2486,35 @@ description: 새 REST API 를 추가할 때 사용.
         <div><b>멈춤 조건<i>관문</i></b><span class="f">통과 → 완료 · 실패 → 다시 · 불가능 → 사람에게</span><span class="d">설계 · 문장처럼 주관적인 판단은 <b>독립 채점자</b>(다른 모델 · 리뷰어 에이전트)가 본다</span></div>
         <div><b>브레이크<i>폭주 방지</i></b><span class="f">최대 반복 횟수 + 비용 상한</span><span class="d">멈추지 않는 루프는 토큰을 태운다 · Stop hook 의 <code>stop_hook_active</code> 도 같은 장치</span></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- 43 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">LOOP ENGINEERING · 실습</div>
+  <h1 class="rv" style="--d:.08s">/goal · ralph-loop · /loop 로 루프를 돌려 본다</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="lp fd" style="--d:.26s">
+      <div><b>/goal<i>조건을 이룰 때까지</i></b><span><em>기본 내장</em>앞 턴이 끝나면 다음 턴 · <b>다른 작은 모델</b>이 「충족 · 불가능」을 판정해야 멈춘다</span></div>
+      <div><b>ralph-loop<i>같은 프롬프트를 다시</i></b><span><em>플러그인</em>끝내려 하면 Stop hook 이 막고 <b>같은 프롬프트</b>를 다시 넣는다 · 완료 문구나 최대 반복에서 멈춘다</span></div>
+      <div><b>/loop<i>시간마다 다시</i></b><span><em>기본 내장</em>정한 <b>간격</b>(1분~)마다 같은 요청 · 세션이 열려 있을 때만 · 취소하거나 7일 뒤 만료</span></div>
+    </div>
+    <table class="itbl pt dense">
+      <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>Claude Code 에 입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
+      <tbody>
+            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">/goal<i>설치 없음</i></td><td class="c"><code class="cmd">/goal MovingAverageServiceTest 에 window 가 1 · 21 일 때 IllegalArgumentException 테스트가 있고 ./gradlew test -q 가 exit 0 이다. 다른 테스트 파일은 수정하지 않는다. 10턴 안에 끝낸다</code></td><td class="k"><code>◎ /goal active</code> · 턴마다 판정이 뜨는가 · <code>/goal</code> 로 턴 수 · 토큰 확인</td></tr>
+            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">ralph 설치<i>없을 때만</i></td><td class="c"><code class="cmd">/plugin install ralph-loop@claude-plugins-official</code></td><td class="k"><code>/ralph-loop</code> · <code>/cancel-ralph</code> 가 보이는가</td></tr>
+            <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">ralph-loop<i>최대 반복 필수</i></td><td class="c"><code class="cmd">/ralph-loop "최저 종가 조회 API GET /api/stocks/{symbol}/min-close 와 테스트를 추가하고 ./gradlew test -q 가 통과하면 &lt;promise&gt;DONE&lt;/promise&gt; 를 출력해" --completion-promise "DONE" --max-iterations 5</code></td><td class="k">끝내려 할 때마다 <b>같은 프롬프트로 다시</b> 도는가 · DONE 또는 5회에서 멈추는가</td></tr>
+            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">/loop<i>시간 간격</i></td><td class="c"><code class="cmd">/loop 2m git status --short 로 바뀐 파일을 한 줄로 알려줘</code></td><td class="k">2분마다 한 줄씩 오는가 · 두 번 보고 <b>「git status 루프 취소해줘」</b></td></tr>
+            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">되돌리기<i>실습 정리</i></td><td class="c"><code class="cmd">! git restore src &amp;&amp; git clean -n src</code></td><td class="k">수정이 되돌려졌는가 · 새 파일 목록을 보고 직접 지운다</td></tr>
+      </tbody>
+    </table>
+    <div class="pt-note fd" style="--d:.9s">
+      <div><b>누가 끝을 정하나</b> /goal 은 <b>다른 모델이 채점</b> · ralph 는 AI 가 <b>완료 문구를 스스로 선언</b> · /loop 은 시간</div>
+      <div><b>브레이크</b> 턴 · 반복 상한을 꼭 둔다 · 고정 간격 /loop 은 Esc 로 안 멈춘다 → 말로 취소</div>
     </div>
   </div>
 </section>
