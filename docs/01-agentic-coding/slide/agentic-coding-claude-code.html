@@ -465,6 +465,11 @@
   .pt code.cmd + code.cmd { margin-top: 4px; }
   .pt td.k { font-size: 15.5px; color: var(--dim); line-height: 1.45; }
   .pt td.k b { color: var(--ink); font-weight: 500; }
+  .pt.dense td { padding: 5px 0; }
+  .pt.dense td.n { padding-top: 10px; }
+  .pt.dense td.p { width: 180px; }
+  .pt.dense td.c { width: 640px; padding-right: 22px; }
+  .pt.dense code.cmd { padding: 6px 12px; }
   .pt-note { margin-top: 12px; display: flex; gap: 36px; font-size: 15px; color: var(--dim); line-height: 1.5; }
   .pt-note b { color: var(--ink); font-weight: 500; }
   /* 18 · project structure */
@@ -2357,6 +2362,32 @@ description: 새 REST API 를 추가할 때 사용.
     </div>
 
     <div class="mc-ban fd" style="--d:.6s">어떤 저장소를 쓰든 <b>들어간 데이터의 품질</b>이 답을 정한다 — 오래되거나 틀린 문서를 넣으면 틀린 답이 <b>그럴듯하게</b> 나온다. 앞에서 쓴 context7 도 공식 문서를 찾아 넣는 RAG 다.</div>
+  </div>
+</section>
+
+<!-- 39 ───────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">LLM WIKI · 실습 · claude-obsidian</div>
+  <h1 class="rv" style="--d:.08s">코드를 위키로 만들고, 위키로 코드를 만든다</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="pre fd" style="--d:.26s"><span class="k">준비</span> 없을 때만 설치 <code class="cmd">! claude plugin marketplace add AgriciDaniel/claude-obsidian</code><code class="cmd">! claude plugin install claude-obsidian@agricidaniel-claude-obsidian</code></div>
+    <table class="itbl pt dense">
+      <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
+      <tbody>
+            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">vault 만들기<i>/exit 후 터미널에서</i></td><td class="c"><code class="cmd">mkdir ../edu-stock-chart-wiki &amp;&amp; cd ../edu-stock-chart-wiki &amp;&amp; claude</code><code class="cmd">/claude-obsidian:wiki</code></td><td class="k">승인 후 <code>inbox/</code> · <code>wiki/</code> 가 생기는가</td></tr>
+            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">자료 넣기<i>4개만 · 토큰 절약</i></td><td class="c"><code class="cmd">! cp ../edu-stock-chart/src/main/java/kr/co/koscom/edu/stockchart/*/{StockController,MovingAverageService}.java ../edu-stock-chart/src/main/resources/{mapper/StockPriceMapper.xml,schema.sql} inbox/</code></td><td class="k"><code>inbox/</code> 에 <b>4개</b> · 전체를 넣지 않는다</td></tr>
+            <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">수집<i>ingest</i></td><td class="c"><code class="cmd">/claude-obsidian:wiki-ingest</code></td><td class="k">노트가 <b>[[링크]]</b> 로 이어지는가 · <code>/usage</code></td></tr>
+            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">Obsidian 확인<i>앱에서 · 토큰 0</i></td><td class="c"><span style="color:var(--dim)">Obsidian → <b style="color:var(--ink)">Open folder as vault</b> → edu-stock-chart-wiki → <b style="color:var(--ink)">Graph view</b></span></td><td class="k">연결이 보이는가 · 앱이 없으면 <code>wiki/*.md</code></td></tr>
+            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">질의<i>위키만 근거로</i></td><td class="c"><code class="cmd">/claude-obsidian:wiki-query 이동평균 조회 API 는 어떤 계층과 규칙으로 만들어져 있나?</code></td><td class="k">답에 <b>노트 출처</b>가 붙는가</td></tr>
+            <tr class="rv" style="--d:0.71s"><td class="n">06</td><td class="p">코드 생성<i>프로젝트로 돌아와서</i></td><td class="c"><code class="cmd">/add-dir ../edu-stock-chart-wiki</code><code class="cmd">edu-stock-chart-wiki/wiki 노트만 근거로 같은 계층 구조의 최고 종가 조회 API GET /api/stocks/{symbol}/max-close 를 추가해줘. 기존 소스는 읽지 마.</code></td><td class="k">위키만 읽고 같은 패턴으로 만드는가 · <code>/context</code></td></tr>
+      </tbody>
+    </table>
+    <div class="pt-note fd" style="--d:.9s">
+      <div><b>토큰 아끼기</b> 넣는 파일 수 = 토큰 · ingest 는 한 번만 · 04 는 앱에서 보니 0 · 06 은 <code>/exit</code> 후 프로젝트에서 새 세션</div>
+      <div><b>환경</b> Python 3.11+ · Windows 는 WSL 권장 (02 의 <code>{ , }</code> 묶음도 동작)</div>
+    </div>
   </div>
 </section>
 
