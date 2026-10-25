@@ -624,6 +624,24 @@
   .hk { grid-template-columns: auto 1fr; }
   .hk-im { position: relative; height: 100%; min-height: 0; border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; background: #F6F0E8; }
   .hk-im img { display: block; height: 100%; width: auto; cursor: zoom-in; }
+  .hk-im video { display: block; height: 100%; width: auto; cursor: zoom-in; }
+  .ev { grid-template-rows: minmax(0, 1fr) auto; }
+  .ev .hk-im { aspect-ratio: 1; }
+  .ev .hk-im video { width: 100%; height: 100%; object-fit: contain; }
+  .ev .mc-r { gap: 10px; }
+  .ev-l { display: flex; flex-direction: column; border-top: 1.5px solid var(--ink); }
+  .ev-l > div { display: grid; grid-template-columns: 34px 150px 1fr 180px; grid-template-rows: auto auto; column-gap: 14px; padding: 17px 0; border-bottom: 1px solid var(--rule); align-items: baseline; }
+  .ev-l .no { grid-row: 1 / 3; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13px; color: var(--faint); }
+  .ev-l > div > b { grid-row: 1 / 3; font-size: 23px; font-weight: 600; color: var(--ink); line-height: 1.15; }
+  .ev-l > div > b i { display: block; font-style: normal; font-size: 14px; font-weight: 400; color: var(--faint); margin-top: 3px; }
+  .ev-l .d { font-size: 18px; line-height: 1.4; color: var(--dim); }
+  .ev-l .d b { color: var(--ink); font-weight: 600; }
+  .ev-l .u { grid-column: 3; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12.5px; color: var(--faint); margin-top: 3px; }
+  .ev-l .w { grid-column: 4; grid-row: 1 / 3; align-self: center; justify-self: start; font-size: 13.5px; line-height: 1.35; color: var(--ink); border: 1px solid var(--rule); border-radius: 8px; padding: 5px 9px; }
+  .ev-l .w.nx { border-style: dashed; color: var(--dim); }
+  .ev-l > div.on { background: var(--panel); margin: 0 -10px; padding-left: 10px; padding-right: 10px; }
+  .ev-cap { font-size: 14.5px; line-height: 1.5; color: var(--faint); }
+  .ev-cap b { color: var(--ink); font-weight: 600; }
   .hk-im .zm { position: absolute; right: 8px; bottom: 8px; font-size: 12px; background: var(--ink); color: var(--page); border-radius: 999px; padding: 3px 10px; }
   .hk .mc-roles > div { grid-template-columns: 170px 1fr; padding: 9px 0; font-size: 16.5px; }
   .hk .mc-roles b.u { font-family: inherit; font-size: inherit; font-weight: 600; }
@@ -2255,6 +2273,30 @@ description: 새 REST API 를 추가할 때 사용.
   </div>
 </section>
 
+<!-- 37 ───────────────────────────────────────────── -->
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">ENGINEERING · 진화</span>
+    <h1 class="rv" style="--d:.08s">프롬프트에서 그래프까지 — 엔지니어링은 바깥으로 넓어진다</h1>
+  </div>
+
+  <div class="mc hk ev">
+    <div class="hk-im rv" style="--d:.2s"><video data-zoom="assets/evolution-layers.jpg" src="assets/evolution-layers.mp4" poster="assets/evolution-layers.jpg" autoplay muted loop playsinline aria-label="Prompt · Context · Harness · Loop · Graph Engineering 다섯 층 — 아래로 갈수록 앞 층을 감싸며 일의 단위가 커진다"></video><span class="zm">클릭하면 확대</span></div>
+
+    <div class="mc-r rv" style="--d:.3s">
+      <div class="ev-l">
+        <div><span class="no">01</span><b>Prompt<i>메시지</i></b><span class="d">한 번의 요청에 필요한 것을 다 담는다 — 역할 · 배경 · 지시 · 예시 · 형식</span><span class="u">단위 · 입력 하나</span><span class="w">질문 잘 쓰기 · use context7</span></div>
+        <div><span class="no">02</span><b>Context<i>기억</i></b><span class="d">창은 유한하다 — 남길 것 · 줄일 것 · <b>버릴 것</b>을 고른다</span><span class="u">단위 · 창에 남는 것</span><span class="w">CLAUDE.md · Skill · /compact</span></div>
+        <div class="on"><span class="no">03</span><b>Harness<i>기계</i></b><span class="d">모으고 → 실행하고(도구 · 서브에이전트) → <b>검증</b>한다</span><span class="u">단위 · 한 번의 실행</span><span class="w">Skill · MCP · Hook · Subagent</span></div>
+        <div><span class="no">04</span><b>Loop<i>반복 실행</i></b><span class="d">목표 · 멈춤 조건(최대 반복 · 예산) · <b>자동 완료 검사</b>로 다시 돌릴지 정한다</span><span class="u">단위 · 전체 실행</span><span class="w nx">2일차</span></div>
+        <div><span class="no">05</span><b>Graph<i>조율</i></b><span class="d">여러 루프의 순서 · 병렬 · <b>누가 누구를 검토</b>할지 정한다</span><span class="u">단위 · 전체 작업</span><span class="w nx">2일차</span></div>
+      </div>
+      <div class="ev-cap">각 층은 앞 층을 <b>감싼다</b> — Prompt · Context 는 Harness 의 「모으기」 안에, Harness 한 번을 Loop 가 반복하고, 어떤 Loop 를 돌릴지 Graph 가 정한다 · 그림 Avi Chawla (DailyDoseofDS)</div>
+    </div>
+    <div class="mc-ban fd" style="--d:.6s">새 용어는 앞의 것을 <b>바꾸는 게 아니라 넓힌다.</b> 결과가 틀리면 프롬프트부터 고치지 말고 <b>일의 단위가 깨진 층</b>을 찾는다 — 오늘은 Harness 까지, 내일은 Loop · Graph.</div>
+  </div>
+</section>
+
 </div></div>
 
 <button id="prev" class="nav" aria-label="이전 슬라이드"></button>
@@ -2306,8 +2348,8 @@ description: 새 REST API 를 추가할 때 사용.
     var zim = document.createElement("img");
     zim.style.cssText = "width:min(980px,96vw);height:auto;background:#fff;display:inline-block";
     zov.appendChild(zim); document.body.appendChild(zov);
-    Array.prototype.forEach.call(document.querySelectorAll("img[data-zoom]"), function (el) {
-      el.addEventListener("click", function () { zim.src = el.src; zov.style.display = "block"; zov.scrollTop = 0; });
+    Array.prototype.forEach.call(document.querySelectorAll("[data-zoom]"), function (el) {
+      el.addEventListener("click", function () { zim.src = el.getAttribute("data-zoom") || el.src; zov.style.display = "block"; zov.scrollTop = 0; });
     });
     zov.addEventListener("click", function () { zov.style.display = "none"; });
     document.addEventListener("keydown", function (e) {
