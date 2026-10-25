@@ -748,6 +748,33 @@
   .ro-t td:nth-child(2) { width: 220px; }
   .ro-t td:last-child { width: auto; }
   .ro-r { display: flex; flex-direction: column; gap: 16px; margin-top: 22px; }
+  .jx { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; flex: 1; min-height: 0; margin-top: 22px; word-break: keep-all; }
+  .jx-c { border: 1.5px solid var(--rule); border-radius: 14px; padding: 26px 24px 22px; display: flex; flex-direction: column; gap: 20px; }
+  .jx-t { font-size: 28px; font-weight: 600; color: var(--ink); display: flex; flex-direction: column; gap: 3px; }
+  .jx-t i { font-style: normal; font-size: 16.5px; font-weight: 500; color: var(--dim); }
+  .jx-s { background: #111110; color: #E8E6E1; border-radius: 8px; padding: 16px 18px; font-size: 19px; line-height: 1.5; min-height: 110px; }
+  .jx-q { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 15.5px; color: var(--faint); }
+  .jx-b { display: grid; grid-template-columns: 72px 1fr 54px; align-items: center; gap: 12px; font-size: 20px; color: var(--dim); }
+  .jx-b i { height: 18px; background: var(--panel); border-radius: 999px; overflow: hidden; }
+  .jx-b em { display: block; height: 100%; background: var(--faint); border-radius: 999px; }
+  .jx-b b { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 18px; font-weight: 500; text-align: right; }
+  .jx-b.on { color: var(--ink); font-weight: 600; }
+  .jx-b.on em { background: #E91E78; }
+  .jx-b.on b { color: var(--ink); font-weight: 700; }
+  .jx-a { margin-top: auto; padding-top: 12px; border-top: 1px dashed var(--rule); font-size: 19px; line-height: 1.45; color: var(--ink); font-weight: 500; }
+  .jx-p { margin-top: 18px; font-size: 19px; line-height: 1.5; color: var(--dim); }
+  .jx-p b { color: var(--ink); font-weight: 600; }
+  .jx-p span { color: var(--faint); font-size: 15px; }
+  .ju-flow { display: flex; align-items: center; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+  .ju-flow span { border: 1.5px solid var(--rule); border-radius: 10px; padding: 10px 16px; font-size: 18px; color: var(--dim); }
+  .ju-flow span.j { border-color: #E91E78; color: var(--ink); font-weight: 600; }
+  .ju-flow i { font-style: normal; color: var(--faint); font-size: 20px; }
+  .ju { margin-top: 18px; }
+  .ju .jx-s { min-height: 0; font-size: 20px; line-height: 1.7; padding: 20px 20px; }
+  .ju .jx-s em { font-style: normal; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 16px; color: #F7A6CB; margin-right: 6px; }
+  .ju .jx-a { margin-top: 0; padding-top: 0; border-top: 0; font-size: 21px; line-height: 1.55; }
+  .ju .jx-c { gap: 24px; }
+  .ju-src { margin-top: auto; padding-top: 12px; border-top: 1px dashed var(--rule); font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13.5px; color: var(--faint); }
   .ev-l > div.on { background: var(--panel); margin: 0 -10px; padding-left: 10px; padding-right: 10px; }
   .ev-cap { font-size: 14.5px; line-height: 1.5; color: var(--faint); }
   .ev-cap b { color: var(--ink); font-weight: 600; }
@@ -2747,6 +2774,114 @@ description: 새 REST API 를 추가할 때 사용.
       <div><b>토큰</b> 실행은 이 세션에서(executing-plans) · subagent-driven 은 작업마다 서브에이전트라 토큰이 크다</div>
     </div>
   </div>
+</section>
+
+<!-- 50 ───────────────────────────────────────────── -->
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">TREND · System One Models</span>
+    <h1 class="rv" style="--d:.08s">Jev — 글 대신 「판단」을 돌려주는 빠른 모델</h1>
+  </div>
+
+  <div class="mc plg">
+    <div class="mc-l rv" style="--d:.2s">
+      <div class="mc-im"><img data-zoom src="assets/system-one-models.png" alt="System One Models — 상태(예: 고객 문의)와 질문을 넣으면 System One Model 이 선택(어느 것) · 점수(척도의 어디) · 참일 가능성(확률)을 돌려준다"><span class="zm">클릭하면 확대</span></div>
+    </div>
+
+    <div class="mc-r rv" style="--d:.3s">
+      <div class="pl-l">
+        <div><b>무엇인가<i>빠른 생각 · System 1</i></b><span class="f">상태 + 질문 → 선택 · 점수 · 참일 확률</span><span class="d">LLM 이 천천히 생각해 <b>글로</b> 답한다면, Jev 는 빠르게 판단해 <b>미리 정한 타입의 값</b>과 신뢰도로 답한다</span></div>
+        <div><b>LLM 과 다른 점<i>판단만 한다</i></b><span class="f">문자열 X · 한 번에 병렬 · 확률 항상 포함</span><span class="d">파싱 · 검증이 필요 없고 타입 오류가 없다 · 대신 <b>대화 · 코드 · 글은 못 쓴다</b></span></div>
+        <div><b>얼마나 빠르고 싼가<i>회사 발표 기준</i></b><span class="f">70 ~ 500ms · 입력 $0.042 / MTok · 출력 무료</span><span class="d">LLM 은 3 ~ 329초 · 단, 자체 측정이고 비용 보조 가능성 · 아직 <b>얼리 액세스</b></span></div>
+        <div><b>어디에 쓰나<i>똑똑한 if 문</i></b><span class="f">분류 · 라우팅 · 점수 · 대량 처리 · 검증</span><span class="d">루프의 <b>검사</b>, 그래프의 <b>라우터</b>처럼 자주 도는 판단을 LLM 대신 맡기면 빠르고 싸다</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 51 ───────────────────────────────────────────── -->
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">TREND · Jev 쓰임 예시</span>
+    <h1 class="rv" style="--d:.08s">여러 개 중에서 확률로 고르고, 기준을 넘으면 바로 실행</h1>
+  </div>
+
+  <div class="jx rv" style="--d:.22s">
+    <div class="jx-c">
+      <div class="jx-t">고객 문의 분류<i>여러 개 중 하나 · 선택</i></div>
+      <div class="jx-s">"앱에서 이체 버튼을 누르면 화면이 멈춰요"</div>
+      <div class="jx-q">질문 · 담당 부서는?</div>
+      <div class="jx-b on"><span>기술</span><i><em style="width:86%"></em></i><b>0.86</b></div>
+      <div class="jx-b"><span>결제</span><i><em style="width:9%"></em></i><b>0.09</b></div>
+      <div class="jx-b"><span>계정</span><i><em style="width:5%"></em></i><b>0.05</b></div>
+      <div class="jx-a">→ 기술팀 큐로 자동 배정</div>
+    </div>
+    <div class="jx-c">
+      <div class="jx-t">이상 거래 탐지<i>참일 확률</i></div>
+      <div class="jx-s">새벽 3시 · 해외 IP · 평소의 20배 금액 이체</div>
+      <div class="jx-q">질문 · 이상 거래인가?</div>
+      <div class="jx-b on"><span>예</span><i><em style="width:92%"></em></i><b>0.92</b></div>
+      <div class="jx-b"><span>아니오</span><i><em style="width:8%"></em></i><b>0.08</b></div>
+      <div class="jx-a">→ 0.8 이상이면 이체 보류 + 본인 확인</div>
+    </div>
+    <div class="jx-c">
+      <div class="jx-t">코드 리뷰 위험도<i>척도 위의 점수</i></div>
+      <div class="jx-s">PR 요약 — 인증 필터 수정 · 테스트 없음</div>
+      <div class="jx-q">질문 · 위험도 (0 ~ 1)?</div>
+      <div class="jx-b on"><span>위험도</span><i><em style="width:74%"></em></i><b>0.74</b></div>
+      <div class="jx-a">→ 0.6 이상이면 사람 리뷰 필수 · 낮으면 자동 머지 후보</div>
+    </div>
+    <div class="jx-c">
+      <div class="jx-t">에이전트 라우팅<i>그래프의 다음 노드</i></div>
+      <div class="jx-s">"삼성전자 최근 1년 수익률 비교표 만들어줘"</div>
+      <div class="jx-q">질문 · 다음에 일할 노드는?</div>
+      <div class="jx-b on"><span>조사</span><i><em style="width:71%"></em></i><b>0.71</b></div>
+      <div class="jx-b"><span>작성</span><i><em style="width:22%"></em></i><b>0.22</b></div>
+      <div class="jx-b"><span>검토</span><i><em style="width:7%"></em></i><b>0.07</b></div>
+      <div class="jx-a">→ 조사 노드로 보낸다</div>
+    </div>
+  </div>
+
+  <div class="jx-p fd" style="--d:.5s"><b>공통 패턴</b> 상태 + 질문 → 선택지마다 확률 → <b>기준 이상이면 바로 실행</b>, 낮으면 <b>LLM · 사람에게 넘긴다</b> · 자주 도는 판단은 Jev, 애매한 것만 LLM <span>· 값은 예시</span></div>
+</section>
+
+<!-- 52 ───────────────────────────────────────────── -->
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">TREND · 개발에서 Jev 쓰기</span>
+    <h1 class="rv" style="--d:.08s">판단은 Jev, 글과 코드는 LLM</h1>
+  </div>
+
+  <div class="ju-flow rv" style="--d:.16s"><span>요청</span><i>→</i><span class="j">Jev · 모델 선택</span><i>→</i><span>LLM · 코드 생성</span><i>→</i><span class="j">Jev · 결과 판정</span><i>→</i><span class="j">Jev · 실행 전 검사</span><i>→</i><span>통과 · 사람 확인</span></div>
+
+  <div class="jx ju rv" style="--d:.26s">
+    <div class="jx-c">
+      <div class="jx-t">모델 선택<i>라우팅 · 비용 절감</i></div>
+      <div class="jx-s">이 작업을 해낼 수 있는 가장 싼 모델은?<br><em>fast</em> 조회 · 추출 · 국소 수정<br><em>powerful</em> 아키텍처 · 고위험 판단</div>
+      <div class="jx-a">→ 쉬운 일은 싼 모델, 어려운 일만 큰 모델</div>
+      <div class="ju-src">LangChain 하네스 · 라우팅 미들웨어</div>
+    </div>
+    <div class="jx-c">
+      <div class="jx-t">생성 결과 판정<i>Jev-as-a-Judge</i></div>
+      <div class="jx-s">테스트를 추가했는가? <em>확률</em><br>요구사항을 모두 다뤘는가? <em>확률</em><br>보안 위험도 <em>0 ~ 1</em></div>
+      <div class="jx-a">→ 큰 LLM 에게 통째로 채점시키지 않고 작은 질문 여러 개로 · 같은 질문 100번에도 점수가 거의 안 변한다</div>
+      <div class="ju-src">LangChain 실험 · 질문은 예시</div>
+    </div>
+    <div class="jx-c">
+      <div class="jx-t">실행 전 가드레일<i>위험한 명령 막기</i></div>
+      <div class="jx-s">에이전트가 실행하려는 셸 명령<br>위험도는? 파일을 지우는가?</div>
+      <div class="jx-a">→ 기준 미만이면 실행, 넘으면 차단 · 사람 확인 — 35장 PreToolUse hook 의 판단을 Jev 가</div>
+      <div class="ju-src">LangChain AutoModeMiddleware(bash)</div>
+    </div>
+    <div class="jx-c">
+      <div class="jx-t">리뷰 우선순위<i>사람이 볼 곳만</i></div>
+      <div class="jx-s">파일마다 변경 위험도 · 심각도 점수<br>→ 높은 파일만 사람 리뷰</div>
+      <div class="jx-a">→ 리뷰 코멘트 작성은 LLM, 어디를 볼지는 Jev</div>
+      <div class="ju-src">커뮤니티 · jev-review</div>
+    </div>
+  </div>
+
+  <div class="jx-p fd" style="--d:.5s"><b>한계</b> 글 · 코드 · 리뷰 코멘트는 못 쓴다 → <b>LLM 과 짝</b>으로 · 아직 얼리 액세스 · 속도 · 비용 수치는 대부분 회사 발표</div>
 </section>
 
 </div></div>
