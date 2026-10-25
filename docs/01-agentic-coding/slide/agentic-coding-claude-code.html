@@ -689,6 +689,10 @@
   .lp > div > span { font-size: 14px; line-height: 1.45; color: var(--dim); }
   .lp > div > span b { color: var(--ink); font-weight: 600; }
   .lp em { font-style: normal; font-size: 11.5px; letter-spacing: 1px; color: var(--ink); border: 1px solid var(--ink); border-radius: 999px; padding: 0 7px; margin-right: 6px; }
+  .gx { border: 1px solid var(--rule); border-radius: 12px; background: #FBF8F2; color: #1B1B1A; padding: 18px; }
+  .gx svg { display: block; width: 100%; height: auto; font-family: "Noto Sans KR", sans-serif; }
+  .gx-n { font-size: 15.5px; line-height: 1.55; color: var(--dim); }
+  .gx-n b { color: var(--ink); font-weight: 600; }
   .ev-l > div.on { background: var(--panel); margin: 0 -10px; padding-left: 10px; padding-right: 10px; }
   .ev-cap { font-size: 14.5px; line-height: 1.5; color: var(--faint); }
   .ev-cap b { color: var(--ink); font-weight: 600; }
@@ -2514,6 +2518,56 @@ description: 새 REST API 를 추가할 때 사용.
     <div class="pt-note fd" style="--d:.9s">
       <div><b>누가 끝을 정하나</b> /goal 은 <b>다른 모델이 채점</b> · ralph 는 AI 가 <b>완료 문구를 스스로 선언</b> · /loop 은 시간</div>
       <div><b>브레이크</b> 턴 · 반복 상한을 꼭 둔다 · 고정 간격 /loop 은 Esc 로 안 멈춘다 → 말로 취소</div>
+    </div>
+  </div>
+</section>
+
+<!-- 44 ───────────────────────────────────────────── -->
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">GRAPH ENGINEERING</span>
+    <h1 class="rv" style="--d:.08s">누가 일하고, 다음은 누구고, 무엇을 같이 보는가</h1>
+  </div>
+
+  <div class="mc plg">
+    <div class="mc-l rv" style="--d:.2s">
+      <div class="gx">
+        <svg viewBox="0 0 720 470" role="img" aria-label="그래프 예시 — 시작에서 조사 A 와 작성 B 가 동시에 일하고, 검토에서 실패하면 다시 돌아가고, 통과하면 사람 승인을 거쳐 완료된다. 모든 노드는 아래 공유 상태를 읽고 쓴다">
+          <defs><marker id="gxa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker></defs>
+          <g fill="none" stroke="currentColor" stroke-width="2" marker-end="url(#gxa)">
+            <path d="M92 190 C130 150 150 120 182 112"/>
+            <path d="M92 214 C130 254 150 284 182 292"/>
+            <path d="M258 112 C300 120 330 160 352 186"/>
+            <path d="M258 292 C300 284 330 244 352 218"/>
+            <path d="M432 202 L488 202"/>
+            <path d="M568 202 L618 202"/>
+          </g>
+          <path d="M392 246 C392 300 330 330 262 312" fill="none" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#gxa)" style="color:#C0392B"/>
+          <text x="352" y="306" font-size="15" fill="#C0392B" font-weight="600">실패 → 다시</text>
+          <text x="440" y="190" font-size="15" fill="#2E6FBF" font-weight="600">통과</text>
+          <g font-size="17" font-weight="600" text-anchor="middle" fill="currentColor">
+            <circle cx="62" cy="202" r="32" fill="#CFE3C3" stroke="currentColor" stroke-width="1.5"/><text x="62" y="208">시작</text>
+            <circle cx="220" cy="110" r="38" fill="#F2B8A0" stroke="currentColor" stroke-width="1.5"/><text x="220" y="105">조사</text><text x="220" y="126" font-size="13" font-weight="500">에이전트 A</text>
+            <circle cx="220" cy="294" r="38" fill="#F2B8A0" stroke="currentColor" stroke-width="1.5"/><text x="220" y="289">작성</text><text x="220" y="310" font-size="13" font-weight="500">에이전트 B</text>
+            <path d="M392 158 L436 202 L392 246 L348 202 Z" fill="#F5D76E" stroke="currentColor" stroke-width="1.5"/><text x="392" y="208">검토</text>
+            <circle cx="528" cy="202" r="38" fill="#A9C7E8" stroke="currentColor" stroke-width="1.5"/><text x="528" y="197">사람</text><text x="528" y="218" font-size="13" font-weight="500">승인</text>
+            <rect x="622" y="176" width="76" height="52" rx="8" fill="#fff" stroke="currentColor" stroke-width="1.5"/><text x="660" y="208">완료</text>
+          </g>
+          <g stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 4" opacity=".55"><path d="M220 332 V392"/><path d="M392 246 V392"/><path d="M528 240 V392"/></g>
+          <rect x="40" y="392" width="640" height="56" rx="10" fill="#FFF7E6" stroke="currentColor" stroke-width="1.5"/>
+          <text x="360" y="426" font-size="17" font-weight="600" text-anchor="middle" fill="currentColor">공유 상태 — 조사 결과 · 초안 · 검토 의견 (모두가 읽고 쓴다)</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="mc-r rv" style="--d:.3s">
+      <div class="pl-l">
+        <div><b>노드<i>일하는 단위</i></b><span class="f">에이전트 · 도구 · 검사 · 사람 승인</span><span class="d">조별 과제의 <b>조원 한 명 한 명</b> — 각자 맡은 일만 한다</span></div>
+        <div><b>엣지<i>다음 순서 규칙</i></b><span class="f">순서대로 · 조건에 따라 · 동시에 나눠서 · 모아서</span><span class="d">「조사가 끝나면 작성 담당에게」 — <b>다음에 누가</b> 할지 정한다</span></div>
+        <div><b>공유 상태<i>함께 보는 기록</i></b><span class="f">모든 노드가 읽고 쓰는 한 장의 기록</span><span class="d">조원이 같이 쓰는 <b>공유 문서</b> — 없으면 작성자가 조사 결과를 못 본다</span></div>
+        <div><b>관문<i>검사 · 사람</i></b><span class="f">통과 → 다음 · 실패 → 되돌림 · 중요한 곳엔 사람</span><span class="d">제출 전 <b>조장 검토</b>와 <b>교수님 확인</b></span></div>
+      </div>
+      <div class="gx-n"><b>루프</b>는 자기에게 돌아오는 엣지 하나짜리 그래프 · 39장 graphify 같은 <b>지식 그래프</b>는 데이터의 관계, 그래프 엔지니어링은 <b>일의 흐름</b> · 예: LangGraph</div>
     </div>
   </div>
 </section>
