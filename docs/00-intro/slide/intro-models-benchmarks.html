@@ -606,6 +606,103 @@
 
 <!-- 04 ───────────────────────────────────────────── -->
 <section class="slide">
+  <div class="eyebrow fd">SMALL MODELS · 2026.11</div>
+  <h1 class="rv" style="--d:.08s">소형 모델의 반란</h1>
+  <div class="hr fd" style="--d:.2s"></div>
+
+  <div class="body" style="display:flex;flex-direction:column">
+    <div class="note-row fd" style="--d:.26s">
+      <span class="bar"></span>
+      <span><b style="color:var(--dim)">30B 이하</b> 또는 <b style="color:var(--dim)">활성 파라미터 소수</b> — 노트북 · 사내 서버 한 대에서 돌아간다</span>
+    </div>
+
+    <div class="cards" style="margin-top:22px">
+
+      <div class="card rv" style="--d:.34s;width:318px">
+        <div class="m-vendor">RECURSIVE · 미국</div>
+        <div class="m-name" style="margin-top:6px">Flint</div>
+        <div class="m-big">
+          <div class="v">39.8B</div>
+          <div class="u">활성 2.5B · MoE</div>
+        </div>
+        <div class="m-meta">
+          <div><span class="k">SWE-bench Verified</span><span class="v">74.2%</span></div>
+          <div><span class="k">속도</span><span class="v">MacBook 125+ tok/s</span></div>
+          <div><span class="k">라이선스</span><span class="v">Apache-2.0</span></div>
+        </div>
+        <div class="m-skill"><i>로컬 코딩</i><i>노트북</i></div>
+        <div class="m-org"><span class="d">2026.10</span>활성 <b>2.5B</b>로 노트북에서 구동 · 제조사 보고</div>
+      </div>
+
+      <div class="card rv" style="--d:.42s;width:318px">
+        <div class="m-vendor">ALIBABA · 중국</div>
+        <div class="m-name" style="margin-top:6px">Qwen3.8 27B</div>
+        <div class="m-big">
+          <div class="v">27B</div>
+          <div class="u">dense · 단일 GPU급</div>
+        </div>
+        <div class="m-meta">
+          <div><span class="k">컨텍스트</span><span class="v">262K</span></div>
+          <div><span class="k">SWE-bench Pro</span><span class="v">61.7</span></div>
+          <div><span class="k">라이선스</span><span class="v">Apache-2.0</span></div>
+        </div>
+        <div class="m-skill"><i>로컬 구동</i><i>비전</i></div>
+        <div class="m-org"><span class="d">2026.08</span>27B로 <b>SWE-bench Pro 61.7</b> · 자체 보고</div>
+      </div>
+
+      <div class="card rv" style="--d:.5s;width:318px">
+        <div class="m-vendor">GOOGLE · 미국</div>
+        <div class="m-name" style="margin-top:6px">Gemma 4 31B</div>
+        <div class="m-big">
+          <div class="v">31B</div>
+          <div class="u">dense · 26B-A4B 동반</div>
+        </div>
+        <div class="m-meta">
+          <div><span class="k">컨텍스트</span><span class="v">256K</span></div>
+          <div><span class="k">LiveCodeBench v6</span><span class="v">80%</span></div>
+          <div><span class="k">라이선스</span><span class="v">Apache-2.0</span></div>
+        </div>
+        <div class="m-skill"><i>노트북</i><i>E2B·E4B 온디바이스</i></div>
+        <div class="m-org"><span class="d">2026.04</span><b>Apache-2.0 전환</b> · 폰·엣지까지 4종</div>
+      </div>
+
+      <div class="card rv" style="--d:.58s;width:318px">
+        <div class="m-vendor">META · 미국</div>
+        <div class="m-name" style="margin-top:6px">Muse Glimmer</div>
+        <div class="m-big">
+          <div class="v">30B</div>
+          <div class="u">단일 그래픽카드용</div>
+        </div>
+        <div class="m-meta">
+          <div><span class="k">구동</span><span class="v">단일 GPU</span></div>
+          <div><span class="k">라이선스</span><span class="v">Apache-2.0</span></div>
+        </div>
+        <div class="m-skill"><i>로컬 구동</i></div>
+        <div class="m-org"><span class="d">Muse 계열</span>대형 <b>Spark Open</b>(816B)의 소형 형제</div>
+      </div>
+
+    </div>
+
+    <div class="foot fd" style="--d:.95s">
+      <div class="takeaway">소형 모델도 성능은 충분하다. 그러나 작을수록 <b>하네스</b>(도구 · 컨텍스트 · 검증 루프)가 결과를 좌우한다.</div>
+      <div class="src">
+        수치는 각 제조사 자체 보고 기준<br>
+        라이선스 · 벤치마크는 모델 카드 원문 확인
+      </div>
+    </div>
+
+    <div class="refs fd" style="--d:1.05s">
+      <span class="lab">참고</span>
+      <a href="https://devops.com/recursive-flint-puts-a-fast-agentic-coding-model-on-developers-laptops" target="_blank" rel="noopener">devops.com — Flint</a>
+      <a href="https://datanorth.ai/news/alibaba-releases-qwen3-8-27b" target="_blank" rel="noopener">datanorth.ai — Qwen3.8-27B</a>
+      <a href="https://9to5google.com/2026/04/02/google-gemma-4/" target="_blank" rel="noopener">9to5google.com — Gemma 4</a>
+      <a href="https://www.noze.it/en/insights/muse-spark-open-meta-open-weights/" target="_blank" rel="noopener">noze.it — Muse</a>
+    </div>
+  </div>
+</section>
+
+<!-- 05 ───────────────────────────────────────────── -->
+<section class="slide">
   <div class="eyebrow fd">BENCHMARKS · 코딩 능력 판단</div>
   <h1 class="rv" style="--d:.08s">무엇을 재는 벤치마크인가</h1>
   <div class="hr fd" style="--d:.2s"></div>
@@ -706,7 +803,7 @@
   </div>
 </section>
 
-<!-- 05 ───────────────────────────────────────────── -->
+<!-- 06 ───────────────────────────────────────────── -->
 <section class="slide">
   <div class="eyebrow fd">STILL MOVING</div>
   <h1 class="rv" style="--d:.08s">지금도 만들어지는 중이다</h1>
