@@ -203,6 +203,11 @@
 
   /* ── 오픈웨이트 카드 변형 ── */
   .card.narrow { width: 262px; }
+  .slide.dense .vendors { gap: 24px; }
+  .slide.dense .card { width: 204px; padding: 16px 14px 14px; }
+  .slide.dense .m-name { font-size: 23px; }
+  .slide.dense .m-price .v { font-size: 24px; }
+  .slide.dense .m-price .u { font-size: 13px; }
   .m-vendor { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13px; letter-spacing: 1.5px; color: var(--faint); }
   .m-big { margin-top: auto; padding-top: 18px; }
   .m-big .v { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 29px; font-weight: 500; font-variant-numeric: tabular-nums; letter-spacing: -1px; line-height: 1.1; }
@@ -345,9 +350,9 @@
 </section>
 
 <!-- 02 ───────────────────────────────────────────── -->
-<section class="slide">
-  <div class="eyebrow fd">PUBLIC MODELS · 2026.09</div>
-  <h1 class="rv" style="--d:.08s">지금 코딩에 쓰는 모델</h1>
+<section class="slide dense">
+  <div class="eyebrow fd">PUBLIC MODELS · 2026.11</div>
+  <h1 class="rv" style="--d:.08s">최근 코딩에 활용되는 모델 동향</h1>
   <div class="hr fd" style="--d:.2s"></div>
 
   <div class="body" style="display:flex;flex-direction:column">
@@ -395,8 +400,8 @@
           </div>
 
           <div class="card rv" style="--d:.54s">
-            <div class="m-name">Sonnet 5</div>
-            <div class="m-role">속도와 지능의 균형</div>
+            <div class="m-name">Sonnet 5.5</div>
+            <div class="m-role">일상 코딩 · 에이전트 작업</div>
             <div class="m-price">
               <div class="v">$2 · $10</div>
               <div class="u">입력 · 출력 / 1M</div>
@@ -407,6 +412,22 @@
             </div>
             <div class="m-skill">
               <i>일상 개발</i><i>실습·반복 작업</i>
+            </div>
+          </div>
+
+          <div class="card rv" style="--d:.62s">
+            <div class="m-name">Haiku 5.5</div>
+            <div class="m-role">빠른 응답 · 서브에이전트</div>
+            <div class="m-price">
+              <div class="v">$0.1 · $0.5</div>
+              <div class="u">입력 · 출력 / 1M</div>
+            </div>
+            <div class="m-meta">
+              <div><span class="k">컨텍스트</span><span class="v">1M</span></div>
+              <div><span class="k">100K 초과</span><span class="v">$0.5 · $2.5</span></div>
+            </div>
+            <div class="m-skill">
+              <i>대량 처리</i><i>간단한 수정</i>
             </div>
           </div>
 
@@ -441,8 +462,8 @@
           </div>
 
           <div class="card rv" style="--d:.8s">
-            <div class="m-name">GPT-6 Sol<br>/ Luna</div>
-            <div class="m-role">비용 최적화 라인</div>
+            <div class="m-name">GPT-6.1 Sol<br>/ GPT-6 Luna</div>
+            <div class="m-role">Astra급 코딩 · 1/5 가격</div>
             <div class="m-price">
               <div class="v">$2 · $10</div>
               <div class="u">Sol — Luna $0.1 · $0.5</div>
@@ -465,7 +486,7 @@
       <div class="takeaway">가격 차이는 <b>25배</b>. 작업 난이도에 모델을 맞추는 것이 첫 번째 절약이다.</div>
       <div class="src">
         Anthropic: platform.claude.com 공식 문서<br>
-        OpenAI: 공개 발표 자료 기준 · 확인 필요
+        OpenAI: developers.openai.com 모델·가격 문서 · 272K 초과 시 장문 요금 가산
       </div>
     </div>
   </div>
@@ -473,8 +494,8 @@
 
 <!-- 03 ───────────────────────────────────────────── -->
 <section class="slide">
-  <div class="eyebrow fd">OPEN WEIGHTS · 2026.09</div>
-  <h1 class="rv" style="--d:.08s">오픈 LLM 모델</h1>
+  <div class="eyebrow fd">OPEN WEIGHTS · 2026.11</div>
+  <h1 class="rv" style="--d:.08s">가중치가 공개된 오픈 웨이트 모델</h1>
   <div class="hr fd" style="--d:.2s"></div>
 
   <div class="body" style="display:flex;flex-direction:column">
@@ -530,7 +551,7 @@
           <div><span class="k">라이선스</span><span class="v">Modified MIT</span></div>
         </div>
         <div class="m-skill"><i>프론트엔드 강점</i></div>
-        <div class="m-org"><span class="d">2026.07</span><b>프론트엔드 코딩</b>에서 오픈 모델 첫 선두권</div>
+        <div class="m-org"><span class="d">2026.07</span><b>프론트엔드 코딩</b> 선두권 · K3.1 Pro 가중치 11월 공개 예정</div>
       </div>
 
       <div class="card narrow rv" style="--d:.58s">
@@ -546,23 +567,23 @@
           <div><span class="k">라이선스</span><span class="v">MIT</span></div>
         </div>
         <div class="m-skill"><i>자체 호스팅</i><i>저가 변종</i></div>
-        <div class="m-org"><span class="d">2026.04</span><b>SWE-bench 오픈 선두</b> · 실제 버그 수정</div>
+        <div class="m-org"><span class="d">2026.08</span><b>SWE-bench 오픈 선두</b> · Flash 저가 변종(MIT)</div>
       </div>
 
       <div class="card narrow rv" style="--d:.66s">
-        <div class="m-vendor">ALIBABA · 중국</div>
-        <div class="m-name" style="margin-top:6px">Qwen3<br>Coder</div>
+        <div class="m-vendor">MINIMAX · 중국</div>
+        <div class="m-name" style="margin-top:6px">M3.1<br>Flash</div>
         <div class="m-big">
-          <div class="v">480B</div>
+          <div class="v">428B</div>
           <div class="u">총 파라미터</div>
         </div>
         <div class="m-meta">
-          <div><span class="k">활성</span><span class="v">35B</span></div>
-          <div><span class="k">Next 계열</span><span class="v">활성 3B</span></div>
-          <div><span class="k">라이선스</span><span class="v">Apache-2.0</span></div>
+          <div><span class="k">활성</span><span class="v">23B</span></div>
+          <div><span class="k">컨텍스트</span><span class="v">1M</span></div>
+          <div><span class="k">라이선스</span><span class="v">자체 커뮤니티</span></div>
         </div>
-        <div class="m-skill"><i>로컬 구동</i><i>효율 최상</i></div>
-        <div class="m-org"><span class="d">2025.07 ~ 2026</span>활성 3B로 <b>SWE-bench 70%대</b></div>
+        <div class="m-skill"><i>멀티모달</i><i>$20M 초과 승인</i></div>
+        <div class="m-org"><span class="d">2026.10</span>가장 <b>최근 공개</b>된 오픈 웨이트</div>
       </div>
 
     </div>
@@ -577,7 +598,7 @@
 
     <div class="refs fd" style="--d:1.05s">
       <span class="lab">참고</span>
-      <a href="https://huggingface.co/Qwen/Qwen3-Coder-Next" target="_blank" rel="noopener">huggingface.co/Qwen/Qwen3-Coder-Next</a>
+      <a href="https://technode.com/2026/10/23/minimax-releases-open-weights-for-428-billion-parameter-m3-1-flash-model/" target="_blank" rel="noopener">technode.com — MiniMax M3.1 Flash</a>
       <a href="https://z.ai/blog/glm-5.3" target="_blank" rel="noopener">z.ai/blog/glm-5.3</a>
     </div>
   </div>
@@ -752,7 +773,7 @@
             <g font-family="Noto Sans KR, sans-serif" font-size="13" fill="var(--dim)">
               <text x="675" y="110" text-anchor="middle">GPT-5.6</text>
               <text x="790" y="90" text-anchor="middle">GPT-6 Astra</text>
-              <text x="856" y="110" text-anchor="end">Sol · Luna</text>
+              <text x="856" y="110" text-anchor="end">6.1 Sol · Luna</text>
             </g>
 
             <!-- Google -->
