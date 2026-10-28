@@ -478,6 +478,8 @@
   .pt code.cmd + code.cmd { margin-top: 4px; }
   .pt td.k { font-size: 15.5px; color: var(--dim); line-height: 1.45; }
   .pt td.k b { color: var(--ink); font-weight: 500; }
+  .itbl.pt.zt td.p { width: 180px; }
+  .itbl.pt.zt td.c { width: 48%; }
   .pt.dense td { padding: 5px 0; }
   .pt.dense td.n { padding-top: 10px; }
   .pt.dense td.p { width: 180px; }
@@ -1597,12 +1599,12 @@
 
 <!-- 10 ───────────────────────────────────────────── -->
 <section class="slide">
-  <div class="eyebrow fd">EXTEND · 외부 플러그인</div>
+  <div class="eyebrow fd">EXTEND · 외부 플러그인 · 1/2</div>
   <h1 class="rv" style="--d:.08s">개발에 유용한 플러그인</h1>
   <div class="hr fd" style="--d:.22s"></div>
 
   <div class="body">
-    <div class="plug3">
+    <div class="plug3" style="zoom:1.15">
       <div class="pcol rv" style="--d:.3s">
         <div class="tcol-h"><span class="n">A</span><span class="t">계획 · 품질 프로세스</span></div>
           <div class="prow"><div><div class="pn">superpowers</div><div class="pd">계획 → TDD → 디버깅 프로세스</div></div><span class="mk rec">권장</span></div>
@@ -1626,6 +1628,18 @@
           <div class="prow"><div><div class="pn">ponytail</div><div class="pd">가장 단순한 해법을 먼저 고른다<br><span class="w">공식 마켓 아님</span></div></div><span class="mk do">실습</span></div>
 
       </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow fd">EXTEND · 외부 플러그인 · 2/2</div>
+  <h1 class="rv" style="--d:.08s">개발에 유용한 플러그인</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="plug3" style="zoom:1.3">
       <div class="pcol rv" style="--d:.46s">
         <div class="tcol-h"><span class="n">C</span><span class="t">외부 연동 · 메모리 (MCP)</span></div>
           <div class="prow"><div><div class="pn">context7</div><div class="pd">최신 라이브러리 문서 조회</div></div><span class="mk do">실습</span></div>
@@ -1654,12 +1668,12 @@
 
 <!-- 11 ───────────────────────────────────────────── -->
 <section class="slide">
-  <div class="eyebrow fd">PLUGINS · 설치 방법</div>
+  <div class="eyebrow fd">PLUGINS · 설치 방법 · 1/2</div>
   <h1 class="rv" style="--d:.08s">찾고, 설치하고, 확인한다</h1>
   <div class="hr fd" style="--d:.22s"></div>
 
   <div class="body">
-    <div class="recipe">
+    <div class="recipe" style="zoom:1.65">
 
       <div class="term rv" style="--d:.3s">
         <div class="term-bar">
@@ -1676,20 +1690,6 @@
 <span class="g">/reload-plugins</span>                  <span class="c">"Active now"면 생략</span>
 <span class="g">/</span>                                <span class="c">/mcp 에서 context7 이 보이면 성공</span>
 <span class="h">claude plugin list</span>               <span class="c">셸에서 목록 · 상태</span>
-
-<span class="c"># 4 · 공식이 아닌 마켓에서 (remotion · ponytail · claude-mem)</span>
-<span class="h">/plugin marketplace add remotion-dev/claude-code-plugin</span>
-<span class="h">/plugin install remotion@remotion</span>
-<span class="h">/plugin marketplace add DietrichGebert/ponytail</span>
-<span class="h">/plugin install ponytail@ponytail</span>
-<span class="h">/plugin marketplace add thedotmack/claude-mem</span>
-<span class="h">/plugin install claude-mem</span>
-
-<span class="c"># 5 · 스킬만 있는 저장소 (플러그인 아님)</span>
-<span class="h">npx skills add tt-a1i/archify -g</span>
-<span class="h">git clone https://github.com/DreambigOu/ELI5.git</span>
-<span class="h">New-Item -ItemType Directory -Force "$HOME\.claude\skills" | Out-Null</span>
-<span class="h">Copy-Item -Recurse ELI5\skills\eli5 "$HOME\.claude\skills\eli5"</span>
         </div>
       </div>
 
@@ -1723,6 +1723,42 @@
           </span>
         </div>
 
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow fd">PLUGINS · 설치 방법 · 2/2</div>
+  <h1 class="rv" style="--d:.08s">찾고, 설치하고, 확인한다</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="recipe" style="zoom:1.15">
+
+      <div class="term rv" style="--d:.3s">
+        <div class="term-bar">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="name">claude</span>
+        </div>
+        <div class="term-body"><span class="c"># 4 · 공식이 아닌 마켓에서 (remotion · ponytail · claude-mem)</span>
+<span class="h">/plugin marketplace add remotion-dev/claude-code-plugin</span>
+<span class="h">/plugin install remotion@remotion</span>
+<span class="h">/plugin marketplace add DietrichGebert/ponytail</span>
+<span class="h">/plugin install ponytail@ponytail</span>
+<span class="h">/plugin marketplace add thedotmack/claude-mem</span>
+<span class="h">/plugin install claude-mem</span>
+
+<span class="c"># 5 · 스킬만 있는 저장소 (플러그인 아님)</span>
+<span class="h">npx skills add tt-a1i/archify -g</span>
+<span class="h">git clone https://github.com/DreambigOu/ELI5.git</span>
+<span class="h">New-Item -ItemType Directory -Force "$HOME\.claude\skills" | Out-Null</span>
+<span class="h">Copy-Item -Recurse ELI5\skills\eli5 "$HOME\.claude\skills\eli5"</span>
+        </div>
+      </div>
+
+      <div class="steps-col">
         <div class="watch fd" style="--d:.8s">
           <div class="h">주의</div>
           <ul>
@@ -1738,12 +1774,12 @@
 
 <!-- 13 ───────────────────────────────────────────── -->
 <section class="slide">
-  <div class="eyebrow fd">SKILL PACKS · 설명 + 2일차 강사 시연</div>
+  <div class="eyebrow fd">SKILL PACKS · 설명 + 2일차 강사 시연 · 1/2</div>
   <h1 class="rv" style="--d:.08s">개발 사이클을 이끄는 두 가지 스킬 모음</h1>
   <div class="hr fd" style="--d:.22s"></div>
 
   <div class="body">
-    <div class="packs rv" style="--d:.3s">
+    <div class="packs rv" style="zoom:1.65;--d:.3s">
       <div class="pack">
         <div class="im"><img src="assets/superpowers-icon.png" alt="superpowers"></div>
         <div>
@@ -1764,7 +1800,17 @@
       </div>
     </div>
 
-    <table class="itbl stbl">
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow fd">SKILL PACKS · 설명 + 2일차 강사 시연 · 2/2</div>
+  <h1 class="rv" style="--d:.08s">개발 사이클을 이끄는 두 가지 스킬 모음</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+
+    <table class="itbl stbl" style="zoom:1.2">
       <thead><tr class="fd" style="--d:.4s"><th></th><th>단계 · ↻ 태스크마다 반복</th><th class="h2">superpowers · 자동으로 발동</th><th class="h2">agent-skills · 명령으로 실행</th></tr></thead>
       <tbody>
             <tr class="rv" style="--d:0.50s"><td class="n">01</td><td class="p">요구사항·스펙</td><td><div class="it"><code>brainstorming</code><span class="ds">질문으로 설계를 다듬고 조각별로 승인</span></div></td><td><div class="it"><code>interview-me</code><span class="ds">한 번에 한 질문으로 요구사항 정리</span></div><div class="it"><code>/spec</code><span class="ds">코드 전에 구조화된 스펙</span></div></td></tr>
@@ -2013,13 +2059,13 @@
 
 <!-- 21 ───────────────────────────────────────────── -->
 <section class="slide">
-  <div class="eyebrow fd">CLAUDE.md · 무엇을 넣을까</div>
+  <div class="eyebrow fd">CLAUDE.md · 무엇을 넣을까 · 1/2</div>
   <h1 class="rv" style="--d:.08s">좋은 CLAUDE.md 쓰는 법</h1>
   <div class="hr fd" style="--d:.22s"></div>
 
   <div class="body">
-    <div class="gw rv" style="--d:.3s">
-      <div class="gw-l">
+    <div class="gw rv" style="zoom:1.55;--d:.3s">
+      <div class="gw-l" style="flex:1">
         <div class="lb">예시 · 실습 프로젝트의 CLAUDE.md · 태그 = 들어가는 분류</div>
         <pre class="ex"><span class="h"># edu-stock-chart</span>
 주식 시세를 조회해 차트로 보여 주는 교육용 웹 서비스 <span class="cat">프로젝트 설명</span>
@@ -2041,6 +2087,18 @@
 - 브랜치: `feature/*` → `main`
 - 커밋 메시지: 한글, `type: 요약`</pre>
       </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow fd">CLAUDE.md · 무엇을 넣을까 · 2/2</div>
+  <h1 class="rv" style="--d:.08s">좋은 CLAUDE.md 쓰는 법</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="gw rv" style="zoom:1.25;--d:.3s">
       <div class="gw-r">
         <div class="lb">핵심 5가지 · HumanLayer</div>
         <ol><li><div><div class="t">꼭 알려줄 것만</div><div class="d">무엇으로 만들었나(스택 · 구조) · 왜 만드나(목적) · 어떻게 일하나(명령 · 검증)</div></div></li><li><div><div class="t">모든 작업에 해당하는 것만</div><div class="d">일부 작업에만 맞는 지시는 뺀다. 관련 없는 내용이 많을수록 무시되기 쉽다</div></div></li><li><div><div class="t">점진적 공개</div><div class="d">세부 내용은 별도 md로 나누고, CLAUDE.md에는 어디를 보면 되는지만 적는다. 코드 복사 대신 file:line</div></div></li><li><div><div class="t">스타일은 린터에게</div><div class="d">포매터 · 린터(필요하면 hook)에 맡긴다. Claude는 린터가 아니다</div></div></li><li><div><div class="t">자동 생성은 초안으로만</div><div class="d">/init 결과를 그대로 쓰지 말고 한 줄씩 검토한다. 모든 단계에 영향을 주는 파일이다</div></div></li></ol>
@@ -2146,10 +2204,10 @@
 <!-- 24 ───────────────────────────────────────────── -->
 <section class="slide wide">
   <div class="wide-head">
-    <span class="eyebrow fd">SKILLS · 구조</span>
+    <span class="eyebrow fd">SKILLS · 구조 · 1/2</span>
     <h1 class="rv" style="--d:.08s">Skill 의 파일 구성과, 컨텍스트에 들어오는 순서</h1>  </div>
 
-  <div class="sc">
+  <div class="sc" style="zoom:1.5;grid-template-columns:1fr 1fr">
     <div class="sc-l rv" style="--d:.2s">
       <div class="sc-lb">디렉토리 · 폴더 하나 = 스킬 하나</div>
 <pre class="sc-code">.claude/skills/
@@ -2162,7 +2220,9 @@
     └── assets/
         └── Test.java.tmpl   <span class="c">← 템플릿 (선택)</span></pre>
       <div class="sc-loc"><b>위치</b> 프로젝트 <b>.claude/skills/</b> (git 으로 팀 공유) · 개인 <b>~/.claude/skills/</b> · 플러그인 안 <b>skills/</b></div>
-      <div class="sc-lb" style="margin-top:6px">SKILL.md · 부분마다 읽히는 시점이 다르다</div>
+    </div>
+    <div class="sc-l">
+      <div class="sc-lb">SKILL.md · 부분마다 읽히는 시점이 다르다</div>
 <pre class="sc-code"><span class="hl"><span class="n">1</span><span class="c">항상 · 세션 시작</span>
 ---
 name: api-scaffold
@@ -2180,6 +2240,15 @@ description: 새 REST API 를 추가할 때 사용.
 - 계층 규칙은 references/layer-rules.md</span></pre>
     </div>
 
+  </div>
+</section>
+
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">SKILLS · 구조 · 2/2</span>
+    <h1 class="rv" style="--d:.08s">Skill 의 파일 구성과, 컨텍스트에 들어오는 순서</h1>  </div>
+
+  <div class="sc" style="zoom:1.15;grid-template-columns:1fr">
     <div class="sc-r rv" style="--d:.32s">
       <div class="sc-win">
         <div class="h sc-row sys" style="display:block;padding-bottom:0">컨텍스트 창</div>
@@ -2272,17 +2341,31 @@ description: 새 REST API 를 추가할 때 사용.
 
 <!-- 26 ───────────────────────────────────────────── -->
 <section class="slide">
-  <div class="eyebrow fd">SKILLS · 실습 1 · 저장 · 조회 API</div>
+  <div class="eyebrow fd">SKILLS · 실습 1 · 저장 · 조회 API · 1/2</div>
   <h1 class="rv" style="--d:.08s">스캐폴딩 Skill 을 만들어 본다</h1>
   <div class="hr fd" style="--d:.22s"></div>
 
-  <div class="body">
-    <table class="itbl pt">
+  <div class="body" style="zoom:1.25">
+    <table class="itbl pt zt">
       <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
       <tbody>
             <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">준비<i>skill-creator 가 있는지 먼저 확인</i></td><td class="c"><code class="cmd">! claude plugin list</code><code class="cmd">/plugin install skill-creator@claude-plugins-official</code></td><td class="k"><b>있고 ✔ enabled</b> → 02 로 · <b>disabled</b> → <code>/plugin</code> 에서 enable · <b>없으면</b> 아래 줄로 설치 후 다시 시작</td></tr>
             <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">스킬 만들기<i>슬래시 명령으로 skill-creator 를 부른다</i></td><td class="c"><code class="cmd">/skill-creator:skill-creator .claude/skills/ 에 api-scaffold 스킬을 만들어줘. 바디를 DB 에 저장 · 조회하는 API 를 추가할 때 쓴다. 순서: ① 계획 ② 기존 코드 스캔 ③ Controller → Service → MyBatis Mapper · XML(바디 @Valid) ④ ./gradlew test</code></td><td class="k">질문이 오면 답한다 · 스킬 하나에 <b>의도 하나</b> (저장 · 조회 API 뼈대만)</td></tr>
             <tr class="rv" style="--d:0.47s"><td class="n">03</td><td class="p">팀 규칙 · 템플릿<i>스킬 없이는 모를 우리 팀 표준</i></td><td class="c"><code class="cmd">api-scaffold 에 팀 규칙과 템플릿을 넣어줘. 규칙: ① Controller 에서 Mapper 직접 호출 금지 — Controller → Service → Mapper 순서만 허용 ② RESTful 스펙 준수 — 조회 GET · 생성 POST · 수정 PUT · 삭제 DELETE, 경로는 명사 복수형(예: GET /api/accounts/{accountNo}) ③ @RestController + @RequestMapping("/api/...") ④ Swagger 설명 어노테이션 필수 — 클래스 @Tag · 메서드 @Operation(summary, description) · 파라미터 @Parameter ⑤ 생성자 주입(@RequiredArgsConstructor), @Autowired 필드 주입 금지. assets/ 에 Controller · Service · Mapper · Mapper XML 템플릿을 기존 코드를 본떠 둔다.</code></td><td class="k"><code>! ls -R .claude/skills/api-scaffold</code> 로 <b>템플릿 4개</b> · SKILL.md 에 <b>팀 규칙 5가지</b>가 있는가</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow fd">SKILLS · 실습 1 · 저장 · 조회 API · 2/2</div>
+  <h1 class="rv" style="--d:.08s">스캐폴딩 Skill 을 만들어 본다</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body" style="zoom:1.35">
+    <table class="itbl pt zt">
+      <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
+      <tbody>
             <tr class="rv" style="--d:0.54s"><td class="n">04</td><td class="p">실제 API 추가<i>출납 계좌 잔고 조회 (account 테이블 · 샘플 3건 준비됨)</i></td><td class="c"><code class="cmd">/api-scaffold 계좌 잔고 조회 API 를 추가해줘. 계좌번호(accountNo)를 받아 account 테이블에서 예금주 · 잔고를 조회하고, 없는 계좌는 404 로 응답한다.</code></td><td class="k">조회가 <b>GET</b> 인가 · Controller 가 <b>Service 만</b> 호출하는가 · <b>@Tag · @Operation</b> 이 붙었는가 · <b>생성자 주입</b>인가 · 계획 → 스캔 → 작성 → 검증 순서인가</td></tr>
             <tr class="rv" style="--d:0.61s"><td class="n">05</td><td class="p">검증<i>테스트 후 Swagger 에서 직접 호출</i></td><td class="c"><code class="cmd">! ./gradlew test</code></td><td class="k">테스트 통과 · Swagger 에서 <code>110-1234-5678</code> 을 넣으면 <b>홍길동 · 1,500,000</b> · 없는 계좌는 <b>404</b></td></tr>
             <tr class="rv" style="--d:0.68s"><td class="n">06</td><td class="p">자동 호출<i>새 세션에서 슬래시 없이</i></td><td class="c"><code class="cmd">거래량 등록 · 조회 API 를 추가해줘. IN: {symbol, tradeDate, volume&gt;0} 저장 → 201 · OUT: 종목별 조회 → [{tradeDate, volume}] 날짜순, 없는 종목 404. 스펙대로 테스트도 작성해줘.</code></td><td class="k">말하지 않아도 <b>api-scaffold 를 불러오는가</b> · 등록 POST · 조회 GET 인가 · Swagger 설명이 붙었는가 · 테스트로 <b>201 · 200 · 404 · 400</b> 확인</td></tr>
@@ -2554,29 +2637,50 @@ description: 새 REST API 를 추가할 때 사용.
 <!-- 34 ───────────────────────────────────────────── -->
 <section class="slide wide">
   <div class="wide-head">
-    <span class="eyebrow fd">HOOKS · 시점 전체</span>
+    <span class="eyebrow fd">HOOKS · 시점 전체 · 1/3</span>
     <h1 class="rv" style="--d:.08s">Claude Code hook 시점 33개 — 언제 실행되나</h1>
   </div>
 
-  <div class="hl rv" style="--d:.22s">
+  <div class="hl rv" style="zoom:1.6;--d:.22s">
     <div class="hl-c"><div class="hl-t"><span class="no">01</span>세션<span class="ct">4</span></div><div class="hl-r on"><b>SessionStart</b><span class="w">세션 시작 · 재개 · /clear · 압축 직후</span></div><div class="hl-r"><b>Setup</b><span class="w">--init · --maintenance 로 시작할 때 (CI 준비 1회)</span></div><div class="hl-r"><b>InstructionsLoaded</b><span class="w">CLAUDE.md · rules 파일을 읽어 들일 때</span></div><div class="hl-r"><b>SessionEnd</b><span class="w">세션이 끝날 때 (exit · /clear · logout)</span></div></div>
     <div class="hl-c"><div class="hl-t"><span class="no">02</span>프롬프트 · 화면<span class="ct">3</span></div><div class="hl-r on"><b>UserPromptSubmit</b><span class="bk">차단</span><span class="w">프롬프트 제출 직후 · AI 가 처리하기 전</span></div><div class="hl-r"><b>UserPromptExpansion</b><span class="bk">차단</span><span class="w">슬래시 명령이 프롬프트로 펼쳐질 때</span></div><div class="hl-r"><b>MessageDisplay</b><span class="w">AI 답변 텍스트가 화면에 표시될 때</span></div></div>
     <div class="hl-c"><div class="hl-t"><span class="no">03</span>도구 실행<span class="ct">6</span></div><div class="hl-r on"><b>PreToolUse</b><span class="bk">차단</span><span class="w">도구 실행 직전 · matcher 로 도구 이름 지정</span></div><div class="hl-r"><b>PermissionRequest</b><span class="w">권한 승인 창이 뜰 때 · decision 으로 허용 · 거부</span></div><div class="hl-r"><b>PermissionDenied</b><span class="w">auto 모드가 도구 호출을 거부했을 때</span></div><div class="hl-r on"><b>PostToolUse</b><span class="w">도구 실행이 성공한 직후</span></div><div class="hl-r"><b>PostToolUseFailure</b><span class="w">도구 실행이 실패한 직후</span></div><div class="hl-r"><b>PostToolBatch</b><span class="bk">차단</span><span class="w">병렬 도구 호출 묶음이 끝나고 다음 판단 전</span></div></div>
     <div class="hl-c"><div class="hl-t"><span class="no">04</span>응답 종료 · 알림<span class="ct">3</span></div><div class="hl-r on"><b>Stop</b><span class="bk">차단</span><span class="w">AI 가 응답을 마쳤을 때 · 막으면 이어서 일한다</span></div><div class="hl-r"><b>StopFailure</b><span class="w">API 오류(rate limit · 과부하)로 턴이 끝났을 때</span></div><div class="hl-r on"><b>Notification</b><span class="w">권한 요청 · 입력 대기 알림을 보낼 때</span></div></div>
+  </div>
+
+  <div class="mx-ft fd" style="--d:.6s"><b>★</b> 개발에서 자주 쓰는 시점 · <span class="hl-bk">차단</span> exit 2 로 막을 수 있다 (Stop 류는 「계속 일해」) · 출처 <a href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener">code.claude.com/docs/en/hooks</a> · 2026.10</div>
+</section>
+
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">HOOKS · 시점 전체 · 2/3</span>
+    <h1 class="rv" style="--d:.08s">Claude Code hook 시점 33개 — 언제 실행되나</h1>
+  </div>
+
+  <div class="hl rv" style="zoom:1.6;--d:.22s">
     <div class="hl-c"><div class="hl-t"><span class="no">05</span>서브에이전트 · 작업<span class="ct">5</span></div><div class="hl-r"><b>SubagentStart</b><span class="w">서브에이전트가 생성될 때</span></div><div class="hl-r"><b>SubagentStop</b><span class="bk">차단</span><span class="w">서브에이전트가 일을 마칠 때</span></div><div class="hl-r"><b>TaskCreated</b><span class="bk">차단</span><span class="w">작업 목록에 작업이 만들어질 때</span></div><div class="hl-r"><b>TaskCompleted</b><span class="bk">차단</span><span class="w">작업을 완료로 표시할 때</span></div><div class="hl-r"><b>TeammateIdle</b><span class="bk">차단</span><span class="w">에이전트 팀의 팀원이 쉬려 할 때</span></div></div>
     <div class="hl-c"><div class="hl-t"><span class="no">06</span>컨텍스트 · 모델<span class="ct">4</span></div><div class="hl-r"><b>PreCompact</b><span class="bk">차단</span><span class="w">컨텍스트 압축 직전 (수동 · 자동)</span></div><div class="hl-r"><b>PostCompact</b><span class="w">컨텍스트 압축이 끝난 뒤</span></div><div class="hl-r"><b>PreModelSwitch</b><span class="bk">차단</span><span class="w">모델 변경을 적용하기 직전</span></div><div class="hl-r"><b>PostModelSwitch</b><span class="w">모델이 바뀐 뒤</span></div></div>
     <div class="hl-c"><div class="hl-t"><span class="no">07</span>환경 변화<span class="ct">6</span></div><div class="hl-r"><b>ConfigChange</b><span class="bk">차단</span><span class="w">세션 중 설정 파일이 바뀔 때</span></div><div class="hl-r"><b>CwdChanged</b><span class="w">작업 디렉터리가 바뀔 때 (cd)</span></div><div class="hl-r"><b>DirectoryAdded</b><span class="w">/add-dir 로 작업 폴더를 추가할 때</span></div><div class="hl-r"><b>FileChanged</b><span class="w">지켜보는 파일(.env 등)이 바뀔 때</span></div><div class="hl-r"><b>WorktreeCreate</b><span class="bk">차단</span><span class="w">worktree 를 만들 때 · 기본 git 동작 대체</span></div><div class="hl-r"><b>WorktreeRemove</b><span class="bk">차단</span><span class="w">hook 이 만든 worktree 를 지울 때</span></div></div>
     <div class="hl-c"><div class="hl-t"><span class="no">08</span>MCP<span class="ct">2</span></div><div class="hl-r"><b>Elicitation</b><span class="bk">차단</span><span class="w">MCP 서버가 도구 실행 중 사용자 입력을 요청할 때</span></div><div class="hl-r"><b>ElicitationResult</b><span class="bk">차단</span><span class="w">사용자가 답한 뒤 · 서버로 보내기 전</span></div></div>
   </div>
 
-  <div class="ha fd" style="--d:.5s">
-    <div class="ha-h">에이전트마다 hook 이 다르다<span>시점 개념은 같아도 이름 · 작성 방식이 달라 옮겨 써야 한다</span></div>
-    <div><b>Claude Code</b><span class="m">settings.json 에 셸 명령 · exit 2 로 차단</span><code>PreToolUse · PostToolUse · Stop</code></div>
-    <div><b>opencode</b><span class="m">JS / TS 플러그인 · .opencode/plugins/</span><code>tool.execute.before · session.idle · file.edited</code></div>
-    <div><b>pi agent</b><span class="m">TypeScript 확장 · pi.on() · ~/.pi/agent/extensions/</span><code>tool_call · tool_result · agent_end · session_start</code></div>
+  <div class="mx-ft fd" style="--d:.6s"><b>★</b> 개발에서 자주 쓰는 시점 · <span class="hl-bk">차단</span> exit 2 로 막을 수 있다 (Stop 류는 「계속 일해」) · 출처 <a href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener">code.claude.com/docs/en/hooks</a> · 2026.10</div>
+</section>
+
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">HOOKS · 시점 전체 · 3/3</span>
+    <h1 class="rv" style="--d:.08s">에이전트마다 hook 이 다르다</h1>
   </div>
 
-  <div class="mx-ft fd" style="--d:.6s"><b>★</b> 개발에서 자주 쓰는 시점 · <span class="hl-bk">차단</span> exit 2 로 막을 수 있다 (Stop 류는 「계속 일해」) · 출처 <a href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener">code.claude.com/docs/en/hooks</a> · 2026.10</div>
+  <div class="rg art ha3" style="zoom:1.2">
+    <div class="jx-p fd" style="--d:.16s;margin:0 0 4px">시점 개념은 같아도 <b>이름 · 작성 방식이 달라</b> 에이전트를 바꾸면 hook 도 옮겨 써야 한다</div>
+    <div class="rg-cards rv" style="--d:.24s">
+      <div class="rg-c"><div class="rg-t">Claude Code</div><div class="rg-shape">settings.json 에 셸 명령</div><div class="rg-d">명령이 <b>exit 2</b> 로 끝나면 막는다</div><div class="rg-u"><b>시점 이름 예</b>PreToolUse · PostToolUse · Stop</div></div>
+      <div class="rg-c"><div class="rg-t">opencode</div><div class="rg-shape">JS / TS 플러그인</div><div class="rg-d"><b>.opencode/plugins/</b> 에 코드로 작성한다</div><div class="rg-u"><b>시점 이름 예</b>tool.execute.before · session.idle · file.edited</div></div>
+      <div class="rg-c"><div class="rg-t">pi agent</div><div class="rg-shape">TypeScript 확장 · pi.on()</div><div class="rg-d"><b>~/.pi/agent/extensions/</b> 에 확장으로 작성한다</div><div class="rg-u"><b>시점 이름 예</b>tool_call · tool_result · agent_end · session_start</div></div>
+    </div>
+  </div>
 </section>
 
 <!-- 35 ───────────────────────────────────────────── -->
@@ -2697,18 +2801,32 @@ description: 새 REST API 를 추가할 때 사용.
 
 <!-- 39 ───────────────────────────────────────────── -->
 <section class="slide">
-  <div class="eyebrow fd">LLM WIKI · 실습 · obsidian-second-brain</div>
+  <div class="eyebrow fd">LLM WIKI · 실습 · obsidian-second-brain · 1/2</div>
   <h1 class="rv" style="--d:.08s">코드를 위키로 만들고, 위키로 코드를 만든다</h1>
   <div class="hr fd" style="--d:.22s"></div>
 
-  <div class="body">
+  <div class="body" style="zoom:1.45">
     <div class="pre fd" style="--d:.26s"><span class="k">준비</span> 없을 때만 설치 (uv 필요) <code class="cmd">/plugin marketplace add eugeniughelbur/obsidian-second-brain</code><code class="cmd">/plugin install obsidian-second-brain@obsidian-second-brain</code></div>
-    <table class="itbl pt dense">
+    <table class="itbl pt zt dense">
       <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
       <tbody>
             <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">vault 만들기<i>빈 폴더 → init · wiki 스타일</i></td><td class="c"><code class="cmd">! mkdir ../koscom-wiki</code><code class="cmd">/obsidian-second-brain:obsidian-init</code></td><td class="k">볼트 경로 <code>../koscom-wiki</code> · 레이아웃 <b>wiki</b> 선택 → <code>_CLAUDE.md</code> · <code>index.md</code> · <code>raw/</code> · <code>wiki/</code> 생성 · 끝나면 <b>세션 재시작</b></td></tr>
             <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">코드 위키 생성<i>architect · 파일별 노트까지</i></td><td class="c"><code class="cmd">/obsidian-second-brain:obsidian-architect . 기본 Architecture 노트에 더해 src 와 build.gradle 파일마다 노트를 wiki/projects/edu-stock-chart/Code/ 에 원본 경로 그대로 만들어줘. 추론은 confidence: speculation 으로 표시</code></td><td class="k"><code>wiki/projects/edu-stock-chart/</code> 에 <b>Architecture 7개 · Code 17개</b> · 코드에 없는 말을 지어내지 않았는가</td></tr>
             <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">Obsidian 확인<i>앱에서 · 토큰 0</i></td><td class="c"><span style="color:var(--dim)">Obsidian → <b style="color:var(--ink)">Open folder as vault</b> → koscom-wiki → <b style="color:var(--ink)">Graph view</b></span></td><td class="k">Controller → Service → Mapper 연결이 보이는가 · 앱이 없으면 <code>wiki/**/*.md</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow fd">LLM WIKI · 실습 · obsidian-second-brain · 2/2</div>
+  <h1 class="rv" style="--d:.08s">코드를 위키로 만들고, 위키로 코드를 만든다</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body" style="zoom:1.25">
+    <table class="itbl pt zt dense">
+      <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
+      <tbody>
             <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">검색<i>find · 위키를 근거로</i></td><td class="c"><code class="cmd">/obsidian-second-brain:obsidian-find StockController 에서 이동평균 요청이 들어오면 어떤 서비스와 매퍼를 거쳐 DB 까지 가는지, 관련 테스트 파일도 같이 알려줘</code></td><td class="k">답이 <b>[[노트]] 링크</b>를 근거로 호출 흐름 · 테스트 4개를 짚는가</td></tr>
             <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">기록<i>capture · decide</i></td><td class="c"><code class="cmd">/obsidian-second-brain:obsidian-capture MovingAverageService 캐시에 TTL · eviction 없음. 개선 후보. 관련: [[MovingAverageService.java]]</code><code class="cmd">/obsidian-second-brain:obsidian-decide --formal window 범위 2~20 · 기본 5. 근거 @Min(2) @Max(20) · validateWindow. 이유는 코드에 없으니 TBD</code></td><td class="k"><code>wiki/concepts/</code> 아이디어 · <code>wiki/decisions/</code> ADR 에 <b>이유 TBD</b> 로 남는가 (지어내지 않았는가)</td></tr>
             <tr class="rv" style="--d:0.71s"><td class="n">06</td><td class="p">코드 생성<i>위키로 코드를 만든다</i></td><td class="c"><code class="cmd">/add-dir ../koscom-wiki</code><code class="cmd">koscom-wiki/wiki/projects/edu-stock-chart 노트를 근거로 같은 계층 구조의 최고 종가 조회 API GET /api/stocks/{symbol}/max-close 를 추가해줘</code></td><td class="k">위키를 근거로 같은 패턴으로 만드는가 · <code>/context</code> · 끝나면 <b>architect 재실행</b> (@user 블록은 유지)</td></tr>
@@ -2890,13 +3008,13 @@ description: 새 REST API 를 추가할 때 사용.
 <!-- 44 · M9 과제 1 실습 ───────────────────────────────────────────── -->
 <section class="slide wide">
   <div class="wide-head">
-    <span class="eyebrow fd">LOOP ENGINEERING · M9 과제 1 · 실습</span>
+    <span class="eyebrow fd">LOOP ENGINEERING · M9 과제 1 · 실습 · 1/2</span>
     <h1 class="rv" style="--d:.08s">순위 필터·정렬을 내 루프로 구현한다</h1>
   </div>
 
-  <div class="body m9-steps">
+  <div class="body m9-steps" style="zoom:1.5">
     <div class="pre fd" style="--d:.26s"><span class="k">준비</span> M8 에서 만든 내 루프 (완료 기준 · Stop 훅 · test-runner) · <b>edu-stock-chart</b> 폴더에서 연 Claude Code</div>
-    <table class="itbl pt dense">
+    <table class="itbl pt zt dense">
       <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>Claude Code 에 입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
       <tbody>
             <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">띄워 보기<i>구현 전 상태</i></td><td class="c"><code class="cmd">! ../scripts/start.sh</code><code class="cmd">! ..\scripts\start.bat</code></td><td class="k"><code>localhost:5173</code> 에서 <b>국내</b>를 눌러도 17개 그대로인가 · 위는 macOS · Linux, 아래는 Windows</td></tr>
@@ -2906,6 +3024,21 @@ description: 새 REST API 를 추가할 때 사용.
 - 정해진 값이 아니면(소문자 포함) 400 · 파라미터를 생략하면 지금과 같은 결과 · 응답 형식은 바꾸지 않는다
 - Controller → Service → Mapper 계층 · SQL 은 DashboardMapper.xml · StockController 와 MovingAverageService 는 수정하지 않는다
 - 각 조건과 400 을 검증하는 테스트를 추가하고 ./gradlew test 가 통과하면 끝</code></td><td class="k">Plan 이 나오면 <b>승인만</b> · 이후 입력하지 않는다</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">LOOP ENGINEERING · M9 과제 1 · 실습 · 2/2</span>
+    <h1 class="rv" style="--d:.08s">순위 필터·정렬을 내 루프로 구현한다</h1>
+  </div>
+
+  <div class="body m9-steps" style="zoom:1.75">
+    <table class="itbl pt zt dense">
+      <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>Claude Code 에 입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
+      <tbody>
             <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">지켜보기<i>개입 최소</i></td><td class="c"><span style="color:var(--faint)">— 입력 없음 —</span></td><td class="k">테스트 실패 → 스스로 고침을 반복하는가 · 잘못 가면 <b>코드를 고치지 말고</b> 기록</td></tr>
             <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">다시 띄우기<i>새 코드 반영</i></td><td class="c"><code class="cmd">! ../scripts/stop.sh &amp;&amp; ../scripts/start.sh</code></td><td class="k"><b>국내</b> 7개 · <b>국내 + 급상승</b> 1위 코스모스바이오</td></tr>
             <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">예시로 확인<i>실제 서버 호출</i></td><td class="c"><code class="cmd">실행 중인 서버에 다음을 호출해 기대값과 맞는지 표로 보여줘: 파라미터 없음 17개 1위 SOXL · market=DOMESTIC&amp;sort=RISE 7개 1위 코스모스바이오 · market=OVERSEAS&amp;sort=FALL 10개 1위 SOXS · market=KR 과 sort=rise 는 400</code></td><td class="k">5개 모두 일치하는가</td></tr>
@@ -2921,17 +3054,17 @@ description: 새 REST API 를 추가할 때 사용.
 <!-- M9 · 루프에 화면 검증 ───────────────────────────── -->
 <section class="slide wide">
   <div class="wide-head">
-    <span class="eyebrow fd">LOOP ENGINEERING · M9 · 루프 강화</span>
+    <span class="eyebrow fd">LOOP ENGINEERING · M9 · 루프 강화 · 1/2</span>
     <h1 class="rv" style="--d:.08s">테스트 다음은 화면 — Playwright 를 루프의 검증에 넣는다</h1>
   </div>
 
-  <div class="body m9-steps">
+  <div class="body m9-steps" style="zoom:1.4">
     <div class="pre fd" style="--d:.26s"><span class="k">준비</span> 과제 1 을 마치고 서비스가 떠 있는 상태 · Playwright MCP 연결 (32장) · <b>edu-stock-chart</b> 폴더에서 연 Claude Code</div>
     <div class="m9-flow fd" style="--d:.3s">
       <span>구현</span><i>→</i><span>테스트<em>Stop 훅 · test-runner</em></span><i>→</i><span>다시 띄우기<em>../scripts</em></span><i>→</i><span class="new">화면 확인<em>ui-verifier · Playwright</em></span><i>→</i><span>끝</span>
       <b>실패하면 어느 단계든 → 고치고 처음부터</b>
     </div>
-    <table class="itbl pt dense">
+    <table class="itbl pt zt dense">
       <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>Claude Code 에 입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
       <tbody>
             <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">검증 노드 만들기<i>ui-verifier 서브에이전트</i></td><td class="c"><code class="cmd">화면 검증 전용 서브에이전트를 .claude/agents/ui-verifier.md 로 만들어줘.
@@ -2944,6 +3077,21 @@ description: 새 REST API 를 추가할 때 사용.
 3. 해외와 급하락을 누르면 1행은 SOXS
 4. 검색창에 삼성을 입력하면 목록 4개 · 첫 항목은 삼성SDI
 5. 검색창에 % 를 입력하면 「검색 결과가 없습니다」</code></td><td class="k">5개가 저장되는가 · 시나리오는 <b>사람이 정한</b> 화면의 정답</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">LOOP ENGINEERING · M9 · 루프 강화 · 2/2</span>
+    <h1 class="rv" style="--d:.08s">테스트 다음은 화면 — Playwright 를 루프의 검증에 넣는다</h1>
+  </div>
+
+  <div class="body m9-steps" style="zoom:1.85">
+    <table class="itbl pt zt dense">
+      <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>Claude Code 에 입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
+      <tbody>
             <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">완료 기준에 넣기<i>CLAUDE.md</i></td><td class="c"><code class="cmd">CLAUDE.md 의 완료 기준에 추가해줘: edu-stock-chart-ui 가 호출하는 API 를 바꿨다면 ../scripts 의 stop · start 스크립트로 다시 띄우고 ui-verifier 로 ui-scenarios.md 를 확인해 모두 통과해야 끝이다. 실패하면 원인을 고치고 다시 확인한다</code></td><td class="k"><b>테스트 통과 → 화면 확인</b> 순서로 들어갔는가</td></tr>
             <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">빨간불 먼저<i>검증기를 검증</i></td><td class="c"><code class="cmd">ui-verifier 로 ui-scenarios.md 를 확인해줘</code></td><td class="k"><b>1~3 통과</b> (과제 1 완료) · <b>4~5 실패</b> (검색 미구현 → 「검색 기능 준비 중」) · 실패를 못 잡으면 시나리오를 고친다</td></tr>
       </tbody>
@@ -3022,13 +3170,13 @@ description: 새 REST API 를 추가할 때 사용.
 <!-- 46 · M9 과제 2 실습 ───────────────────────────────────────────── -->
 <section class="slide wide">
   <div class="wide-head">
-    <span class="eyebrow fd">LOOP ENGINEERING · M9 과제 2 · 실습</span>
+    <span class="eyebrow fd">LOOP ENGINEERING · M9 과제 2 · 실습 · 1/2</span>
     <h1 class="rv" style="--d:.08s">종목 검색을 고친 루프로 다시 돌린다</h1>
   </div>
 
-  <div class="body m9-steps">
+  <div class="body m9-steps" style="zoom:1.42">
     <div class="pre fd" style="--d:.26s"><span class="k">준비</span> 화면 검증을 붙인 내 루프 (Stop 훅 · test-runner · <b>ui-verifier · ui-scenarios.md</b>) · <b>edu-stock-chart</b> 폴더에서 연 Claude Code</div>
-    <table class="itbl pt dense">
+    <table class="itbl pt zt dense">
       <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>Claude Code 에 입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
       <tbody>
             <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">띄워 보기<i>구현 전 상태</i></td><td class="c"><code class="cmd">! ../scripts/stop.sh &amp;&amp; ../scripts/start.sh</code><code class="cmd">! ..\scripts\stop.bat &amp;&amp; ..\scripts\start.bat</code></td><td class="k">검색창에 <b>삼성</b> → <code>검색 기능 준비 중</code> 이 뜨는가 · 아래는 Windows</td></tr>
@@ -3039,6 +3187,21 @@ description: 새 REST API 를 추가할 때 사용.
 - name 오름차순 · 최대 10건 · 결과가 없으면 200 과 빈 목록
 - Controller → Service → Mapper 계층 · 검색용 Controller · Service · Mapper 를 새로 만든다 · StockController 와 MovingAverageService 는 수정하지 않는다
 - 각 조건을 검증하는 테스트를 추가하고 ./gradlew test 가 통과하면 끝</code></td><td class="k">Plan 이 나오면 <b>승인만</b> · 이후 입력하지 않는다</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">LOOP ENGINEERING · M9 과제 2 · 실습 · 2/2</span>
+    <h1 class="rv" style="--d:.08s">종목 검색을 고친 루프로 다시 돌린다</h1>
+  </div>
+
+  <div class="body m9-steps" style="zoom:1.7">
+    <table class="itbl pt zt dense">
+      <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>Claude Code 에 입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
+      <tbody>
             <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">지켜보기<i>1차와 비교</i></td><td class="c"><span style="color:var(--faint)">— 입력 없음 —</span></td><td class="k">테스트 통과 뒤 <b>스스로 다시 띄우고 ui-verifier 를 부르는가</b> · 과제 1 에서 고친 규칙이 같은 실수를 막는가</td></tr>
             <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">화면 검증 보고<i>루프가 한다</i></td><td class="c"><span style="color:var(--faint)">— 입력 없음 —</span></td><td class="k">시나리오 <b>5개 모두 통과</b>를 보고하고 끝나는가 · 4~5 가 실패면 스스로 고쳐 다시 확인하는가</td></tr>
             <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">예시로 확인<i>실제 서버 호출</i></td><td class="c"><code class="cmd">실행 중인 서버에 /api/stocks/search 를 호출해 기대값과 맞는지 표로 보여줘: 삼성 4개(삼성SDI 가 처음) · tsla 테슬라 · 앞뒤 공백 sox SOXL·SOXS · 0 은 10개 · % 와 _ 와 없는종목 은 빈 목록 · 공백만과 q 없음은 400</code></td><td class="k">모두 일치하는가</td></tr>
