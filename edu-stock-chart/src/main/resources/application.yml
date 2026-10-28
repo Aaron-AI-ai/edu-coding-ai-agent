@@ -15,7 +15,8 @@ spring:
 
   sql:
     init:
-      mode: always          # schema.sql → data.sql 순서로 실행
+      mode: always          # schema.sql → data.sql → data-detail.sql 순서로 실행
+      data-locations: classpath:data.sql, classpath:data-detail.sql   # data-detail.sql: 종목 상세 시드 (SOXL 외 16종목)
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
