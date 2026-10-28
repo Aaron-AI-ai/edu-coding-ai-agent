@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.koscom.edu.stockchart.mapper.DashboardMapper">
+
+    <select id="findIndices" resultType="MarketIndex">
+        SELECT code, name, tag, tag_hot, price, change_amount, change_rate,
+               high_52w, low_52w, sparkline, on_board, on_ticker
+          FROM market_index
+         ORDER BY sort_order ASC
+    </select>
+
+    <select id="findSchedules" resultType="EconomicSchedule">
+        SELECT id, schedule_date, title
+          FROM economic_schedule
+         ORDER BY schedule_date ASC, id ASC
+    </select>
+
+    <select id="findRankings" resultType="StockRanking">
+        SELECT rank_no, symbol, name, logo_text, logo_color, overseas, price, change_rate,
+               trade_amount, market_cap, buy_ratio, industry, ai_summary
+          FROM stock_ranking
+         ORDER BY rank_no ASC
+    </select>
+
+</mapper>

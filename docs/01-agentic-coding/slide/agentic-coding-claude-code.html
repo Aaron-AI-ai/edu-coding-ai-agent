@@ -87,12 +87,12 @@
   .crit .q { font-size: 36px; font-weight: 300; letter-spacing: -0.5px; border-bottom: 2px solid var(--ink); padding-bottom: 6px; }
 
   /* ── 스펙트럼 ── */
-  .spectrum { margin-top: 42px; display: flex; gap: 16px; }
+  .spectrum { margin-top: 26px; display: flex; gap: 16px; }
   .step {
     flex: 1;
     border: 1.5px solid var(--rule);
     border-radius: 3px;
-    padding: 20px 22px 22px;
+    padding: 16px 20px 16px;
     display: flex;
     flex-direction: column;
     background: var(--page);
@@ -100,24 +100,28 @@
   .step.lead { border: 2px solid var(--ink); background: var(--ink); color: var(--page); }
   .step .n { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13px; letter-spacing: 2px; color: var(--faint); }
   .step.lead .n { color: var(--invert-dim); }
-  .step .name { margin-top: 12px; font-size: 30px; font-weight: 400; letter-spacing: -0.4px; }
-  .step .who { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--rule); font-size: 17px; line-height: 1.5; color: var(--dim); }
+  .step .name { margin-top: 8px; font-size: 30px; font-weight: 400; letter-spacing: -0.4px; }
+  .step .who { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--rule); font-size: 17px; line-height: 1.5; color: var(--dim); }
   .step.lead .who { border-top-color: var(--invert-rule); color: #C9C6C0; }
   .step .who b { color: var(--ink); font-weight: 500; }
   .step.lead .who b { color: var(--page); }
-  .step .human { margin-top: 14px; font-size: 16px; color: var(--faint); }
+  .step .human { margin-top: 10px; margin-bottom: 12px; font-size: 16px; color: var(--faint); }
   .step.lead .human { color: var(--invert-dim); }
+  .step .thumb { position: relative; margin-top: auto; height: 84px; border: 1px solid var(--rule); border-radius: 2px; overflow: hidden; background: var(--panel); }
+  .step .thumb img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, center top); }
+  .step .tool { position: absolute; left: 6px; bottom: 6px; display: flex; align-items: center; gap: 6px; padding: 3px 9px 3px 6px; font-size: 12px; color: var(--ink); background: var(--page); border: 1px solid var(--rule); border-radius: 999px; }
+  .step .tool i { width: 14px; height: 14px; flex-shrink: 0; background: currentColor; -webkit-mask: var(--i) center / contain no-repeat; mask: var(--i) center / contain no-repeat; }
   .step .human span { display: block; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 11px; letter-spacing: 1.5px; margin-bottom: 5px; }
 
   /* ── 축 ── */
-  .axis { margin-top: 26px; display: flex; align-items: center; gap: 18px; }
+  .axis { margin-top: 16px; display: flex; align-items: center; gap: 18px; }
   .axis .cap { font-size: 18px; color: var(--dim); flex-shrink: 0; }
   .axis .cap b { color: var(--ink); font-weight: 500; }
   .axis .line { flex: 1; height: 1px; background: linear-gradient(to right, var(--rule), var(--ink)); position: relative; }
   .axis .line::after { content: ""; position: absolute; right: -1px; top: -3.5px; border-left: 8px solid var(--ink); border-top: 4px solid transparent; border-bottom: 4px solid transparent; }
 
   /* ── 하단 ── */
-  .foot { margin-top: auto; padding-top: 30px; display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; }
+  .foot { margin-top: auto; padding-top: 14px; display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; }
   .shift { font-size: 22px; line-height: 1.55; color: var(--dim); max-width: 60ch; }
   .shift b { color: var(--ink); font-weight: 500; }
   .shift .head { display: block; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 2px; color: var(--faint); margin-bottom: 10px; }
@@ -259,6 +263,15 @@
   .rstep.key .t { position: relative; }
   .rstep.key { background: linear-gradient(to right, var(--panel), transparent); margin-left: -12px; padding-left: 12px; }
 
+  .orca-shot { flex: 1.25; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  .orca-shot img { display: block; width: 100%; border: 1px solid var(--rule); border-radius: 4px; }
+  .orca-shot .cap { font-size: 14px; color: var(--faint); }
+  .orca-lead { font-size: 17px; line-height: 1.5; color: var(--dim); padding-bottom: 12px; }
+  .orca-lead b { color: var(--ink); font-weight: 500; }
+  .orca-lead span { margin-left: 8px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 1px; color: var(--faint); }
+  .steps-col .rstep { padding: 9px 0; }
+  .steps-col .rstep .t { font-size: 17px; }
+  .steps-col .rstep .d { font-size: 14px; margin-top: 2px; }
   .watch { margin-top: auto; padding-top: 22px; }
   .watch .h { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 2px; color: var(--faint); }
   .watch ul { margin: 12px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
@@ -870,6 +883,75 @@
   .ha code { display: block; margin-top: 2px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12.5px; color: var(--ink); }
   .mx-ft a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
   .vsd-f .q { grid-column: 1 / -1; padding-top: 14px; border-top: 1px solid var(--invert-rule); font-size: 17px; }
+
+  /* ── M9 과제 스펙 장표 ── */
+  .m9 { margin-top: 26px; flex: 1; min-height: 0; display: grid; grid-template-columns: 1.18fr 1fr; gap: 48px; word-break: keep-all; }
+  .m9-col { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+  .m9 h3 { margin: 0 0 10px; padding-bottom: 8px; border-bottom: 1.5px solid var(--ink); font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13px; letter-spacing: 2px; font-weight: 500; color: var(--faint); }
+  .m9 p { margin: 8px 0 0; font-size: 17px; line-height: 1.5; color: var(--dim); }
+  .m9 p b, .m9 li b { color: var(--ink); font-weight: 500; }
+  .m9 code { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: .9em; }
+  .m9 code.api { display: inline-block; background: #111110; color: #E8E6E1; border-radius: 3px; padding: 4px 12px; font-size: 15px; }
+  .m9 table { width: 100%; border-collapse: collapse; }
+  .m9 th { text-align: left; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 1.5px; font-weight: 500; color: var(--faint); padding: 0 10px 6px 0; }
+  .m9 td { padding: 8px 14px 8px 0; border-top: 1px solid var(--rule); font-size: 17px; line-height: 1.45; color: var(--dim); vertical-align: top; }
+  .m9 td:first-child { color: var(--ink); font-weight: 500; white-space: nowrap; }
+  .m9 td code { color: var(--ink); }
+  .m9 ul, .m9 ol { margin: 0; padding-left: 22px; font-size: 17px; line-height: 1.7; color: var(--dim); }
+  .m9-ui { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 14px 16px; border-radius: 8px; background: #17171c; font-size: 15px; }
+  .m9-ui .seg { display: flex; padding: 3px; border-radius: 7px; background: #1f1f25; }
+  .m9-ui .seg span { padding: 4px 8px; border-radius: 5px; color: #6e6e78; }
+  .m9-ui .seg span.hit { color: #E8E6E1; box-shadow: inset 0 0 0 1.5px #3485fa; }
+  .m9-ui .seg span.on { background: #33333b; color: #E8E6E1; }
+  .m9-ui .box { width: 300px; padding: 7px 12px; border: 1px solid #33333b; border-radius: 8px; color: #E8E6E1; }
+  .m9-ui .drop { width: 300px; margin-top: 4px; padding: 7px 12px; border: 1px solid #33333b; border-radius: 8px; color: #8d8d96; font-size: 14px; line-height: 1.6; }
+  .m9-ui .drop b { color: #E8E6E1; font-weight: 500; }
+  .m9-ui .st { display: flex; flex-direction: column; }
+  .m9-ui .st i { font-style: normal; font-size: 11px; letter-spacing: 1.5px; color: #8d8d96; margin-bottom: 4px; }
+  .m9-ui:has(.st) { align-items: flex-start; }
+  .m9-ui .arrow { color: #8d8d96; padding: 0 6px; margin-top: 26px; }
+  .m9-steps { margin-top: 22px; }
+  .m9-steps .pt td.c { width: 780px; }
+  .m9-steps .pt code.cmd { font-size: 14px; line-height: 1.55; }
+  .m9-steps .pt td.k { font-size: 16px; }
+  .m9-flow { display: flex; align-items: center; gap: 10px; margin: 4px 0 18px; font-size: 16px; color: var(--ink); }
+  .m9-flow span { display: flex; flex-direction: column; padding: 8px 14px; border: 1.5px solid var(--rule); border-radius: 8px; line-height: 1.3; }
+  .m9-flow span.new { border-color: var(--ink); font-weight: 500; }
+  .m9-flow em { font-style: normal; font-size: 12.5px; font-weight: 300; color: var(--faint); }
+  .m9-flow i { font-style: normal; color: var(--faint); }
+  .m9-flow b { margin-left: 18px; font-size: 14.5px; font-weight: 400; color: var(--dim); }
+
+  /* ── 코드 리뷰 장표 ── */
+  .cr { margin-top: 26px; flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; word-break: keep-all; }
+  .cr h3 { margin: 0 0 12px; padding-bottom: 8px; border-bottom: 1.5px solid var(--ink); font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13px; letter-spacing: 2px; font-weight: 500; color: var(--faint); }
+  .cr-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .cr-stats > div { border: 1.5px solid var(--rule); border-radius: 10px; padding: 18px 22px; }
+  .cr-stats > div.hot { border-color: var(--ink); }
+  .cr-stats b { display: block; font-size: 58px; font-weight: 300; line-height: 1.1; color: var(--ink); letter-spacing: -1px; }
+  .cr-stats span { font-size: 18px; color: var(--dim); }
+  .cr-src { margin-top: 12px; font-size: 14px; line-height: 1.55; color: var(--faint); }
+  .cr-src a { color: var(--faint); }
+  .cr-list { display: flex; flex-direction: column; gap: 14px; }
+  .cr-list > div { display: grid; grid-template-columns: 210px 1fr; gap: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--rule); }
+  .cr-list > div:last-child { border-bottom: 0; }
+  .cr-list b { font-size: 20px; font-weight: 500; color: var(--ink); line-height: 1.35; }
+  .cr-list span { font-size: 17px; line-height: 1.55; color: var(--dim); }
+  .cr-list span b, .cr-list span code { font-size: inherit; }
+  .cr-list span b { font-weight: 500; }
+  .cr-list small { display: block; margin-top: 4px; font-size: 13px; color: var(--faint); }
+  .cr-list small a { color: var(--faint); }
+  .cr-ban { margin-top: 18px; padding: 14px 20px; border-radius: 10px; background: var(--invert-bg); color: var(--invert-fg); font-size: 18px; line-height: 1.5; }
+  .cr-ban b { font-weight: 500; }
+  .cr-ban i { display: block; margin-top: 4px; font-style: normal; font-size: 13px; color: var(--invert-dim); }
+  .cr-lad { display: flex; flex-direction: column; gap: 10px; }
+  .cr-lad > div { display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; padding: 12px 16px; border: 1.5px solid var(--rule); border-radius: 10px; }
+  .cr-lad > div.pick { border-color: var(--ink); }
+  .cr-lad .no { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 14px; color: var(--faint); padding-top: 3px; }
+  .cr-lad > div > div > b { display: block; font-size: 19px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+  .cr-lad span { font-size: 16px; line-height: 1.5; color: var(--dim); }
+  .cr-lad span b { color: var(--ink); font-weight: 500; }
+  .cr-lad em { font-style: normal; font-size: 11.5px; letter-spacing: 1px; color: var(--ink); border: 1px solid var(--ink); border-radius: 999px; padding: 0 7px; margin-left: 8px; vertical-align: 2px; }
+  .cr-lad .x { color: var(--faint); }
 </style>
 
 <div id="stage"><div id="board">
@@ -892,6 +974,7 @@
         <div class="name">자동완성</div>
         <div class="who"><b>사람</b><br>커서 위치가 곧 지시</div>
         <div class="human"><span>사람의 일</span>계속 타이핑</div>
+        <div class="thumb" style="--pos:left top"><img src="assets/ex-copilot.png" alt="VS Code Copilot 화면 예시"><span class="tool"><i style="--i:url('data:image/svg+xml,%3Csvg role=%22img%22 viewBox=%220 0 24 24%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cpath d=%22M23.922 16.997C23.061 18.492 18.063 22.02 12 22.02 5.937 22.02.939 18.492.078 16.997A.641.641 0 0 1 0 16.741v-2.869a.883.883 0 0 1 .053-.22c.372-.935 1.347-2.292 2.605-2.656.167-.429.414-1.055.644-1.517a10.098 10.098 0 0 1-.052-1.086c0-1.331.282-2.499 1.132-3.368.397-.406.89-.717 1.474-.952C7.255 2.937 9.248 1.98 11.978 1.98c2.731 0 4.767.957 6.166 2.093.584.235 1.077.546 1.474.952.85.869 1.132 2.037 1.132 3.368 0 .368-.014.733-.052 1.086.23.462.477 1.088.644 1.517 1.258.364 2.233 1.721 2.605 2.656a.841.841 0 0 1 .053.22v2.869a.641.641 0 0 1-.078.256Zm-11.75-5.992h-.344a4.359 4.359 0 0 1-.355.508c-.77.947-1.918 1.492-3.508 1.492-1.725 0-2.989-.359-3.782-1.259a2.137 2.137 0 0 1-.085-.104L4 11.746v6.585c1.435.779 4.514 2.179 8 2.179 3.486 0 6.565-1.4 8-2.179v-6.585l-.098-.104s-.033.045-.085.104c-.793.9-2.057 1.259-3.782 1.259-1.59 0-2.738-.545-3.508-1.492a4.359 4.359 0 0 1-.355-.508Zm2.328 3.25c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm-5 0c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm3.313-6.185c.136 1.057.403 1.913.878 2.497.442.544 1.134.938 2.344.938 1.573 0 2.292-.337 2.657-.751.384-.435.558-1.15.558-2.361 0-1.14-.243-1.847-.705-2.319-.477-.488-1.319-.862-2.824-1.025-1.487-.161-2.192.138-2.533.529-.269.307-.437.808-.438 1.578v.021c0 .265.021.562.063.893Zm-1.626 0c.042-.331.063-.628.063-.894v-.02c-.001-.77-.169-1.271-.438-1.578-.341-.391-1.046-.69-2.533-.529-1.505.163-2.347.537-2.824 1.025-.462.472-.705 1.179-.705 2.319 0 1.211.175 1.926.558 2.361.365.414 1.084.751 2.657.751 1.21 0 1.902-.394 2.344-.938.475-.584.742-1.44.878-2.497Z%22/%3E%3C/svg%3E')"></i>VS Code Copilot</span></div>
       </div>
 
       <div class="step rv" style="--d:.5s">
@@ -899,6 +982,7 @@
         <div class="name">대화</div>
         <div class="who"><b>사람</b><br>매 턴마다 지시</div>
         <div class="human"><span>사람의 일</span>붙여넣고 옮기기</div>
+        <div class="thumb" style="--pos:center"><img src="assets/ex-chatgpt.png" alt="ChatGPT 화면 예시"><span class="tool"><i style="--i:url('data:image/svg+xml,%3Csvg role=%22img%22 viewBox=%220 0 24 24%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cpath d=%22M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z%22/%3E%3C/svg%3E')"></i>ChatGPT</span></div>
       </div>
 
       <div class="step rv" style="--d:.58s">
@@ -906,6 +990,7 @@
         <div class="name">워크플로</div>
         <div class="who"><b>사람</b><br>경로를 미리 고정</div>
         <div class="human"><span>사람의 일</span>파이프라인 설계</div>
+        <div class="thumb" style="--pos:center"><img src="assets/ex-n8n.png" alt="n8n 화면 예시"><span class="tool"><i style="--i:url('data:image/svg+xml,%3Csvg role=%22img%22 viewBox=%220 0 24 24%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cpath d=%22M21.4737 5.6842c-1.1772 0-2.1663.8051-2.4468 1.8947h-2.8955c-1.235 0-2.289.893-2.492 2.111l-.1038.623a1.263 1.263 0 0 1-1.246 1.0555H11.289c-.2805-1.0896-1.2696-1.8947-2.4468-1.8947s-2.1663.8051-2.4467 1.8947H4.973c-.2805-1.0896-1.2696-1.8947-2.4468-1.8947C1.1311 9.4737 0 10.6047 0 12s1.131 2.5263 2.5263 2.5263c1.1772 0 2.1663-.8051 2.4468-1.8947h1.4223c.2804 1.0896 1.2696 1.8947 2.4467 1.8947 1.1772 0 2.1663-.8051 2.4468-1.8947h1.0008a1.263 1.263 0 0 1 1.2459 1.0555l.1038.623c.203 1.218 1.257 2.111 2.492 2.111h.3692c.2804 1.0895 1.2696 1.8947 2.4468 1.8947 1.3952 0 2.5263-1.131 2.5263-2.5263s-1.131-2.5263-2.5263-2.5263c-1.1772 0-2.1664.805-2.4468 1.8947h-.3692a1.263 1.263 0 0 1-1.246-1.0555l-.1037-.623A2.52 2.52 0 0 0 13.9607 12a2.52 2.52 0 0 0 .821-1.4794l.1038-.623a1.263 1.263 0 0 1 1.2459-1.0555h2.8955c.2805 1.0896 1.2696 1.8947 2.4468 1.8947 1.3952 0 2.5263-1.131 2.5263-2.5263s-1.131-2.5263-2.5263-2.5263m0 1.2632a1.263 1.263 0 0 1 1.2631 1.2631 1.263 1.263 0 0 1-1.2631 1.2632 1.263 1.263 0 0 1-1.2632-1.2632 1.263 1.263 0 0 1 1.2632-1.2631M2.5263 10.7368A1.263 1.263 0 0 1 3.7895 12a1.263 1.263 0 0 1-1.2632 1.2632A1.263 1.263 0 0 1 1.2632 12a1.263 1.263 0 0 1 1.2631-1.2632m6.3158 0A1.263 1.263 0 0 1 10.1053 12a1.263 1.263 0 0 1-1.2632 1.2632A1.263 1.263 0 0 1 7.579 12a1.263 1.263 0 0 1 1.2632-1.2632m10.1053 3.7895a1.263 1.263 0 0 1 1.2631 1.2632 1.263 1.263 0 0 1-1.2631 1.2631 1.263 1.263 0 0 1-1.2632-1.2631 1.263 1.263 0 0 1 1.2632-1.2632%22/%3E%3C/svg%3E')"></i>n8n</span></div>
       </div>
 
       <div class="step lead rv" style="--d:.66s">
@@ -913,6 +998,7 @@
         <div class="name">에이전트</div>
         <div class="who"><b>모델</b><br>경로를 정하고 스스로 검증</div>
         <div class="human"><span>사람의 일</span>기준을 주고 결과를 검증</div>
+        <div class="thumb" style="--pos:center top"><img src="assets/ex-claude-code.png" alt="Claude Code 화면 예시"><span class="tool"><i style="--i:url('data:image/svg+xml,%3Csvg role=%22img%22 viewBox=%220 0 24 24%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cpath d=%22m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z%22/%3E%3C/svg%3E')"></i>Claude Code</span></div>
       </div>
     </div>
 
@@ -1314,6 +1400,84 @@
   </div>
 </section>
 
+<!-- 06b ──────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">SECRET RECIPE 02 · ORCA</div>
+  <h1 class="rv" style="--d:.08s">에이전트 여러 개를 한 화면에서, Orca</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="recipe">
+
+      <div class="orca-shot rv" style="--d:.3s">
+        <img src="assets/orca-app.jpg" alt="Orca 데스크톱 앱 — Claude Code와 Codex를 워크트리별로 동시에 실행하고 모바일 앱으로 확인하는 화면">
+        <div class="cap">Claude Code · Codex 를 워크트리별 탭으로 동시에 실행 — 오른쪽은 모바일 앱</div>
+      </div>
+
+      <div class="steps-col">
+        <div class="orca-lead fd" style="--d:.34s">CLI 에이전트를 <b>격리된 git 워크트리</b>에서 병렬로 돌리는 오픈소스 데스크톱 앱 <span>Stably AI · MIT</span></div>
+        <div class="rstep rv" style="--d:0.42s">
+          <span class="n">01</span>
+          <span>
+            <div class="t">병렬 워크트리</div>
+            <div class="d">프롬프트 하나를 에이전트 5개에 나눠, 각자 격리된 워크트리에서 돌리고 결과를 비교해 채택</div>
+          </span>
+        </div>
+        <div class="rstep rv" style="--d:0.47s">
+          <span class="n">02</span>
+          <span>
+            <div class="t">터미널 분할</div>
+            <div class="d">무제한 분할 · 재시작해도 유지되는 스크롤백</div>
+          </span>
+        </div>
+        <div class="rstep rv" style="--d:0.52s">
+          <span class="n">03</span>
+          <span>
+            <div class="t">디자인 모드</div>
+            <div class="d">내장 브라우저에서 UI 요소를 클릭하면 HTML · CSS · 스크린샷이 프롬프트로</div>
+          </span>
+        </div>
+        <div class="rstep rv" style="--d:0.57s">
+          <span class="n">04</span>
+          <span>
+            <div class="t">GitHub · Linear 연동</div>
+            <div class="d">앱 안에서 PR · 이슈를 보고, 작업에서 바로 워크트리 생성</div>
+          </span>
+        </div>
+        <div class="rstep rv" style="--d:0.62s">
+          <span class="n">05</span>
+          <span>
+            <div class="t">SSH 워크트리</div>
+            <div class="d">원격 서버에서 에이전트를 돌리고 파일 편집 · git · 터미널을 그대로</div>
+          </span>
+        </div>
+        <div class="rstep rv" style="--d:0.67s">
+          <span class="n">06</span>
+          <span>
+            <div class="t">diff 주석</div>
+            <div class="d">AI가 만든 diff 줄에 코멘트를 달아 에이전트에게 되돌려 보낸다</div>
+          </span>
+        </div>
+        <div class="rstep rv" style="--d:0.72s">
+          <span class="n">07</span>
+          <span>
+            <div class="t">파일 끌어다 놓기</div>
+            <div class="d">파일 · 이미지를 에이전트 프롬프트로 바로 드래그</div>
+          </span>
+        </div>
+        <div class="rstep rv" style="--d:0.77s">
+          <span class="n">08</span>
+          <span>
+            <div class="t">모바일 앱 · Orca CLI</div>
+            <div class="d">휴대폰에서 완료 알림과 후속 지시 · 에이전트가 <code>orca</code> 명령으로 Orca를 조작</div>
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- 07 ───────────────────────────────────────────── -->
 <section class="slide">
   <div class="eyebrow fd">CLAUDE CODE 기본 제공 기능 · SLASH COMMANDS 1</div>
@@ -1572,33 +1736,6 @@
   </div>
 </section>
 
-<!-- 12 ───────────────────────────────────────────── -->
-<section class="slide">
-  <div class="eyebrow fd">SECRET RECIPE 04</div>
-  <h1 class="rv" style="--d:.08s">플러그인 일곱 개를 설치한다</h1>
-  <div class="hr fd" style="--d:.22s"></div>
-
-  <div class="body">
-    <table class="itbl">
-      <thead><tr class="fd" style="--d:.28s"><th></th><th>플러그인</th><th>설치 · 클릭하면 복사</th><th>확인</th></tr></thead>
-      <tbody>
-            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">context7<i>최신 문서 조회 (MCP)</i></td><td class="c"><code class="cmd">/plugin install context7@claude-plugins-official</code></td><td>"Spring Boot 3.4 문서를 조회해줘" → <b style='color:var(--ink)'>도구 호출</b>이 뜨는지</td></tr>
-            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">playwright<i>브라우저로 화면 검증 (MCP)</i></td><td class="c"><code class="cmd">/plugin install playwright@claude-plugins-official</code></td><td>"localhost:5173 을 열어줘" → <b style='color:var(--ink)'>브라우저 도구 호출</b>이 뜨는지</td></tr>
-            <tr class="rv" style="--d:0.57s"><td class="n">03</td><td class="p">ponytail<i>가장 단순한 해법을 먼저 고른다</i></td><td class="c"><code class="cmd">/plugin marketplace add DietrichGebert/ponytail<br>/plugin install ponytail@ponytail</code></td><td>새 세션에서 <b style='color:var(--ink)'>답변이 짧아지고 단순해지는지</b></td></tr>
-            <tr class="rv" style="--d:0.64s"><td class="n">04</td><td class="p">remotion<i>React로 영상 만들기</i></td><td class="c"><code class="cmd">/plugin marketplace add remotion-dev/claude-code-plugin<br>/plugin install remotion@remotion</code></td><td><code>/</code> 를 눌러 <b style='color:var(--ink)'>remotion</b> 항목이 보이는지</td></tr>
-            <tr class="rv" style="--d:0.71s"><td class="n">05</td><td class="p">archify<i>아키텍처 · 시퀀스 도식</i></td><td class="c"><code class="cmd">npx skills add tt-a1i/archify -g</code></td><td><code>/</code> 를 눌러 <b style='color:var(--ink)'>archify</b> 스킬이 보이는지</td></tr>
-            <tr class="rv" style="--d:0.78s"><td class="n">06</td><td class="p">eli5<i>코드 · 오류를 눈높이에 맞춰 설명</i></td><td class="c"><code class="cmd"><span class="d">PS&gt; </span>git clone https://github.com/DreambigOu/ELI5.git<br><span class="d">PS&gt; </span>New-Item -ItemType Directory -Force "$HOME\.claude\skills" | Out-Null<br><span class="d">PS&gt; </span>Copy-Item -Recurse ELI5\skills\eli5 "$HOME\.claude\skills\eli5"</code></td><td>"이 오류를 초등학생에게 설명해줘" → <b style='color:var(--ink)'>eli5</b> 스킬이 쓰이는지</td></tr>
-            <tr class="rv" style="--d:0.85s"><td class="n">07</td><td class="p">claude-mem<i>세션 기억 저장 · 주입</i></td><td class="c"><code class="cmd">/plugin marketplace add thedotmack/claude-mem<br>/plugin install claude-mem</code></td><td>Claude Code <b style='color:var(--ink)'>재시작</b> 후 <code>/mcp</code> 에 claude-mem 이 보이는지</td></tr>
-      </tbody>
-    </table>
-
-    <div class="inote fd" style="--d:.9s">
-      <div><span class="k">범위</span>세 번째 <b>"이 저장소에서만"</b> 을 고른다 — 실습이 끝나면 개인 환경에 남지 않는다</div>
-      <div><span class="k">정리</span><code>claude plugin uninstall &lt;이름&gt;@claude-plugins-official --scope local</code></div>
-    </div>
-  </div>
-</section>
-
 <!-- 13 ───────────────────────────────────────────── -->
 <section class="slide">
   <div class="eyebrow fd">SKILL PACKS · 설명 + 2일차 강사 시연</div>
@@ -1760,6 +1897,31 @@
   </div>
 </section>
 
+<!-- 16b ──────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">PLUGINS · 실습 · playwright</div>
+  <h1 class="rv" style="--d:.08s">Playwright 를 설치하고 Swagger 를 눌러 본다</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="pre fd" style="--d:.26s"><span class="k">목표</span> AI 가 <b style="color:var(--ink);font-weight:500">브라우저를 직접 조작</b>해 <b style="color:var(--ink);font-weight:500">Swagger</b> 로 API 를 실행하고 응답을 확인한다 · 실습 폴더 <code class="cmd">cd edu-stock-chart</code><code class="cmd">claude</code></div>
+    <table class="itbl pt dense">
+      <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
+      <tbody>
+            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">설치<i>MCP 플러그인</i></td><td class="c"><code class="cmd">/plugin install playwright@claude-plugins-official</code></td><td class="k">재시작 후 <code>/mcp</code> 에서 <b>playwright · browser_navigate</b> 가 보이는가 · Chrome 이 없으면 <code>! npx playwright install chrome</code></td></tr>
+            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">프로젝트 실행<i>API 8080 · 화면 5173</i></td><td class="c"><code class="cmd">! ..\scripts\start.bat</code><code class="cmd">! ../scripts/start.sh</code></td><td class="k">첫 줄 Windows · 둘째 줄 macOS / Linux · 빌드가 끝나면 <code>localhost:5173</code> 안내 · 확인 <code>! ..\scripts\status.bat</code></td></tr>
+            <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">Swagger 열기<i>AI 가 브라우저를 연다</i></td><td class="c"><code class="cmd">playwright 로 http://localhost:8080/swagger-ui.html 을 열고 dashboard-controller 의 API 목록을 알려줘</code></td><td class="k"><b>브라우저 창</b>이 뜨는가 · <code>/indices</code> · <code>/schedules</code> · <code>/rankings</code> 3개</td></tr>
+            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">API 호출<i>Swagger Try it out</i></td><td class="c"><code class="cmd">Swagger 에서 GET /api/dashboard/indices 를 Try it out 으로 실행하고 응답 코드와 첫 번째 지수의 이름 · 가격을 알려줘</code></td><td class="k"><b>200</b> · 첫 지수 <b>달러 인덱스 102.00</b></td></tr>
+            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">정리<i>실습이 끝나면</i></td><td class="c"><code class="cmd">! ..\scripts\stop.bat</code><code class="cmd">! ../scripts/stop.sh</code></td><td class="k">8080 · 5173 포트가 풀리는가 · 스냅샷 · 스크린샷은 <code>.playwright-mcp/</code> 에 쌓인다 → <code>.gitignore</code></td></tr>
+      </tbody>
+    </table>
+    <div class="pt-note fd" style="--d:.9s">
+      <div><b>역할</b> Swagger 는 <b>API 의 입출력</b>을 보여 주고 · Playwright 는 그 화면을 <b>사람 대신 눌러 준다</b></div>
+      <div><b>토큰</b> 페이지를 열 때마다 화면 구조가 컨텍스트에 들어간다 · API 자체의 상태 코드 검증은 <code>./gradlew test</code> 가 더 적합하다</div>
+    </div>
+  </div>
+</section>
+
 <!-- 18 ───────────────────────────────────────────── -->
 <section class="slide">
   <div class="eyebrow fd">PLUGINS · 실습 대상</div>
@@ -1789,7 +1951,7 @@
         <div class="ex"><code class="cmd">edu-stock-chart의 주식 조회 흐름을 archify로 시퀀스 다이어그램으로 그려줘</code></div>
       </div>
       <div class="tc">
-        <div class="top"><div class="nm" style="font-size:25px">remotion <span class="mk do">실습</span></div><span class="st">★ 61,240</span></div>
+        <div class="top"><div class="nm" style="font-size:25px">remotion <span class="mk rec">권장</span></div><span class="st">★ 61,240</span></div>
         <div class="vis one"><img src="assets/remotion-logo.gif" alt="remotion"></div>
         <div class="def">React 코드로 영상을 만든다 — 코드가 원본</div>
         <div class="lb2">제공</div>
@@ -2084,6 +2246,30 @@ description: 새 REST API 를 추가할 때 사용.
   </div>
 </section>
 
+<!-- 25b ──────────────────────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">SKILLS · 사전 실습 · eli5</div>
+  <h1 class="rv" style="--d:.08s">eli5 Skill 을 설치하고 프로젝트를 물어본다</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <table class="itbl pt">
+      <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
+      <tbody>
+            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">설치<i>스킬만 있는 저장소 · 플러그인 아님</i></td><td class="c"><code class="cmd">git clone https://github.com/DreambigOu/ELI5.git</code><code class="cmd">New-Item -ItemType Directory -Force "$HOME\.claude\skills" | Out-Null</code><code class="cmd">Copy-Item -Recurse ELI5\skills\eli5 "$HOME\.claude\skills\eli5"</code></td><td class="k">PowerShell 에서 실행 · Claude Code 를 <b>새로 시작</b>한 뒤 <code>/</code> 를 눌러 <b>eli5 가 보이는가</b></td></tr>
+            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">프로젝트에서 연다<i>열린 디렉토리가 곧 작업 범위</i></td><td class="c"><code class="cmd">cd edu-stock-chart</code><code class="cmd">claude</code></td><td class="k">실습 프로젝트 폴더 안에서 열었는가</td></tr>
+            <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">쉽게 물어본다<i>슬래시로 스킬을 직접 부른다</i></td><td class="c"><code class="cmd">/eli5 edu-stock-chart 프로젝트가 무엇을 하는지 초등학생에게 설명해줘</code></td><td class="k">어떤 파일을 <b>어떤 순서로</b> 읽는가 · 어려운 용어 대신 <b>비유</b>로 설명하는가</td></tr>
+            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">대상을 바꾼다<i>같은 질문 · 다른 청중</i></td><td class="c"><code class="cmd">이 프로젝트의 구조(Controller → Service → Mapper)를 매니저에게 설명해줘</code></td><td class="k">슬래시 없이도 <b>eli5 를 불러오는가</b> · 어휘 · 비유 · 깊이가 03 과 <b>달라지는가</b></td></tr>
+            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">코드를 물어본다<i>쉬운 설명이 맞는지 본다</i></td><td class="c"><code class="cmd">MovingAverageService 가 이동평균을 계산하는 방식을 신입 개발자에게 설명해줘</code></td><td class="k">설명이 <b>실제 코드와 맞는가</b> — 쉬운 말이 곧 정확한 말은 아니다 · 의심되면 해당 파일을 열어 대조</td></tr>
+      </tbody>
+    </table>
+    <div class="pt-note fd" style="--d:.9s">
+      <div><b>비교</b> eli5 없이 <b>"쉽게 설명해줘"</b>만 해 보고, 대상(5세 · 매니저 · 신입)을 지정했을 때와 비교한다</div>
+      <div><b>참고</b> <code>~/.claude/skills</code> 에 설치하면 <b>모든 프로젝트</b>에서 보인다 (개인 환경)</div>
+    </div>
+  </div>
+</section>
+
 <!-- 26 ───────────────────────────────────────────── -->
 <section class="slide">
   <div class="eyebrow fd">SKILLS · 실습 1 · 저장 · 조회 API</div>
@@ -2096,10 +2282,10 @@ description: 새 REST API 를 추가할 때 사용.
       <tbody>
             <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">준비<i>skill-creator 가 있는지 먼저 확인</i></td><td class="c"><code class="cmd">! claude plugin list</code><code class="cmd">/plugin install skill-creator@claude-plugins-official</code></td><td class="k"><b>있고 ✔ enabled</b> → 02 로 · <b>disabled</b> → <code>/plugin</code> 에서 enable · <b>없으면</b> 아래 줄로 설치 후 다시 시작</td></tr>
             <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">스킬 만들기<i>슬래시 명령으로 skill-creator 를 부른다</i></td><td class="c"><code class="cmd">/skill-creator:skill-creator .claude/skills/ 에 api-scaffold 스킬을 만들어줘. 바디를 DB 에 저장 · 조회하는 API 를 추가할 때 쓴다. 순서: ① 계획 ② 기존 코드 스캔 ③ Controller → Service → MyBatis Mapper · XML(바디 @Valid) ④ ./gradlew test</code></td><td class="k">질문이 오면 답한다 · 스킬 하나에 <b>의도 하나</b> (저장 · 조회 API 뼈대만)</td></tr>
-            <tr class="rv" style="--d:0.47s"><td class="n">03</td><td class="p">팀 규칙 · 템플릿<i>스킬 없이는 모를 우리 팀 표준</i></td><td class="c"><code class="cmd">api-scaffold 에 팀 규칙과 템플릿을 넣어줘. 규칙: 조회도 POST(예: POST /api/stocks/prices/search) · @RestController + @RequestMapping("/api/...") · 생성자 주입(@RequiredArgsConstructor), @Autowired 필드 주입 금지. assets/ 에 Controller · Service · Mapper · Mapper XML 템플릿을 기존 코드를 본떠 둔다.</code></td><td class="k"><code>! ls -R .claude/skills/api-scaffold</code> 로 <b>템플릿 4개</b> · SKILL.md 에 <b>팀 규칙 3가지</b>가 있는가</td></tr>
-            <tr class="rv" style="--d:0.54s"><td class="n">04</td><td class="p">실제 API 추가<i>출납 계좌 잔고 조회 (account 테이블 · 샘플 3건 준비됨)</i></td><td class="c"><code class="cmd">/api-scaffold 계좌 잔고 조회 API 를 추가해줘. 계좌번호(accountNo)를 받아 account 테이블에서 예금주 · 잔고를 조회하고, 없는 계좌는 404 로 응답한다.</code></td><td class="k">조회가 <b>팀 규칙대로 POST</b> 인가 · <b>생성자 주입</b>인가 · 계획 → 스캔 → 작성 → 검증 순서인가</td></tr>
+            <tr class="rv" style="--d:0.47s"><td class="n">03</td><td class="p">팀 규칙 · 템플릿<i>스킬 없이는 모를 우리 팀 표준</i></td><td class="c"><code class="cmd">api-scaffold 에 팀 규칙과 템플릿을 넣어줘. 규칙: ① Controller 에서 Mapper 직접 호출 금지 — Controller → Service → Mapper 순서만 허용 ② RESTful 스펙 준수 — 조회 GET · 생성 POST · 수정 PUT · 삭제 DELETE, 경로는 명사 복수형(예: GET /api/accounts/{accountNo}) ③ @RestController + @RequestMapping("/api/...") ④ Swagger 설명 어노테이션 필수 — 클래스 @Tag · 메서드 @Operation(summary, description) · 파라미터 @Parameter ⑤ 생성자 주입(@RequiredArgsConstructor), @Autowired 필드 주입 금지. assets/ 에 Controller · Service · Mapper · Mapper XML 템플릿을 기존 코드를 본떠 둔다.</code></td><td class="k"><code>! ls -R .claude/skills/api-scaffold</code> 로 <b>템플릿 4개</b> · SKILL.md 에 <b>팀 규칙 5가지</b>가 있는가</td></tr>
+            <tr class="rv" style="--d:0.54s"><td class="n">04</td><td class="p">실제 API 추가<i>출납 계좌 잔고 조회 (account 테이블 · 샘플 3건 준비됨)</i></td><td class="c"><code class="cmd">/api-scaffold 계좌 잔고 조회 API 를 추가해줘. 계좌번호(accountNo)를 받아 account 테이블에서 예금주 · 잔고를 조회하고, 없는 계좌는 404 로 응답한다.</code></td><td class="k">조회가 <b>GET</b> 인가 · Controller 가 <b>Service 만</b> 호출하는가 · <b>@Tag · @Operation</b> 이 붙었는가 · <b>생성자 주입</b>인가 · 계획 → 스캔 → 작성 → 검증 순서인가</td></tr>
             <tr class="rv" style="--d:0.61s"><td class="n">05</td><td class="p">검증<i>테스트 후 Swagger 에서 직접 호출</i></td><td class="c"><code class="cmd">! ./gradlew test</code></td><td class="k">테스트 통과 · Swagger 에서 <code>110-1234-5678</code> 을 넣으면 <b>홍길동 · 1,500,000</b> · 없는 계좌는 <b>404</b></td></tr>
-            <tr class="rv" style="--d:0.68s"><td class="n">06</td><td class="p">자동 호출<i>새 세션에서 슬래시 없이</i></td><td class="c"><code class="cmd">거래량 등록 · 조회 API 를 추가해줘. IN: {symbol, tradeDate, volume&gt;0} 저장 → 201 · OUT: 종목별 조회 → [{tradeDate, volume}] 날짜순, 없는 종목 404. 스펙대로 테스트도 작성해줘.</code></td><td class="k">말하지 않아도 <b>api-scaffold 를 불러오는가</b> · 조회도 POST 인가 · 테스트로 <b>201 · 200 · 404 · 400</b> 확인</td></tr>
+            <tr class="rv" style="--d:0.68s"><td class="n">06</td><td class="p">자동 호출<i>새 세션에서 슬래시 없이</i></td><td class="c"><code class="cmd">거래량 등록 · 조회 API 를 추가해줘. IN: {symbol, tradeDate, volume&gt;0} 저장 → 201 · OUT: 종목별 조회 → [{tradeDate, volume}] 날짜순, 없는 종목 404. 스펙대로 테스트도 작성해줘.</code></td><td class="k">말하지 않아도 <b>api-scaffold 를 불러오는가</b> · 등록 POST · 조회 GET 인가 · Swagger 설명이 붙었는가 · 테스트로 <b>201 · 200 · 404 · 400</b> 확인</td></tr>
       </tbody>
     </table>
     <div class="pt-note fd" style="--d:.9s;align-items:center">
@@ -2178,7 +2364,7 @@ description: 새 REST API 를 추가할 때 사용.
       <div class="nm">Skills</div>
       <div class="sub">에이전트에게 가르친다</div>
       <div class="big">HOW · 어떻게 할지<small>규칙 · 절차 · 템플릿 — 아는 것을 늘린다</small></div>
-      <div class="ex"><div class="k">EXAMPLE</div><div class="v">우리 팀 규칙대로 만드는 계좌 API<br>(조회도 POST · 생성자 주입)</div><div class="v" style="color:var(--invert-dim);font-size:16px">api-scaffold · test-writer</div></div>
+      <div class="ex"><div class="k">EXAMPLE</div><div class="v">우리 팀 규칙대로 만드는 계좌 API<br>(RESTful · Swagger 설명 · 생성자 주입)</div><div class="v" style="color:var(--invert-dim);font-size:16px">api-scaffold · test-writer</div></div>
     </div>
     <div class="vsd-c m rv" style="--d:.32s">
       <div class="nm">MCP</div>
@@ -2300,6 +2486,33 @@ description: 새 REST API 를 추가할 때 사용.
     <div class="inote fd" style="--d:.7s">
       <div><span class="k">정리</span>모르는 최신 내용은 AI 가 <b>웹 검색으로 메우지만, 설정 키처럼 정확해야 하는 값은 틀릴 수 있다.</b> context7 은 <b>버전별 공식 문서</b>로 답한다.</div>
       <div><span class="k">참고</span>Opus · Sonnet 5.5 (지식 기준 2026.06) 는 context7 없이도 맞힌다 · 차이는 <b style="white-space:nowrap">학습 시점 이후</b> 내용에서 난다</div>
+    </div>
+  </div>
+</section>
+
+<!-- 32 · Playwright MCP ───────────────────────────── -->
+<section class="slide">
+  <div class="eyebrow fd">MCP · 실습</div>
+  <h1 class="rv" style="--d:.08s">Playwright MCP 로 Swagger 를 직접 눌러 본다</h1>
+  <div class="hr fd" style="--d:.22s"></div>
+
+  <div class="body">
+    <div class="pre fd" style="--d:.26s"><span class="k">목표</span> AI 가 <b style="color:var(--ink);font-weight:500">브라우저를 직접 조작</b>해 API 를 실행하고 화면으로 확인한다 · 준비 Node.js 18+ · Chrome · 실습 폴더 <code class="cmd">cd edu-stock-chart</code><code class="cmd">claude</code></div>
+    <table class="itbl pt dense">
+      <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
+      <tbody>
+            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">연결 확인<i>이미 있는지 먼저 본다</i></td><td class="c"><code class="cmd">! claude mcp list</code></td><td class="k">playwright 가 보이면 <b>03</b> 으로 · 플러그인으로 깔았다면 <code>plugin:playwright</code> 로 보인다</td></tr>
+            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">MCP 등록<i>없을 때만 · 팀과 공유</i></td><td class="c"><code class="cmd">! claude mcp add --scope project playwright -- npx @playwright/mcp@latest</code></td><td class="k"><code>.mcp.json</code> 이 생기는가 · 플러그인 방식은 <code>/plugin install playwright@claude-plugins-official</code> · 등록 후 재시작</td></tr>
+            <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">도구 확인<i>로그인 없음</i></td><td class="c"><code class="cmd">/mcp</code></td><td class="k">playwright 선택 → <b>browser_navigate · browser_click · browser_take_screenshot</b> 이 보이는가</td></tr>
+            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">서비스 기동<i>Swagger 가 뜬다</i></td><td class="c"><code class="cmd">! ../scripts/start.sh</code><code class="cmd">! ..\scripts\start.bat</code></td><td class="k"><code>localhost:8080/swagger-ui.html</code> 이 열리는가 · 아래는 Windows</td></tr>
+            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">Swagger 열기<i>AI 가 브라우저를 연다</i></td><td class="c"><code class="cmd">playwright 로 http://localhost:8080/swagger-ui.html 을 열고 보이는 API 목록을 알려줘</code></td><td class="k"><b>브라우저 창</b>이 뜨는가 · dashboard-controller 3개 · stock-controller 1개</td></tr>
+            <tr class="rv" style="--d:0.71s"><td class="n">06</td><td class="p">Try it out<i>눌러서 실행</i></td><td class="c"><code class="cmd">Swagger 에서 GET /api/stocks/{symbol}/moving-average 를 Try it out 으로 symbol 005930, window 3 으로 실행하고 응답 코드와 첫 번째 값을 알려줘</code></td><td class="k"><b>200</b> · points 8개 · 첫 값 2026-09-03 <b>70133.33</b></td></tr>
+            <tr class="rv" style="--d:0.78s"><td class="n">07</td><td class="p">오류 · 증거<i>스크린샷</i></td><td class="c"><code class="cmd">같은 API 를 window 1 로 실행해 응답 코드를 알려주고 응답 화면 스크린샷을 저장해줘</code></td><td class="k"><b>400</b> 이 나오는가 · 스크린샷 파일 경로를 알려주는가</td></tr>
+      </tbody>
+    </table>
+    <div class="pt-note fd" style="--d:.9s">
+      <div><b>토큰</b> 페이지를 열 때마다 화면 구조(스냅샷)가 컨텍스트에 들어간다 · 다 쓰면 <code>/mcp</code> 에서 끈다</div>
+      <div><b>파일</b> 스냅샷 · 스크린샷은 <code>.playwright-mcp/</code> 에 쌓인다 → <code>.gitignore</code> · Chrome 이 없으면 <code>npx playwright install chrome</code></div>
     </div>
   </div>
 </section>
@@ -2611,6 +2824,335 @@ description: 새 REST API 를 추가할 때 사용.
   </div>
 </section>
 
+<!-- 43 · M9 과제 1 스펙 ───────────────────────────────────────────── -->
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">LOOP ENGINEERING · M9 과제 1</span>
+    <h1 class="rv" style="--d:.08s">순위 필터·정렬 — 버튼은 있고, API 를 만든다</h1>
+    <span class="tail fd">docs/practice/m9-ranking-filter.md</span>
+  </div>
+
+  <div class="m9">
+    <div class="m9-col rv" style="--d:.2s">
+      <div><h3>화면 · 이미 연결됨</h3>
+        <div class="m9-ui">
+          <div class="seg"><span>전체</span><span class="hit on">국내</span><span>해외</span></div>
+          <div class="seg"><span class="hit">코스콤증권 거래대금</span><span>코스콤증권 거래량</span><span>거래대금</span><span>거래량</span><span class="hit on">급상승</span><span class="hit">급하락</span></div>
+        </div>
+        <p>누르면 → <code class="api">GET /api/dashboard/rankings?market=DOMESTIC&amp;sort=RISE</code></p>
+        <p><b>지금</b> 서버가 파라미터를 무시 → 무엇을 눌러도 17개 그대로 · 파란 테두리 버튼만 과제 범위</p>
+      </div>
+      <div><h3>파라미터</h3>
+        <table>
+          <tr><th>이름</th><th>값</th><th>동작</th></tr>
+          <tr><td><code>market</code></td><td><code>ALL</code> 생략 시</td><td>전체</td></tr>
+          <tr><td></td><td><code>DOMESTIC</code></td><td>국내만 · <code>overseas = false</code></td></tr>
+          <tr><td></td><td><code>OVERSEAS</code></td><td>해외만 · <code>overseas = true</code></td></tr>
+          <tr><td><code>sort</code></td><td><code>TRADE_AMOUNT</code> 생략 시</td><td><code>rank_no</code> 오름차순</td></tr>
+          <tr><td></td><td><code>RISE</code></td><td>등락률 <code>change_rate</code> 내림차순</td></tr>
+          <tr><td></td><td><code>FALL</code></td><td>등락률 <code>change_rate</code> 오름차순</td></tr>
+        </table>
+        <p>등락률이 같으면 <code>rank_no</code> 오름차순</p>
+      </div>
+      <div><h3>규칙</h3>
+        <ul>
+          <li>정해진 값이 아니면 (소문자 <code>rise</code> 포함) → <b>400</b></li>
+          <li>파라미터를 모두 생략하면 <b>지금과 같은 결과</b> · 응답 형식은 그대로</li>
+          <li>Controller → Service → Mapper · SQL 은 <code>DashboardMapper.xml</code></li>
+          <li><code>StockController</code> · <code>MovingAverageService</code> 는 수정하지 않는다</li>
+        </ul>
+      </div>
+    </div>
+    <div class="m9-col rv" style="--d:.3s">
+      <div><h3>데이터 · 준비됨</h3>
+        <p><code>stock_ranking</code> 17개 — 국내 7 · 해외 10 · 컬럼 <code>rank_no</code> · <code>overseas</code> · <code>change_rate</code></p>
+      </div>
+      <div><h3>확인용 예시 · 시드 데이터 기준</h3>
+        <table>
+          <tr><th>요청</th><th>기대 결과</th></tr>
+          <tr><td>(파라미터 없음)</td><td>17개 · 1위 SOXL</td></tr>
+          <tr><td><code>?market=DOMESTIC&amp;sort=RISE</code></td><td>7개 · 1위 코스모스바이오 +29.94% · 2위 에코프로비엠 +7.81%</td></tr>
+          <tr><td><code>?market=OVERSEAS&amp;sort=FALL</code></td><td>10개 · 1위 SOXS -2.11%</td></tr>
+          <tr><td><code>?market=KR</code> · <code>?sort=rise</code></td><td>400</td></tr>
+        </table>
+      </div>
+      <div><h3>완료 기준</h3>
+        <ol>
+          <li><code>./gradlew test</code> 통과 (기존 테스트 포함)</li>
+          <li>파라미터 표의 각 행과 400 을 검증하는 테스트가 있다</li>
+          <li>다시 띄운 화면에서 버튼을 누르면 순위가 바뀐다</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 44 · M9 과제 1 실습 ───────────────────────────────────────────── -->
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">LOOP ENGINEERING · M9 과제 1 · 실습</span>
+    <h1 class="rv" style="--d:.08s">순위 필터·정렬을 내 루프로 구현한다</h1>
+  </div>
+
+  <div class="body m9-steps">
+    <div class="pre fd" style="--d:.26s"><span class="k">준비</span> M8 에서 만든 내 루프 (완료 기준 · Stop 훅 · test-runner) · <b>edu-stock-chart</b> 폴더에서 연 Claude Code</div>
+    <table class="itbl pt dense">
+      <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>Claude Code 에 입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
+      <tbody>
+            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">띄워 보기<i>구현 전 상태</i></td><td class="c"><code class="cmd">! ../scripts/start.sh</code><code class="cmd">! ..\scripts\start.bat</code></td><td class="k"><code>localhost:5173</code> 에서 <b>국내</b>를 눌러도 17개 그대로인가 · 위는 macOS · Linux, 아래는 Windows</td></tr>
+            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">과제 입력<i>스펙 전부 · 한 번에</i></td><td class="c"><code class="cmd">edu-stock-chart 의 GET /api/dashboard/rankings 에 market · sort 파라미터를 추가해줘.
+- market: ALL(기본) 전체 · DOMESTIC 국내(overseas = false) · OVERSEAS 해외(overseas = true)
+- sort: TRADE_AMOUNT(기본) rank_no 오름차순 · RISE change_rate 내림차순 · FALL change_rate 오름차순 · 등락률이 같으면 rank_no 오름차순
+- 정해진 값이 아니면(소문자 포함) 400 · 파라미터를 생략하면 지금과 같은 결과 · 응답 형식은 바꾸지 않는다
+- Controller → Service → Mapper 계층 · SQL 은 DashboardMapper.xml · StockController 와 MovingAverageService 는 수정하지 않는다
+- 각 조건과 400 을 검증하는 테스트를 추가하고 ./gradlew test 가 통과하면 끝</code></td><td class="k">Plan 이 나오면 <b>승인만</b> · 이후 입력하지 않는다</td></tr>
+            <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">지켜보기<i>개입 최소</i></td><td class="c"><span style="color:var(--faint)">— 입력 없음 —</span></td><td class="k">테스트 실패 → 스스로 고침을 반복하는가 · 잘못 가면 <b>코드를 고치지 말고</b> 기록</td></tr>
+            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">다시 띄우기<i>새 코드 반영</i></td><td class="c"><code class="cmd">! ../scripts/stop.sh &amp;&amp; ../scripts/start.sh</code></td><td class="k"><b>국내</b> 7개 · <b>국내 + 급상승</b> 1위 코스모스바이오</td></tr>
+            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">예시로 확인<i>실제 서버 호출</i></td><td class="c"><code class="cmd">실행 중인 서버에 다음을 호출해 기대값과 맞는지 표로 보여줘: 파라미터 없음 17개 1위 SOXL · market=DOMESTIC&amp;sort=RISE 7개 1위 코스모스바이오 · market=OVERSEAS&amp;sort=FALL 10개 1위 SOXS · market=KR 과 sort=rise 는 400</code></td><td class="k">5개 모두 일치하는가</td></tr>
+      </tbody>
+    </table>
+    <div class="pt-note fd" style="--d:.9s">
+      <div><b>기록</b> 무엇이 부족해 헤맸나 → CLAUDE.md · 훅 · 완료 기준 중 어디를 고칠지 적는다</div>
+      <div><b>다음</b> 루프에 <b>화면 검증</b>을 붙이고 → <b>과제 2 · 종목 검색</b>으로 차이를 본다</div>
+    </div>
+  </div>
+</section>
+
+<!-- M9 · 루프에 화면 검증 ───────────────────────────── -->
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">LOOP ENGINEERING · M9 · 루프 강화</span>
+    <h1 class="rv" style="--d:.08s">테스트 다음은 화면 — Playwright 를 루프의 검증에 넣는다</h1>
+  </div>
+
+  <div class="body m9-steps">
+    <div class="pre fd" style="--d:.26s"><span class="k">준비</span> 과제 1 을 마치고 서비스가 떠 있는 상태 · Playwright MCP 연결 (32장) · <b>edu-stock-chart</b> 폴더에서 연 Claude Code</div>
+    <div class="m9-flow fd" style="--d:.3s">
+      <span>구현</span><i>→</i><span>테스트<em>Stop 훅 · test-runner</em></span><i>→</i><span>다시 띄우기<em>../scripts</em></span><i>→</i><span class="new">화면 확인<em>ui-verifier · Playwright</em></span><i>→</i><span>끝</span>
+      <b>실패하면 어느 단계든 → 고치고 처음부터</b>
+    </div>
+    <table class="itbl pt dense">
+      <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>Claude Code 에 입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
+      <tbody>
+            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">검증 노드 만들기<i>ui-verifier 서브에이전트</i></td><td class="c"><code class="cmd">화면 검증 전용 서브에이전트를 .claude/agents/ui-verifier.md 로 만들어줘.
+- playwright MCP 로 http://localhost:5173 을 열고 받은 시나리오를 순서대로 직접 클릭 · 입력해 확인한다
+- 결과는 시나리오별 통과 · 실패 한 줄과 실패 화면 스크린샷 경로만 돌려준다 · 페이지 스냅샷 전체는 돌려주지 않는다
+- 코드는 수정하지 않는다</code></td><td class="k">파일이 생기는가 · <code>/agents</code> 에 <b>ui-verifier</b> 가 보이는가 (안 보이면 재시작)</td></tr>
+            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">시나리오 저장<i>화면의 완료 기준</i></td><td class="c"><code class="cmd">다음 화면 시나리오를 ui-scenarios.md 로 저장해줘
+1. 순위 표에서 국내를 누르면 7행이고 1행은 삼성전자
+2. 이어서 급상승을 누르면 1행은 코스모스바이오
+3. 해외와 급하락을 누르면 1행은 SOXS
+4. 검색창에 삼성을 입력하면 목록 4개 · 첫 항목은 삼성SDI
+5. 검색창에 % 를 입력하면 「검색 결과가 없습니다」</code></td><td class="k">5개가 저장되는가 · 시나리오는 <b>사람이 정한</b> 화면의 정답</td></tr>
+            <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">완료 기준에 넣기<i>CLAUDE.md</i></td><td class="c"><code class="cmd">CLAUDE.md 의 완료 기준에 추가해줘: edu-stock-chart-ui 가 호출하는 API 를 바꿨다면 ../scripts 의 stop · start 스크립트로 다시 띄우고 ui-verifier 로 ui-scenarios.md 를 확인해 모두 통과해야 끝이다. 실패하면 원인을 고치고 다시 확인한다</code></td><td class="k"><b>테스트 통과 → 화면 확인</b> 순서로 들어갔는가</td></tr>
+            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">빨간불 먼저<i>검증기를 검증</i></td><td class="c"><code class="cmd">ui-verifier 로 ui-scenarios.md 를 확인해줘</code></td><td class="k"><b>1~3 통과</b> (과제 1 완료) · <b>4~5 실패</b> (검색 미구현 → 「검색 기능 준비 중」) · 실패를 못 잡으면 시나리오를 고친다</td></tr>
+      </tbody>
+    </table>
+    <div class="pt-note fd" style="--d:.9s">
+      <div><b>왜 서브에이전트</b> 화면 스냅샷은 한 번에 수천 토큰 · 메인 대화에는 <b>통과 · 실패 한 줄</b>만 돌아온다 (컨텍스트 격리)</div>
+      <div><b>더 단단하게</b> 시나리오를 <code>npx playwright test</code> 스크립트로 만들면 Stop 훅에서 사람 없이 돈다</div>
+    </div>
+  </div>
+</section>
+
+<!-- 45 · M9 과제 2 스펙 ───────────────────────────────────────────── -->
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">LOOP ENGINEERING · M9 과제 2</span>
+    <h1 class="rv" style="--d:.08s">종목 검색 — 검색창은 있고, API 를 만든다</h1>
+    <span class="tail fd">docs/practice/m9-stock-search.md</span>
+  </div>
+
+  <div class="m9">
+    <div class="m9-col rv" style="--d:.2s">
+      <div><h3>화면 · 이미 연결됨</h3>
+        <div class="m9-ui">
+          <div class="st"><i>지금</i><div class="box">삼성</div><div class="drop">검색 기능 준비 중 · /api/stocks/search 미구현</div></div>
+          <span class="arrow">→</span>
+          <div class="st"><i>구현 후</i><div class="box">삼성</div><div class="drop"><b>삼성SDI</b> 006400 · KOSPI<br><b>삼성물산</b> 028260 · KOSPI<br>…</div></div>
+        </div>
+        <p>입력하면 → <code class="api">GET /api/stocks/search?q=삼성</code> · 결과를 눌러도 화면 전환 없음</p>
+      </div>
+      <div><h3>응답</h3>
+        <p><code class="api">[{ "symbol": "005930", "name": "삼성전자", "market": "KOSPI" }, …]</code></p>
+        <p>필드 이름이 다르면 목록이 깨진다 — 화면이 <b>symbol · name · market</b> 을 읽는다</p>
+      </div>
+      <div><h3>데이터 · 준비됨</h3>
+        <p><code>stock</code> 테이블 32개 — 국내 20 · 해외 12 · 컬럼 <code>symbol</code> · <code>name</code> · <code>market</code></p>
+      </div>
+      <div><h3>규칙</h3>
+        <ul>
+          <li>Controller → Service → Mapper · SQL 은 Mapper XML</li>
+          <li>검색용 Controller · Service · Mapper 를 <b>새로</b> 만든다</li>
+          <li><code>StockController</code> · <code>MovingAverageService</code> 는 수정하지 않는다</li>
+        </ul>
+      </div>
+    </div>
+    <div class="m9-col rv" style="--d:.3s">
+      <div><h3>검색 조건</h3>
+        <table>
+          <tr><th>조건</th><th>동작</th></tr>
+          <tr><td>대상</td><td><code>symbol</code> 또는 <code>name</code> 에 들어 있으면 (부분 일치)</td></tr>
+          <tr><td>영문</td><td>대소문자 구분 안 함 — <code>tsla</code> → 테슬라</td></tr>
+          <tr><td><code>%</code> · <code>_</code></td><td>와일드카드가 아니라 <b>글자 그대로</b> — <code>%</code> → 빈 목록</td></tr>
+          <tr><td>검색어</td><td>앞뒤 공백 제거 · 없거나 공백뿐이면 <b>400</b></td></tr>
+          <tr><td>정렬 · 개수</td><td><code>name</code> 오름차순 · <b>최대 10건</b> · 없으면 200 과 <code>[]</code></td></tr>
+        </table>
+      </div>
+      <div><h3>확인용 예시 · 시드 데이터 기준</h3>
+        <table>
+          <tr><th>검색어</th><th>기대 결과</th></tr>
+          <tr><td><code>삼성</code></td><td>4개 · 삼성SDI → 삼성물산 → 삼성바이오로직스 → 삼성전자</td></tr>
+          <tr><td><code>tsla</code> · <code>␣sox␣</code></td><td>테슬라 · SOXL, SOXS</td></tr>
+          <tr><td><code>0</code></td><td>10개 (11개 이상 일치)</td></tr>
+          <tr><td><code>%</code> · <code>_</code> · <code>없는종목</code></td><td>빈 목록</td></tr>
+          <tr><td>공백만 · <code>q</code> 없음</td><td>400</td></tr>
+        </table>
+      </div>
+      <div><h3>완료 기준</h3>
+        <ol>
+          <li><code>./gradlew test</code> 통과 · 검색 조건 각 줄을 검증하는 테스트</li>
+          <li>다시 띄운 화면의 검색창에 입력하면 결과 목록이 뜬다</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 46 · M9 과제 2 실습 ───────────────────────────────────────────── -->
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">LOOP ENGINEERING · M9 과제 2 · 실습</span>
+    <h1 class="rv" style="--d:.08s">종목 검색을 고친 루프로 다시 돌린다</h1>
+  </div>
+
+  <div class="body m9-steps">
+    <div class="pre fd" style="--d:.26s"><span class="k">준비</span> 화면 검증을 붙인 내 루프 (Stop 훅 · test-runner · <b>ui-verifier · ui-scenarios.md</b>) · <b>edu-stock-chart</b> 폴더에서 연 Claude Code</div>
+    <table class="itbl pt dense">
+      <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>Claude Code 에 입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
+      <tbody>
+            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">띄워 보기<i>구현 전 상태</i></td><td class="c"><code class="cmd">! ../scripts/stop.sh &amp;&amp; ../scripts/start.sh</code><code class="cmd">! ..\scripts\stop.bat &amp;&amp; ..\scripts\start.bat</code></td><td class="k">검색창에 <b>삼성</b> → <code>검색 기능 준비 중</code> 이 뜨는가 · 아래는 Windows</td></tr>
+            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">과제 입력<i>스펙 전부 · 한 번에</i></td><td class="c"><code class="cmd">edu-stock-chart 에 종목 검색 API GET /api/stocks/search?q= 를 추가해줘. 데이터는 stock 테이블(symbol · name · market).
+- 응답: [{ "symbol": "005930", "name": "삼성전자", "market": "KOSPI" }] 형식의 목록
+- q 는 앞뒤 공백을 제거하고 쓴다 · 없거나 공백뿐이면 400
+- symbol 또는 name 부분 일치 · 영문 대소문자 무시 · % 와 _ 는 와일드카드가 아니라 글자 그대로 찾는다
+- name 오름차순 · 최대 10건 · 결과가 없으면 200 과 빈 목록
+- Controller → Service → Mapper 계층 · 검색용 Controller · Service · Mapper 를 새로 만든다 · StockController 와 MovingAverageService 는 수정하지 않는다
+- 각 조건을 검증하는 테스트를 추가하고 ./gradlew test 가 통과하면 끝</code></td><td class="k">Plan 이 나오면 <b>승인만</b> · 이후 입력하지 않는다</td></tr>
+            <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">지켜보기<i>1차와 비교</i></td><td class="c"><span style="color:var(--faint)">— 입력 없음 —</span></td><td class="k">테스트 통과 뒤 <b>스스로 다시 띄우고 ui-verifier 를 부르는가</b> · 과제 1 에서 고친 규칙이 같은 실수를 막는가</td></tr>
+            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">화면 검증 보고<i>루프가 한다</i></td><td class="c"><span style="color:var(--faint)">— 입력 없음 —</span></td><td class="k">시나리오 <b>5개 모두 통과</b>를 보고하고 끝나는가 · 4~5 가 실패면 스스로 고쳐 다시 확인하는가</td></tr>
+            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">예시로 확인<i>실제 서버 호출</i></td><td class="c"><code class="cmd">실행 중인 서버에 /api/stocks/search 를 호출해 기대값과 맞는지 표로 보여줘: 삼성 4개(삼성SDI 가 처음) · tsla 테슬라 · 앞뒤 공백 sox SOXL·SOXS · 0 은 10개 · % 와 _ 와 없는종목 은 빈 목록 · 공백만과 q 없음은 400</code></td><td class="k">모두 일치하는가</td></tr>
+      </tbody>
+    </table>
+    <div class="pt-note fd" style="--d:.9s">
+      <div><b>1차 vs 2차</b> 무엇을 고쳤더니 무엇이 좋아졌나 — 턴 수 · 개입 횟수 · 같은 실수 반복 · <b>화면까지 확인했는가</b></div>
+      <div><b>주의</b> <code>삼성SDI</code> 가 먼저인 것은 정상 (영문이 한글보다 앞) · 버그로 보고 고치게 두지 않는다</div>
+    </div>
+  </div>
+</section>
+
+<!-- 코드 리뷰 · 소개 ───────────────────────────── -->
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">CODE REVIEW</span>
+    <h1 class="rv" style="--d:.08s">코드는 싸졌고, 리뷰가 새 병목이 됐다</h1>
+  </div>
+
+  <div class="m9-flow fd" style="--d:.16s;margin:22px 0 0">
+    <span>요구사항<em>사람</em></span><i>→</i><span>코드 작성<em>AI · 몇 분</em></span><i>→</i><span class="new">리뷰 · 검증<em>사람 · 그대로 → 줄이 길어진다</em></span><i>→</i><span>배포<em>그대로</em></span>
+    <b>가장 느린 단계가 전체 속도를 정한다 — 쓰기를 빠르게 해도 리뷰가 그대로면 배포는 그대로</b>
+  </div>
+
+  <div class="cr" style="margin-top:22px">
+    <div class="rv" style="--d:.2s">
+      <h3>AI 도입이 많은 팀에서 일어난 일</h3>
+      <div class="cr-stats">
+        <div><b>+98%</b><span>병합된 PR 수</span></div>
+        <div class="hot"><b>+91%</b><span>PR 리뷰 시간</span></div>
+        <div><b>+154%</b><span>PR 크기</span></div>
+        <div><b>+9%</b><span>개발자당 버그</span></div>
+      </div>
+      <div class="cr-ban" style="margin-top:12px"><b>조직 전체의 배포 속도 · 리드 타임 · 장애율은 그대로</b> — 개인은 빨라졌는데 회사는 빨라지지 않았다<i>병목이 「쓰기」에서 「리뷰 · 검증」으로 옮겨 갔다</i></div>
+      <div class="cr-src">출처 Faros AI, <a href="https://www.faros.ai/ai-productivity-paradox" target="_blank" rel="noopener">The AI Productivity Paradox</a> (2025) · 개발자 10,000+ · 1,255 팀 텔레메트리 · 분석 도구 회사의 자료이며 인과가 아닌 상관관계</div>
+    </div>
+
+    <div class="rv" style="--d:.3s">
+      <h3>그래서 코드 품질이 더 중요해졌다</h3>
+      <div class="cr-list">
+        <div><b>테스트 통과 ≠ 좋은 코드</b><span>M9 에서 본 함정 — <code>${}</code> SQL 인젝션 · 400 대신 500 · 범위 밖 수정은 <b>테스트가 못 잡는다</b></span></div>
+        <div><b>사람 리뷰가 가장 비싸다</b><span>AI 가 만든 PR 은 많고 크다 · 사람이 줄마다 읽으면 그 자리에서 줄이 막힌다</span></div>
+        <div><b>버그는 큰 PR 에 숨는다</b><span>PR 이 커질수록 꼼꼼히 못 본다 · 놓친 결함은 운영에서 더 비싸게 돌아온다</span></div>
+        <div><b>AI 가 1차로 거른다</b><span><code>/code-review</code> 로 정확성 문제를 먼저 걸러내고, 사람은 <b>설계 · 요구사항 판단</b>에 시간을 쓴다</span></div>
+      </div>
+      <div class="cr-ban"><b>/code-review</b> — Claude Code 내장 리뷰 · 변경(diff)을 <b>새 서브에이전트</b>가 읽고 버그를 찾아 보고한다<i>low ~ max 로 깊이 조절 · 대상 지정 (PR · 브랜치 · 경로) · --fix 로 바로 수정 · ultra 는 클라우드 정밀 리뷰</i></div>
+    </div>
+  </div>
+</section>
+
+<!-- 코드 리뷰 · 왜 별도 세션 ───────────────────────────── -->
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">CODE REVIEW · 왜 별도 세션인가</span>
+    <h1 class="rv" style="--d:.08s">쓴 사람이 채점하면 점수가 후하다</h1>
+  </div>
+
+  <div class="cr" style="grid-template-columns: 1.12fr 1fr">
+    <div class="rv" style="--d:.2s">
+      <h3>원인 · 연구와 공식 문서</h3>
+      <div class="cr-list">
+        <div><b>자기 선호 편향</b><span>LLM 평가자는 <b>자기가 쓴 글을 알아보고</b> 더 높게 평가한다 · 알아보는 능력이 클수록 편향도 커진다<small>Panickssery · Bowman · Feng, <a href="https://arxiv.org/abs/2404.13076" target="_blank" rel="noopener">LLM Evaluators Recognize and Favor Their Own Generations</a> (NeurIPS 2024)</small></span></div>
+        <div><b>혼자서는 못 고친다</b><span>외부 피드백 없이 스스로 다시 보면 <b>잘 고쳐지지 않고, 오히려 나빠지기도</b> 한다<small>Huang et al., <a href="https://arxiv.org/abs/2310.01798" target="_blank" rel="noopener">Large Language Models Cannot Self-Correct Reasoning Yet</a> (ICLR 2024)</small></span></div>
+        <div><b>이유를 알면 믿는다</b><span>같은 대화의 리뷰어는 「왜 이렇게 짰는지」를 이미 듣고 있다 · 새 컨텍스트 리뷰어는 <b>diff 와 기준만</b> 보고 결과 자체로 판단한다<small>Anthropic, <a href="https://code.claude.com/docs/en/best-practices" target="_blank" rel="noopener">Claude Code Best practices</a> — Add an adversarial review step</small></span></div>
+        <div><b>꽉 찬 컨텍스트</b><span>구현으로 가득 찬 세션은 <b>앞의 지시를 잊고 실수가 늘어난다</b> — 컨텍스트가 찰수록 성능이 떨어진다<small>Anthropic, <a href="https://code.claude.com/docs/en/best-practices" target="_blank" rel="noopener">Claude Code Best practices</a></small></span></div>
+      </div>
+      <div class="cr-ban">"A fresh context improves code review since Claude won't be biased toward code it just wrote."<i>— Claude Code Best practices · Writer / Reviewer 패턴 (Session A 가 쓰고 Session B 가 리뷰)</i></div>
+    </div>
+
+    <div class="rv" style="--d:.3s">
+      <h3>리뷰가 얼마나 독립적인가</h3>
+      <div class="cr-lad">
+        <div><span class="no">①</span><div><b class="x">같은 대화에서 「검토해줘」</b><span>쓴 맥락 그대로 채점 · 작성자 = 채점자</span></div></div>
+        <div><span class="no">②</span><div><b>같은 세션에서 <code>/code-review</code></b><span>리뷰는 <b>새 서브에이전트</b>가 한다 · 그러나 결과를 받아 무엇을 고칠지 <b>판단하는 건 작성 세션</b></span></div></div>
+        <div class="pick"><span class="no">③</span><div><b>별도 세션에서 <code>/code-review</code><em>실습</em></b><span>작성 대화 · 판단까지 분리 · <b>다른 모델</b>로 볼 수 있다 · 결과는 사람이 골라 작성 세션에 넘긴다</span></div></div>
+        <div><span class="no">④</span><div><b><code>/code-review ultra</code></b><span>클라우드에서 여러 에이전트가 더 깊게 본다 · 별도 과금 · 직접 입력해야 시작</span></div></div>
+      </div>
+      <div class="cr-ban" style="background:none;border:1.5px solid var(--rule);color:var(--dim)"><b style="color:var(--ink)">주의 — 찾으라면 찾는다</b> · 리뷰어는 문제가 없어도 무언가를 보고한다 · <b style="color:var(--ink)">정확성 · 요구사항</b>에 해당하는 것만 고치고 나머지는 선택 (다 고치면 과설계)</div>
+    </div>
+  </div>
+</section>
+
+<!-- 코드 리뷰 · 실습 ───────────────────────────── -->
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">CODE REVIEW · 실습</span>
+    <h1 class="rv" style="--d:.08s">별도 세션에서 /code-review 로 과제 코드를 리뷰한다</h1>
+  </div>
+
+  <div class="body m9-steps">
+    <div class="lp fd" style="--d:.24s">
+      <div><b>/code-review<i>레벨</i></b><span><code>low</code> 확실한 것만 · <code>medium</code> ~ <code>max</code> 넓게 · 생략하면 <b>지난번 레벨</b>을 다시 쓴다</span></div>
+      <div><b>대상<i>뒤에 붙인다</i></b><span>생략 = 현재 브랜치 + 커밋 안 한 변경 · <code>src/main</code> 경로 · <code>HEAD~3..HEAD</code> 커밋 · PR 번호</span></div>
+      <div><b>--fix · --max-findings<i>플래그</i></b><span><code>--fix</code> 리뷰가 바로 고친다 (체크포인트 밖 → git 으로 되돌림) · <code>--max-findings all</code> 전부 보기</span></div>
+    </div>
+    <table class="itbl pt dense">
+      <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
+      <tbody>
+            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">새 세션 열기<i>작성 세션은 그대로</i></td><td class="c"><code class="cmd">cd edu-stock-chart &amp;&amp; claude</code></td><td class="k"><b>새 터미널 창</b>에서 · 과제를 구현한 대화와 다른 세션인가</td></tr>
+            <tr class="rv" style="--d:0.42s"><td class="n">02</td><td class="p">모델 고르기<i>선택 · 다른 눈</i></td><td class="c"><code class="cmd">/model</code></td><td class="k">작성 때와 <b>다른 모델</b>을 고르면 편향이 더 줄어든다</td></tr>
+            <tr class="rv" style="--d:0.48s"><td class="n">03</td><td class="p">리뷰 실행<i>변경 전체</i></td><td class="c"><code class="cmd">/code-review</code></td><td class="k">백그라운드로 돌고 결과가 도착하는가 · 파일 위치 · 한 줄 요약 · <code>correctness</code> 같은 분류</td></tr>
+            <tr class="rv" style="--d:0.54s"><td class="n">04</td><td class="p">깊게 · 좁게<i>레벨과 대상</i></td><td class="c"><code class="cmd">/code-review high src/main</code></td><td class="k"><code>low</code> 보다 발견이 늘어나는가 · 지정한 경로만 보는가</td></tr>
+            <tr class="rv" style="--d:0.60s"><td class="n">05</td><td class="p">함정 대조<i>테스트가 놓친 것</i></td><td class="c"><code class="cmd">방금 리뷰 결과 중 SQL 인젝션(${}) · 400 대신 500 · % 와 _ 미처리 · 범위 밖 수정(StockController 등)에 해당하는 것을 표로 정리해줘</code></td><td class="k"><b>테스트는 통과했는데</b> 리뷰가 잡은 문제가 있는가</td></tr>
+            <tr class="rv" style="--d:0.66s"><td class="n">06</td><td class="p">작성 세션에 넘기기<i>Writer ← Reviewer</i></td><td class="c"><code class="cmd">리뷰 결과: [붙여넣기]. 정확성 · 요구사항에 해당하는 것만 고치고 ./gradlew test 와 ui-verifier 로 다시 확인해줘</code></td><td class="k"><b>원래 작성 세션</b>에 입력 · 고친 뒤 테스트 · 화면 검증까지 통과하는가</td></tr>
+            <tr class="rv" style="--d:0.72s"><td class="n">07</td><td class="p">다시 리뷰<i>리뷰 세션에서</i></td><td class="c"><code class="cmd">/code-review</code></td><td class="k">이전 발견이 사라졌는가 · 새로 나온 것이 정확성 문제인가</td></tr>
+      </tbody>
+    </table>
+    <div class="pt-note fd" style="--d:.9s">
+      <div><b>왜 --fix 를 안 쓰나</b> 고칠지 말지는 <b>사람이 골라</b> 작성 세션에 넘긴다 — 리뷰 세션이 고치면 다시 「쓴 사람」이 된다</div>
+      <div><b>버전</b> Claude Code v2.1.223 이상 (<code>--max-findings</code> 는 v2.1.288) · <code>/review</code> 도 같은 명령 · <code>! claude --version</code></div>
+    </div>
+  </div>
+</section>
+
 <!-- 44 ───────────────────────────────────────────── -->
 <section class="slide wide">
   <div class="wide-head">
@@ -2693,13 +3235,13 @@ description: 새 REST API 를 추가할 때 사용.
         <div class="rg-t">강제<i>Deterministic</i></div>
         <div class="rg-shape">Hook · 관리형 설정</div>
         <div class="rg-d">막거나 확인을 받는다 · <b>항상</b> 지켜지고 결정이 로그로 남는다</div>
-        <div class="rg-u"><b>앞에서</b>Hook 32–35장 · 꼭 지켜야 할 정책은 Skill 이 아니라 여기로</div>
+        <div class="rg-u"><b>앞에서</b>Hook 33–36장 · 꼭 지켜야 할 정책은 Skill 이 아니라 여기로</div>
       </div>
       <div class="rg-c">
         <div class="rg-t">판단<i>Gate</i></div>
         <div class="rg-shape">사람 승인</div>
         <div class="rg-d">branch 보호 · 릴리스 매니저 서명 · 정책 오너에게 라우팅</div>
-        <div class="rg-u"><b>앞에서</b>그래프의 「사람 승인」 관문 43장</div>
+        <div class="rg-u"><b>앞에서</b>그래프의 「사람 승인」 관문 52장</div>
       </div>
     </div>
     <div class="ru rv" style="--d:.34s">
@@ -2965,7 +3507,7 @@ description: 새 REST API 를 추가할 때 사용.
     <div class="jx-c">
       <div class="jx-t">실행 전 가드레일<i>위험한 명령 막기</i></div>
       <div class="jx-s">에이전트가 실행하려는 셸 명령<br>위험도는? 파일을 지우는가?</div>
-      <div class="jx-a">→ 기준 미만이면 실행, 넘으면 차단 · 사람 확인 — 35장 PreToolUse hook 의 판단을 Jev 가</div>
+      <div class="jx-a">→ 기준 미만이면 실행, 넘으면 차단 · 사람 확인 — 36장 PreToolUse hook 의 판단을 Jev 가</div>
       <div class="ju-src">LangChain AutoModeMiddleware(bash)</div>
     </div>
     <div class="jx-c">

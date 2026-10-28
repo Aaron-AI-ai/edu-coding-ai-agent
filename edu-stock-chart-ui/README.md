@@ -35,5 +35,17 @@ const res = await fetch('/api/stocks/005930/prices?from=2026-01-01&to=2026-06-30
 
 ## 현재 상태
 
-`src/main.js` 는 **더미 데이터로 차트가 뜨는 것까지만** 구현되어 있습니다.
-실제 시세 조회와 화면 구성은 실습에서 만듭니다.
+코스콤증권 홈 대시보드 화면이 구현되어 있습니다. 데이터는 백엔드 H2 시드(`data.sql`)에서 옵니다.
+
+| 영역 | API |
+|---|---|
+| 지수 카드 · 하단 티커 | `GET /api/dashboard/indices` |
+| 주요 일정 | `GET /api/dashboard/schedules` |
+| 실시간 차트 순위 | `GET /api/dashboard/rankings` |
+
+버튼은 눌린 상태만 바뀌고 화면 전환은 하지 않습니다. 단, M9 루프 실습 과제 두 곳은 화면이 먼저 연결되어 있고 서버 구현을 기다립니다.
+
+| 화면 | 호출 | 과제 |
+|---|---|---|
+| 순위 필터 · 정렬 버튼 | `GET /api/dashboard/rankings?market=&sort=` | `docs/practice/m9-ranking-filter.md` |
+| 상단 검색창 | `GET /api/stocks/search?q=` | `docs/practice/m9-stock-search.md` |
