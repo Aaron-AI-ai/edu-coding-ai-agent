@@ -478,6 +478,7 @@
   .pt code.cmd + code.cmd { margin-top: 4px; }
   .pt td.k { font-size: 15.5px; color: var(--dim); line-height: 1.45; }
   .pt td.k b { color: var(--ink); font-weight: 500; }
+  td.p b.ex { font-style: normal; font-size: 11px; letter-spacing: 1px; color: var(--ink); border: 1px solid var(--ink); border-radius: 999px; padding: 0 7px; margin-right: 6px; font-weight: 500; }
   code.cmd .cp-all { display: block; margin-top: 6px; color: #F7A6CB; font-size: .9em; }
   .wq-lead { font-size: 17px; color: var(--dim); margin-bottom: 10px; }
   .wq-lead b { color: var(--ink); font-weight: 600; }
@@ -3026,7 +3027,7 @@ description: 새 REST API 를 추가할 때 사용.
   <h1 class="rv" style="--d:.08s">/goal · /loop 로 루프를 돌려 본다</h1>
   <div class="hr fd" style="--d:.22s"></div>
 
-  <div class="body" style="zoom:1.35">
+  <div class="body" style="zoom:1.25">
     <div class="lp fd" style="--d:.26s;grid-template-columns:repeat(2,1fr)">
       <div><b>/goal<i>조건을 이룰 때까지</i></b><span><em>기본 내장</em>앞 턴이 끝나면 다음 턴 · <b>다른 작은 모델</b>이 「충족 · 불가능」을 판정해야 멈춘다</span></div>
       <div><b>/loop<i>시간마다 다시</i></b><span><em>기본 내장</em>정한 <b>간격</b>(1분~)마다 같은 요청 · 세션이 열려 있을 때만 · 취소하거나 7일 뒤 만료</span></div>
@@ -3038,7 +3039,9 @@ description: 새 REST API 를 추가할 때 사용.
 [완료] 1 · 21 예외 + 메시지 · 2 · 20 정상 · test exit 0 결과를 보여준다
 [제약] 이 파일만 · 삭제 · @Disabled 금지   [멈춤] 10턴
 [예외] main 수정 필요 · 환경 오류 2회 → 보고하고 멈춤<span class="cp-all">클릭하면 전체 프롬프트 복사</span></code></td><td class="k"><code>◎ /goal active</code> · 턴마다 판정이 뜨는가 · <b>테스트 4개</b>와 exit 0 결과가 대화에 보이는가 · 다른 파일을 고치지 않았는가 · <code>/goal</code> 로 턴 수 · 토큰 확인</td></tr>
-            <tr class="rv" style="--d:0.57s"><td class="n">02</td><td class="p">/loop<i>시간 간격</i></td><td class="c"><code class="cmd">/loop 2m git status --short 로 바뀐 파일을 한 줄로 알려줘</code></td><td class="k">2분마다 한 줄씩 오는가 · 두 번 보고 <b>「git status 루프 취소해줘」</b></td></tr>
+            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">/loop<i><b class="ex">예시</b> 커밋 → 위키 자동 갱신</i></td><td class="c"><code class="cmd" data-copy="/loop 2m 최신 커밋(git log -1 --format=%h)과 koscom-wiki 의 edu-stock-chart 노트 frontmatter scanned-commit 을 비교해줘.&#10;- 같으면 「위키 최신」 한 줄만 쓴다&#10;- 다르면 /obsidian-second-brain:obsidian-architect 로 증분 갱신한다 (scanned-commit 이후 바뀐 파일만 · @user 블록 유지 · 끝나면 scanned-commit 갱신) → /obsidian-second-brain:obsidian-reindex → 갱신한 노트 목록을 한 줄로 알려준다&#10;- 코드는 수정하지 않는다">/loop 2m 최신 커밋 ↔ 위키 scanned-commit 비교
+같으면 「위키 최신」 한 줄 · 다르면 architect 증분 갱신 → reindex
+코드는 수정하지 않는다<span class="cp-all">클릭하면 전체 프롬프트 복사</span></code></td><td class="k">별도 세션에서 켜 둔다 · 다른 세션에서 <b>커밋</b>하면 2분 안에 <b>갱신한 노트</b>를 보고하는가 · @user 메모 유지 · 「위키 루프 취소해줘」 · 운영에서는 post-commit hook</td></tr>
       </tbody>
     </table>
     <div class="pt-note fd" style="--d:.9s">
