@@ -3672,25 +3672,26 @@ description: 새 REST API 를 추가할 때 사용.
 
 <!-- 49 ───────────────────────────────────────────── -->
 <section class="slide">
-  <div class="eyebrow fd">AI-SDLC · 실습 · superpowers</div>
-  <h1 class="rv" style="--d:.08s">superpowers 로 AI-SDLC 한 사이클을 돌린다</h1>
+  <div class="eyebrow fd">AI-SDLC · 시연 · superpowers</div>
+  <h1 class="rv" style="--d:.08s">[시연] superpowers 로 AI-SDLC 한 사이클을 돌린다</h1>
   <div class="hr fd" style="--d:.22s"></div>
 
   <div class="body">
-    <div class="pre fd" style="--d:.26s"><span class="k">준비</span> <code class="cmd">/skills</code> 에 brainstorming 이 없을 때만 <code class="cmd">/plugin install superpowers@claude-plugins-official</code> <span style="color:var(--faint)">· 과제: 종목별 기간 수익률 조회 API</span></div>
+    <div class="pre fd" style="--d:.26s"><span class="k">과제</span> <span>SOXL 종목 상세 API <b>GET /api/stocks/{symbol}/detail</b> · 화면 · DB 는 준비됨 → <b>Controller · Service · Mapper 만</b> 구현 <span style="color:var(--faint)">· 시작 전 ../scripts/start.sh → SOXL 클릭 → 「아직 구현되지 않았습니다」 팝업 확인</span></span></div>
     <table class="itbl pt dense">
       <thead><tr class="fd" style="--d:.28s"><th></th><th>SDLC 단계 · 스킬</th><th>Claude Code 에 입력 · 클릭하면 복사</th><th>확인할 것 · 사람 게이트</th></tr></thead>
       <tbody>
-            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">Plan · Design<i>brainstorming</i></td><td class="c"><code class="cmd">종목별 기간 수익률 조회 API (GET /api/stocks/{symbol}/return?from=&amp;to=) 를 만들고 싶어. brainstorming 부터 해줘</code></td><td class="k">질문에 답하고 <b>설계 승인</b> · <code>docs/superpowers/specs/…-design.md</code> = intent + spec</td></tr>
-            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">Build 준비<i>writing-plans</i></td><td class="c"><code class="cmd">승인한 설계로 구현 계획을 써줘</code></td><td class="k">2~5분 단위 작업 · 파일 경로 · 검증 단계 · <code>docs/superpowers/plans/…md</code> = plan.md · <b>계획 승인</b></td></tr>
-            <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">Build · Test<i>executing-plans · TDD</i></td><td class="c"><code class="cmd">계획을 executing-plans 로 이 세션에서 실행해줘</code></td><td class="k">작업마다 <b>실패 테스트 먼저(RED)</b> → 통과(GREEN) · <code>./gradlew test -q</code></td></tr>
-            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">Review<i>requesting-code-review</i></td><td class="c"><code class="cmd">계획 대비 코드 리뷰를 요청해줘</code></td><td class="k">심각도별 이슈 · <b>Critical 은 진행을 막는다</b> · 무엇을 고칠지 사람이 판단</td></tr>
-            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">Deploy 준비<i>finishing-a-development-branch</i></td><td class="c"><code class="cmd">개발 브랜치를 마무리해줘</code></td><td class="k">테스트 확인 후 <b>merge · PR · 보관 · 폐기</b> 중 사람이 선택</td></tr>
+            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">Plan · Design<i>brainstorming</i></td><td class="c"><code class="cmd" data-copy="edu-stock-chart 에 종목 상세 API GET /api/stocks/{symbol}/detail 을 만들고 싶어. brainstorming 부터 해줘.&#10;[배경]&#10;- 화면(../edu-stock-chart-ui)은 준비되어 있다 · 순위의 SOXL 행을 누르면 상세 화면으로 바뀌는데, 지금은 API 가 없어(404) 「아직 구현되지 않았습니다」 팝업이 뜬다&#10;- 응답 필드는 ../edu-stock-chart-ui/src/main.js 의 「종목 상세」 주석을 그대로 따른다&#10;- 데이터는 schema.sql 의 stock · stock_quote · stock_daily_price 를 쓴다 · SOXL 시드는 data.sql 에 준비되어 있다&#10;[제약]&#10;- 기존 구조 Controller → Service → Mapper · SQL 은 src/main/resources/mapper 의 Mapper XML&#10;- 없는 종목은 404 (StockNotFoundException)&#10;- 화면 코드 · schema.sql · data.sql 은 수정하지 않는다">종목 상세 API 를 만들고 싶어. brainstorming 부터 해줘 (배경 · 제약 포함)</code></td><td class="k">질문에 답하고 <b>설계 승인</b> · <code>docs/superpowers/specs/…-design.md</code> = intent + spec</td></tr>
+            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">Build 준비<i>writing-plans · TDD 필수</i></td><td class="c"><code class="cmd" data-copy="승인한 설계로 구현 계획을 써줘.&#10;[계획 규칙]&#10;- 모든 작업은 test-driven-development 로 쓴다: 실패 테스트 작성 → ./gradlew test 로 실패(RED) 확인 → 최소 구현 → ./gradlew test 로 통과(GREEN) 확인&#10;- 테스트는 꼭 쓴다&#10;  - Mapper: SOXL 시세 1건 · 일봉 62개 · 오래된 날짜 순&#10;  - Service: 없는 종목이면 StockNotFoundException&#10;  - Controller(MockMvc): SOXL → 200 · price 113134 · dailyPrices 62개 / 없는 종목 → 404&#10;- 작업마다 마지막 단계로 ./gradlew test 전체 통과(BUILD SUCCESSFUL)를 검증한다&#10;- 마지막 작업은 Playwright 화면 점검: ../scripts/start.sh 로 띄우고 http://localhost:5173 에서 SOXL 행 클릭 → 팝업 없이 상세 화면이 뜨는지 확인 → ../scripts/stop.sh">구현 계획을 써줘 · 작업마다 TDD 테스트 · gradle test · Playwright</code></td><td class="k">작업마다 <b>테스트 먼저</b> · <code>./gradlew test</code> 검증 단계 · 마지막 Playwright · <b>계획 승인</b></td></tr>
+            <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">Build · Test<i>executing-plans · TDD</i></td><td class="c"><code class="cmd" data-copy="계획을 executing-plans 로 이 세션에서 실행해줘.&#10;- 작업마다 RED(실패) → GREEN(통과) 의 ./gradlew test 결과를 대화에 그대로 보여준다&#10;- 테스트를 지우거나 @Disabled · assume 으로 통과시키지 않는다 · 기대값을 결과에 맞춰 고치지 않는다">계획을 executing-plans 로 이 세션에서 실행해줘 · RED → GREEN</code></td><td class="k">작업마다 <b>실패 테스트 먼저(RED)</b> → 통과(GREEN) · <code>./gradlew test</code> BUILD SUCCESSFUL</td></tr>
+            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">Verify<i>Playwright 화면 점검</i></td><td class="c"><code class="cmd" data-copy="Playwright 로 화면을 검증해줘.&#10;1. ../scripts/start.sh (Windows 는 ..\scripts\start.bat) 로 새로 빌드해 띄운다&#10;2. http://localhost:5173 에서 순위 1위 SOXL 행을 누른다&#10;3. 확인 · 결과를 표로 보여준다&#10;   - 「아직 구현되지 않았습니다」 팝업이 뜨지 않고 주소가 #/stocks/SOXL&#10;   - 113,134원 · +2,467원 (2.23%) · 1일 범위 109,541원 ~ 114,599원 · 거래대금 1위 · 체결강도 119.43%&#10;   - 차트 캔들 · 일별 시세 첫 줄 10.27 113,134 · 개인 -42만 · 외국인 +26만 · 기관 +15만&#10;4. 뒤로 가기로 대시보드에 돌아오는지 확인한다&#10;5. 상세 화면 스크린샷 1장을 남기고 ../scripts/stop.sh (Windows 는 ..\scripts\stop.bat) 로 끈다">Playwright 로 SOXL 클릭 → 상세 화면 검증 · 스크린샷</code></td><td class="k"><b>팝업 대신 상세 화면</b> · 113,134원 +2.23% · 차트 · 일별 시세 · 뒤로 가기</td></tr>
+            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">Review<i>requesting-code-review</i></td><td class="c"><code class="cmd">계획 대비 코드 리뷰를 요청해줘</code></td><td class="k">심각도별 이슈 · <b>Critical 은 진행을 막는다</b> · 무엇을 고칠지 사람이 판단</td></tr>
+            <tr class="rv" style="--d:0.71s"><td class="n">06</td><td class="p">Deploy 준비<i>finishing-a-development-branch</i></td><td class="c"><code class="cmd">개발 브랜치를 마무리해줘</code></td><td class="k">테스트 확인 후 <b>merge · PR · 보관 · 폐기</b> 중 사람이 선택</td></tr>
       </tbody>
     </table>
     <div class="pt-note fd" style="--d:.9s">
-      <div><b>AI-SDLC 대응</b> specs = intent · spec · plans = plan.md · 리뷰 = PR 게이트 · 단계마다 <b>사람이 승인</b>해야 다음으로</div>
-      <div><b>토큰</b> 실행은 이 세션에서(executing-plans) · subagent-driven 은 작업마다 서브에이전트라 토큰이 크다</div>
+      <div><b>AI-SDLC 대응</b> specs = intent · spec · plans = plan.md · 테스트 · Playwright = 검증 · 리뷰 = PR 게이트 · 단계마다 <b>사람이 승인</b>해야 다음으로</div>
+      <div><b>준비</b> <code class="cmd">/skills</code> 에 brainstorming 이 없을 때만 <code class="cmd">/plugin install superpowers@claude-plugins-official</code> · 실행은 이 세션에서(executing-plans) — subagent-driven 은 토큰이 크다</div>
     </div>
   </div>
 </section>

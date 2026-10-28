@@ -34,7 +34,7 @@
       <button><svg viewBox="0 0 24 24"><path d="M12 3c1 4 6 6 6 11a6 6 0 0 1-12 0c0-3 2-4 2-7 2 1 3 3 3 5 1-2 1-6 1-9z" /></svg>실시간</button>
     </aside>
 
-    <main class="panel">
+    <main id="dashboard" class="panel">
       <div class="market-status">
         <span class="dot closed"></span>국내 장 닫힘
         <span class="dot open"></span>해외 정규장 <span class="dim">22:30 ~ 05:00</span>
@@ -87,6 +87,15 @@
         <tbody id="ranking-body"></tbody>
       </table>
     </main>
+
+    <!-- 종목 상세 · #/stocks/{symbol} 일 때 dashboard 대신 보인다 (GET /api/stocks/{symbol}/detail) -->
+    <main id="detail" class="detail" hidden></main>
+
+    <!-- 상세 API 가 없거나 실패하면 띄우는 안내 -->
+    <dialog id="notice" class="notice-dialog">
+      <p id="notice-msg"></p>
+      <form method="dialog"><button>확인</button></form>
+    </dialog>
 
     <footer class="ticker">
       <button class="notice">투자 유의사항</button>

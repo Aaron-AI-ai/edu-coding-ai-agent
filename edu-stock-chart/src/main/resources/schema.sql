@@ -62,3 +62,32 @@ CREATE TABLE IF NOT EXISTS stock (
     name          VARCHAR(50)    NOT NULL,
     market        VARCHAR(10)    NOT NULL   -- KOSPI · KOSDAQ · NASDAQ · NYSE
 );
+
+-- 종목 상세 화면 · 시세 요약 (superpowers 시연 · GET /api/stocks/{symbol}/detail 용) · 금액 단위는 원, 투자자 순매수는 주
+CREATE TABLE IF NOT EXISTS stock_quote (
+    symbol             VARCHAR(20)    PRIMARY KEY,
+    price              BIGINT         NOT NULL,
+    change_amount      BIGINT         NOT NULL,
+    change_rate        DECIMAL(6, 2)  NOT NULL,
+    day_low            BIGINT         NOT NULL,
+    day_high           BIGINT         NOT NULL,
+    low_52w            BIGINT         NOT NULL,
+    high_52w           BIGINT         NOT NULL,
+    trade_amount_rank  INT            NOT NULL,
+    execution_strength DECIMAL(6, 2)  NOT NULL,
+    individual_net     BIGINT         NOT NULL,
+    foreign_net        BIGINT         NOT NULL,
+    institution_net    BIGINT         NOT NULL
+);
+
+-- 종목 상세 화면 · 일봉 (차트 캔들 · 거래량 · 일별 시세)
+CREATE TABLE IF NOT EXISTS stock_daily_price (
+    symbol      VARCHAR(20)    NOT NULL,
+    trade_date  DATE           NOT NULL,
+    open_price  BIGINT         NOT NULL,
+    high_price  BIGINT         NOT NULL,
+    low_price   BIGINT         NOT NULL,
+    close_price BIGINT         NOT NULL,
+    volume      BIGINT         NOT NULL,
+    PRIMARY KEY (symbol, trade_date)
+);
