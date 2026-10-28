@@ -922,11 +922,11 @@
   .sp-all .k { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13px; letter-spacing: 2px; color: var(--faint); white-space: nowrap; }
   .sp-all code.cmd { flex: 1; margin: 0; display: block; white-space: pre-wrap; background: #141311; color: #F4F3F1; border-radius: 6px; padding: 12px 18px; font-size: 16px; line-height: 1.55; cursor: pointer; }
   .sp-turn { align-self: center; font-size: 18px; color: var(--dim); }
-  .sd { margin-top: 26px; flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 18px 28px; word-break: keep-all; }
-  .sd-shot h3 { margin: 0 0 10px; font-size: 22px; font-weight: 600; color: var(--ink); }
+  .sd { margin-top: 26px; flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto; align-content: center; gap: 18px 32px; word-break: keep-all; }
+  .sd-shot h3 { margin: 0 0 14px; font-size: 26px; font-weight: 600; color: var(--ink); }
   .sd-shot h3 em { font-style: normal; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 14px; letter-spacing: 1px; color: var(--faint); margin-right: 10px; font-weight: 500; }
   .sd-shot .mc-im { border-radius: 10px; }
-  .sd-shot p { margin: 10px 0 0; font-size: 18px; line-height: 1.5; color: var(--dim); }
+  .sd-shot p { margin: 14px 0 0; font-size: 21px; line-height: 1.5; color: var(--dim); }
   .sd-shot p b { color: var(--ink); font-weight: 600; }
   .sd-shot code, .sd-flow code { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: .9em; }
   .sd-flow { grid-column: 1 / -1; display: flex; align-items: stretch; gap: 10px; }
@@ -3667,17 +3667,6 @@ description: 새 REST API 를 추가할 때 사용.
       <h3><em>구현 후</em>같은 클릭 → <code>#/stocks/SOXL</code> 상세 화면</h3>
       <div class="mc-im"><img data-zoom src="assets/soxl-detail-after.jpg" alt="구현 후 SOXL 상세 화면 — 113,134원 +2,467원(2.23%) · 1일 · 52주 범위 · 거래대금 1위 · 체결강도 119.43% · 일봉 차트 · 일별 시세 · 개인 · 외국인 · 기관"><span class="zm">클릭하면 확대</span></div>
       <p><b>113,134원 +2.23%</b> · 1일 · 52주 범위 · 체결강도 · 일봉 차트 62개 · 일별 시세 · 개인 · 외국인 · 기관</p>
-    </div>
-    <div class="sd-flow rv" style="--d:.4s">
-      <div><b>화면 · 준비됨</b><span><code>edu-stock-chart-ui</code> · 응답 필드는 <code>main.js</code> 「종목 상세」 주석</span></div>
-      <span class="ar">→</span>
-      <div class="todo"><b>Controller</b><span><code>GET /api/stocks/{symbol}/detail</code> · 없는 종목 404</span></div>
-      <span class="ar">→</span>
-      <div class="todo"><b>Service</b><span>시세 + 일봉을 응답 하나로 · 없으면 <code>StockNotFoundException</code></span></div>
-      <span class="ar">→</span>
-      <div class="todo"><b>Mapper XML</b><span><code>stock</code> · <code>stock_quote</code> 1건 · <code>stock_daily_price</code> 62건 오래된 순</span></div>
-      <span class="ar">→</span>
-      <div><b>DB · 준비됨</b><span><code>schema.sql</code> · <code>data.sql</code> 에 SOXL 시드</span></div>
     </div>
   </div>
 </section>
