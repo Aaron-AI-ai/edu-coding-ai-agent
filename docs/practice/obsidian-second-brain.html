@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>obsidian-second-brain 실습 — edu-stock-chart 코드 위키</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --page: #F4F3F1; --rule: #D6D3CE; --ink: #141311; --dim: #5D5B57; --faint: #96938D;
+    --code-bg: #111110; --code-fg: #E8E6E1; --warn: #B4531E; --ok: #2E7D4F; --soft: #ECEAE6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --page: #171614; --rule: #33312D; --ink: #F1EFEB; --dim: #A5A29C; --faint: #7A7772;
+      --code-bg: #0C0C0B; --code-fg: #E8E6E1; --warn: #E2854A; --ok: #7FD99A; --soft: #1F1E1B;
+    }
+  }
+  :root[data-theme="dark"] {
+    --page: #171614; --rule: #33312D; --ink: #F1EFEB; --dim: #A5A29C; --faint: #7A7772;
+    --code-bg: #0C0C0B; --code-fg: #E8E6E1; --warn: #E2854A; --ok: #7FD99A; --soft: #1F1E1B;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--page); color: var(--ink); }
+  body { font-family: "Noto Sans KR", -apple-system, sans-serif; font-weight: 300; line-height: 1.65; font-size: 16px; }
+  main { max-width: 980px; margin: 0 auto; padding: 48px 16px 96px; }
+  .eyebrow { font-family: "JetBrains Mono", Menlo, monospace; font-size: 12px; letter-spacing: 2px; color: var(--faint); }
+  h1 { font-size: 34px; font-weight: 400; letter-spacing: -0.5px; margin: 8px 0 6px; line-height: 1.25; }
+  h2 { font-size: 24px; font-weight: 400; margin: 56px 0 14px; padding-bottom: 8px; border-bottom: 1.5px solid var(--ink); }
+  h3 { font-size: 18px; font-weight: 500; margin: 30px 0 10px; }
+  p { margin: 10px 0; color: var(--ink); }
+  .lead { color: var(--dim); font-size: 17px; }
+  .hr { height: 1.5px; background: var(--ink); margin: 18px 0 28px; }
+  .meta { display: grid; grid-template-columns: 110px 1fr; gap: 6px 16px; font-size: 15px; margin: 18px 0 0; }
+  .meta b { font-weight: 500; color: var(--faint); font-family: "JetBrains Mono", Menlo, monospace; font-size: 12px; letter-spacing: 1.5px; padding-top: 3px; }
+  .meta code { word-break: break-all; }
+  code { font-family: "JetBrains Mono", Menlo, monospace; font-size: 0.88em; background: var(--soft); padding: 1px 6px; border-radius: 3px; }
+  pre { background: var(--code-bg); color: var(--code-fg); border-radius: 4px; padding: 14px 18px; font-family: "JetBrains Mono", Menlo, monospace; font-size: 13px; line-height: 1.55; overflow-x: auto; margin: 12px 0; }
+  pre code { background: none; padding: 0; font-size: inherit; color: inherit; }
+  code.cmd { display: block; background: var(--code-bg); color: var(--code-fg); border-radius: 4px; padding: 10px 16px; font-size: 13.5px; line-height: 1.55; white-space: pre-wrap; word-break: break-word; margin: 8px 0; cursor: pointer; position: relative; }
+  code.cmd:hover { outline: 1px dashed #6B6862; outline-offset: 3px; }
+  code.cmd.copied::after { content: " ✓ 복사됨"; color: #7FD99A; font-size: .85em; }
+  code.cmd .d { color: #6B6862; }
+  table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 15px; }
+  th { font-family: "JetBrains Mono", Menlo, monospace; font-size: 11.5px; letter-spacing: 2px; font-weight: 500; color: var(--faint); text-align: left; padding: 0 10px 9px 0; border-bottom: 1.5px solid var(--ink); }
+  td { padding: 8px 10px 8px 0; border-bottom: 1px solid var(--rule); vertical-align: top; color: var(--dim); }
+  td:first-child { color: var(--ink); font-weight: 500; white-space: nowrap; }
+  td.n { font-family: "JetBrains Mono", Menlo, monospace; font-size: 12.5px; color: var(--faint); width: 36px; font-weight: 400; }
+  td b { color: var(--ink); font-weight: 500; }
+  ul, ol { padding-left: 22px; margin: 8px 0; color: var(--dim); }
+  li { margin: 4px 0; }
+  li b { color: var(--ink); font-weight: 500; }
+  .note { border-left: 3px solid var(--rule); padding: 8px 16px; margin: 14px 0; color: var(--dim); font-size: 15px; background: var(--soft); border-radius: 0 4px 4px 0; }
+  .note.warn { border-left-color: var(--warn); }
+  .note b { color: var(--ink); font-weight: 500; }
+  .tag { display: inline-block; font-family: "JetBrains Mono", Menlo, monospace; font-size: 11px; letter-spacing: 1px; padding: 1px 7px; border-radius: 3px; border: 1px solid var(--rule); color: var(--faint); vertical-align: middle; margin-left: 4px; }
+  .tag.tbd { border-color: var(--warn); color: var(--warn); }
+  .tag.ok { border-color: var(--ok); color: var(--ok); }
+  .step { font-family: "JetBrains Mono", Menlo, monospace; font-size: 12px; letter-spacing: 1.5px; color: var(--faint); margin-right: 8px; }
+  .check { margin: 10px 0 0; padding: 10px 14px; border: 1px solid var(--rule); border-radius: 4px; font-size: 14.5px; color: var(--dim); }
+  .check b { color: var(--ink); font-weight: 500; }
+  .check::before { content: "확인할 것 · "; font-family: "JetBrains Mono", Menlo, monospace; font-size: 11px; letter-spacing: 2px; color: var(--faint); }
+  .toc { columns: 2; column-gap: 32px; font-size: 15px; margin: 16px 0 0; }
+  .toc a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .toc a:hover { border-bottom-color: var(--ink); }
+  .toc li { break-inside: avoid; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 720px) { .toc { columns: 1; } .two { grid-template-columns: 1fr; } h1 { font-size: 28px; } td:first-child { white-space: normal; } }
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">LLM WIKI · 실습 기록 · OBSIDIAN-SECOND-BRAIN</div>
+  <h1>코드를 위키로 만들고, 위키로 코드를 만든다</h1>
+  <p class="lead">edu-stock-chart 코드를 Obsidian 볼트(koscom-wiki)에 유지되는 위키로 만들고, 그 위키를 근거로 검색 · 기록 · 코드 생성까지 해 본다.</p>
+  <div class="meta">
+    <b>작성일</b><span>2026-10-28</span>
+    <b>대상 코드</b><span><code>C:/Users/KOSCOM/workspace/edu-coding-ai-agent/edu-stock-chart</code> (commit f4d55ec)</span>
+    <b>볼트</b><span><code>C:/Users/KOSCOM/workspace/koscom-wiki</code> · wiki 스타일 레이아웃</span>
+    <b>플러그인</b><span>obsidian-second-brain v0.20.0 · 명령은 <code>/obsidian-second-brain:&lt;명령&gt;</code> 형식 · <a href="https://github.com/eugeniughelbur/obsidian-second-brain" style="color:var(--ink)">github.com/eugeniughelbur/obsidian-second-brain</a></span>
+    <b>경로 표기</b><span>Windows 기준이다. macOS · Linux 는 <code>C:/Users/KOSCOM/workspace</code> 를 자기 작업 폴더로 바꿔 읽는다.</span>
+  </div>
+  <div class="hr"></div>
+
+  <div class="note">
+    <b>기록 방식</b> · <code>init</code> 과 <code>find</code> 는 이 세션에서 직접 실행하고 결과를 확인했다. <code>architect</code> · <code>capture</code> · <code>decide</code> · <code>log</code> · <code>ingest</code> · <code>health</code> 는 볼트에 남은 파일과 <code>Logs/2026-10-28.md</code> 로 실행 사실과 결과를 확인했다. 실행 장면 자체를 이 세션에서 관찰한 것은 아니다. 확인하지 못한 값은 <span class="tag tbd">TBD</span> 로 표시한다.
+  </div>
+
+  <ul class="toc" style="list-style:none;padding-left:0">
+    <li><a href="#s0">0. 사전 준비 · 플러그인 설치</a></li>
+    <li><a href="#s1">1. 전체 흐름</a></li>
+    <li><a href="#s2">2. 볼트 폴더 만들기와 init</a></li>
+    <li><a href="#s3">3. 코드 위키 생성 (architect)</a></li>
+    <li><a href="#s4">4. 실습 기록 (find · capture · decide · log · ingest · health)</a></li>
+    <li><a href="#s5">5. 하루 치 운영 로그</a></li>
+    <li><a href="#s6">6. 현재 볼트 상태에서 발견한 점</a></li>
+    <li><a href="#s7">7. 반복 실행용 요약</a></li>
+    <li><a href="#s8">8. 위키로 코드를 만든다 (선택)</a></li>
+  </ul>
+
+  <!-- ───────────────────────────── 0 -->
+  <h2 id="s0">0. 사전 준비 · 플러그인 설치</h2>
+  <table>
+    <thead><tr><th>항목</th><th>필요한 것</th><th>확인</th></tr></thead>
+    <tbody>
+      <tr><td>Claude Code · git</td><td>이미 쓰고 있는 환경 그대로</td><td><code>claude --version</code></td></tr>
+      <tr><td>uv</td><td>플러그인의 Python 헬퍼(볼트 생성기 · 점검 스크립트)를 <code>uv run</code> 으로 실행한다</td><td><code>uv --version</code> · 없으면 <a href="https://docs.astral.sh/uv/" style="color:var(--ink)">docs.astral.sh/uv</a></td></tr>
+      <tr><td>Python 3.10+</td><td>uv 가 관리한다 · 별도 패키지 불필요</td><td><code>uv python list</code></td></tr>
+      <tr><td>Obsidian 앱 (선택)</td><td>Graph view 로 링크를 눈으로 볼 때만 · 없어도 실습은 된다</td><td>볼트 폴더를 <b>Open folder as vault</b></td></tr>
+      <tr><td>API 키</td><td>핵심 명령(init · architect · find · capture · decide · log · ingest · health)은 <b>키가 필요 없다</b></td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <h3>플러그인 설치 (없을 때만)</h3>
+  <p>Claude Code 세션 안에서 실행한다. 설치 후 <code>/plugin</code> 에서 <b>enabled</b> 인지 본다.</p>
+  <code class="cmd">/plugin marketplace add eugeniughelbur/obsidian-second-brain</code>
+  <code class="cmd">/plugin install obsidian-second-brain@obsidian-second-brain</code>
+  <div class="check"><code>/plugin</code> 목록에 <b>obsidian-second-brain ✔ enabled</b> · <code>/obsidian-second-brain:</code> 까지 치면 명령이 자동 완성되는가</div>
+  <div class="note">
+    <b>명령 이름 규칙</b> · README 는 <code>/obsidian-init</code> 처럼 적지만 플러그인으로 설치하면 <code>/obsidian-second-brain:obsidian-init</code> 처럼 플러그인 이름이 앞에 붙는다. 이 문서의 명령은 모두 플러그인 형식이다.
+  </div>
+
+  <!-- ───────────────────────────── 1 -->
+  <h2 id="s1">1. 전체 흐름</h2>
+  <table>
+    <thead><tr><th></th><th>작업</th><th>명령</th><th>결과</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td>볼트 폴더 준비</td><td><code>mkdir</code> · 폴더 확인</td><td>koscom-wiki 는 비어 있던 폴더</td></tr>
+      <tr><td class="n">2</td><td>볼트 초기화</td><td><code>obsidian-init</code></td><td>운영 매뉴얼 · 카탈로그 · 로그 · Bases · 폴더 구조 생성</td></tr>
+      <tr><td class="n">3</td><td>코드 위키 생성</td><td><code>obsidian-architect</code></td><td>Architecture 노트 7개 + 프로젝트 노트 1개 + 코드 파일 노트 17개</td></tr>
+      <tr><td class="n">4</td><td>검색 실습</td><td><code>obsidian-find</code></td><td>호출 흐름과 관련 테스트를 노트 링크로 추적</td></tr>
+      <tr><td class="n">5</td><td>아이디어 메모</td><td><code>obsidian-capture</code></td><td><code>wiki/concepts/</code> 에 idea 노트 2개</td></tr>
+      <tr><td class="n">6</td><td>결정 기록</td><td><code>obsidian-decide --formal</code></td><td><code>wiki/decisions/</code> 에 ADR 1개</td></tr>
+      <tr><td class="n">7</td><td>작업 기록</td><td><code>obsidian-log</code></td><td><code>wiki/logs/</code> 에 개발 로그 1개 · 데일리 노트</td></tr>
+      <tr><td class="n">8</td><td>외부 자료 반영</td><td><code>obsidian-ingest</code></td><td><code>raw/articles/</code> 원본 + <code>wiki/concepts/</code> 요약</td></tr>
+      <tr><td class="n">9</td><td>볼트 점검</td><td><code>obsidian-health</code></td><td>치명 0 · 경고 2 · 정보 2</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ───────────────────────────── 2 -->
+  <h2 id="s2">2. 볼트 폴더 만들기와 init</h2>
+
+  <h3><span class="step">2-1</span>디렉토리 생성</h3>
+  <p>edu-stock-chart 와 나란히 빈 폴더를 만든다. edu-stock-chart 에서 연 Claude Code 세션 안에서 <code>!</code> 로 실행하면 된다.</p>
+  <code class="cmd">! mkdir ../koscom-wiki</code>
+  <code class="cmd">! ls -la ../koscom-wiki   <span class="d"># Windows cmd: dir ..\koscom-wiki</span></code>
+  <div class="check"><code>C:\Users\KOSCOM\workspace\koscom-wiki</code> 가 있고 <b>비어 있는가</b> · 이미 파일이 있으면 init 이 덮어쓰기 여부를 묻는다</div>
+
+  <h3><span class="step">2-2</span>볼트 경로 환경 변수</h3>
+  <p>처음에는 <code>OBSIDIAN_VAULT_PATH</code> 환경 변수도, <code>~/.config/obsidian-second-brain/.env</code> 파일도 없었다. init 이 경로를 물어보고 아래 한 줄을 저장한다. 직접 만들어 두어도 된다.</p>
+  <pre><code># ~/.config/obsidian-second-brain/.env
+OBSIDIAN_VAULT_PATH=C:/Users/KOSCOM/workspace/koscom-wiki</code></pre>
+  <div class="note">README 는 <code>~/.claude/settings.json</code> 의 <code>env</code> 에 <code>OBSIDIAN_VAULT_PATH</code> 를 넣는 방법도 안내한다. 둘 중 하나면 된다. 이 실습은 <code>.env</code> 파일을 썼다.</div>
+
+  <h3><span class="step">2-3</span>init 실행과 선택</h3>
+  <code class="cmd">/obsidian-second-brain:obsidian-init</code>
+  <table>
+    <thead><tr><th>질문</th><th>선택한 값</th><th>이유</th></tr></thead>
+    <tbody>
+      <tr><td>볼트 경로</td><td><code>C:/Users/KOSCOM/workspace/koscom-wiki</code></td><td>2-1 에서 만든 빈 폴더</td></tr>
+      <tr><td>레이아웃</td><td><b>wiki 스타일</b></td><td>Claude 가 주로 읽고 쓰는 코드 위키 · <code>First-Brain/</code> 변형(사람 노트 분리)은 쓰지 않음</td></tr>
+      <tr><td>덮어쓰기 정책</td><td><b>confirm</b> (기본값)</td><td><code>.vault-config.json</code> 에 키를 따로 쓰지 않음</td></tr>
+    </tbody>
+  </table>
+  <ul>
+    <li><code>_CLAUDE.md</code> 의 <b>Owner · 직책 · 동료</b>는 TBD 로 두었다. 볼트가 비어 있어 탐색용 서브에이전트는 실행하지 않았다.</li>
+    <li>끝나면 <b>Claude 세션을 재시작</b>한다. MCP 서버가 새 볼트 경로를 읽어야 이후 명령이 새 파일을 본다.</li>
+  </ul>
+
+  <h3><span class="step">2-4</span>init 이 만든 것</h3>
+  <pre><code>koscom-wiki/
+├─ _CLAUDE.md            운영 매뉴얼 (폴더 맵, 자동 저장 규칙, 명명 규칙)
+├─ index.md              카탈로그 (탐색 시 가장 먼저 읽음)
+├─ log.md                로그 안내 파일 (항목은 Logs/ 에 기록)
+├─ .claude/CLAUDE.md     @../_CLAUDE.md 한 줄 (볼트에서 세션을 열면 매뉴얼 로드)
+├─ Bases/                Projects.base, People.base, Tasks.base, Daily.base
+├─ Logs/                 일별 운영 로그 (YYYY-MM-DD.md)
+├─ boards/               칸반 보드 (아직 비어 있음)
+├─ raw/                  articles/ transcripts/ pdfs/ videos/ (불변 원본)
+├─ Research/             Web/ Deep/ X-pulse/ X-reads/ YouTube/ NotebookLM/
+└─ wiki/
+   ├─ entities/ concepts/ projects/ daily/ logs/
+   └─ reviews/ tasks/ decisions/ meetings/ agenda/</code></pre>
+  <div class="check"><code>_CLAUDE.md</code> · <code>index.md</code> · <code>raw/</code> · <code>wiki/</code> 가 있는가 · <code>cat ../koscom-wiki/_CLAUDE.md</code> 로 폴더 맵이 읽히는가</div>
+
+  <h3><span class="step">2-5</span>폴더 맵 (wiki 스타일)</h3>
+  <table>
+    <thead><tr><th>노트 종류</th><th>폴더</th></tr></thead>
+    <tbody>
+      <tr><td>사람 · 회사 · 도구</td><td><code>wiki/entities/</code></td></tr>
+      <tr><td>아이디어 · 개념 · 종합</td><td><code>wiki/concepts/</code></td></tr>
+      <tr><td>프로젝트 · 코드 아키텍처</td><td><code>wiki/projects/</code></td></tr>
+      <tr><td>데일리</td><td><code>wiki/daily/</code></td></tr>
+      <tr><td>개발 로그</td><td><code>wiki/logs/</code></td></tr>
+      <tr><td>결정 기록(ADR)</td><td><code>wiki/decisions/</code></td></tr>
+      <tr><td>원본 자료(불변)</td><td><code>raw/</code></td></tr>
+      <tr><td>운영 로그</td><td><code>Logs/</code></td></tr>
+    </tbody>
+  </table>
+
+  <!-- ───────────────────────────── 3 -->
+  <h2 id="s3">3. 코드 위키 생성 — 패키지 구조 그대로 문서화 (architect)</h2>
+
+  <h3><span class="step">3-1</span>실행한 프롬프트</h3>
+  <p>기본 Architecture 노트만으로는 파일 단위 추적이 어려워서, 파일별 노트 규칙을 프롬프트에 같이 넣었다. 세션 재시작 후 edu-stock-chart 에서 실행한다.</p>
+<code class="cmd">/obsidian-second-brain:obsidian-architect C:/Users/KOSCOM/workspace/edu-coding-ai-agent/edu-stock-chart
+
+기본 Architecture 노트(Overview, 핵심 모듈별 노트, Key decisions)를 wiki/projects/edu-stock-chart/Architecture/ 에 만들고, 이에 더해 코드 파일별 노트를 아래 규칙으로 만들어 줘.
+
+[파일별 노트 규칙]
+- 대상: src/main/java, src/main/resources, src/test/java 아래 모든 파일, 그리고 build.gradle, settings.gradle
+- 제외: scripts/, gradle/, gradlew*, .gitignore, build/, .gradle/
+- 위치: wiki/projects/edu-stock-chart/Code/ 아래에 원본 디렉토리 경로를 그대로 재현
+- 파일명: 원본 파일명 + .md (확장자 유지)
+- frontmatter: type: code-file, date, tags, ai-first: true, source-path, language, module, scanned-commit
+- 본문: 요약, 역할, 주요 항목, 의존 관계([[wikilink]]), 소속 Architecture 모듈 링크
+- 코드에 없는 내용은 지어내지 말고 추론은 confidence: speculation 으로 표시
+- 생성 내용은 @generated 마커로 감싸고 사용자 메모는 @user 블록으로 비워 둘 것</code>
+
+  <h3><span class="step">3-2</span>생성 결과 — 노트 25개</h3>
+  <table>
+    <thead><tr><th>구분</th><th>개수</th><th>위치</th></tr></thead>
+    <tbody>
+      <tr><td>프로젝트 노트</td><td>1</td><td><code>wiki/projects/edu-stock-chart/edu-stock-chart.md</code></td></tr>
+      <tr><td>Architecture 노트</td><td>7</td><td><code>wiki/projects/edu-stock-chart/Architecture/</code> — Overview · API Layer · Service Layer · Persistence · Configuration and Build · Tests · Key decisions</td></tr>
+      <tr><td>코드 파일 노트</td><td>17</td><td><code>wiki/projects/edu-stock-chart/Code/</code> — gradle 2 · java 7 · resources 4 · test 4</td></tr>
+    </tbody>
+  </table>
+  <div class="note warn"><b>정정</b> · 앞선 대화에서 "src 아래 파일이 약 23개"라고 말했으나 실제 대상은 17개다.</div>
+  <div class="check"><code>! find ../koscom-wiki/wiki/projects/edu-stock-chart -name "*.md" | wc -l</code> 가 <b>25</b> 인가 · 노트에 코드에 없는 설명이 들어가지 않았는가</div>
+
+  <h3><span class="step">3-3</span>원본 경로와 노트 경로의 대응</h3>
+  <pre><code>원본: edu-stock-chart/                                    노트: wiki/projects/edu-stock-chart/Code/
+├─ build.gradle                                           ├─ build.gradle.md
+├─ settings.gradle                                        ├─ settings.gradle.md
+└─ src/                                                   └─ src/
+   ├─ main/java/kr/co/koscom/edu/stockchart/                 ├─ main/java/kr/co/koscom/edu/stockchart/
+   │  ├─ StockChartApplication.java                          │  ├─ StockChartApplication.java.md
+   │  ├─ controller/StockController.java                     │  ├─ controller/StockController.java.md
+   │  ├─ domain/StockPrice.java                              │  ├─ domain/StockPrice.java.md
+   │  ├─ dto/MovingAverageResponse.java                      │  ├─ dto/MovingAverageResponse.java.md
+   │  ├─ exception/StockNotFoundException.java               │  ├─ exception/StockNotFoundException.java.md
+   │  ├─ mapper/StockPriceMapper.java                        │  ├─ mapper/StockPriceMapper.java.md
+   │  └─ service/MovingAverageService.java                   │  └─ service/MovingAverageService.java.md
+   ├─ main/resources/                                        ├─ main/resources/
+   │  ├─ application.yml                                     │  ├─ application.yml.md
+   │  ├─ schema.sql                                          │  ├─ schema.sql.md
+   │  ├─ data.sql                                            │  ├─ data.sql.md
+   │  └─ mapper/StockPriceMapper.xml                         │  └─ mapper/StockPriceMapper.xml.md
+   └─ test/java/kr/co/koscom/edu/stockchart/                 └─ test/java/kr/co/koscom/edu/stockchart/
+      ├─ StockChartApplicationTests.java                        ├─ StockChartApplicationTests.java.md
+      ├─ controller/StockControllerTest.java                    ├─ controller/StockControllerTest.java.md
+      ├─ mapper/StockPriceMapperTest.java                       ├─ mapper/StockPriceMapperTest.java.md
+      └─ service/MovingAverageServiceTest.java                  └─ service/MovingAverageServiceTest.java.md</code></pre>
+  <p><code>StockPriceMapper.java</code> 와 <code>StockPriceMapper.xml</code> 은 이름이 같아서 확장자를 유지했다 (<code>.java.md</code> · <code>.xml.md</code>).</p>
+
+  <h3><span class="step">3-4</span>코드 파일 노트의 구조 (예: StockController.java.md)</h3>
+  <pre><code>---
+type: code-file
+date: 2026-10-28
+tags: [code-file, java, api-layer]
+ai-first: true
+source-path: src/main/java/kr/co/koscom/edu/stockchart/controller/StockController.java
+language: java
+module: "[[Architecture - API Layer]]"
+scanned-commit: f4d55ec
+confidence: high
+project: "[[edu-stock-chart]]"
+---
+
+&lt;!-- @generated:start --&gt;
+## For future agent
+(요약) REST controller exposing GET /api/stocks/{symbol}/moving-average ...
+
+## 역할
+## 주요 항목 (from code)
+## 의존 관계
+- Uses: [[MovingAverageService.java]], [[MovingAverageResponse.java]]
+- Used by: [[StockControllerTest.java]]
+## 소속 Architecture 모듈
+&lt;!-- @generated:end --&gt;
+
+&lt;!-- @user:start --&gt;
+&lt;!-- @user:end --&gt;</code></pre>
+  <p>재실행하면 <b>@generated 블록만 갱신</b>되고 @user 블록은 유지된다. 사람이 적은 메모는 @user 안에 둔다.</p>
+
+  <h3><span class="step">3-5</span>호출 흐름 요약 (코드 노트에서 확인한 내용)</h3>
+  <pre><code>GET /api/stocks/{symbol}/moving-average?window=5
+  → StockController → MovingAverageService → StockPriceMapper(.java) → StockPriceMapper.xml → stock_price 테이블</code></pre>
+  <table>
+    <thead><tr><th>단계</th><th>핵심 내용</th></tr></thead>
+    <tbody>
+      <tr><td>StockController</td><td>window 는 2~20 · 기본 5. 검증 후 서비스에 위임</td></tr>
+      <tr><td>MovingAverageService</td><td>입력 검증 · 메모리 캐시(<code>symbol:window</code> 키) · DB 조회 최대 3회 재시도 · 단순 이동평균 계산 · 데이터 없으면 <code>StockNotFoundException</code></td></tr>
+      <tr><td>StockPriceMapper</td><td>MyBatis <code>@Mapper</code> · 메서드는 <code>findBySymbol(String)</code> 하나</td></tr>
+      <tr><td>StockPriceMapper.xml</td><td><code>SELECT id, symbol, trade_date, close_price FROM stock_price WHERE symbol = #{symbol} ORDER BY trade_date ASC</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3><span class="step">3-6</span>Obsidian 에서 확인 (선택 · 토큰 0)</h3>
+  <p>Obsidian → <b>Open folder as vault</b> → <code>koscom-wiki</code> → <b>Graph view</b>. Controller → Service → Mapper → XML 이 선으로 이어져 보이면 된다. 앱이 없으면 <code>wiki/**/*.md</code> 를 열어 <code>[[링크]]</code> 를 본다.</p>
+
+  <!-- ───────────────────────────── 4 -->
+  <h2 id="s4">4. 실습 기록</h2>
+
+  <h3><span class="step">4-1</span>find — 호출 흐름 검색</h3>
+  <code class="cmd">/obsidian-second-brain:obsidian-find StockController에서 이동평균 요청이 들어오면 어떤 서비스와 매퍼를 거쳐 DB까지 가는지, 관련 테스트 파일도 같이 알려줘</code>
+  <ul>
+    <li>세션에 <code>obsidian_search</code> 도구가 연결돼 있지 않아서 위키 노트를 직접 읽어 답했다. (새 노트가 검색에 안 나오면 <code>/obsidian-second-brain:obsidian-reindex</code>)</li>
+    <li>3-5 의 호출 흐름과 노트 링크를 찾았다.</li>
+    <li>관련 테스트: <code>StockControllerTest</code> · <code>MovingAverageServiceTest</code> · <code>StockPriceMapperTest</code> · <code>StockChartApplicationTests</code>. 근거는 각 노트의 <b>Used by</b> 링크이며 테스트 내부는 열어 보지 않았다.</li>
+    <li>서비스 노트의 관찰: 캐시에 TTL 이나 eviction 이 없다 (의도 여부는 코드로 알 수 없음). Strategy/Factory 중첩 타입이 확장 포인트라는 해석은 <code>confidence: speculation</code> 이다.</li>
+  </ul>
+  <div class="check">답이 <b>[[노트]] 링크</b>를 근거로 들고, 코드에 없는 이유를 지어내지 않고 <b>speculation</b> 으로 표시하는가</div>
+
+  <h3><span class="step">4-2</span>capture — 아이디어 메모 (2건)</h3>
+  <code class="cmd">/obsidian-second-brain:obsidian-capture MovingAverageService 캐시(ConcurrentHashMap)에 TTL이나 eviction이 없음. 종목이 늘면 메모리가 계속 커질 수 있으니 개선 후보로 검토. 관련: [[MovingAverageService.java]]</code>
+  <p>생성 노트: <code>wiki/concepts/MovingAverageService cache has no TTL or eviction.md</code></p>
+  <pre><code>---
+type: idea
+date: 2026-10-28
+tags: [idea]
+status: captured
+related-projects: ["[[edu-stock-chart]]"]
+ai-first: true
+---
+## For future agent
+Idea captured 2026-10-28: the in-memory cache in [[MovingAverageService.java]] (`ConcurrentHashMap`, key `symbol:window`)
+has no TTL or eviction, so memory can grow as symbols and windows increase. Candidate improvement for [[edu-stock-chart]];
+see also [[Architecture - Key decisions]] (decision 5).
+
+MovingAverageService 캐시(ConcurrentHashMap)에 TTL이나 eviction이 없음. 종목이 늘면 메모리가 계속 커질 수 있으니 개선 후보로 검토.</code></pre>
+  <p>두 번째 노트: <code>wiki/concepts/MovingAverageService 트랜잭션 어노테이션 추가.md</code></p>
+  <pre><code>---
+type: idea
+date: 2026-10-28
+tags: [idea]
+status: captured
+related-projects: ["[[edu-stock-chart]]"]
+ai-first: true
+---
+## 향후 에이전트를 위한 요약
+2026-10-28에 캡처한 아이디어: [[MovingAverageService.java]]에 트랜잭션 어노테이션을 추가한다. [[edu-stock-chart]]의 개선 후보이며,
+구체적인 이유와 적용 범위는 TBD다. 커밋 f4d55ec 기준으로 `src/` 아래에 `@Transactional`은 한 곳도 없다(검색 확인).
+
+MovingAverageService 트랜잭션 어노테이션 추가.</code></pre>
+  <div class="note">두 번째 노트의 섹션 제목이 한글이다. <code>edu-stock-chart/CLAUDE.md</code> 의 한글 규칙이 적용된 첫 사례다. 두 노트 모두 데일리 노트의 Ideas 항목에 링크됐다.</div>
+
+  <h3><span class="step">4-3</span>decide — 결정 기록 (--formal)</h3>
+  <code class="cmd">/obsidian-second-brain:obsidian-decide --formal edu-stock-chart의 이동평균 window 허용 범위를 2~20으로 제한하고 기본값을 5로 둔다. 근거는 StockController의 @Min(2) @Max(20)과 MovingAverageService.validateWindow 코드이며, 왜 이 범위를 골랐는지는 코드에 없으므로 TBD로 표시. 관련: [[StockController.java]], [[MovingAverageService.java]], [[edu-stock-chart]]</code>
+  <p>생성 노트: <code>wiki/decisions/2026-10-28 - Moving average window range 2-20 default 5.md</code> (type: adr · status: accepted · confidence: high)</p>
+  <table>
+    <thead><tr><th>섹션</th><th>내용</th></tr></thead>
+    <tbody>
+      <tr><td>Decision</td><td>window 는 2 이상 20 이하이고, 생략하면 5</td></tr>
+      <tr><td>Context</td><td>StockController 의 <code>@RequestParam(defaultValue = "5") @Min(2) @Max(20)</code>, MovingAverageService 의 <code>MIN_WINDOW = 2</code> · <code>MAX_WINDOW = 20</code> 과 <code>validateWindow</code> (코드에서 확인)</td></tr>
+      <tr><td>선택한 이유</td><td><span class="tag tbd">TBD</span> 코드 · 주석 · 커밋 이력 어디에도 없음 (commit-decision miner 후보 0건)</td></tr>
+      <tr><td>Options Considered</td><td><span class="tag tbd">TBD</span> 기록된 대안 없음</td></tr>
+      <tr><td>Rationale</td><td><span class="tag tbd">TBD</span> 설명을 지어내면 speculation 이 되므로 비워 둠</td></tr>
+      <tr><td>Consequences</td><td>범위 밖 요청은 컨트롤러에서 HTTP 400 (StockControllerTest 의 invalidWindow · 값 1 과 21). 검증이 컨트롤러와 서비스에 이중으로 있어 상수를 함께 바꿔야 함. 서비스 쪽 검증을 직접 검사하는 테스트는 없음. 저장된 행이 window 보다 적으면 points 가 빈 목록</td></tr>
+      <tr><td>기록 성격</td><td>이 날짜에 내린 결정이 아니라 <b>소급해서 기록</b>한 것</td></tr>
+    </tbody>
+  </table>
+  <div class="check">ADR 의 <b>이유 · 대안 · 근거</b>가 TBD 로 남아 있는가 — 코드에 없는 이유를 LLM 이 채워 넣었다면 그것이 바로 지어낸 것</div>
+
+  <h3><span class="step">4-4</span>log — 작업 기록</h3>
+  <code class="cmd">/obsidian-second-brain:obsidian-log edu-stock-chart 코드 위키 실습: 파일별 노트 확인, 호출 흐름(Controller → Service → Mapper → XML) 검색, 캐시 TTL 아이디어와 window 범위 결정을 기록함</code>
+  <p>생성 노트: <code>wiki/logs/2026-10-28 - edu-stock-chart.md</code> (type: devlog)</p>
+  <ul>
+    <li><b>목표</b> edu-stock-chart 코드를 koscom-wiki 의 유지되는 위키로 만든다.</li>
+    <li><b>변경</b> architect 산출물 전체 · 아이디어 캡처 · ADR 작성</li>
+    <li>호출 흐름 검색은 사용자 요청에 따라 완료로 기록했지만, 이 로그 시점에는 직접 실행한 것이 아니므로 "검색 결과: TBD(사용자 진술, 관찰 아님)" 로 명시했다.</li>
+    <li><b>문제</b> <code>python</code> 이 스텁으로 해석돼 <code>uv run python</code> 으로 생성기를 실행했다. 생성 후 볼트 점검에서 고아 노트 0 · 끊어진 타깃 0. 루트 파일 <code>_CLAUDE.md</code> 는 frontmatter 가 없다고 나오나 예외 대상이다.</li>
+    <li><b>다음 단계</b> 캐시 TTL 아이디어 검토 · window 범위의 이유 보강 · 코드 변경 시 architect 재실행</li>
+  </ul>
+  <p>함께 갱신된 곳: 프로젝트 노트의 Dev logs 와 Key Decisions · 데일리 노트 <code>wiki/daily/2026-10-28.md</code>.</p>
+
+  <h3><span class="step">4-5</span>ingest — 외부 자료를 위키로</h3>
+  <p>미리보기로 무엇이 생길지 먼저 보고, 이어서 실행한다.</p>
+  <code class="cmd">/obsidian-second-brain:obsidian-ingest C:/Users/KOSCOM/workspace/edu-coding-ai-agent/edu-stock-chart/scripts/README.md --preview</code>
+  <code class="cmd">/obsidian-second-brain:obsidian-ingest C:/Users/KOSCOM/workspace/edu-coding-ai-agent/edu-stock-chart/scripts/README.md</code>
+  <ul>
+    <li><b>불변 원본</b> <code>raw/articles/2026-10-28 - edu-stock-chart scripts README.md</code> — type: source · source_type: article · capture_scope: full-local · source_quality: medium. <code>source_file_hash</code> 와 <code>content_hash</code> 로 원본 변경 여부를 추적할 수 있다.</li>
+    <li><b>지식 노트</b> <code>wiki/concepts/edu-stock-chart run and debug scripts.md</code> (confidence: stated)</li>
+  </ul>
+  <table>
+    <thead><tr><th>스크립트</th><th>하는 일</th><th>Windows</th><th>macOS · Linux</th></tr></thead>
+    <tbody>
+      <tr><td>run</td><td>서비스 실행 (http://localhost:8080)</td><td><code>scripts\run.bat</code></td><td><code>./scripts/run.sh</code></td></tr>
+      <tr><td>test</td><td>단위 테스트 전체</td><td><code>scripts\test.bat</code></td><td><code>./scripts/test.sh</code></td></tr>
+      <tr><td>build</td><td>빌드 + 테스트</td><td><code>scripts\build.bat</code></td><td><code>./scripts/build.sh</code></td></tr>
+      <tr><td>swagger</td><td>Swagger UI 열기</td><td><code>scripts\swagger.bat</code></td><td><code>./scripts/swagger.sh</code></td></tr>
+      <tr><td>h2</td><td>H2 콘솔 열기</td><td><code>scripts\h2.bat</code></td><td><code>./scripts/h2.sh</code></td></tr>
+    </tbody>
+  </table>
+  <ul>
+    <li>swagger 와 h2 는 서비스가 실행 중이어야 한다.</li>
+    <li>H2 콘솔: JDBC URL <code>jdbc:h2:mem:stockchart</code> · 사용자 <code>sa</code> · 비밀번호 없음. 인메모리라 서비스 종료 시 데이터가 사라지며 <code>schema.sql</code> · <code>data.sql</code> 이 시작할 때마다 다시 실행된다.</li>
+    <li>테스트 리포트: <code>build/reports/tests/test/index.html</code></li>
+    <li>포트를 바꾸려면 <code>application.yml</code> 에 <code>server.port</code> 를 추가한다 (현재 설정에 없음).</li>
+    <li>Swagger UI 경로 <code>/swagger-ui.html</code> · H2 콘솔 경로 <code>/h2-console</code> 은 README 에 없고 <code>application.yml</code> 과 교차 확인한 값이다.</li>
+    <li>스크립트 파일 자체는 읽지 않고 README 만 반영했다 (코드 파일 노트에서 <code>scripts/</code> 를 제외했기 때문).</li>
+  </ul>
+
+  <h3><span class="step">4-6</span>health — 볼트 점검</h3>
+  <code class="cmd">/obsidian-second-brain:obsidian-health</code>
+  <p>결과 (<code>Logs/2026-10-28.md</code> 기록): <b>치명 0 · 경고 2 · 정보 2</b>. 경고와 정보의 구체 내용은 이 기록에서 확인하지 못했다 <span class="tag tbd">TBD</span>. health 의 상세 결과 노트는 볼트에 남아 있지 않다.</p>
+  <div class="check">치명 0 인가 · 경고가 있으면 무엇인지 직접 읽고 아래 6 절에 적는다</div>
+
+  <!-- ───────────────────────────── 5 -->
+  <h2 id="s5">5. 하루 치 운영 로그 (Logs/2026-10-28.md)</h2>
+  <pre><code>09:32 - init      | 볼트 초기화: _CLAUDE.md, index.md, Logs/
+09:40 - architect | edu-stock-chart 스캔(f4d55ec): 프로젝트/Architecture 노트 8개, 코드 파일 노트 17개 생성
+10:28 - decide    | ADR 생성: 2026-10-28 - Moving average window range 2-20 default 5 (근거 TBD)
+10:37 - health    | 치명 0, 경고 2, 정보 2</code></pre>
+  <p>capture · log · ingest 항목은 이 운영 로그에 줄로 남아 있지 않다 (해당 노트와 데일리 노트로만 확인됨).</p>
+
+  <!-- ───────────────────────────── 6 -->
+  <h2 id="s6">6. 현재 볼트 상태에서 발견한 점</h2>
+  <ul>
+    <li><b>index.md 가 최신이 아니다.</b> Concepts 섹션이 <code>_Empty._</code> 로 남아 있는데 실제로는 idea 2개와 concept 1개가 있다. Logs 섹션에도 <code>wiki/logs/</code> 개발 로그가 빠져 있다. <code>/obsidian-second-brain:obsidian-init</code> 을 다시 실행하면 카탈로그를 새로 만든다.</li>
+    <li><b>영어 노트와 한글 노트가 섞여 있다.</b> <code>edu-stock-chart/CLAUDE.md</code> 의 한글 규칙을 만든 뒤에 생성된 노트만 한글 섹션 제목을 쓴다. 기존 영어 노트는 architect 를 재실행하거나 직접 번역해야 한다.</li>
+    <li><code>_CLAUDE.md</code> 의 Owner · 직책 · 동료가 TBD 로 남아 있다.</li>
+    <li><code>scripts/</code> 는 코드 파일 노트 대상에서 제외돼 있다. ingest 로 README 만 개념 노트로 반영했다.</li>
+    <li>원본 저장소는 <code>edu-stock-chart/CLAUDE.md</code> 만 새로 추가된 상태이며 커밋하지 않았다.</li>
+    <li>health 경고 2건의 내용 <span class="tag tbd">TBD</span></li>
+  </ul>
+
+  <!-- ───────────────────────────── 7 -->
+  <h2 id="s7">7. 반복 실행용 요약</h2>
+  <table>
+    <thead><tr><th></th><th>언제</th><th>명령</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td>처음 한 번</td><td>볼트 경로 설정: <code>~/.config/obsidian-second-brain/.env</code> 의 <code>OBSIDIAN_VAULT_PATH</code></td></tr>
+      <tr><td class="n">2</td><td>처음 한 번</td><td><code>/obsidian-second-brain:obsidian-init</code> → 세션 재시작</td></tr>
+      <tr><td class="n">3</td><td>코드가 바뀔 때마다</td><td><code>/obsidian-second-brain:obsidian-architect &lt;코드 경로&gt;</code> + 파일별 노트 규칙 (3-1) · @user 블록은 유지된다</td></tr>
+      <tr><td class="n">4</td><td>작업 중</td><td><code>obsidian-capture</code> (아이디어) · <code>obsidian-decide</code> (결정) · <code>obsidian-log</code> (작업 기록)</td></tr>
+      <tr><td class="n">5</td><td>외부 자료</td><td><code>obsidian-ingest --preview</code> 후 <code>obsidian-ingest</code></td></tr>
+      <tr><td class="n">6</td><td>점검과 검색</td><td><code>obsidian-health</code> · <code>obsidian-find</code> · 새 노트가 안 나오면 <code>obsidian-reindex</code></td></tr>
+    </tbody>
+  </table>
+
+  <!-- ───────────────────────────── 8 -->
+  <h2 id="s8">8. 위키로 코드를 만든다 (선택)</h2>
+  <p>위 기록에는 없는 단계다. 위키가 코드의 "근거"로 쓰일 수 있는지 확인한다. edu-stock-chart 에서 <b>새 세션</b>을 열고 볼트를 추가 디렉토리로 붙인다.</p>
+  <code class="cmd">/add-dir ../koscom-wiki</code>
+  <code class="cmd">koscom-wiki/wiki/projects/edu-stock-chart 노트를 근거로 같은 계층 구조의 최고 종가 조회 API GET /api/stocks/{symbol}/max-close 를 추가해줘</code>
+  <div class="check">Controller → Service → Mapper → XML 을 위키 노트의 패턴대로 만드는가 · <code>/context</code> 로 어떤 노트를 읽었는지 본다 · 끝나면 <b>architect 를 재실행</b>해 새 파일 노트를 만든다</div>
+  <div class="note"><b>토큰 아끼기</b> · architect 는 코드가 바뀔 때만 · Graph view 는 앱에서 보니 0 · find 는 위키만 읽으므로 원본 코드를 다시 읽는 것보다 싸다.</div>
+</main>
+<script>
+  document.querySelectorAll('code.cmd').forEach(function (el) {
+    el.title = '클릭하면 복사';
+    el.addEventListener('click', function () {
+      var text = el.innerText.replace(/\s*#.*$/gm, '').trim();
+      var done = function () { el.classList.add('copied'); setTimeout(function () { el.classList.remove('copied'); }, 1400); };
+      try { navigator.clipboard.writeText(text).then(done, done); } catch (e) { done(); }
+    });
+  });
+</script>
+</body>
+</html>

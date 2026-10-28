@@ -2687,7 +2687,7 @@ description: 새 REST API 를 추가할 때 사용.
         <div class="rg-d">LLM 이 원문을 미리 읽고 <b>서로 링크된 Markdown 페이지</b>로 정리해 둔다 · 사람도 읽고 고친다</div>
         <div class="rg-u"><b>이럴 때</b>프로젝트 · 도메인 지식을 사람과 AI 가 함께 쌓을 때 — 설계 결정 · 코드 구조 · 용어집</div>
         <div class="rg-u rg-w"><b>약점</b>원문이 바뀌면 다시 정리해야 어긋나지 않는다</div>
-        <div class="rg-e">claude-obsidian · Obsidian</div>
+        <div class="rg-e">obsidian-second-brain · Obsidian</div>
       </div>
     </div>
 
@@ -2697,26 +2697,26 @@ description: 새 REST API 를 추가할 때 사용.
 
 <!-- 39 ───────────────────────────────────────────── -->
 <section class="slide">
-  <div class="eyebrow fd">LLM WIKI · 실습 · claude-obsidian</div>
+  <div class="eyebrow fd">LLM WIKI · 실습 · obsidian-second-brain</div>
   <h1 class="rv" style="--d:.08s">코드를 위키로 만들고, 위키로 코드를 만든다</h1>
   <div class="hr fd" style="--d:.22s"></div>
 
   <div class="body">
-    <div class="pre fd" style="--d:.26s"><span class="k">준비</span> 없을 때만 설치 <code class="cmd">! claude plugin marketplace add AgriciDaniel/claude-obsidian</code><code class="cmd">! claude plugin install claude-obsidian@agricidaniel-claude-obsidian</code></div>
+    <div class="pre fd" style="--d:.26s"><span class="k">준비</span> 없을 때만 설치 (uv 필요) <code class="cmd">/plugin marketplace add eugeniughelbur/obsidian-second-brain</code><code class="cmd">/plugin install obsidian-second-brain@obsidian-second-brain</code></div>
     <table class="itbl pt dense">
       <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
       <tbody>
-            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">vault 만들기<i>/exit 후 터미널에서</i></td><td class="c"><code class="cmd">mkdir ../edu-stock-chart-wiki &amp;&amp; cd ../edu-stock-chart-wiki &amp;&amp; claude</code><code class="cmd">/claude-obsidian:wiki</code></td><td class="k">승인 후 <code>inbox/</code> · <code>wiki/</code> 가 생기는가</td></tr>
-            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">자료 넣기<i>4개만 · 토큰 절약</i></td><td class="c"><code class="cmd">! cp ../edu-stock-chart/src/main/java/kr/co/koscom/edu/stockchart/*/{StockController,MovingAverageService}.java ../edu-stock-chart/src/main/resources/{mapper/StockPriceMapper.xml,schema.sql} inbox/</code></td><td class="k"><code>inbox/</code> 에 <b>4개</b> · 전체를 넣지 않는다</td></tr>
-            <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">수집<i>ingest</i></td><td class="c"><code class="cmd">/claude-obsidian:wiki-ingest</code></td><td class="k">노트가 <b>[[링크]]</b> 로 이어지는가 · <code>/usage</code></td></tr>
-            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">Obsidian 확인<i>앱에서 · 토큰 0</i></td><td class="c"><span style="color:var(--dim)">Obsidian → <b style="color:var(--ink)">Open folder as vault</b> → edu-stock-chart-wiki → <b style="color:var(--ink)">Graph view</b></span></td><td class="k">연결이 보이는가 · 앱이 없으면 <code>wiki/*.md</code></td></tr>
-            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">질의<i>위키를 근거로</i></td><td class="c"><code class="cmd">/claude-obsidian:wiki-query 이동평균 조회 API 는 어떤 계층과 규칙으로 만들어져 있나?</code></td><td class="k">답에 <b>노트 출처</b>가 붙는가</td></tr>
-            <tr class="rv" style="--d:0.71s"><td class="n">06</td><td class="p">코드 생성<i>프로젝트로 돌아와서</i></td><td class="c"><code class="cmd">/add-dir ../edu-stock-chart-wiki</code><code class="cmd">edu-stock-chart-wiki/wiki 노트를 근거로 같은 계층 구조의 최고 종가 조회 API GET /api/stocks/{symbol}/max-close 를 추가해줘</code></td><td class="k">위키를 근거로 같은 패턴으로 만드는가 · <code>/context</code></td></tr>
+            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">vault 만들기<i>빈 폴더 → init · wiki 스타일</i></td><td class="c"><code class="cmd">! mkdir ../koscom-wiki</code><code class="cmd">/obsidian-second-brain:obsidian-init</code></td><td class="k">볼트 경로 <code>../koscom-wiki</code> · 레이아웃 <b>wiki</b> 선택 → <code>_CLAUDE.md</code> · <code>index.md</code> · <code>raw/</code> · <code>wiki/</code> 생성 · 끝나면 <b>세션 재시작</b></td></tr>
+            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">코드 위키 생성<i>architect · 파일별 노트까지</i></td><td class="c"><code class="cmd">/obsidian-second-brain:obsidian-architect . 기본 Architecture 노트에 더해 src 와 build.gradle 파일마다 노트를 wiki/projects/edu-stock-chart/Code/ 에 원본 경로 그대로 만들어줘. 추론은 confidence: speculation 으로 표시</code></td><td class="k"><code>wiki/projects/edu-stock-chart/</code> 에 <b>Architecture 7개 · Code 17개</b> · 코드에 없는 말을 지어내지 않았는가</td></tr>
+            <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">Obsidian 확인<i>앱에서 · 토큰 0</i></td><td class="c"><span style="color:var(--dim)">Obsidian → <b style="color:var(--ink)">Open folder as vault</b> → koscom-wiki → <b style="color:var(--ink)">Graph view</b></span></td><td class="k">Controller → Service → Mapper 연결이 보이는가 · 앱이 없으면 <code>wiki/**/*.md</code></td></tr>
+            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">검색<i>find · 위키를 근거로</i></td><td class="c"><code class="cmd">/obsidian-second-brain:obsidian-find StockController 에서 이동평균 요청이 들어오면 어떤 서비스와 매퍼를 거쳐 DB 까지 가는지, 관련 테스트 파일도 같이 알려줘</code></td><td class="k">답이 <b>[[노트]] 링크</b>를 근거로 호출 흐름 · 테스트 4개를 짚는가</td></tr>
+            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">기록<i>capture · decide</i></td><td class="c"><code class="cmd">/obsidian-second-brain:obsidian-capture MovingAverageService 캐시에 TTL · eviction 없음. 개선 후보. 관련: [[MovingAverageService.java]]</code><code class="cmd">/obsidian-second-brain:obsidian-decide --formal window 범위 2~20 · 기본 5. 근거 @Min(2) @Max(20) · validateWindow. 이유는 코드에 없으니 TBD</code></td><td class="k"><code>wiki/concepts/</code> 아이디어 · <code>wiki/decisions/</code> ADR 에 <b>이유 TBD</b> 로 남는가 (지어내지 않았는가)</td></tr>
+            <tr class="rv" style="--d:0.71s"><td class="n">06</td><td class="p">코드 생성<i>위키로 코드를 만든다</i></td><td class="c"><code class="cmd">/add-dir ../koscom-wiki</code><code class="cmd">koscom-wiki/wiki/projects/edu-stock-chart 노트를 근거로 같은 계층 구조의 최고 종가 조회 API GET /api/stocks/{symbol}/max-close 를 추가해줘</code></td><td class="k">위키를 근거로 같은 패턴으로 만드는가 · <code>/context</code> · 끝나면 <b>architect 재실행</b> (@user 블록은 유지)</td></tr>
       </tbody>
     </table>
     <div class="pt-note fd" style="--d:.9s">
-      <div><b>토큰 아끼기</b> 넣는 파일 수 = 토큰 · ingest 는 한 번만 · 04 는 앱에서 보니 0 · 06 은 <code>/exit</code> 후 프로젝트에서 새 세션</div>
-      <div><b>환경</b> Python 3.11+ · Windows 는 WSL 권장 (02 의 <code>{ , }</code> 묶음도 동작)</div>
+      <div><b>토큰 아끼기</b> architect 는 한 번만 · 03 은 앱에서 보니 0 · 점검은 <code>obsidian-health</code> · 검색에 안 나오면 <code>obsidian-reindex</code></div>
+      <div><b>환경</b> uv · 볼트 경로 <code>~/.config/obsidian-second-brain/.env</code> · 전문: <code>docs/practice/obsidian-second-brain.html</code></div>
     </div>
   </div>
 </section>
