@@ -902,6 +902,19 @@
   .vsd-f .q { grid-column: 1 / -1; padding-top: 14px; border-top: 1px solid var(--invert-rule); font-size: 17px; }
 
   /* ── M9 과제 스펙 장표 ── */
+  .sd { margin-top: 26px; flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 18px 28px; word-break: keep-all; }
+  .sd-shot h3 { margin: 0 0 10px; font-size: 22px; font-weight: 600; color: var(--ink); }
+  .sd-shot h3 em { font-style: normal; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 14px; letter-spacing: 1px; color: var(--faint); margin-right: 10px; font-weight: 500; }
+  .sd-shot .mc-im { border-radius: 10px; }
+  .sd-shot p { margin: 10px 0 0; font-size: 18px; line-height: 1.5; color: var(--dim); }
+  .sd-shot p b { color: var(--ink); font-weight: 600; }
+  .sd-shot code, .sd-flow code { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: .9em; }
+  .sd-flow { grid-column: 1 / -1; display: flex; align-items: stretch; gap: 10px; }
+  .sd-flow > .ar { align-self: center; font-size: 24px; color: var(--faint); }
+  .sd-flow > div { flex: 1; border: 1.5px solid var(--rule); border-radius: 8px; padding: 12px 16px; background: var(--page); }
+  .sd-flow > div.todo { border-color: var(--ink); border-width: 2px; }
+  .sd-flow b { display: block; font-size: 19px; font-weight: 600; color: var(--ink); }
+  .sd-flow span { display: block; margin-top: 4px; font-size: 16px; line-height: 1.45; color: var(--dim); }
   .wf { margin-top: 30px; flex: 1; min-height: 0; display: grid; grid-template-rows: auto auto auto; align-content: space-evenly; gap: 26px; word-break: keep-all; }
   .wf-lane { display: grid; grid-template-columns: 170px 1fr; gap: 22px; align-items: stretch; }
   .wf-tag { border-top: 2px solid var(--ink); padding-top: 10px; font-size: 27px; font-weight: 600; color: var(--ink); }
@@ -3613,6 +3626,38 @@ description: 새 REST API 를 추가할 때 사용.
           <li>진실의 원천이 둘이면 기록이 엇갈린다</li>
         </ul>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- superpowers 시연 · 화면으로 보는 과제 ───────────────────────────── -->
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">AI-SDLC · 시연 준비 · 화면으로 보는 과제</span>
+    <h1 class="rv" style="--d:.08s">SOXL 을 누르면 — 지금은 팝업, 구현하면 상세 화면</h1>
+  </div>
+
+  <div class="sd">
+    <div class="sd-shot rv" style="--d:.2s">
+      <h3><em>지금</em>순위 1위 SOXL 행을 클릭</h3>
+      <div class="mc-im"><img data-zoom src="assets/soxl-detail-before.jpg" alt="대시보드 순위 표에서 SOXL 행을 누르면 「아직 구현되지 않았습니다 · GET /api/stocks/SOXL/detail」 팝업이 뜬다"><span class="zm">클릭하면 확대</span></div>
+      <p>화면이 <code>GET /api/stocks/SOXL/detail</code> 을 부르지만 서버에 API 가 없다 → <b>404</b> → 「아직 구현되지 않았습니다」 팝업</p>
+    </div>
+    <div class="sd-shot rv" style="--d:.3s">
+      <h3><em>구현 후</em>같은 클릭 → <code>#/stocks/SOXL</code> 상세 화면</h3>
+      <div class="mc-im"><img data-zoom src="assets/soxl-detail-after.jpg" alt="구현 후 SOXL 상세 화면 — 113,134원 +2,467원(2.23%) · 1일 · 52주 범위 · 거래대금 1위 · 체결강도 119.43% · 일봉 차트 · 일별 시세 · 개인 · 외국인 · 기관"><span class="zm">클릭하면 확대</span></div>
+      <p><b>113,134원 +2.23%</b> · 1일 · 52주 범위 · 체결강도 · 일봉 차트 62개 · 일별 시세 · 개인 · 외국인 · 기관</p>
+    </div>
+    <div class="sd-flow rv" style="--d:.4s">
+      <div><b>화면 · 준비됨</b><span><code>edu-stock-chart-ui</code> · 응답 필드는 <code>main.js</code> 「종목 상세」 주석</span></div>
+      <span class="ar">→</span>
+      <div class="todo"><b>Controller</b><span><code>GET /api/stocks/{symbol}/detail</code> · 없는 종목 404</span></div>
+      <span class="ar">→</span>
+      <div class="todo"><b>Service</b><span>시세 + 일봉을 응답 하나로 · 없으면 <code>StockNotFoundException</code></span></div>
+      <span class="ar">→</span>
+      <div class="todo"><b>Mapper XML</b><span><code>stock</code> · <code>stock_quote</code> 1건 · <code>stock_daily_price</code> 62건 오래된 순</span></div>
+      <span class="ar">→</span>
+      <div><b>DB · 준비됨</b><span><code>schema.sql</code> · <code>data.sql</code> 에 SOXL 시드</span></div>
     </div>
   </div>
 </section>
