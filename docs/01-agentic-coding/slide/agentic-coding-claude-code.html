@@ -694,11 +694,14 @@
   .rg-u b { display: block; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 2px; color: var(--faint); font-weight: 400; margin-bottom: 4px; }
   .rg-e { margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--rule); font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 16px; color: var(--dim); }
   .rg .mc-ban { grid-column: auto; }
-  .rg.art .rg-c { gap: 22px; padding: 30px 30px 20px; }
-  .rg.art .rg-t { font-size: 36px; }
-  .rg.art .rg-shape { font-size: 17px; padding: 14px 18px; }
-  .rg.art .rg-d, .rg.art .rg-u { font-size: 22px; }
+  .rg.art .rg-c { gap: 12px; padding: 22px 24px 14px; }
+  .rg.art .rg-t { font-size: 30px; }
+  .rg.art .rg-shape { font-size: 15px; padding: 10px 16px; }
+  .rg.art .rg-d, .rg.art .rg-u { font-size: 18px; }
   .rg.art .rg-e { font-size: 15px; }
+  .rg-im { position: relative; flex: none; height: 300px; border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; background: #fff; }
+  .rg-im img, .rg-im video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; cursor: zoom-in; }
+  .rg-im .zm { position: absolute; right: 8px; bottom: 8px; font-size: 12px; background: var(--ink); color: var(--page); border-radius: 999px; padding: 3px 10px; }
   .rg-ex { border: 1.5px dashed var(--rule); border-radius: 10px; padding: 14px 16px; font-size: 20px; line-height: 1.5; color: var(--ink); }
   .rg-ex b { display: block; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 2px; color: var(--faint); font-weight: 400; margin-bottom: 4px; }
   .rg.sdl { gap: 24px; }
@@ -3705,7 +3708,7 @@ description: 새 REST API 를 추가할 때 사용.
         <div class="rg-shape">→ 단일 HTML (확대 · 테마) · PNG · SVG</div>
         <div class="rg-d">한 문장이나 <b>저장소를 읽어</b> 구조도 · 시퀀스 등 5가지 다이어그램을 만든다</div>
         <div class="rg-u"><b>이럴 때</b>설계 리뷰 · 신규 입사자 온보딩 · 발표에서 보여주고 탐색할 때</div>
-        <div class="rg-ex"><b>요청 예</b>「이 저장소의 아키텍처를 archify 로 그려줘」</div>
+        <div class="rg-im"><img data-zoom src="assets/out-archify-sequence.jpg" alt="archify 결과 — edu-stock-chart 이동평균 API 시퀀스 다이어그램 (HTML)"><span class="zm">archify 결과 · 클릭하면 확대</span></div>
         <div class="rg-e">npx skills add tt-a1i/archify -g</div>
       </div>
       <div class="rg-c">
@@ -3713,7 +3716,6 @@ description: 새 REST API 를 추가할 때 사용.
         <div class="rg-shape">→ .drawio · PNG · SVG · PDF</div>
         <div class="rg-d">설명 · 코드 · <b>SQL 스키마</b>를 사람이 계속 고칠 수 있는 draw.io 파일로 만든다</div>
         <div class="rg-u"><b>이럴 때</b>설계서 · 위키에 넣고 팀이 직접 편집하며 관리할 때</div>
-        <div class="rg-ex"><b>요청 예</b>「schema.sql 을 ERD 로 그려서 PNG 로 내보내줘」</div>
         <div class="rg-e">draw.io 데스크톱 + npx skills add Agents365-ai/drawio-skill -g</div>
       </div>
       <div class="rg-c">
@@ -3721,7 +3723,6 @@ description: 새 REST API 를 추가할 때 사용.
         <div class="rg-shape">→ React 코드 → MP4</div>
         <div class="rg-d">장면을 <b>코드로</b> 만들고 렌더한다 · 문구만 바꿔 다시 뽑기 쉽다</div>
         <div class="rg-u"><b>이럴 때</b>기능 소개 · 릴리스 노트 · 교육 영상 · 회사 사용은 라이선스 확인</div>
-        <div class="rg-ex"><b>요청 예</b>「이번 릴리스 기능 3개를 30초 소개 영상으로 만들어줘」</div>
         <div class="rg-e">claude plugin install remotion@remotion</div>
       </div>
     </div>
@@ -3753,31 +3754,6 @@ Client → StockController → MovingAverageService → StockPriceMapper → H2
       <div><b>토큰</b> 범위를 좁혀 요청한다 — 엔드포인트 하나 · 참여자 5개 · 요청 하나</div>
     </div>
   </div>
-  </div>
-</section>
-
-<!-- 49c ───────────────────────────────────────────── -->
-<section class="slide">
-  <div class="eyebrow fd">AI AGENT · 산출물 실습 · remotion</div>
-  <h1 class="rv" style="--d:.08s">서비스를 띄우고, 그 데이터로 영상을 만든다</h1>
-  <div class="hr fd" style="--d:.22s"></div>
-
-  <div class="body">
-    <div class="pre fd" style="--d:.26s"><span class="k">준비</span> Node.js · Git 필요 <code class="cmd">! node -v</code> · 없을 때만 <code class="cmd">/plugin marketplace add remotion-dev/claude-code-plugin</code><code class="cmd">/plugin install remotion@remotion</code> <span style="color:var(--faint)">· 설치 후 재시작</span></div>
-    <table class="itbl pt">
-      <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>Claude Code 에 입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
-      <tbody>
-            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">서비스 기동<i>실제 데이터 준비</i></td><td class="c"><code class="cmd">edu-stock-chart 를 백그라운드로 기동하고 /api/stocks/005930/moving-average?window=3 응답을 stock.json 으로 저장해줘</code></td><td class="k"><code>localhost:8080</code> 이 뜨는가 · JSON 에 날짜별 이동평균이 담기는가</td></tr>
-            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">영상 만들기<i>remotion-create</i></td><td class="c"><code class="cmd">/remotion:remotion-create stock.json 데이터로 삼성전자 3일 이동평균 선이 그려지는 20초 차트 영상을 만들어줘</code></td><td class="k">영상 프로젝트가 생기는가 (<code>npx create-video</code>) · 데이터가 영상에 들어갔는가</td></tr>
-            <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">미리보기<i>Remotion Studio</i></td><td class="c"><code class="cmd">Remotion Studio 를 띄워줘</code></td><td class="k">브라우저 타임라인에서 장면을 넘겨 보며 확인</td></tr>
-            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">말로 고치기<i>수정</i></td><td class="c"><code class="cmd">제목을 크게 하고, 마지막 3초에 「edu-stock-chart 이동평균 API」 자막을 넣어줘</code></td><td class="k">Studio 화면에 <b>바로 반영</b>되는가</td></tr>
-            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">렌더<i>MP4</i></td><td class="c"><code class="cmd">MP4 로 렌더하고, 기동한 서비스는 꺼줘</code></td><td class="k"><code>out/</code> 에 mp4 가 생기고 재생되는가 · 8080 이 내려갔는가</td></tr>
-      </tbody>
-    </table>
-    <div class="pt-note fd" style="--d:.9s">
-      <div><b>토큰</b> API 는 한 번만 호출해 JSON 으로 · 렌더는 내 PC 의 CPU 가 한다 (토큰 0)</div>
-      <div><b>주의</b> 첫 실행은 npm 설치로 몇 분 걸린다 · 회사에서 쓰면 Remotion 라이선스 확인</div>
-    </div>
   </div>
 </section>
 
