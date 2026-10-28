@@ -3735,27 +3735,29 @@ description: 새 REST API 를 추가할 때 사용.
 </section>
 
 <!-- 49b ───────────────────────────────────────────── -->
-<section class="slide">
-  <div class="eyebrow fd">AI AGENT · 산출물 실습</div>
-  <h1 class="rv" style="--d:.08s">archify · drawio-skill 로 우리 프로젝트를 그린다</h1>
-  <div class="hr fd" style="--d:.22s"></div>
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">AI AGENT · 산출물 실습</span>
+    <h1 class="rv" style="--d:.08s">archify 로 요청 흐름을 시퀀스 다이어그램으로 그린다</h1>
+  </div>
 
-  <div class="body">
-    <div class="pre fd" style="--d:.26s"><span class="k">준비</span> <code class="cmd">/skills</code> 에 없을 때만 <code class="cmd">! npx skills add tt-a1i/archify -g</code><code class="cmd">! npx skills add Agents365-ai/drawio-skill -g</code> <span style="color:var(--faint)">· drawio 는 draw.io 데스크톱 필요 · 설치 후 claude 재시작</span></div>
-    <table class="itbl pt">
+  <div class="body m9-steps" style="zoom:1.5">
+    <div class="pre fd" style="--d:.26s"><span class="k">준비</span> <code class="cmd">/skills</code> 에 archify 가 없을 때만 <code class="cmd">! npx skills add tt-a1i/archify -g</code> <span style="color:var(--faint)">· 설치 후 claude 재시작 · edu-stock-chart 폴더에서 연 Claude Code</span></div>
+    <table class="itbl pt zt dense">
       <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>Claude Code 에 입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
       <tbody>
-            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">구조도<i>archify</i></td><td class="c"><code class="cmd">archify 로 이 프로젝트의 아키텍처 다이어그램을 만들어줘. Controller → Service → Mapper → H2 흐름 중심으로 컴포넌트 8~12개</code></td><td class="k">HTML 하나가 생기는가 · 브라우저에서 <b>확대 · 테마 전환</b></td></tr>
-            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">시퀀스<i>archify</i></td><td class="c"><code class="cmd">archify 로 GET /api/stocks/{symbol}/moving-average 요청의 시퀀스 다이어그램을 만들어줘</code></td><td class="k">호출 순서가 <b>실제 코드와 같은가</b></td></tr>
-            <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">ERD<i>drawio-skill</i></td><td class="c"><code class="cmd">drawio-skill 로 src/main/resources/schema.sql 의 테이블 구조를 ERD 로 그리고 PNG 로도 내보내줘</code></td><td class="k"><code>.drawio</code> · <code>.png</code> 생성 · stock_price · account 컬럼이 맞는가</td></tr>
-            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">직접 고치기<i>draw.io 앱 · 토큰 0</i></td><td class="c"><span style="color:var(--dim)">draw.io 앱에서 <b style="color:var(--ink)">.drawio 파일 열기</b> → 박스 · 선 이동 · 메모 추가</span></td><td class="k">AI 가 만든 그림을 <b>사람이 바로</b> 이어서 고칠 수 있는가</td></tr>
-            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">문서에 넣기<i>재사용</i></td><td class="c"><code class="cmd">만든 ERD PNG 를 README 에 「데이터 구조」 섹션으로 넣어줘</code></td><td class="k">문서와 그림이 함께 git 에 남는가</td></tr>
+            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">시퀀스 그리기<i>Controller → Service → Mapper</i></td><td class="c"><code class="cmd" data-copy="archify 로 StockController 의 GET /api/stocks/{symbol}/moving-average 요청을 시퀀스 다이어그램으로 그려줘.&#10;- 먼저 코드를 읽는다: StockController.java · MovingAverageService.java · StockPriceMapper.java · StockPriceMapper.xml&#10;- 참여자(왼쪽 → 오른쪽): Client · StockController · MovingAverageService · StockPriceMapper · H2(stock_price)&#10;- 호출 순서는 코드 그대로: movingAverage(symbol, window) → calculate(symbol, window) → validateSymbol · validateWindow → 캐시 확인 → fetchWithRetry(symbol) → findBySymbol(symbol) → SELECT … FROM stock_price ORDER BY trade_date ASC&#10;- 응답 화살표에 반환 타입을 적는다: List&lt;StockPrice&gt; → MovingAverageResponse&#10;- 분기도 그린다: 캐시 hit 이면 바로 반환 · 조회 결과가 없으면 StockNotFoundException · window 가 2~20 밖이면 IllegalArgumentException&#10;- 메서드 이름은 코드와 똑같이 쓰고, 코드에 없는 호출은 넣지 않는다&#10;- 결과는 HTML 파일 하나로 만든다">archify 로 StockController 의 GET /api/stocks/{symbol}/moving-average 요청을 시퀀스 다이어그램으로
+Client → StockController → MovingAverageService → StockPriceMapper → H2
+분기 · 반환 타입까지 · 코드에 없는 호출은 넣지 않는다<span class="cp-all">클릭하면 전체 프롬프트 복사</span></code></td><td class="k">HTML 하나가 생기는가 · 브라우저에서 열어 <b>확대 · 테마 전환</b></td></tr>
+            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">코드와 대조<i>틀린 화살표 찾기</i></td><td class="c"><code class="cmd">방금 만든 시퀀스 다이어그램의 화살표마다 해당 코드 위치(파일:줄)를 표로 보여줘. 코드에 없는 화살표가 있으면 표시해줘</code></td><td class="k">모든 화살표가 <b>실제 코드</b>에 있는가 · <code>fetchWithRetry</code> 처럼 숨은 단계가 빠지지 않았는가</td></tr>
+            <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">다듬기<i>같은 파일 갱신</i></td><td class="c"><code class="cmd">시퀀스 다이어그램에서 fetchWithRetry 의 재시도(최대 3번)를 loop 로 표시하고 같은 파일을 갱신해줘</code></td><td class="k">새 파일이 아니라 <b>같은 HTML</b> 이 바뀌는가 · loop 박스가 보이는가</td></tr>
       </tbody>
     </table>
     <div class="pt-note fd" style="--d:.9s">
-      <div><b>고르는 기준</b> 보여주고 탐색 → archify (HTML) · 계속 고치고 문서화 → drawio (.drawio)</div>
-      <div><b>토큰</b> 범위를 좁혀 요청한다 — 컴포넌트 8~12개 · 테이블 2개 · 요청 하나</div>
+      <div><b>왜 시퀀스</b> 코드는 파일별로 흩어져 있다 · 요청 하나가 지나가는 길을 한 장에 본다</div>
+      <div><b>토큰</b> 범위를 좁혀 요청한다 — 엔드포인트 하나 · 참여자 5개 · 요청 하나</div>
     </div>
+  </div>
   </div>
 </section>
 
