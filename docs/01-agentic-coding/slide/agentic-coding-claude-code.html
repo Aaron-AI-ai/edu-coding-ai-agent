@@ -796,16 +796,12 @@
   .ru ol, .ru ul { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; font-size: 17px; line-height: 1.45; color: var(--dim); }
   .ru b { color: var(--ink); font-weight: 600; }
   .ru-w { border-style: dashed; }
-  .ro { display: grid; grid-template-columns: 58fr 42fr; gap: 28px; flex: 1; min-height: 0; margin-top: 6px; }
-  .ro-t td.p { width: 160px; font-size: 20px; }
-  .ro-t { align-self: start; }
-  .ro-t td { padding-top: 41px; padding-bottom: 41px; font-size: 19px; }
-  .ro-r .ru { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 20px 26px; }
-  .ro-r .ru ol, .ro-r .ru ul { font-size: 19.5px; gap: 12px; }
-  .ro-r .ru-h { font-size: 13px; margin-bottom: 12px; }
-  .ro-t td:nth-child(2) { width: 220px; }
+  .ro { display: flex; flex-direction: column; justify-content: center; flex: 1; min-height: 0; margin-top: 6px; }
+  .ro-t td.p { width: 230px; font-size: 25px; }
+  .ro-t { width: 100%; }
+  .ro-t td { padding-top: 26px; padding-bottom: 26px; font-size: 23px; }
+  .ro-t td:nth-child(2) { width: 400px; }
   .ro-t td:last-child { width: auto; }
-  .ro-r { display: flex; flex-direction: column; gap: 16px; margin-top: 22px; }
   .jx { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; flex: 1; min-height: 0; margin-top: 22px; word-break: keep-all; }
   .jx-c { border: 1.5px solid var(--rule); border-radius: 14px; padding: 26px 24px 22px; display: flex; flex-direction: column; gap: 20px; }
   .jx-t { font-size: 28px; font-weight: 600; color: var(--ink); display: flex; flex-direction: column; gap: 3px; }
@@ -3647,27 +3643,6 @@ description: 새 REST API 를 추가할 때 사용.
         <tr><td class="p">보안 리드</td><td>릴리스 전 스캔</td><td>정기 스캔 운영 · 발견 사항 분류</td></tr>
       </tbody>
     </table>
-    <div class="ro-r rv" style="--d:.3s">
-      <div class="ru">
-        <div class="ru-h">이렇게 시작한다</div>
-        <ol>
-          <li><code>intent.md</code> 템플릿을 정하고 PO 가 직접 검토</li>
-          <li><code>/init</code> 으로 CLAUDE.md 를 만들고 팀이 함께 관리</li>
-          <li>정책 하나를 Skill 로 · 꼭 지킬 것은 Hook 으로</li>
-          <li>테스트 · 빌드를 <b>명령 하나</b>로 묶어 스스로 검증하게</li>
-          <li>세션은 2~3개로 시작 · CI 는 읽기 전용 판단부터</li>
-        </ol>
-      </div>
-      <div class="ru ru-w">
-        <div class="ru-h">주의할 점</div>
-        <ul>
-          <li>에이전트가 테스트를 고칠 수 있으면 <b>검증이 무력화</b>된다</li>
-          <li>병렬 세션을 늘리면 <b>사람의 리뷰가 새 병목</b>이 된다</li>
-          <li>CLAUDE.md 가 길어지면 컨텍스트 낭비 · 지침 무시</li>
-          <li>진실의 원천이 둘이면 기록이 엇갈린다</li>
-        </ul>
-      </div>
-    </div>
   </div>
 </section>
 
