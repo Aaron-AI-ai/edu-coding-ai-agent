@@ -770,6 +770,15 @@
   .sd-chain code { font-size: 18px; background: #111110; color: #E8E6E1; border-radius: 6px; padding: 10px 14px; }
   .sd-chain em { font-style: normal; color: var(--faint); font-size: 18px; }
   .sd-chain em.bk { color: var(--ink); font-weight: 600; font-size: 16px; border: 1.5px dashed var(--ink); border-radius: 6px; padding: 6px 10px; }
+  .sw { display: flex; align-items: stretch; gap: 6px; }
+  .sw-ar { align-self: center; color: var(--faint); font-size: 20px; }
+  .sw-n { flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; border: 1.5px solid var(--rule); border-radius: 10px; padding: 14px 14px 12px; background: var(--page); min-width: 0; }
+  .sw-n code { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 17px; background: #111110; color: #E8E6E1; border-radius: 6px; padding: 6px 10px; white-space: nowrap; }
+  .sw-w { font-size: 16px; line-height: 1.4; color: var(--dim); flex: 1; }
+  .sw-g { font-size: 13px; font-weight: 600; border-radius: 999px; padding: 3px 10px; background: var(--ink); color: var(--page); }
+  .sw-g.ai { background: none; border: 1.5px solid var(--rule); color: var(--faint); font-weight: 500; }
+  .sw-back { align-self: center; font-size: 17px; color: var(--dim); border: 1.5px dashed var(--ink); border-radius: 999px; padding: 6px 18px; }
+  .sw-back b { color: var(--ink); }
   .sd-note { font-size: 18.5px; line-height: 1.5; color: var(--dim); }
   .s6 { width: 100%; border-collapse: collapse; margin-top: 22px; word-break: keep-all; }
   .s6 th { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 2px; font-weight: 500; color: var(--faint); text-align: left; padding: 0 12px 10px 0; border-bottom: 1.5px solid var(--ink); }
@@ -933,19 +942,13 @@
   .sp-all .k { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13px; letter-spacing: 2px; color: var(--faint); white-space: nowrap; }
   .sp-all code.cmd { flex: 1; margin: 0; display: block; white-space: pre-wrap; background: #141311; color: #F4F3F1; border-radius: 6px; padding: 12px 18px; font-size: 16px; line-height: 1.55; cursor: pointer; }
   .sp-turn { align-self: center; font-size: 18px; color: var(--dim); }
-  .sd { margin-top: 26px; flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto; align-content: center; gap: 18px 32px; word-break: keep-all; }
-  .sd-shot h3 { margin: 0 0 14px; font-size: 26px; font-weight: 600; color: var(--ink); }
-  .sd-shot h3 em { font-style: normal; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 14px; letter-spacing: 1px; color: var(--faint); margin-right: 10px; font-weight: 500; }
-  .sd-shot .mc-im { border-radius: 10px; }
-  .sd-shot p { margin: 14px 0 0; font-size: 21px; line-height: 1.5; color: var(--dim); }
-  .sd-shot p b { color: var(--ink); font-weight: 600; }
-  .sd-shot code, .sd-flow code { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: .9em; }
-  .sd-flow { grid-column: 1 / -1; display: flex; align-items: stretch; gap: 10px; }
-  .sd-flow > .ar { align-self: center; font-size: 24px; color: var(--faint); }
-  .sd-flow > div { flex: 1; border: 1.5px solid var(--rule); border-radius: 8px; padding: 12px 16px; background: var(--page); }
-  .sd-flow > div.todo { border-color: var(--ink); border-width: 2px; }
-  .sd-flow b { display: block; font-size: 19px; font-weight: 600; color: var(--ink); }
-  .sd-flow span { display: block; margin-top: 4px; font-size: 16px; line-height: 1.45; color: var(--dim); }
+  .sx { margin-top: 26px; flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto; align-content: center; gap: 18px 32px; word-break: keep-all; }
+  .sx-shot h3 { margin: 0 0 14px; font-size: 26px; font-weight: 600; color: var(--ink); }
+  .sx-shot h3 em { font-style: normal; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 14px; letter-spacing: 1px; color: var(--faint); margin-right: 10px; font-weight: 500; }
+  .sx-shot .mc-im { border-radius: 10px; }
+  .sx-shot p { margin: 14px 0 0; font-size: 21px; line-height: 1.5; color: var(--dim); }
+  .sx-shot p b { color: var(--ink); font-weight: 600; }
+  .sx-shot code { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: .9em; }
   .wf { margin-top: 30px; flex: 1; min-height: 0; display: grid; grid-template-rows: auto auto auto; align-content: space-evenly; gap: 26px; word-break: keep-all; }
   .wf-lane { display: grid; grid-template-columns: 170px 1fr; gap: 22px; align-items: stretch; }
   .wf-tag { border-top: 2px solid var(--ink); padding-top: 10px; font-size: 27px; font-weight: 600; color: var(--ink); }
@@ -3566,7 +3569,8 @@ description: 새 REST API 를 추가할 때 사용.
 
     <div class="sd-loop rv" style="--d:.34s">
       <div class="sd-lb">AI 네이티브 SDLC — 각 단계가 <b>다음 단계가 읽을 산출물</b>을 git 에 남기는 루프</div>
-      <div class="sd-chain"><code>intent.md</code><em>→</em><code>spec.md</code><em>→</em><code>plan.md</code><em>→</em><code>diff + 테스트</code><em>→</em><code>PR · 리뷰 결과</code><em>→</em><code>배포</code><em>→</em><code>인시던트 기록</code><em class="bk">↺ 새 intent.md</em></div>
+      <div class="sw"><div class="sw-n"><code>intent.md</code><span class="sw-w">왜 · 무엇을</span><span class="sw-g ai">AI</span></div><span class="sw-ar">→</span><div class="sw-n"><code>spec.md</code><span class="sw-w">요구사항 · 수용 기준</span><span class="sw-g">사람 승인</span></div><span class="sw-ar">→</span><div class="sw-n"><code>plan.md</code><span class="sw-w">작업 단위 · 검증 방법</span><span class="sw-g">사람 승인</span></div><span class="sw-ar">→</span><div class="sw-n"><code>diff + 테스트</code><span class="sw-w">AI 가 구현 · 검증</span><span class="sw-g ai">AI</span></div><span class="sw-ar">→</span><div class="sw-n"><code>PR · 리뷰 결과</code><span class="sw-w">리뷰 · 수정</span><span class="sw-g">사람 판단</span></div><span class="sw-ar">→</span><div class="sw-n"><code>배포</code><span class="sw-w">릴리스</span><span class="sw-g">사람 승인</span></div><span class="sw-ar">→</span><div class="sw-n"><code>인시던트 기록</code><span class="sw-w">운영에서 배운 것</span><span class="sw-g ai">AI</span></div></div>
+      <div class="sw-back">↺ 인시던트 기록이 <b>새 intent.md</b> 가 되어 다음 사이클을 시작한다</div>
       <div class="sd-note">산출물이 모두 버전 관리되니 커밋 · 작성자 · 시각이 그대로 <b>감사 추적</b>이 된다 · 사람은 단계마다 일하지 않고 <b>게이트에서 판단</b>한다</div>
     </div>
   </div>
@@ -3683,13 +3687,13 @@ description: 새 REST API 를 추가할 때 사용.
     <h1 class="rv" style="--d:.08s">SOXL 을 누르면 — 지금은 팝업, 구현하면 상세 화면</h1>
   </div>
 
-  <div class="sd">
-    <div class="sd-shot rv" style="--d:.2s">
+  <div class="sx">
+    <div class="sx-shot rv" style="--d:.2s">
       <h3><em>지금</em>순위 1위 SOXL 행을 클릭</h3>
       <div class="mc-im"><img data-zoom src="assets/soxl-detail-before.jpg" alt="대시보드 순위 표에서 SOXL 행을 누르면 「아직 구현되지 않았습니다 · GET /api/stocks/SOXL/detail」 팝업이 뜬다"><span class="zm">클릭하면 확대</span></div>
       <p>화면이 <code>GET /api/stocks/SOXL/detail</code> 을 부르지만 서버에 API 가 없다 → <b>404</b> → 「아직 구현되지 않았습니다」 팝업</p>
     </div>
-    <div class="sd-shot rv" style="--d:.3s">
+    <div class="sx-shot rv" style="--d:.3s">
       <h3><em>구현 후</em>같은 클릭 → <code>#/stocks/SOXL</code> 상세 화면</h3>
       <div class="mc-im"><img data-zoom src="assets/soxl-detail-after.jpg" alt="구현 후 SOXL 상세 화면 — 113,134원 +2,467원(2.23%) · 1일 · 52주 범위 · 거래대금 1위 · 체결강도 119.43% · 일봉 차트 · 일별 시세 · 개인 · 외국인 · 기관"><span class="zm">클릭하면 확대</span></div>
       <p><b>113,134원 +2.23%</b> · 1일 · 52주 범위 · 체결강도 · 일봉 차트 62개 · 일별 시세 · 개인 · 외국인 · 기관</p>
