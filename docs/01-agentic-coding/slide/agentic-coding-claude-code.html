@@ -712,11 +712,12 @@
   .rg-im .zm { position: absolute; right: 8px; bottom: 8px; font-size: 12px; background: var(--ink); color: var(--page); border-radius: 999px; padding: 3px 10px; }
   .rg-ex { border: 1.5px dashed var(--rule); border-radius: 10px; padding: 14px 16px; font-size: 20px; line-height: 1.5; color: var(--ink); }
   .rg-ex b { display: block; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 2px; color: var(--faint); font-weight: 400; margin-bottom: 4px; }
-  .rg.sdl { gap: 24px; }
+  .rg.sdl { gap: 24px; justify-content: center; }
   .rg.sdl .rg-cards { flex: none; }
-  .rg.sdl .ru { flex: 1; padding: 24px 30px; display: flex; flex-direction: column; justify-content: center; }
-  .rg.sdl .ru-h { font-size: 13px; margin-bottom: 14px; }
-  .rg.sdl .ru ol { font-size: 21px; gap: 14px; }
+  .rg.sdl .rg-c { gap: 24px; padding: 36px 34px; }
+  .rg.sdl .rg-t { font-size: 40px; }
+  .rg.sdl .rg-shape { font-size: 19px; padding: 16px 20px; }
+  .rg.sdl .rg-d, .rg.sdl .rg-u { font-size: 23px; }
   .rg-w { color: var(--dim); }
   .plg { grid-template-columns: 60fr 40fr; grid-template-rows: minmax(0, 1fr); }
   .plg .mc-l { justify-content: center; }
@@ -3623,16 +3624,6 @@ description: 새 REST API 를 추가할 때 사용.
         <div class="rg-d">branch 보호 · 릴리스 매니저 서명 · 정책 오너에게 라우팅</div>
         <div class="rg-u"><b>앞에서</b>그래프의 「사람 승인」 관문 52장</div>
       </div>
-    </div>
-    <div class="ru rv" style="--d:.34s">
-      <div class="ru-h">단계마다 지키는 핵심 규칙</div>
-      <ol>
-        <li><b>plan 승인 전에는 코드를 고치지 않는다</b> — 리뷰할 근거가 먼저다</li>
-        <li><b>버그는 실패하는 테스트부터 커밋</b>하고, 테스트 파일 수정은 Hook 으로 막는다</li>
-        <li><b>최종 검증은 새 컨텍스트</b>의 검증 서브에이전트가 — 만든 쪽의 가정에 끌려가지 않게</li>
-        <li><b>운영 배포는 승인 기록이 있을 때만</b> — Hook 이 막고 이유를 AI 에게 돌려준다</li>
-        <li><b>엔지니어가 우회할 수 없는 관리형 설정</b> — 시크릿 차단 · 네트워크 제한 · 샌드박스 · 승인된 MCP · Skill · Hook 만</li>
-      </ol>
     </div>
   </div>
 </section>
