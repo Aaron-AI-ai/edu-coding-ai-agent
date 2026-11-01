@@ -1,11 +1,11 @@
 # UI 실습 스크립트
 
-| 스크립트 | 하는 일 | Windows | macOS · Linux |
-|---|---|---|---|
-| install | 의존성 설치 (최초 1회) | `scripts\install.bat` | `./scripts/install.sh` |
-| dev | 개발 서버 — http://localhost:5173 | `scripts\dev.bat` | `./scripts/dev.sh` |
-| build | 배포 빌드 — `dist/` | `scripts\build.bat` | `./scripts/build.sh` |
-| preview | 빌드 결과 미리보기 — http://localhost:4173 | `scripts\preview.bat` | `./scripts/preview.sh` |
+| 스크립트 | 하는 일 | Windows (cmd) | Windows (PowerShell) | macOS · Linux |
+|---|---|---|---|---|
+| install | 의존성 설치 (최초 1회) | `scripts\install.bat` | `scripts\install.ps1` | `./scripts/install.sh` |
+| dev | 개발 서버 — http://localhost:5173 | `scripts\dev.bat` | `scripts\dev.ps1` | `./scripts/dev.sh` |
+| build | 배포 빌드 — `dist/` | `scripts\build.bat` | `scripts\build.ps1` | `./scripts/build.sh` |
+| preview | 빌드 결과 미리보기 — http://localhost:4173 | `scripts\preview.bat` | `scripts\preview.ps1` | `./scripts/preview.sh` |
 
 `dev` 는 `node_modules` 가 없으면 의존성을 먼저 설치합니다.
 
@@ -17,3 +17,4 @@
 ## 참고
 
 - macOS에서 권한 오류가 나면 `chmod +x scripts/*.sh`
+- PowerShell 에서 실행이 막히면 `powershell -ExecutionPolicy Bypass -File scripts\dev.ps1` 처럼 실행
