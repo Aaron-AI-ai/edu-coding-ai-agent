@@ -289,6 +289,9 @@
   .ctbl td { padding: 11px 0; border-bottom: 1px solid var(--rule); vertical-align: top; font-size: 16px; line-height: 1.45; color: var(--dim); }
   .ctbl td.k { width: 186px; padding-right: 16px; font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 15px; color: var(--ink); white-space: nowrap; }
   .ctbl tr.hi td { color: var(--ink); }
+  .perm-ex { margin-top: 8px; display: flex; flex-wrap: wrap; align-items: center; gap: 5px; }
+  .perm-ex .pl { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 11px; letter-spacing: 1px; color: var(--faint); margin-right: 2px; }
+  .perm-ex code { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12.5px; background: var(--panel); color: var(--ink); border-radius: 4px; padding: 2px 7px; }
   .ctbl tr.hi td.k { font-weight: 500; }
   .ctbl td.k.long { white-space: normal; word-break: normal; overflow-wrap: normal; font-size: 13.5px; line-height: 1.35; }
   .ctbl td .sub { display: block; font-size: 13.5px; color: var(--faint); margin-top: 3px; }
@@ -1616,7 +1619,7 @@
           <tbody>
             <tr class="hi"><td class="k">/init</td><td>프로젝트를 읽고 CLAUDE.md를 만든다 <span class='sub'>RECIPE 02</span></td></tr>
             <tr><td class="k">/memory</td><td>메모리 파일을 직접 편집한다 <span class='sub'>RECIPE 02</span></td></tr>
-            <tr class="hi"><td class="k">/permissions</td><td>허용 · 차단 규칙을 정한다 <span class='sub'>RECIPE 02</span></td></tr>
+            <tr class="hi"><td class="k">/permissions</td><td>허용 · 차단 규칙을 정한다 <span class='sub'>RECIPE 02</span><div class="perm-ex"><span class="pl">Allow 예</span><code>Bash(./gradlew test *)</code><code>Bash(npm run *)</code><code>Edit(./src/**)</code><code>WebFetch(domain:docs.spring.io)</code><code>mcp__playwright__*</code></div></td></tr>
             <tr class="hi"><td class="k">/hooks</td><td>훅을 확인하고 등록한다 <span class='sub'>RECIPE 03</span></td></tr>
             <tr class="hi"><td class="k long">/skill-creator:<wbr>skill-creator</td><td>나만의 스킬을 만든다 <span class='sub'>공식 플러그인 · 설치 필요 · 이름은 <b>플러그인:스킬</b> 형식</span></td></tr>
           </tbody>
