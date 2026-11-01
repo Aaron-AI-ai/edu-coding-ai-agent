@@ -3,3 +3,4 @@
 .run/
 .playwright-mcp/
 .claude/worktrees/
+install/packages/

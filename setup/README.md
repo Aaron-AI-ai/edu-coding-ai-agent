@@ -1,5 +1,7 @@
 # setup — Windows 사전 준비
 
+> 교육 환경 전체(Claude Code · 권장 도구 · 충돌 점검 · 플러그인 · Skill)는 [`install/`](../install/README.md) 을 쓰세요. 이 폴더는 Git · Node · JDK 만 설치하는 최소 버전입니다.
+
 실습 전에 한 번만 실행합니다. Windows 10 (1809 이상) / 11, 인터넷 연결이 필요합니다.
 
 | 스크립트 | 하는 일 |
