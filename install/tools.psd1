@@ -67,12 +67,6 @@
             GitHub = 'stablyai/orca'; Asset = '(?i)\.exe$'
             Why = 'Claude Code · Codex 를 워크트리별 탭으로 동시에 실행'
         }
-        @{
-            Id = 'drawio'; Name = 'draw.io 데스크톱'; Level = '권장'; Kind = 'app'
-            Paths = @('%ProgramFiles%\draw.io\draw.io.exe', '%LOCALAPPDATA%\Programs\draw.io\draw.io.exe')
-            Winget = 'JGraph.Draw'; Silent = '/S'
-            Why = 'drawio-skill 로 만든 .drawio 를 열고 PNG 로 내보내기'
-        }
     )
 
     # 실습 서비스가 쓰는 포트 - 다른 프로그램이 쓰고 있으면 충돌

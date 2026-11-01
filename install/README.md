@@ -29,7 +29,6 @@ Windows 10 (1809 이상) / 11 · PowerShell 5.1 이상 · winget(앱 설치 관�
 | 권장 | Google Chrome | Playwright MCP 화면 검증 · Hallmark 화면 검사 | `Google.Chrome` |
 | 권장 | Obsidian | LLM 위키 실습 | `Obsidian.Obsidian` |
 | 권장 | Orca | 에이전트를 워크트리별 탭으로 병렬 실행 | `StablyAI.Orca` (안 되면 GitHub 릴리스) |
-| 권장 | draw.io 데스크톱 | drawio-skill 결과 열기 · PNG 내보내기 | `JGraph.Draw` |
 
 설치 순서: **winget → `packages\` 의 받아 둔 파일(무인 옵션) → 공식 설치 스크립트**. JDK 21 을 설치하면 `JAVA_HOME` 이 비었거나 21 이 아닐 때 21 로 맞춥니다.
 
