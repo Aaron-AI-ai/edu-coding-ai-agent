@@ -11,6 +11,19 @@ $RepoRoot    = Split-Path -Parent $InstallRoot
 $PackageDir  = Join-Path $InstallRoot 'packages'
 $Config      = Import-PowerShellDataFile (Join-Path $InstallRoot 'tools.psd1')
 
+# 끝낼 때 — 이 스크립트를 실행하려고 새로 띄운 창(탐색기 「PowerShell에서 실행」 · .bat)이면 엔터를 칠 때까지 기다린다
+# 이미 열어 둔 터미널에서 .\check.ps1 로 실행했다면 프로세스 인자에 스크립트 경로가 없으므로 기다리지 않는다
+function Exit-Script([int]$Code = 0) {
+    $script = $MyInvocation.PSCommandPath
+    $launched = $false
+    if ($script) { $launched = [bool]([Environment]::GetCommandLineArgs() | Where-Object { $_ -like "*$(Split-Path $script -Leaf)*" }) }
+    if ($launched -and -not $env:EDU_INSTALL_NOPAUSE) {
+        Write-Host ''
+        [void](Read-Host '엔터를 누르면 창이 닫힙니다')
+    }
+    exit $Code
+}
+
 function Write-Title([string]$Text) {
     Write-Host ''
     Write-Host "=== $Text ===" -ForegroundColor Cyan
@@ -78,10 +91,17 @@ function Get-ToolStatus($Tool) {
     $s.Version = $(if ($v) { $v } else { '버전 확인 불가' })
     $s.State = 'OK'
     $cur = ConvertTo-Version $v
+    # 동작에 문제가 없으면 OK — 권장보다 낮은 버전은 메모만 남긴다
     if ($Tool.Major -and $cur -and $cur.Major -ne $Tool.Major) {
-        $s.State = 'OLD'; $s.Note = "$($Tool.Major) 이 필요 (지금 $($cur.Major))"
+        # Java: PATH 의 java 가 21 이 아니어도 JAVA_HOME 이 21 이면 Gradle 은 그 JDK 로 돈다
+        $jh = $env:JAVA_HOME
+        $jhJava = $(if ($jh) { Join-Path $jh 'bin\java.exe' } else { $null })
+        $jhOk = $false
+        if ($jhJava -and (Test-Path $jhJava)) { $jhOk = ((& $jhJava -version 2>&1 | Out-String) -match "version `"$($Tool.Major)[.`"]") }
+        if ($jhOk) { $s.Note = "PATH 는 $($cur.Major) · JAVA_HOME 은 $($Tool.Major) — 빌드는 $($Tool.Major) 로 동작" }
+        else { $s.State = 'OLD'; $s.Note = "$($Tool.Major) 이 필요 (지금 $($cur.Major)) — JDK $($Tool.Major) 설치 또는 JAVA_HOME 지정" }
     } elseif ($Tool.Min -and $cur -and $cur -lt (ConvertTo-Version $Tool.Min)) {
-        $s.State = 'OLD'; $s.Note = "$($Tool.Min) 이상 필요"
+        $s.Note = "권장 $($Tool.Min) 이상 — 기본 실습은 동작"
     }
     return [pscustomobject]$s
 }
@@ -127,7 +147,9 @@ function Get-Conflicts {
     # 1) Java — 21 이 아닌 JDK 가 PATH 앞에 있거나 JAVA_HOME 이 다른 JDK 를 가리키면 Gradle 8.6 · toolchain 21 이 깨진다
     $java = Get-CmdVersion 'java' @('-version') 'version "(\d+)'
     $javaPaths = Get-CommandPaths 'java'
-    if ($java -and $java -ne '21') { Add 'Java' "PATH 의 java 가 $java 입니다 ($($javaPaths[0])) — 21 이 먼저 와야 한다" '' $null }
+    $jhIs21 = $false
+    if ($env:JAVA_HOME -and (Test-Path (Join-Path $env:JAVA_HOME 'bin\java.exe'))) { $jhIs21 = ((& (Join-Path $env:JAVA_HOME 'bin\java.exe') -version 2>&1 | Out-String) -match 'version "21') }
+    if ($java -and $java -ne '21' -and -not $jhIs21) { Add 'Java' "PATH 의 java 가 $java 입니다 ($($javaPaths[0])) — 21 이 먼저 와야 한다" '' $null }
     if ($javaPaths.Count -gt 1) { Add 'Java' ("java 가 여러 곳에 있다: " + ($javaPaths -join ' | ')) '' $null }
     if ($env:JAVA_HOME -and -not (Test-Path (Join-Path $env:JAVA_HOME 'bin\java.exe'))) {
         if ([Environment]::GetEnvironmentVariable('JAVA_HOME', 'User')) {

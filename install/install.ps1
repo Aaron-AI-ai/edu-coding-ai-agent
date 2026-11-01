@@ -19,7 +19,7 @@ if ($todo.Count -eq 0) {
     foreach ($s in $todo) { $i++; Write-Host ("  {0}. {1,-26} {2}  — {3}" -f $i, $s.Name, $s.Level, $s.Tool.Why) }
     if (-not $Yes) {
         $answer = Read-Host '설치할 번호 (예: 1,2 · 엔터 = 전부 · n = 취소)'
-        if ($answer -match '^[nN]') { exit 0 }
+        if ($answer -match '^[nN]') { Exit-Script 0 }
         if ($answer) {
             $picks = $answer -split '[,\s]+' | Where-Object { $_ -match '^\d+$' } | ForEach-Object { [int]$_ } | Sort-Object -Unique
             $todo = @($picks | Where-Object { $_ -ge 1 -and $_ -le $todo.Count } | ForEach-Object { $todo[$_ - 1] })
@@ -118,4 +118,4 @@ if ($failed.Count -gt 0) { Write-State FAIL ("실패: " + ($failed -join ', ') +
 Write-Host '  1. 터미널을 모두 닫고 새로 연다 (PATH 반영)'
 Write-Host '  2. install\1-check.bat 으로 다시 점검'
 Write-Host '  3. claude 로그인 후 install\4-claude-setup.bat 으로 플러그인 · Skill 설치'
-if ($failed.Count -gt 0) { exit 1 } else { exit 0 }
+if ($failed.Count -gt 0) { Exit-Script 1 } else { Exit-Script 0 }

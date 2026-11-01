@@ -14,6 +14,8 @@ Windows 10 (1809 이상) / 11 · PowerShell 5.1 이상 · winget(앱 설치 관�
 | 4 | `4-claude-setup.bat` | 강의에서 쓰는 플러그인 · Skill 중 **없는 것만** 골라 설치 |
 | 5 | `1-check.bat` | 다시 점검 — 필수 항목이 모두 `[OK]` 면 종료 코드 0 |
 
+`.ps1` 을 직접 실행해도 됩니다 (탐색기에서 오른쪽 클릭 → 「PowerShell에서 실행」 또는 `powershell -ExecutionPolicy Bypass -File install\check.ps1`). 새로 뜬 창은 결과를 보여 준 뒤 **엔터를 칠 때까지 기다립니다**. 이미 열어 둔 터미널에서 `.\install\check.ps1` 로 실행하면 기다리지 않습니다 (항상 바로 끝내려면 `$env:EDU_INSTALL_NOPAUSE=1`). ZIP 으로 받아 「스크립트를 실행할 수 없습니다」가 나오면 PowerShell 에서 `Get-ChildItem install -Recurse | Unblock-File` 을 한 번 실행합니다.
+
 옵션은 `.bat` 뒤에 붙입니다: `3-install.bat -Yes` (묻지 않음) · `-RequiredOnly` (필수만) · `-Offline` (받아 둔 파일만) · `-SkipWarmup` · `1-check.bat -ReportOnly` (보고만) · `2-download.bat -Only git,node,java`
 
 ## 설치하는 것

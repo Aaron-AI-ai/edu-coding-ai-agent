@@ -47,3 +47,4 @@ foreach ($t in $tools) {
 
 Write-Host ''
 Write-Host '  install 폴더를 통째로 복사해 가면 교육 PC 에서 3-install.bat 이 받은 파일로 설치한다.' -ForegroundColor DarkGray
+Exit-Script 0

@@ -31,4 +31,4 @@ if ($need.Count -eq 0) {
     Write-State WARN ("설치 · 업데이트 필요: " + (($need | ForEach-Object { $_.Name }) -join ', '))
     Write-Host '             → 3-install.bat 이 이 항목만 골라 설치한다' -ForegroundColor DarkGray
 }
-if ($mustNeed.Count -gt 0) { exit 1 } else { exit 0 }
+if ($mustNeed.Count -gt 0) { Exit-Script 1 } else { Exit-Script 0 }

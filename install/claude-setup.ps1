@@ -8,7 +8,7 @@ Update-SessionPath
 Add-UserPath (Join-Path $env:USERPROFILE '.local\bin')   # 네이티브 claude · uv tool 설치 위치
 if (-not (Get-Command claude -ErrorAction SilentlyContinue)) {
     Write-State FAIL 'claude 가 없다 — 3-install.bat 을 먼저 실행하고 새 터미널에서 다시 실행한다'
-    exit 1
+    Exit-Script 1
 }
 
 function Invoke-Quiet([string]$Line) {
@@ -58,11 +58,11 @@ foreach ($it in $items) {
     $ok = [bool](& $it.Test)
     if ($ok) { Write-State OK $it.Name } else { $i++; $todo += $it; Write-State MISSING ("{0}. {1}  — {2}" -f $i, $it.Name, $it.Run) }
 }
-if ($todo.Count -eq 0) { Write-State OK '모두 설치되어 있다'; exit 0 }
+if ($todo.Count -eq 0) { Write-State OK '모두 설치되어 있다'; Exit-Script 0 }
 
 if (-not $Yes) {
     $answer = Read-Host "`n설치할 번호 (예: 1,4 · 엔터 = 전부 · n = 취소)"
-    if ($answer -match '^[nN]') { exit 0 }
+    if ($answer -match '^[nN]') { Exit-Script 0 }
     if ($answer) {
         $picks = $answer -split '[,\s]+' | Where-Object { $_ -match '^\d+$' } | ForEach-Object { [int]$_ } | Sort-Object -Unique
         $todo = @($picks | Where-Object { $_ -ge 1 -and $_ -le $todo.Count } | ForEach-Object { $todo[$_ - 1] })
@@ -100,4 +100,4 @@ foreach ($it in $todo) {
 
 Write-Host ''
 Write-Host '  claude 를 다시 시작해야 새 플러그인 · Skill 이 보인다 (/plugin · /skills 로 확인)' -ForegroundColor DarkGray
-if ($failed -gt 0) { exit 1 } else { exit 0 }
+if ($failed -gt 0) { Exit-Script 1 } else { Exit-Script 0 }
