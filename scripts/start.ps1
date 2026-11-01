@@ -14,7 +14,7 @@ foreach ($port in 8080, 5173) {
 
 Write-Host '[1/4] API 서버 빌드 (테스트 제외 · 테스트는 edu-stock-chart\scripts\test.ps1)'
 Push-Location (Join-Path $Root 'edu-stock-chart')
-& .\gradlew.bat clean bootJar -q
+& .\scripts\gradlew.ps1 clean bootJar -q   # .bat 을 거치지 않는다 (액세스 거부 대비)
 if ($LASTEXITCODE -ne 0) { Pop-Location; exit 1 }
 $Jar = (Get-ChildItem build\libs\*.jar | Where-Object Name -notmatch 'plain' | Select-Object -First 1).FullName
 Pop-Location

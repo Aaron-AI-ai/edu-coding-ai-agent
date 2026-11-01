@@ -5,5 +5,5 @@ try {
   Write-Host '  Swagger  http://localhost:8080/swagger-ui.html'
   Write-Host '  H2       http://localhost:8080/h2-console'
   Write-Host ''
-  .\gradlew.bat bootRun
+  & .\scripts\gradlew.ps1 bootRun
 } finally { Pop-Location }

@@ -2,7 +2,7 @@
 Push-Location (Join-Path $PSScriptRoot '..')
 try {
   Write-Host '[edu-stock-chart] 전체 테스트를 실행합니다.'
-  .\gradlew.bat test
+  & .\scripts\gradlew.ps1 test
   Write-Host ''
   Write-Host '테스트 리포트: build\reports\tests\test\index.html'
 } finally { Pop-Location }

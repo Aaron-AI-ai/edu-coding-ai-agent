@@ -105,7 +105,7 @@ if (-not $SkipWarmup -and (Get-ToolStatus ($Config.Tools | Where-Object { $_.Id 
         $old = $ErrorActionPreference; $ErrorActionPreference = 'Continue'
         $g = 1; $n = 1
         $api = Join-Path $RepoRoot 'edu-stock-chart'; $ui = Join-Path $RepoRoot 'edu-stock-chart-ui'
-        if (Test-Path $api) { Push-Location $api; cmd /c "gradlew.bat bootJar -q --no-daemon"; $g = $LASTEXITCODE; Pop-Location } else { Write-State WARN "폴더 없음: $api" }
+        if (Test-Path $api) { & (Join-Path $api 'scripts\gradlew.ps1') bootJar -q --no-daemon; $g = $LASTEXITCODE } else { Write-State WARN "폴더 없음: $api" }
         if (Test-Path $ui)  { Push-Location $ui;  cmd /c "npm install --no-fund --no-audit"; $n = $LASTEXITCODE; Pop-Location } else { Write-State WARN "폴더 없음: $ui" }
         $ErrorActionPreference = $old
         if ($g -eq 0) { Write-State OK 'edu-stock-chart 빌드' } else { Write-State FAIL 'edu-stock-chart 빌드 — 1-check.bat 으로 Java 충돌 확인' }
