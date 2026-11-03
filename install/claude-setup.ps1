@@ -47,7 +47,7 @@ $items = @(
     @{ Name = 'Skill archify';         Type = 'skill';  Test = { Test-Skill '^archify$' };                      Run = 'npx -y skills add tt-a1i/archify -g --agent claude-code' }
     @{ Name = 'Skill drawio-skill';    Type = 'skill';  Test = { Test-Skill 'drawio' };                         Run = 'npx -y skills add Agents365-ai/drawio-skill -g --agent claude-code' }
     @{ Name = 'Skill hallmark';        Type = 'skill';  Test = { Test-Skill '^hallmark$' };                     Run = 'npx -y skills add nutlope/hallmark -g --agent claude-code' }
-    @{ Name = 'Skill eli5';            Type = 'eli5';   Test = { Test-Skill '^eli5$' };                         Run = 'git clone https://github.com/DreambigOu/ELI5.git → ~\.claude\skills\eli5' }
+    @{ Name = 'Skill eli5';            Type = 'eli5';   Test = { Test-Skill '^eli5$' };                         Run = 'eli5-pack\eli5.zip 압축 해제 → ~\.claude\skills' }
     @{ Name = 'graphify (uv)';         Type = 'graphify'; Test = { [bool](Get-Command graphify -ErrorAction SilentlyContinue) -and (Test-Skill '^graphify$') }; Run = 'uv tool install graphifyy → graphify install' }
 )
 
@@ -78,12 +78,12 @@ foreach ($it in $todo) {
     $old = $ErrorActionPreference; $ErrorActionPreference = 'Continue'
     switch ($it.Type) {
         'eli5' {
-            $src = Join-Path $env:TEMP 'eli5-src'
-            if (Test-Path $src) { Remove-Item $src -Recurse -Force }
-            git clone --depth 1 https://github.com/DreambigOu/ELI5.git $src
+            # git · GitHub 없이 — 레포의 eli5-pack\eli5.zip 을 풀어 설치한다
+            $zip = Join-Path $PSScriptRoot '..\eli5-pack\eli5.zip'
+            if (-not (Test-Path $zip)) { Write-State FAIL "eli5-pack\eli5.zip 이 없다 — 레포를 최신으로 받는다 ($zip)"; break }
             $dst = Join-Path $env:USERPROFILE '.claude\skills'
             New-Item -ItemType Directory -Force $dst | Out-Null
-            Copy-Item -Recurse -Force (Join-Path $src 'skills\eli5') (Join-Path $dst 'eli5')
+            Expand-Archive -Force -Path $zip -DestinationPath $dst
         }
         'graphify' {
             if (-not (Get-Command uv -ErrorAction SilentlyContinue)) { Write-State FAIL 'uv 가 없다 — 3-install.bat 으로 uv 를 설치한다'; break }
