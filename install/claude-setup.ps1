@@ -47,7 +47,7 @@ $items = @(
     @{ Name = 'Skill archify';         Type = 'skill';  Test = { Test-Skill '^archify$' };                      Run = 'npx -y skills add tt-a1i/archify -g --agent claude-code' }
     @{ Name = 'Skill drawio-skill';    Type = 'skill';  Test = { Test-Skill 'drawio' };                         Run = 'npx -y skills add Agents365-ai/drawio-skill -g --agent claude-code' }
     @{ Name = 'Skill hallmark';        Type = 'skill';  Test = { Test-Skill '^hallmark$' };                     Run = 'npx -y skills add nutlope/hallmark -g --agent claude-code' }
-    @{ Name = 'Skill eli5';            Type = 'eli5';   Test = { Test-Skill '^eli5$' };                         Run = 'eli5-pack\eli5.zip 압축 해제 → ~\.claude\skills' }
+    @{ Name = 'Skill eli5';            Type = 'eli5';   Test = { Test-Path (Join-Path $PSScriptRoot '..\edu-stock-chart\.claude\skills\eli5\SKILL.md') }; Run = 'eli5-pack\eli5.zip 압축 해제 → edu-stock-chart\.claude\skills' }
     @{ Name = 'graphify (uv)';         Type = 'graphify'; Test = { [bool](Get-Command graphify -ErrorAction SilentlyContinue) -and (Test-Skill '^graphify$') }; Run = 'uv tool install graphifyy → graphify install' }
 )
 
@@ -81,7 +81,7 @@ foreach ($it in $todo) {
             # git · GitHub 없이 — 레포의 eli5-pack\eli5.zip 을 풀어 설치한다
             $zip = Join-Path $PSScriptRoot '..\eli5-pack\eli5.zip'
             if (-not (Test-Path $zip)) { Write-State FAIL "eli5-pack\eli5.zip 이 없다 — 레포를 최신으로 받는다 ($zip)"; break }
-            $dst = Join-Path $env:USERPROFILE '.claude\skills'
+            $dst = Join-Path $PSScriptRoot '..\edu-stock-chart\.claude\skills'   # 이 프로젝트에만 설치
             New-Item -ItemType Directory -Force $dst | Out-Null
             Expand-Archive -Force -Path $zip -DestinationPath $dst
         }

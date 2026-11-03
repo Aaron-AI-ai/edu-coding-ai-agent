@@ -1836,9 +1836,8 @@
 
 <span class="c"># 5 · 스킬만 있는 저장소 (플러그인 아님)</span>
 <span class="h">npx skills add tt-a1i/archify -g</span>
-<span class="c">  eli5 · git 없이 zip 으로 (레포 루트에서)</span>
-<span class="h">New-Item -ItemType Directory -Force "$HOME\.claude\skills" | Out-Null</span>
-<span class="h">Expand-Archive -Force eli5-pack\eli5.zip "$HOME\.claude\skills"</span>
+<span class="c">  eli5 · git 없이 zip 으로 · 이 프로젝트에만 (레포 루트에서)</span>
+<span class="h">Expand-Archive -Force eli5-pack\eli5.zip "edu-stock-chart\.claude\skills"</span>
         </div>
       </div>
 
@@ -2409,8 +2408,8 @@ description: 새 REST API 를 추가할 때 사용.
     <table class="itbl pt">
       <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
       <tbody>
-            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">설치<i>git · GitHub 계정 없이 · zip 을 푼다</i></td><td class="c"><code class="cmd">New-Item -ItemType Directory -Force "$HOME\.claude\skills" | Out-Null</code><code class="cmd">Expand-Archive -Force eli5-pack\eli5.zip "$HOME\.claude\skills"</code></td><td class="k"><b>프로젝트 루트(edu-coding-ai-agent)</b>의 PowerShell 에서 실행 · <code>eli5-pack\eli5.zip</code> 은 <b>미리 넣어 둔 파일</b> · 확인 <code>Test-Path "$HOME\.claude\skills\eli5\SKILL.md"</code> → <b>True</b></td></tr>
-            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">프로젝트에서 연다<i>열린 디렉토리가 곧 작업 범위</i></td><td class="c"><code class="cmd">cd edu-stock-chart</code><code class="cmd">claude</code></td><td class="k">실습 프로젝트 폴더 안에서 여는가 · 새로 시작한 뒤 <code>/</code> 를 눌러 <b>eli5 가 보이는가</b></td></tr>
+            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">설치<i>git · GitHub 계정 없이</i></td><td class="c"><code class="cmd">Expand-Archive -Force eli5-pack\eli5.zip "edu-stock-chart\.claude\skills"</code></td><td class="k"><b>프로젝트 루트(edu-coding-ai-agent)</b>의 PowerShell 에서 실행 · <code>eli5-pack\eli5.zip</code> 은 <b>미리 넣어 둔 파일</b> · 확인 <code>Test-Path "edu-stock-chart\.claude\skills\eli5\SKILL.md"</code> → <b>True</b></td></tr>
+            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">프로젝트에서 연다<i>이 폴더에서만 스킬이 보인다</i></td><td class="c"><code class="cmd">cd edu-stock-chart</code><code class="cmd">claude</code></td><td class="k"><b>edu-stock-chart 폴더 안</b>에서 여는가 (다른 폴더에서는 안 보인다) · 새로 시작한 뒤 <code>/</code> 를 눌러 <b>eli5 가 보이는가</b></td></tr>
             <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">쉽게 물어본다<i>슬래시로 스킬을 직접 부른다</i></td><td class="c"><code class="cmd">/eli5 edu-stock-chart 프로젝트가 무엇을 하는지 초등학생에게 설명해줘</code></td><td class="k">어떤 파일을 <b>어떤 순서로</b> 읽는가 · 어려운 용어 대신 <b>비유</b>로 설명하는가</td></tr>
             <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">대상을 바꾼다<i>같은 질문 · 다른 청중</i></td><td class="c"><code class="cmd">이 프로젝트의 구조(Controller → Service → Mapper)를 매니저에게 설명해줘</code></td><td class="k">슬래시 없이도 <b>eli5 를 불러오는가</b> · 어휘 · 비유 · 깊이가 03 과 <b>달라지는가</b></td></tr>
             <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">코드를 물어본다<i>쉬운 설명이 맞는지 본다</i></td><td class="c"><code class="cmd">MovingAverageService 가 이동평균을 계산하는 방식을 신입 개발자에게 설명해줘</code></td><td class="k">설명이 <b>실제 코드와 맞는가</b> — 쉬운 말이 곧 정확한 말은 아니다 · 의심되면 해당 파일을 열어 대조</td></tr>
@@ -2418,7 +2417,7 @@ description: 새 REST API 를 추가할 때 사용.
     </table>
     <div class="pt-note fd" style="--d:.9s">
       <div><b>비교</b> eli5 없이 <b>"쉽게 설명해줘"</b>만 해 보고, 대상(5세 · 매니저 · 신입)을 지정했을 때와 비교한다</div>
-      <div><b>참고</b> <code>~/.claude/skills</code> 에 설치하면 <b>모든 프로젝트</b>에서 보인다 (개인 환경)</div>
+      <div><b>참고</b> <code>edu-stock-chart/.claude/skills</code> 에 풀었으므로 <b>이 프로젝트에서만</b> 보인다 (개인 환경에는 남지 않는다)</div>
     </div>
   </div>
 </section>
