@@ -2669,16 +2669,13 @@ description: 새 REST API 를 추가할 때 사용.
             <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">연결 확인<i>이미 있는지 먼저 본다</i></td><td class="c"><code class="cmd">! claude mcp list</code></td><td class="k">playwright 가 보이면 <b>03</b> 으로 · 플러그인으로 깔았다면 <code>plugin:playwright</code> 로 보인다</td></tr>
             <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">MCP 등록<i>없을 때만 · 팀과 공유</i></td><td class="c"><code class="cmd">! claude mcp add --scope project playwright -- npx @playwright/mcp@latest</code></td><td class="k"><code>.mcp.json</code> 이 생기는가 · 플러그인 방식은 <code>/plugin install playwright@claude-plugins-official</code> · 등록 후 재시작</td></tr>
             <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">도구 확인<i>로그인 없음</i></td><td class="c"><code class="cmd">/mcp</code></td><td class="k">playwright 선택 → <b>browser_navigate · browser_click · browser_take_screenshot</b> 이 보이는가</td></tr>
-            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">서비스 기동<i>Swagger 가 뜬다</i></td><td class="c"><code class="cmd">! ../scripts/start.sh</code><code class="cmd">! ..\scripts\start.bat</code></td><td class="k"><code>localhost:8080/swagger-ui.html</code> 이 열리는가 · 아래는 Windows</td></tr>
-            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">Swagger 열기<i>AI 가 브라우저를 연다</i></td><td class="c"><code class="cmd">playwright 로 http://localhost:8080/swagger-ui.html 을 열고 보이는 API 목록을 알려줘</code></td><td class="k"><b>브라우저 창</b>이 뜨는가 · dashboard-controller 3개 · stock-controller 1개</td></tr>
+            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">서비스 기동<i>Swagger 가 뜬다</i></td><td class="c"><code class="cmd">! powershell -NoProfile -ExecutionPolicy Bypass -File ..\scripts\start.ps1</code></td><td class="k"><code>[OK] 실행 완료</code> 후 <code>localhost:8080/swagger-ui.html</code> 이 열리는가 · macOS 는 <code>../scripts/start.sh</code></td></tr>
+            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">Swagger 열기<i>AI 가 브라우저를 연다</i></td><td class="c"><code class="cmd">playwright 로 http://localhost:8080/swagger-ui.html 을 열고 보이는 API 목록을 알려줘</code></td><td class="k"><b>브라우저 창</b>이 뜨는가 (Chrome 이 없으면 <code>npx playwright install chrome</code>) · dashboard-controller 3개 · stock-controller 1개</td></tr>
             <tr class="rv" style="--d:0.71s"><td class="n">06</td><td class="p">Try it out<i>눌러서 실행</i></td><td class="c"><code class="cmd">Swagger 에서 GET /api/stocks/{symbol}/moving-average 를 Try it out 으로 symbol 005930, window 3 으로 실행하고 응답 코드와 첫 번째 값을 알려줘</code></td><td class="k"><b>200</b> · points 8개 · 첫 값 2026-09-03 <b>70133.33</b></td></tr>
-            <tr class="rv" style="--d:0.78s"><td class="n">07</td><td class="p">오류 · 증거<i>스크린샷</i></td><td class="c"><code class="cmd">같은 API 를 window 1 로 실행해 응답 코드를 알려주고 응답 화면 스크린샷을 저장해줘</code></td><td class="k"><b>400</b> 이 나오는가 · 스크린샷 파일 경로를 알려주는가</td></tr>
+            <tr class="rv" style="--d:0.78s"><td class="n">07</td><td class="p">오류 · 증거<i>스크린샷</i></td><td class="c"><code class="cmd">같은 API 를 window 1 로 실행해 응답 코드를 알려주고 응답 화면 스크린샷을 저장해줘</code></td><td class="k"><b>400</b> 이 나오는가 · 스크린샷 · 스냅샷은 <code>.playwright-mcp/</code> 에 쌓인다 → <code>.gitignore</code></td></tr>
+            <tr class="rv" style="--d:0.85s"><td class="n">08</td><td class="p">서비스 종료<i>실습이 끝나면</i></td><td class="c"><code class="cmd">! powershell -NoProfile -ExecutionPolicy Bypass -File ..\scripts\stop.ps1</code></td><td class="k">8080 · 5173 포트가 풀리는가 · 스냅샷이 토큰을 먹으니 <code>/mcp</code> 에서 playwright 도 끈다 · macOS 는 <code>../scripts/stop.sh</code></td></tr>
       </tbody>
     </table>
-    <div class="pt-note fd" style="--d:.9s">
-      <div><b>토큰</b> 페이지를 열 때마다 화면 구조(스냅샷)가 컨텍스트에 들어간다 · 다 쓰면 <code>/mcp</code> 에서 끈다</div>
-      <div><b>파일</b> 스냅샷 · 스크린샷은 <code>.playwright-mcp/</code> 에 쌓인다 → <code>.gitignore</code> · Chrome 이 없으면 <code>npx playwright install chrome</code></div>
-    </div>
   </div>
 </section>
 
