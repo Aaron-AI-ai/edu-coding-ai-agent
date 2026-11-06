@@ -40,7 +40,7 @@
             Id = 'uv'; Name = 'uv (Python 도구 관리)'; Level = '권장'; Kind = 'cli'
             Cmd = 'uv'; Args = @('--version'); Regex = 'uv (\d+\.\d+\.\d+)'
             Winget = 'astral-sh.uv'; Script = 'irm https://astral.sh/uv/install.ps1 | iex'
-            Why = 'graphify 설치 (uv tool install graphifyy) · obsidian-second-brain'
+            Why = 'graphify 설치 (uv tool install --python-preference only-managed --python 3.12 graphifyy) · obsidian-second-brain'
         }
         @{
             Id = 'ffmpeg'; Name = 'FFmpeg'; Level = '권장'; Kind = 'cli'

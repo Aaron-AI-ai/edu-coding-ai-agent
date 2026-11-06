@@ -48,7 +48,7 @@ $items = @(
     @{ Name = 'Skill drawio-skill';    Type = 'skill';  Test = { Test-Skill 'drawio' };                         Run = 'npx -y skills add Agents365-ai/drawio-skill -g --agent claude-code' }
     @{ Name = 'Skill hallmark';        Type = 'skill';  Test = { Test-Skill '^hallmark$' };                     Run = 'npx -y skills add nutlope/hallmark -g --agent claude-code' }
     @{ Name = 'Skill eli5';            Type = 'eli5';   Test = { Test-Path (Join-Path $PSScriptRoot '..\edu-stock-chart\.claude\skills\eli5\SKILL.md') }; Run = 'eli5-pack\eli5.zip 압축 해제 → edu-stock-chart\.claude\skills' }
-    @{ Name = 'graphify (uv)';         Type = 'graphify'; Test = { [bool](Get-Command graphify -ErrorAction SilentlyContinue) -and (Test-Skill '^graphify$') }; Run = 'uv tool install graphifyy → graphify install' }
+    @{ Name = 'graphify (uv)';         Type = 'graphify'; Test = { [bool](Get-Command graphify -ErrorAction SilentlyContinue) -and (Test-Skill '^graphify$') }; Run = 'uv tool install --python-preference only-managed --python 3.12 graphifyy → graphify install' }
 )
 
 Write-Title '플러그인 · Skill 상태'
@@ -87,7 +87,7 @@ foreach ($it in $todo) {
         }
         'graphify' {
             if (-not (Get-Command uv -ErrorAction SilentlyContinue)) { Write-State FAIL 'uv 가 없다 — 3-install.bat 으로 uv 를 설치한다'; break }
-            if (-not (Get-Command graphify -ErrorAction SilentlyContinue)) { uv tool install graphifyy; Update-SessionPath; Add-UserPath (Join-Path $env:USERPROFILE '.local\bin') }
+            if (-not (Get-Command graphify -ErrorAction SilentlyContinue)) { uv tool install --python-preference only-managed --python 3.12 graphifyy; Update-SessionPath; Add-UserPath (Join-Path $env:USERPROFILE '.local\bin') }
             graphify install
         }
         default { cmd /c $it.Run }

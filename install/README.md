@@ -26,7 +26,7 @@ Windows 10 (1809 이상) / 11 · PowerShell 5.1 이상 · winget(앱 설치 관�
 | 필수 | Node.js LTS 22+ (npm · npx) | edu-stock-chart-ui (Vite) · `npx skills` · Playwright MCP · HyperFrames | `OpenJS.NodeJS.LTS` |
 | 필수 | JDK **21** (Azul Zulu) | edu-stock-chart — Spring Boot 3.4 · Gradle 8.6 · toolchain 21 | `Azul.Zulu.21.JDK` |
 | 필수 | Claude Code 2.1.223+ | 과정 전체 · `/code-review` | `Anthropic.ClaudeCode` (안 되면 `irm https://claude.ai/install.ps1 \| iex`) |
-| 권장 | Python 3.12 · uv | graphify (`uv tool install graphifyy`) · obsidian-second-brain | `Python.Python.3.12` · `astral-sh.uv` |
+| 권장 | Python 3.12 · uv | graphify (`uv tool install --python-preference only-managed --python 3.12 graphifyy`) · obsidian-second-brain | `Python.Python.3.12` · `astral-sh.uv` |
 | 권장 | FFmpeg | HyperFrames 영상 렌더 | `Gyan.FFmpeg` |
 | 권장 | Google Chrome | Playwright MCP 화면 검증 · Hallmark 화면 검사 | `Google.Chrome` |
 | 권장 | Obsidian | LLM 위키 실습 | `Obsidian.Obsidian` |
@@ -50,7 +50,7 @@ Windows 10 (1809 이상) / 11 · PowerShell 5.1 이상 · winget(앱 설치 관�
 
 - 마켓: `claude-plugins-official` · `hyperframes` · `ponytail` · `thedotmack` · `obsidian-second-brain`
 - 플러그인: superpowers · playwright · context7 · skill-creator · hyperframes · ponytail · claude-mem · obsidian-second-brain
-- Skill: archify · drawio-skill · hallmark (`npx skills add … -g`) · eli5 (git 없이 `eli5-pack\eli5.zip` 압축 해제 → `edu-stock-chart\.claude\skills\eli5` · 이 프로젝트에서만 보임) · graphify (`uv tool install graphifyy` → `graphify install`)
+- Skill: archify · drawio-skill · hallmark (`npx skills add … -g`) · eli5 (git 없이 `eli5-pack\eli5.zip` 압축 해제 → `edu-stock-chart\.claude\skills\eli5` · 이 프로젝트에서만 보임) · graphify (`uv tool install --python-preference only-managed --python 3.12 graphifyy` → `graphify install`)
 
 서드파티 플러그인은 훅과 MCP 서버를 실행할 수 있습니다. 목록을 보고 필요한 번호만 골라 설치하세요.
 
