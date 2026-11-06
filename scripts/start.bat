@@ -15,7 +15,8 @@ for %%P in (8080 5173) do (
 
 echo [1/4] API 서버 빌드 (테스트 제외 · 테스트는 edu-stock-chart\scripts\test.bat)
 pushd "%ROOT%\edu-stock-chart"
-call gradlew.bat clean bootJar -q || (popd & exit /b 1)
+rem gradlew.bat 대신 gradlew.ps1 (gradlew.bat 액세스 거부 대비)
+powershell -NoProfile -ExecutionPolicy Bypass -File "%ROOT%\edu-stock-chart\scripts\gradlew.ps1" clean bootJar -q || (popd & exit /b 1)
 for %%J in (build\libs\*.jar) do (
   echo %%~nJ | findstr plain > nul || set "JAR=%%J"
 )

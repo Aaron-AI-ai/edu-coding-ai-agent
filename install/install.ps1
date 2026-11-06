@@ -97,6 +97,11 @@ foreach ($s in $todo) {
     if ($s.Id -eq 'java') { Set-JavaHome }
 }
 
+# 인터넷에서 받은 ZIP 이면 스크립트에 「차단」 표시(Zone.Identifier)가 붙어 실행이 거부될 수 있다 → 미리 푼다
+Get-ChildItem $RepoRoot -Recurse -File -Include *.bat, *.cmd, *.ps1 -ErrorAction SilentlyContinue |
+    Where-Object { $_.FullName -notmatch '\\node_modules\\' } | Unblock-File -ErrorAction SilentlyContinue
+Write-State OK '스크립트 차단 표시 해제 (Unblock-File)'
+
 # 프로젝트 의존성 미리 받기 — 교실에서 처음 빌드할 때 기다리지 않도록
 if (-not $SkipWarmup -and (Get-ToolStatus ($Config.Tools | Where-Object { $_.Id -eq 'java' })).State -eq 'OK' -and (Get-ToolStatus ($Config.Tools | Where-Object { $_.Id -eq 'node' })).State -eq 'OK') {
     $go = $(if ($Yes) { 'y' } else { Read-Host "`n실습 프로젝트 의존성(Gradle · npm)을 미리 받을까요? (Y/n)" })

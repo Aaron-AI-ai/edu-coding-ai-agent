@@ -26,4 +26,5 @@ swagger · h2 는 서비스가 실행 중이어야 합니다.
 - macOS에서 권한 오류가 나면 `chmod +x scripts/*.sh`
 - 포트를 바꾸려면 `src/main/resources/application.yml` 에 `server.port` 추가
 - PowerShell 에서 실행이 막히면 `powershell -ExecutionPolicy Bypass -File scripts\run.ps1` 처럼 실행
-- PowerShell 스크립트는 `gradlew.bat` 대신 `scripts\gradlew.ps1` 로 Gradle 을 실행한다 — `.bat` 실행이 「액세스 거부」로 막힌 PC 대비
+- `.ps1` · `.bat` 스크립트 모두 `gradlew.bat` 대신 `scripts\gradlew.ps1` 로 Gradle 을 실행한다 — `gradlew.bat` 이 「액세스 거부」로 막힌 PC 대비
+- 직접 Gradle 을 돌릴 때도 `gradlew.bat` 대신 `powershell -ExecutionPolicy Bypass -File scripts\gradlew.ps1 test` · Claude Code 의 `! ./gradlew …` 와 hook 은 Git Bash 로 돌아 `.bat` 을 쓰지 않는다
