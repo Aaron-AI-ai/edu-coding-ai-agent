@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'pmd'
     id 'org.springframework.boot' version '3.4.1'
     id 'io.spring.dependency-management' version '1.1.7'
 }
@@ -43,4 +44,21 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+// 린트 — ./gradlew pmdMain (build 에 포함) · 규칙은 실습용 5개만
+pmd {
+    toolVersion = '7.7.0'
+    sourceSets = [sourceSets.main]
+    consoleOutput = true
+    ruleSets = []
+    ruleSetConfig = resources.text.fromString("""<?xml version="1.0"?>
+<ruleset name="edu" xmlns="http://pmd.sourceforge.net/ruleset/2.0.0">
+  <description>edu</description>
+  <rule ref="category/java/bestpractices.xml/SystemPrintln"/>
+  <rule ref="category/java/bestpractices.xml/UnusedLocalVariable"/>
+  <rule ref="category/java/bestpractices.xml/UnusedPrivateField"/>
+  <rule ref="category/java/bestpractices.xml/UnusedPrivateMethod"/>
+  <rule ref="category/java/bestpractices.xml/AvoidPrintStackTrace"/>
+</ruleset>""")
 }
