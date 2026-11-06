@@ -3039,7 +3039,7 @@ description: 새 REST API 를 추가할 때 사용.
     <div class="mc-r rv" style="--d:.3s">
       <div class="pl-l">
         <div><b>Prompt<i>한 번 요청 · 한 번 실행</i></b><span class="f">나 → AI → 결과</span><span class="d">결과의 품질은 <b>질문</b>에 달려 있다 · 틀리면 사람이 다시 묻는다</span></div>
-        <div><b>Loop<i>통과할 때까지 다시</i></b><span class="f">작업 → AI → 검사 ✕ → 다시 … ✓ → 완료</span><span class="d"><b>목표(검사)</b>가 있어 스스로 고친다 · 앞의 Stop hook 빌드 게이트가 작은 루프다</span></div>
+        <div><b>Loop<i>통과할 때까지 다시</i></b><span class="f">작업 → AI → 검사 ✕ → 다시 … ✓ → 완료</span><span class="d"><b>목표(검사)</b>가 있어 스스로 고친다 · 앞의 Stop hook 검사(빌드 · 테스트 · 린트)가 작은 루프다</span></div>
         <div><b>Graph<i>여러 부분의 지도</i></b><span class="f">시작 → 에이전트 A · B · C → 검사 → 사람 승인 → 완료</span><span class="d">여러 루프 · 에이전트를 <b>한 흐름</b>으로 엮고, 중요한 관문에 <b>사람</b>이 선다</span></div>
       </div>
       <div class="pl-k">
