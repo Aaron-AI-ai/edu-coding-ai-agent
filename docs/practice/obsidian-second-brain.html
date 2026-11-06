@@ -122,8 +122,15 @@
     <code class="cmd">! mkdir ../koscom-wiki</code>
   </details>
   <details class="qc"><summary><span class="step">02</span>볼트 초기화 · obsidian-init</summary>
-    <p class="qc-hint">같은 세션에서 실행 · 경로는 <b>절대 경로</b>로 답하고 레이아웃은 <b>wiki</b> · 끝나면 세션 재시작</p>
-    <code class="cmd">/obsidian-second-brain:obsidian-init</code>
+    <p class="qc-hint">같은 세션에서 실행 · 경로는 자기 경로로 바꾼다 · 빈 vault 부트스트랩 · 레이아웃 <b>wiki</b> · 끝나면 세션 재시작</p>
+    <code class="cmd">/obsidian-second-brain:obsidian-init
+
+볼트 경로는 C:/Users/KOSCOM/workspace/koscom-wiki 로 확정이다. 방금 만든 빈 폴더이니 다른 경로를 찾거나 되묻지 말고 그대로 vault 경로로 쓴다.
+
+- 빈 vault 를 부트스트랩한다 (_CLAUDE.md, index.md, log.md 생성 · 기존 파일이 없으니 덮어쓰기 없음)
+- 레이아웃은 wiki 스타일: raw/ (원본 불변) · wiki/projects · wiki/concepts · wiki/decisions · wiki/logs
+- 레이아웃 선택 질문이 나오면 wiki 로 답한다
+- 끝나면 만든 파일 · 폴더 목록과 「세션 재시작 필요」를 알려준다</code>
   </details>
   <details class="qc"><summary><span class="step">03</span>코드 위키 생성 · obsidian-architect</summary>
     <p class="qc-hint">파일별 노트 규칙까지 한 번에 · 코드 경로는 자기 경로로 바꾼다</p>
