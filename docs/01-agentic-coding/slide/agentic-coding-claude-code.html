@@ -2791,7 +2791,6 @@ description: 새 REST API 를 추가할 때 사용.
 01 과 같은 규칙 · 한글 샘플로 한 줄 추가 확인<span class="cp-all">클릭하면 전체 프롬프트 복사</span></code></td><td class="k"><code>/hooks</code> 에 <b>PreToolUse · PostToolUse</b> 가 모두 보이는가 · 명령이 <code>python3</code>(macOS) · <code>python</code>(Windows) 인가</td></tr>
             <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">막히는지<i>Pre 확인</i></td><td class="c"><code class="cmd">application.yml 의 server.port 를 9090 으로 바꿔줘</code></td><td class="k"><b>"설정 파일은 수정 금지"</b> 로 막히는가 · <code>! git diff --stat</code> 에 변경이 없는가</td></tr>
             <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">남는지<i>Post 확인</i></td><td class="c"><code class="cmd">MovingAverageService 클래스 위에 한 줄 주석을 추가해줘</code></td><td class="k"><code>! cat .claude/edit-log.txt</code> 에 <b>시간 · 파일 경로</b>가 찍히는가</td></tr>
-            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">되돌리기<i>실습 정리</i></td><td class="c"><code class="cmd">! git restore src</code></td><td class="k">코드가 원래대로 · hook 은 <code>/hooks</code> 에서 확인 후 지우거나 남긴다</td></tr>
       </tbody>
     </table>
     <div class="pt-note fd" style="--d:.9s">
