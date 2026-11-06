@@ -2761,17 +2761,16 @@ description: 새 REST API 를 추가할 때 사용.
     <table class="itbl pt dense">
       <thead><tr class="fd" style="--d:.28s"><th></th><th>단계</th><th>입력 · 클릭하면 복사</th><th>확인할 것</th></tr></thead>
       <tbody>
-            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">현재 확인<i>이미 있는지 먼저 본다</i></td><td class="c"><code class="cmd">/hooks</code></td><td class="k">Stop 에 등록된 hook 이 없는가 · 있으면 03 을 건너뛴다</td></tr>
-            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">검사 직접 돌리기<i>hook 이 돌릴 명령</i></td><td class="c"><code class="cmd">! ./gradlew build</code><code class="cmd">! ./gradlew cleanTest test</code><code class="cmd">! ./gradlew pmdMain</code></td><td class="k">셋 다 <b>BUILD SUCCESSFUL</b> · build = 컴파일 + PMD + 테스트 · cleanTest 는 캐시 없이 테스트를 다시 · PMD 규칙은 <code>build.gradle</code> 의 <code>pmd</code> 블록 (5개)</td></tr>
-            <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">hook 추가<i>AI 에게 시킨다</i></td><td class="c"><code class="cmd">.claude/settings.json 에 Stop hook 을 추가해줘. 명령은 ./gradlew cleanTest build -q 1&gt;&amp;2 || exit 2 로 해줘.</code></td><td class="k"><code>.claude/settings.json</code> 에 들어갔는가 · <code>/hooks</code> 에 <b>Stop</b> 이 보이는가</td></tr>
-            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">일부러 깨뜨리기<i>린트 위반을 낸다</i></td><td class="c"><code class="cmd">MovingAverageService 의 calculate() 에 디버그용 System.out.println 과 쓰지 않는 변수 debugCount 를 추가해. 빌드는 확인하지 마.</code></td><td class="k">AI 가 끝내려는 순간 <b>Stop hook 이 막고</b> PMD 위반 2건 <code>SystemPrintln</code> · <code>UnusedLocalVariable</code> 이 줄 번호와 함께 뜨는가</td></tr>
-            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">자동 복구<i>입력하지 않고 지켜본다</i></td><td class="c"><span style="color:var(--faint)">— 입력 없음 —</span></td><td class="k">AI 가 위반을 읽고 <b>스스로 고친 뒤</b> 빌드 · 테스트 · 린트가 모두 통과해야 끝나는가</td></tr>
-            <tr class="rv" style="--d:0.71s"><td class="n">06</td><td class="p">되돌리기<i>실습 코드 정리</i></td><td class="c"><code class="cmd">! git restore src</code></td><td class="k">MovingAverageService 가 원래대로 · hook 은 남겨 두거나 <code>/hooks</code> 에서 지운다</td></tr>
+            <tr class="rv" style="--d:0.36s"><td class="n">01</td><td class="p">현재 확인<i>이미 있는지 먼저 본다</i></td><td class="c"><code class="cmd">/hooks</code></td><td class="k">Stop 에 등록된 hook 이 없는가 · 있으면 02 를 건너뛴다</td></tr>
+            <tr class="rv" style="--d:0.43s"><td class="n">02</td><td class="p">hook 추가<i>AI 에게 시킨다</i></td><td class="c"><code class="cmd">.claude/settings.json 에 Stop hook 을 추가해줘. 명령은 ./gradlew cleanTest test pmdMain build -q 1&gt;&amp;2 || exit 2 로 해줘.</code></td><td class="k"><code>.claude/settings.json</code> 에 들어갔는가 · <code>/hooks</code> 에 <b>Stop</b> 이 보이는가 · <b>cleanTest</b> 가 맨 앞이어야 테스트가 캐시 없이 다시 돈다 · PMD 규칙은 <code>build.gradle</code> 의 <code>pmd</code> 블록</td></tr>
+            <tr class="rv" style="--d:0.50s"><td class="n">03</td><td class="p">일부러 깨뜨리기<i>린트 위반을 낸다</i></td><td class="c"><code class="cmd">MovingAverageService 의 calculate() 에 디버그용 System.out.println 과 쓰지 않는 변수 debugCount 를 추가해. 빌드는 확인하지 마.</code></td><td class="k">AI 가 끝내려는 순간 <b>Stop hook 이 막고</b> PMD 위반 2건 <code>SystemPrintln</code> · <code>UnusedLocalVariable</code> 이 줄 번호와 함께 뜨는가</td></tr>
+            <tr class="rv" style="--d:0.57s"><td class="n">04</td><td class="p">자동 복구<i>입력하지 않고 지켜본다</i></td><td class="c"><span style="color:var(--faint)">— 입력 없음 —</span></td><td class="k">AI 가 위반을 읽고 <b>스스로 고친 뒤</b> 빌드 · 테스트 · 린트가 모두 통과해야 끝나는가</td></tr>
+            <tr class="rv" style="--d:0.64s"><td class="n">05</td><td class="p">되돌리기<i>실습 코드 정리</i></td><td class="c"><code class="cmd">! git restore src</code></td><td class="k">MovingAverageService 가 원래대로 · hook 은 남겨 두거나 <code>/hooks</code> 에서 지운다</td></tr>
       </tbody>
     </table>
     <div class="pt-note fd" style="--d:.9s">
       <div><b>|| exit 2 가 핵심</b> gradle 은 실패하면 exit 1 → 그냥 알리고 끝난다 · <b>exit 2</b> 여야 막고 에러를 AI 에게 돌려준다</div>
-      <div><b>주의</b> 계속 실패하면 멈추지 못한다 → 입력의 <code>stop_hook_active</code> 로 두 번째는 통과 · build 는 테스트까지 돌아 매 턴 느려진다 → 느리면 <code>compileJava pmdMain</code> 만</div>
+      <div><b>주의</b> 계속 실패하면 멈추지 못한다 → 입력의 <code>stop_hook_active</code> 로 두 번째는 통과 · 테스트까지 돌아 매 턴 느려진다 → 느리면 <code>compileJava pmdMain</code> 만</div>
     </div>
   </div>
 </section>
