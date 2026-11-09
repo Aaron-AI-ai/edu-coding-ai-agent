@@ -50,7 +50,7 @@ Windows 10 (1809 이상) / 11 · PowerShell 5.1 이상 · winget(앱 설치 관�
 
 - 마켓: `claude-plugins-official` · `hyperframes` · `ponytail` · `thedotmack` · `obsidian-second-brain`
 - 플러그인: superpowers · playwright · context7 · skill-creator · hyperframes · ponytail · claude-mem · obsidian-second-brain
-- Skill: archify · drawio-skill · hallmark (`npx skills add … -g`) · eli5 (git 없이 `eli5-pack\eli5.zip` 압축 해제 → `edu-stock-chart\.claude\skills\eli5` · 이 프로젝트에서만 보임) · graphify (`uv tool install --python-preference only-managed --python 3.12 graphifyy` → `graphify install`)
+- Skill: archify (`npx skills add … --agent claude-code` → `edu-stock-chart` 프로젝트 폴더에 설치) · drawio-skill · hallmark (`npx skills add … -g`) · eli5 (git 없이 `eli5-pack\eli5.zip` 압축 해제 → `edu-stock-chart\.claude\skills\eli5` · 이 프로젝트에서만 보임) · graphify (`uv tool install --python-preference only-managed --python 3.12 graphifyy` → `graphify install`)
 
 서드파티 플러그인은 훅과 MCP 서버를 실행할 수 있습니다. 목록을 보고 필요한 번호만 골라 설치하세요.
 
