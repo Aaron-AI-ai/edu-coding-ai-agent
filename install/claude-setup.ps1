@@ -18,6 +18,7 @@ function Invoke-Quiet([string]$Line) {
     return $out
 }
 
+$stockDir = (Join-Path $PSScriptRoot '..\edu-stock-chart')   # archify 는 이 프로젝트 폴더에 설치한다 (사용자 폴더는 작업 폴더 밖이라 읽기가 막힐 수 있다)
 $skillDirs = @((Join-Path $env:USERPROFILE '.claude\skills'), (Join-Path $env:USERPROFILE '.agents\skills'))
 function Test-Skill([string]$Pattern) {
     foreach ($d in $skillDirs) {
@@ -44,7 +45,7 @@ $items = @(
     @{ Name = 'ponytail';              Type = 'plugin'; Test = { $plugins -match 'ponytail@' };                 Run = 'claude plugin install ponytail@ponytail' }
     @{ Name = 'claude-mem';            Type = 'plugin'; Test = { $plugins -match '\bclaude-mem@' };             Run = 'claude plugin install claude-mem@thedotmack' }
     @{ Name = 'obsidian-second-brain'; Type = 'plugin'; Test = { $plugins -match 'obsidian-second-brain@' };    Run = 'claude plugin install obsidian-second-brain@obsidian-second-brain' }
-    @{ Name = 'Skill archify';         Type = 'skill';  Test = { Test-Skill '^archify$' };                      Run = 'npx -y skills add tt-a1i/archify -g --agent claude-code' }
+    @{ Name = 'Skill archify';         Type = 'skill';  Test = { Test-Path (Join-Path $stockDir '.claude\skills\archify\SKILL.md') }; Run = "cd /d `"$stockDir`" && npx -y skills add tt-a1i/archify --agent claude-code -y" }
     @{ Name = 'Skill drawio-skill';    Type = 'skill';  Test = { Test-Skill 'drawio' };                         Run = 'npx -y skills add Agents365-ai/drawio-skill -g --agent claude-code' }
     @{ Name = 'Skill hallmark';        Type = 'skill';  Test = { Test-Skill '^hallmark$' };                     Run = 'npx -y skills add nutlope/hallmark -g --agent claude-code' }
     @{ Name = 'Skill eli5';            Type = 'eli5';   Test = { Test-Path (Join-Path $PSScriptRoot '..\edu-stock-chart\.claude\skills\eli5\SKILL.md') }; Run = 'eli5-pack\eli5.zip 압축 해제 → edu-stock-chart\.claude\skills' }
