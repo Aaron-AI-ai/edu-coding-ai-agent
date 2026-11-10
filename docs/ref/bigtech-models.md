@@ -7,6 +7,7 @@
 | 회사 | 모델 | 시점 | 메모 |
 |---|---|---|---|
 | Anthropic | Opus 5.5 / Sonnet 5.5 / Haiku 5.5 | 9/22 · 9/28 · 10/7 | 5.5 계열, 컨텍스트 1M. Haiku 5.5는 $0.1·$0.5 (1M 토큰당 입력·출력) |
+| Anthropic | Fable 5.2 | 11/9 | 가장 능력 높은 일반 공개 모델(코딩·과학·금융). $8·$40(Fable 5.1은 $10·$50), 컨텍스트 1M, 기본 effort high. 일상 코딩은 Opus 5.5 권장 |
 | OpenAI | GPT-6 Astra · GPT-6.1 Sol · GPT-6 Luna | 2026.09~ | Astra $10·$50 (1.05M), Sol $2·$10, Luna $0.1·$0.5 |
 | Google | Gemini 4 Argon | 9/30 발표 · 10/13 일반 공개 | 저장소 단위 코딩에 강점 |
 | xAI | Grok 4.7 | 9/21 | 저렴한 가격, 코딩 · 지식 업무 겨냥 |
