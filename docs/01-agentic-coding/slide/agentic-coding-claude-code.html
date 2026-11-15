@@ -796,6 +796,10 @@
   .s6 td:nth-child(3) { width: 250px; }
   .s6 td:last-child { width: 250px; color: var(--ink); }
   .s6 code { font-size: 16px; }
+  .s6w { display: flex; gap: 48px; align-items: center; margin-top: 18px; }
+  .s6w .ge-im { flex: none; }
+  .s6w .s6 { margin-top: 0; flex: 1; }
+  .s6w .s6 td:nth-child(3), .s6w .s6 td:last-child { width: auto; }
   .ru { border: 1.5px solid var(--rule); border-radius: 12px; padding: 16px 22px; }
   .ru-h { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: 2px; color: var(--faint); margin-bottom: 8px; }
   .ru ol, .ru ul { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; font-size: 17px; line-height: 1.45; color: var(--dim); }
@@ -3404,6 +3408,25 @@ description: 새 REST API 를 추가할 때 사용.
   </div>
 </section>
 
+<!-- 44 ───────────────────────────────────────────── -->
+<section class="slide wide">
+  <div class="wide-head">
+    <span class="eyebrow fd">GRAPH ENGINEERING</span>
+    <h1 class="rv" style="--d:.08s">비슷한 것이 아니라 연결된 것을 찾는다</h1>
+  </div>
+
+  <div class="ge">
+    <div class="ge-im rv" style="--d:.18s"><img data-zoom src="assets/graph-engineering.png" alt="Graph Engineering explained — 시작(작업 정의) → 나누기(노드로 쪼갬) → 작업자 1 조사 · 2 비교 · 3 확인을 동시에 실행 → 검사(오류를 일찍 잡음) → 하나의 깔끔한 답"><span class="zm">클릭하면 확대</span></div>
+
+    <div class="ge-c rv" style="--d:.3s">
+      <div><b>노드와 엣지<i>그래프는 이 둘뿐</i></b><span class="d"><b>노드</b> 아는 것 · 일하는 것 (사람 · 결정 · 장애 · 작업자)<br><b>엣지</b> 그 사이의 연결 — 위 그림처럼 <b>나누고 · 동시에 돌리고 · 검사해 합친다</b></span></div>
+      <div><b>연결을 따라 찾는다<i>여러 단계(hop)</i></b><span class="f">Job queue —결정→ ADR-007<br>ADR-007 —대체→ ADR-003<br>ADR-003 —원인→ 장애 03-11</span><span class="d">「Redis 를 왜 뺐나?」 벡터는 Redis 언급 글 10개, 그래프는 <b>이유의 사슬</b> 3개</span></div>
+      <div><b>관계에 이름을 붙인다<i>타입 있는 엣지</i></b><span class="f">관련 있음 → 1비트<br>supersedes · depends_on<br>decided_by · caused</span><span class="d">누가 누구를 대체했는지 · 무엇이 원인인지 알아야 AI 가 <b>추론</b>할 수 있다</span></div>
+      <div><b>언제 쓰나<i>질문에 따라 나눠 쓴다</i></b><span class="d"><b>강함</b> 여러 단계 연결 · 시간에 따른 변화 · 전체 종합<br><b>약함</b> 단순 조회 · 비용 → 이때는 벡터 검색<br><b>주의</b> 「같은 대상」 판단이 틀리면 단계마다 오류가 곱해진다 — 위키 링크 <code>[[ ]]</code> 는 사람이 이미 이어 둔 그래프</span></div>
+    </div>
+  </div>
+</section>
+
 <!-- 코드 리뷰 · 소개 ───────────────────────────── -->
 <section class="slide wide">
   <div class="wide-head">
@@ -3500,25 +3523,6 @@ description: 새 REST API 를 추가할 때 사용.
   </div>
 </section>
 
-<!-- 44 ───────────────────────────────────────────── -->
-<section class="slide wide">
-  <div class="wide-head">
-    <span class="eyebrow fd">GRAPH ENGINEERING</span>
-    <h1 class="rv" style="--d:.08s">비슷한 것이 아니라 연결된 것을 찾는다</h1>
-  </div>
-
-  <div class="ge">
-    <div class="ge-im rv" style="--d:.18s"><img data-zoom src="assets/graph-engineering.png" alt="Graph Engineering explained — 시작(작업 정의) → 나누기(노드로 쪼갬) → 작업자 1 조사 · 2 비교 · 3 확인을 동시에 실행 → 검사(오류를 일찍 잡음) → 하나의 깔끔한 답"><span class="zm">클릭하면 확대</span></div>
-
-    <div class="ge-c rv" style="--d:.3s">
-      <div><b>노드와 엣지<i>그래프는 이 둘뿐</i></b><span class="d"><b>노드</b> 아는 것 · 일하는 것 (사람 · 결정 · 장애 · 작업자)<br><b>엣지</b> 그 사이의 연결 — 위 그림처럼 <b>나누고 · 동시에 돌리고 · 검사해 합친다</b></span></div>
-      <div><b>연결을 따라 찾는다<i>여러 단계(hop)</i></b><span class="f">Job queue —결정→ ADR-007<br>ADR-007 —대체→ ADR-003<br>ADR-003 —원인→ 장애 03-11</span><span class="d">「Redis 를 왜 뺐나?」 벡터는 Redis 언급 글 10개, 그래프는 <b>이유의 사슬</b> 3개</span></div>
-      <div><b>관계에 이름을 붙인다<i>타입 있는 엣지</i></b><span class="f">관련 있음 → 1비트<br>supersedes · depends_on<br>decided_by · caused</span><span class="d">누가 누구를 대체했는지 · 무엇이 원인인지 알아야 AI 가 <b>추론</b>할 수 있다</span></div>
-      <div><b>언제 쓰나<i>질문에 따라 나눠 쓴다</i></b><span class="d"><b>강함</b> 여러 단계 연결 · 시간에 따른 변화 · 전체 종합<br><b>약함</b> 단순 조회 · 비용 → 이때는 벡터 검색<br><b>주의</b> 「같은 대상」 판단이 틀리면 단계마다 오류가 곱해진다 — 위키 링크 <code>[[ ]]</code> 는 사람이 이미 이어 둔 그래프</span></div>
-    </div>
-  </div>
-</section>
-
 <!-- AI-SDLC · 배경 ───────────────────────────── -->
 <section class="slide wide">
   <div class="wide-head">
@@ -3569,17 +3573,20 @@ description: 새 REST API 를 추가할 때 사용.
     <h1 class="rv" style="--d:.08s">6단계 — 산출물이 다음 단계로, 사람은 게이트에</h1>
   </div>
 
-  <table class="s6 rv" style="--d:.2s">
-    <thead><tr><th></th><th>단계</th><th>남기는 산출물</th><th>AI 가 하는 일</th><th>사람 게이트</th></tr></thead>
-    <tbody>
-      <tr><td class="n">01</td><td class="p">Plan<i>의도 캡처</i></td><td><code>intent.md</code></td><td>질문으로 범위 · 사용자 · 제약 · 성공 기준을 구체화해 초안 작성 — 몇 주 → 몇 시간</td><td>프로덕트 오너 승인</td></tr>
-      <tr><td class="n">02</td><td class="p">Design<i>요구사항 + 설계</i></td><td><code>spec.md</code></td><td>조직 Skill(보안 · 컴플라이언스 · UX)을 적용해 <b>한 세션</b>에 요구사항과 설계를 함께</td><td>PO 리뷰 · 고위험이면 테크리드</td></tr>
-      <tr><td class="n">03</td><td class="p">Build<i>계획 기반 구현</i></td><td><code>plan.md</code> · diff</td><td><b>plan mode 로 계획 먼저</b> → 승인 후 구현 · CLAUDE.md · Skill · Hook · 병렬 세션</td><td>엔지니어가 plan 승인</td></tr>
-      <tr><td class="n">04</td><td class="p">Test<i>스스로 검증</i></td><td>테스트 결과 · 빌드 로그 · 스크린샷</td><td>사람에게 넘기기 전에 <b>스스로 검증</b> · 새 컨텍스트의 검증 서브에이전트 · CI 평가</td><td>코드 소유자 (증거 첨부 리뷰)</td></tr>
-      <tr><td class="n">05</td><td class="p">Deploy<i>검토 · 배포 게이트</i></td><td>PR · 리뷰 결과 · 배포 기록</td><td>모든 PR 에 같은 리뷰(버그 · 보안 · 스펙 준수) · 정책은 <code>REVIEW.md</code></td><td>코드 소유자 · 운영은 릴리스 매니저</td></tr>
-      <tr><td class="n">06</td><td class="p">Maintain<i>루프 닫기</i></td><td>인시던트 기록 · 새 <code>intent.md</code></td><td>스크립트가 이상을 감지하면 진단 → 수정 PR 또는 새 intent 로 <b>01 단계에 되돌림</b></td><td>서비스 소유자 · on-call</td></tr>
-    </tbody>
-  </table>
+  <div class="s6w">
+    <div class="ge-im rv" style="--d:.18s;height:730px"><img data-zoom src="assets/agent-ready-sdlc.png" alt="The Agent-Ready SDLC — AI-DLC 와 AI-native SDLC 의 단계별 산출물(intent · spec · plan · evals · review findings)과 사람 게이트"><span class="zm">클릭하면 확대</span></div>
+    <table class="s6 rv" style="--d:.2s">
+      <thead><tr><th></th><th>단계</th><th>산출물</th><th>사람 게이트</th></tr></thead>
+      <tbody>
+        <tr><td class="n">01</td><td class="p">Plan</td><td><code>intent.md</code></td><td>프로덕트 오너 승인</td></tr>
+        <tr><td class="n">02</td><td class="p">Design</td><td><code>spec.md</code></td><td>PO 리뷰 · 고위험이면 테크리드</td></tr>
+        <tr><td class="n">03</td><td class="p">Build</td><td><code>plan.md</code> · diff</td><td>엔지니어가 plan 승인</td></tr>
+        <tr><td class="n">04</td><td class="p">Test</td><td>테스트 결과 · 빌드 로그 · 스크린샷</td><td>코드 소유자 (증거 첨부 리뷰)</td></tr>
+        <tr><td class="n">05</td><td class="p">Deploy</td><td>PR · 리뷰 결과 · 배포 기록</td><td>코드 소유자 · 운영은 릴리스 매니저</td></tr>
+        <tr><td class="n">06</td><td class="p">Maintain</td><td>인시던트 기록 · 새 <code>intent.md</code></td><td>서비스 소유자 · on-call</td></tr>
+      </tbody>
+    </table>
+  </div>
 </section>
 
 <!-- 47 ───────────────────────────────────────────── -->
