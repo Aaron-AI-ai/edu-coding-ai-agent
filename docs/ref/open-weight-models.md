@@ -11,7 +11,8 @@
 | Moonshot AI | Kimi K3 | 2.8T · 104B | Modified MIT | 프론트엔드 코딩 · 긴 코딩 작업 |
 | DeepSeek | V4 Pro | 1.6T · 49B | MIT | SWE-bench(실제 저장소 버그 수정) · 1M 긴 문맥 효율 |
 | DeepSeek | V4.1 Flash 1017 | 552B · 약 8B | MIT | 에이전틱 코딩 · 터미널 작업을 싼값에 |
-| MiniMax | M3.1 Flash | 428B · 23B | 자체 커뮤니티 | 네이티브 멀티모달(텍스트 · 이미지 · 영상 입력) |
+| NVIDIA (미국) | Nemotron 3 Ultra | 약 550B · 55B | NVIDIA Open Model License 계열(원문 확인) | 비중국 대형 오픈 모델 |
+| NVIDIA (미국) | Nemotron 3 Super | 약 120B · 12B | NVIDIA Open Model License 계열(원문 확인) | 활성 12B 로 가성비 · 자체 호스팅 현실성 |
 | Mistral AI (프랑스) | Large 4 | 약 1T · 52B | 수정 MIT | 비중국 대표 · 사이버보안 |
 
 ## 모델별 요약
@@ -21,13 +22,14 @@
 - **Kimi K3** — 출시 때 Arena 프론트엔드 코딩 리더보드 1위. 1M 컨텍스트. 측정 대부분이 Moonshot 호스팅 API 기준이라 자체 호스팅 성능은 아직 검증이 적다.
 - **DeepSeek V4 Pro** — SWE-bench Verified 80.6%(자체) · 74%(NIST 재측정). 1M 토큰에서 V3.2 대비 연산 27% · KV 캐시 10%. V4.1 Flash 출시와 함께 API 에서는 은퇴했다는 보도가 있다.
 - **DeepSeek V4.1 Flash 1017** — 2026-10-17, 9월 V4.1 Flash 를 같은 가격에 개선한 체크포인트. DeepSWE 77.0 · Terminal-Bench 4.0 42.3 · HLE 42.6(자체). 크기는 출시 글 552B, Hugging Face 파일 합계 약 763B 로 출처가 엇갈린다.
-- **MiniMax M3.1 Flash** — 2026-10-23 가중치 공개(약 252GB). 에이전틱 작업 · 코딩 · 보안이 M3 대비 개선. 추론을 끌 수 없고, 독립 평가(Vals Index)는 22개 중 15위.
+- **NVIDIA Nemotron 3 Ultra** — 2026-06-04(Computex) 공개로 보도된 최상위 모델(약 550B · 활성 55B). 일부 출처가 지능 지수 48(미국 오픈 1위)로 적지만 **단일 출처 · 미검증**이라 표에는 싣지 않는다. 구형 자료는 아직 '출시 예정'으로 적어 출처가 엇갈린다.
+- **NVIDIA Nemotron 3 Super** — 2026-03-11(GTC) 공개, 약 120B · 활성 12B. 활성이 작아 비용이 낮은 중간급. 벤치마크 점수는 확인하지 못했다. 로컬 실행용은 Nano(약 30B · 활성 3B, 2025-12).
 - **Mistral Large 4** — 2026-10-29 가중치 공개(FP8 · NVFP4). 지능 지수 38.4 로 Large 3(9.3)에서 크게 올랐지만 중국 상위 모델(44~46)보다는 아래. AA Cyber Index 50 으로 Kimi K3 · DeepSeek V4.1 Flash(41)보다 높다는 발표(Mistral 차트). 크기는 1T · 활성 52B 와 1.05T · 활성 49B 로, 컨텍스트는 512K~1M 으로 출처가 엇갈린다. 수정 MIT 라 API 서비스(MaaS)로 팔 때만 별도 상용 라이선스.
 
 ## 고를 때 기준
 
 - 모두 **MoE** — 활성 파라미터가 작아 연산은 가볍지만, **총 파라미터만큼 메모리**(수백 GB)가 필요해 자체 호스팅 부담이 크다.
-- 오픈 웨이트 상위는 중국 모델이 차지한다. 비중국 중에서는 Mistral Large 4(38)가 가장 높고, NVIDIA Nemotron · Reflection Beam 등은 20~30대.
+- 오픈 웨이트 상위는 중국 모델이 차지한다. 비중국 중에서는 Mistral Large 4(38)가 검증된 최고. NVIDIA Nemotron 3 Ultra 는 48 이라는 보도가 있으나 미검증.
 - 상용 프론티어 54~58 · 오픈 44~46. 그 차이를 감수하고 얻는 것은 **데이터를 밖으로 내보내지 않는 선택지**다.
 - 라이선스가 제각각(MIT · Modified MIT · 자체)이라 **도입 전 원문 확인**은 필수다.
 
@@ -50,8 +52,9 @@
 - [DeepSeek V4.1-Flash-1017 — SmartScope](https://smartscope.blog/en/blog/deepseek-v4-1-flash-1017-release-benchmarks-price-2026/)
 - [DeepSeek V4.1-Flash-1017 — MindStudio](https://www.mindstudio.ai/blog/deepseek-v4-1-flash-1017-release)
 - [DeepSeek launches V4.1-Flash and retires V4-Pro — The Next Web](https://thenextweb.com/news/deepseek-v4-1-flash-launch-v4-pro-retired-price-cut)
-- [MiniMax M3.1 Flash open weights — aicybr](https://aicybr.com/blog/minimax-m31-flash-open-weights-428b-license-local-deployment)
-- [MiniMax M3.1 Flash — Vals AI](https://www.vals.ai/models/minimax_MiniMax-M3.1-flash)
+- [NVIDIA Debuts Nemotron 3 Family — NVIDIA Newsroom](https://nvidianews.nvidia.com/news/nvidia-debuts-nemotron-3-family-of-open-models)
+- [NVIDIA Computex 2026 recap — ExplainX](https://explainx.ai/blog/nvidia-computex-2026-nemotron-3-ultra-complete-recap)
+- [Nemotron — Wikipedia](https://en.wikipedia.org/wiki/Nemotron)
 - [Mistral Large 4 Open Weights — ShiftDelete](https://en.shiftdelete.net/mistral-large-4-open-weights/)
 - [Mistral Large 4 im Test — eesel.ai](https://www.eesel.ai/de/blog/mistral-large-4-test)
 - [Mistral Large — Artificial Analysis](https://artificialanalysis.ai/models/mistral-large)
