@@ -161,7 +161,7 @@ Java는 코드가 길고 Gradle 출력이 장황해 **같은 작업도 토큰을
 **같은 도구, 다른 결과** — 84%가 AI를 쓰지만 결과는 3배 넘게 벌어진다 (인트로 1장)
 
 - **상용 모델 (2장)** — Anthropic Opus 5.5 · Fable 5.2 · Sonnet 5.5 · Haiku 5.5, OpenAI GPT-6 Astra · GPT-6.1 Sol / GPT-6 Luna. 가격 차이 25배 → **작업 난이도에 모델을 맞추는 것이 첫 번째 절약**
-- **오픈 웨이트 (3장)** — Kimi K3.1 Pro · GLM-5.3 · DeepSeek V4 Pro · Qwen3.8 2.4T · MiniMax M3.1 Flash · Mistral Large 4. 전부 MoE (총 파라미터 = 메모리, 활성 파라미터 = 연산량). 상용과의 지능 지수 차이를 감수하고 얻는 것은 **데이터를 내보내지 않는 선택지**
+- **오픈 웨이트 (3장)** — Kimi K3.1 Pro · GLM-5.3 · DeepSeek V4 Pro · Qwen3.8 2.4T · NVIDIA Nemotron 3 Ultra · Mistral Large 4. 전부 MoE (총 파라미터 = 메모리, 활성 파라미터 = 연산량). 상용과의 지능 지수 차이를 감수하고 얻는 것은 **데이터를 내보내지 않는 선택지**
 - **소형 모델 (4장)** — Flint · Qwen3.8 27B · Gemma 4 31B · Muse Glimmer. 노트북·사내 서버 한 대에서 구동. **작을수록 하네스가 결과를 좌우한다**
 - **벤치마크 읽는 법 (5장)** — SWE-bench Pro(결과물) · Terminal-Bench(행위) · DeepSWE(장기 개발) · LiveCodeBench(인지). 재는 대상이 달라 순위가 다른 것이 정상. 포화된 SWE-bench Verified는 제외
 - **아직 움직이는 중 (6장)** — 10개월에 주요 모델 약 20개, 포화되면 시험을 바꾼다 → **바뀌어도 살아남는 것(하네스와 루프)에 투자한다**
