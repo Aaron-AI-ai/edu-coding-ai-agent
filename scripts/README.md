@@ -9,6 +9,7 @@ API 서버(`edu-stock-chart`)와 UI(`edu-stock-chart-ui`)를 한 번에 다룹�
 | stop | 두 서비스 중지 | `scripts\stop.bat` | `scripts\stop.ps1` | `./scripts/stop.sh` |
 
 - 대시보드 http://localhost:5173 · Swagger http://localhost:8080/swagger-ui.html
+- Windows 에서도 **Git Bash** 에서는 `./scripts/start.sh` · `status.sh` · `stop.sh` 를 그대로 쓸 수 있습니다 (UI 의존성이 중간에 끊겨 `vite is not recognized` 가 나면 `edu-stock-chart-ui/node_modules` 를 지우고 다시 실행)
 - start 는 테스트를 돌리지 않습니다. 테스트는 `edu-stock-chart/scripts/test.*`
 - PID 와 로그는 `.run/` 에 남습니다 (`api.log` · `ui.log`)
 - 8080 · 5173 을 이미 쓰고 있으면 start 가 멈춥니다. 개발 서버(`dev.*` · `run.*`)를 먼저 끄세요

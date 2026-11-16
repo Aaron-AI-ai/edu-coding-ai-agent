@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 새로 빌드한 뒤 API 서버(8080)와 UI(5173)를 백그라운드로 실행 - macOS · Linux
+# 새로 빌드한 뒤 API 서버(8080)와 UI(5173)를 백그라운드로 실행 - macOS · Linux · Windows Git Bash
 set -e
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 RUN="$ROOT/.run"
@@ -21,7 +21,8 @@ echo "[1/4] API 서버 빌드 (테스트 제외 · 테스트는 edu-stock-chart/
 JAR="$(ls "$API"/build/libs/*.jar | grep -v plain | head -1)"
 
 echo "[2/4] UI 빌드"
-(cd "$UI" && { [ -d node_modules ] || npm install; } && npm run build --silent)
+# node_modules 폴더만 있고 vite 가 없으면(설치 중단) "vite is not recognized" 로 빌드가 실패한다 → vite 파일로 확인
+(cd "$UI" && { [ -f node_modules/vite/bin/vite.js ] || npm install; } && npm run build --silent)
 
 echo "[3/4] 실행"
 nohup java -jar "$JAR" > "$RUN/api.log" 2>&1 &
